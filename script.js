@@ -19,10 +19,19 @@ var partree;
 //debugger;
 
 $(document).ready(function(){
+	
+	/*
 	// Create some paragraphs of text of varying lengths
 	for (i = 0; i < num_pars; i++) {
 		paragraphs.push(nrand());
 	}
+	
+	console.log(paragraphs);
+	
+	*/
+	
+	// Here's one I made earlier
+	paragraphs = [6408, 10944, 8880, 8592, 3936, 7752, 10440, 7200, 11112, 10776, 12216, 7320, 12504, 5904, 11496, 6144, 10944, 6216, 8640, 6336, 6312, 9888, 13176, 7176, 11712, 13104, 10752, 5880, 7320, 6792];
 	
 	// Now populate the widths array
 	for (i = 5; i <= 30; i += 5) {
