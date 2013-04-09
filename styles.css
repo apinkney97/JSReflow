@@ -1,0 +1,4 @@
+body { background-color: black; }
+div { white-space: nowrap; overflow: hidden; }
+.bgred { background-color: red; }
+.bgblue { background-color: blue; color: white; }
