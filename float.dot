@@ -23,15 +23,17 @@ digraph G {
 	{	node [shape=diamond];
 		partree  [label="parTree\ndepleted?"];
 		pastbot  [label="Past\nbottom of\npage?"];
-		floatq   [label="Floats in\nqueue?"];
+		floatq   [label="First float\nin queue\nwill fit?"];
 		lineq    [label="Lines in\nqueue"];
-		floatfit [label="First float\nwill fit?"];
+		//floatfit [label="First float\nwill fit?"];
 	}
 	
-	enqueue [label="Place next\nitem in\nrequisite\nqueue"];
-	newcol  [label="Start new\ncolumn"];
-	placef  [label="Place float"];
-	placel  [label="Place line"];
+	{	node [style=filled, fillcolor=yellow];
+		enqueue [label="Place next\nitem in\nrequisite\nqueue"];
+		newcol  [label="Start new\ncolumn"];
+		placef  [label="Place float"];
+		placel  [label="Place line"];
+	}
 
 	start   -> partree;
 	enqueue -> pastbot;
@@ -42,8 +44,9 @@ digraph G {
 	{	edge [label="Y", color="forestgreen"];
 		partree  -> stop;
 		pastbot  -> newcol;
-		floatq   -> floatfit;
-		floatfit -> placef;
+		//floatq   -> floatfit;
+		//floatfit -> placef;
+		floatq -> placef;
 		lineq    -> placel;
 	}
 	
@@ -51,7 +54,7 @@ digraph G {
 		pastbot  -> floatq;
 		partree  -> enqueue;
 		floatq   -> lineq;
-		floatfit -> lineq;
+		//floatfit -> lineq;
 		lineq    -> partree;
 	}
 	
