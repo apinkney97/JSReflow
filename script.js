@@ -11,7 +11,10 @@ var MIN_GUTTER = 12 / PT_PER_PX;
 var GALLEY_WIDTHS = [];
 var PARAGRAPHS = [];
 var PARAGRAPH_TREE;
-var BODYHEIGHT = (window.innerHeight - BOT_MARGIN - TOP_MARGIN);
+var BODYHEIGHT;
+var FLOAT_QUEUE;
+var LINE_QUEUE;
+var CURR_P;
 
 var FLOAT_TYPES = Object.freeze({
     NONE: 0,
@@ -22,7 +25,12 @@ var FLOAT_TYPES = Object.freeze({
 
 var FLOAT_TYPE;
 
-FLOAT_TYPE = FLOAT_TYPES.DUMB;
+FLOAT_TYPE = FLOAT_TYPES.SIMPLEQUEUE;
+
+function Floatable(width, height) {
+    this.width = width;
+    this.height = height;
+}
 
 $(document).ready(function() {
 
@@ -35,13 +43,6 @@ $(document).ready(function() {
     console.log(PARAGRAPHS);
 
     */
-
-    // 
-    function Floatable(width, height) {
-        'use strict';
-        this.width = width;
-        this.height = height;
-    }
 
     // Here's one I made earlier
     PARAGRAPHS = [6408, new Floatable(50, 50), 10944, 8880, 8592, new Floatable(50, 25), new Floatable(25, 50), 3936, 7752, 10440, 7200, 11112, 10776, 12216, 7320, new Floatable(40, 30), 12504, 5904, 11496, 6144, 10944, 6216, 8640, 6336, 6312, 9888, 13176, 7176, 11712, 13104, 10752, 5880, 7320, 6792];
@@ -96,6 +97,8 @@ function doLayout() {
     var numCols;
     var badness = Array(GALLEY_WIDTHS.length);
     var min_badness_index = 0;
+    
+    BODYHEIGHT = (window.innerHeight - BOT_MARGIN - TOP_MARGIN);
 
     for (var i = 0; i < GALLEY_WIDTHS.length; i++) {
         var nc = Math.floor(pageWidth / (GALLEY_WIDTHS[i] + MIN_GUTTER));
@@ -130,148 +133,103 @@ function doLayout() {
     dropdown += "</select>\n";
 
     outputDiv("title", 1000, PS_PX + 5, (window.innerWidth - 1000) / 2, 3, dropdown + (FLOAT_TYPE == FLOAT_TYPES.NONE ? "none" : (FLOAT_TYPE == FLOAT_TYPES.DUMB ? "dumb" : (FLOAT_TYPE == FLOAT_TYPES.MSWORD ? "MS Word" : ( FLOAT_TYPE == FLOAT_TYPES.SIMPLEQUEUE ? "simple queue" : "unknown (" + FLOAT_TYPE + ")")))) + ", " + numCols + " cols, badness: "+ Math.round(badness[min_badness_index] * 100) / 100 );
+	
+	
+	if (FLOAT_TYPE == FLOAT_TYPES.SIMPLEQUEUE) {
+		FLOAT_QUEUE = [];
+		LINE_QUEUE = [];
+		CURR_P = 0;
+		
 
-    var floatQueue = [];
-    var lineQueue = [];
+		while (enqueueNext(galleywidth, min_badness_index)) {
+		    while (FLOAT_QUEUE.length > 0 && (FLOAT_QUEUE[0].height + curr_y) <= (window.innerHeight - BOT_MARGIN) || LINE_QUEUE.length > 0) {
+				if (curr_y > (window.innerHeight - BOT_MARGIN)) { //start new column
+				    curr_y = TOP_MARGIN;
+				    curr_x += colsep;
+				}
+				
+				if (FLOAT_QUEUE.length > 0 && (FLOAT_QUEUE[0].height + curr_y) <= (window.innerHeight - BOT_MARGIN)) {
+					outputFloat(FLOAT_QUEUE[0].width, FLOAT_QUEUE[0].height, curr_x, curr_y);
+					curr_y += FLOAT_QUEUE[0].height;
+					curr_y += PAR_SEP;
+					FLOAT_QUEUE.shift();
+				} else if (LINE_QUEUE.length > 0) {
+					outputLine(LINE_QUEUE[0], PS_PX, curr_x, curr_y, 'W' + min_badness_index + ' Qwertyuiop Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
+		            curr_y += VS_PX;
+		            LINE_QUEUE.shift();
+		            if (LINE_QUEUE.length == 0) { // end of a paragraph
+		            	curr_y += PAR_SEP;
+		            }
+				}
+				
+			}
+//			curr_y += PAR_SEP;
+		}
+		
+	} else {
+	
+		for (var p = 0; p < PARAGRAPH_TREE.length; p++) {
+		    if (curr_y > (window.innerHeight - BOT_MARGIN)) { //start new column
+		        curr_y = TOP_MARGIN;
+		        curr_x += colsep;
+		    }
 
-    for (var p = 0; p < PARAGRAPH_TREE.length; p++) {
-        if (curr_y > (window.innerHeight - BOT_MARGIN)) { //start new column
-            curr_y = TOP_MARGIN;
-            curr_x += colsep;
-        }
+		    if (Array.isArray(PARAGRAPH_TREE[p])) {
+		        // We assume it's a normal paragraph
+		        for (var l = 0; l < PARAGRAPH_TREE[p][min_badness_index].length; l++) {
+		            if (curr_y > (window.innerHeight - BOT_MARGIN)) { //start new column
+		                curr_y = TOP_MARGIN;
+		                curr_x += colsep;
+		            }
+		            
+		            outputLine(PARAGRAPH_TREE[p][min_badness_index][l], PS_PX, curr_x, curr_y, 'W' + min_badness_index + ' P' + p + ' L' + l + ' Qwertyuiop Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
 
-        if (Array.isArray(PARAGRAPH_TREE[p])) {
-            // We assume it's a normal paragraph
-            for (var l = 0; l < PARAGRAPH_TREE[p][min_badness_index].length; l++) {
-                if (curr_y > (window.innerHeight - BOT_MARGIN)) { //start new column
-                    curr_y = TOP_MARGIN;
-                    curr_x += colsep;
-                }
-                width = PARAGRAPH_TREE[p][min_badness_index][l];
-                outputLine(width, PS_PX, curr_x, curr_y, 'W' + min_badness_index + ' P' + p + ' L' + l + ' Qwertyuiop Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
+		            curr_y += VS_PX;
+		        }
+		    } else {
+		        // It must be a Floatable object
 
-                curr_y += VS_PX;
-            }
-        } else {
-            // It must be a Floatable object
+		        // Scale width to fit column (and height proportionately)
+		        var w = PARAGRAPH_TREE[p].width;
+		        var h = PARAGRAPH_TREE[p].height;
 
-            // Scale width to fit column (and height proportionately)
-            var w = PARAGRAPH_TREE[p].width;
-            var h = PARAGRAPH_TREE[p].height;
+		        var scale = galleywidth / w;
 
-            var scale = galleywidth / w;
+		        w *= scale;
+		        h *= scale;
 
-            w *= scale;
-            h *= scale;
+		        if (h > BODYHEIGHT) {
+		            scale = BODYHEIGHT / h;
+		            w *= scale;
+		            h *= scale;
+		        }
 
-            if (h > BODYHEIGHT) {
-                scale = BODYHEIGHT / h;
-                w *= scale;
-                h *= scale;
-            }
+		        if (FLOAT_TYPE == FLOAT_TYPES.DUMB) {
 
-            if (FLOAT_TYPE == FLOAT_TYPES.DUMB) {
+		            // Just stick the figure out wherever
+		            outputFloat(w, h, curr_x, curr_y);
+		            curr_y += h;
 
-                // Just stick the figure out wherever
-                outputFloat(w, h, curr_x, curr_y);
-                curr_y += h;
+		        } else if (FLOAT_TYPE == FLOAT_TYPES.MSWORD) {
 
-            } else if (FLOAT_TYPE == FLOAT_TYPES.MSWORD) {
+		            // check if it'll actually fit in the column, and if not, move to a new one
+		            if (curr_y + h > (window.innerHeight - BOT_MARGIN)) {
+		                curr_y = TOP_MARGIN;
+		                curr_x += colsep;
+		            }
 
-                // check if it'll actually fit in the column, and if not, move to a new one
-                if (curr_y + h > (window.innerHeight - BOT_MARGIN)) {
-                    curr_y = TOP_MARGIN;
-                    curr_x += colsep;
-                }
+		            outputFloat(w, h, curr_x, curr_y);
+		            curr_y += h;
 
-                outputFloat(w, h, curr_x, curr_y);
-                curr_y += h;
+		        } else {
+		                // Don't output anything.
+		                // console.log(FLOAT_TYPE);
+		        }
+		    }
+		    curr_y += PAR_SEP;
 
-            } else if (FLOAT_TYPE == FLOAT_TYPES.SIMPLEQUEUE) {
-                if (curr_y + h > (window.innerHeight - BOT_MARGIN)) {
-                    // Won't fit in place, so enqueue it
-                    floatQueue.push(PARAGRAPH_TREE[p]);
-
-                    // Now output lines as normal until the bottom of the column, and enqueue the rest
-                    // (also enqueue any further figures encountered whilst doing this)
-                    for ( ; p < PARAGRAPH_TREE.length; p++) {
-
-                        if (Array.isArray(PARAGRAPH_TREE[p])) {
-                            // It's a normal paragraph
-                            for (var l = 0; l < PARAGRAPH_TREE[p][min_badness_index].length; l++) {
-                                if (curr_y > (window.innerHeight - BOT_MARGIN)) { //start new column
-                                    while (l < PARAGRAPH_TREE[p][min_badness_index].length) {
-                                        lineQueue.push(PARAGRAPH_TREE[p][min_badness_index][l++]);
-                                    }
-                                    curr_y = TOP_MARGIN;
-                                    curr_x += colsep;
-                                    break;
-                                }
-                                width = PARAGRAPH_TREE[p][min_badness_index][l];
-                                outputLine(width, PS_PX, curr_x, curr_y, 'W' + min_badness_index + ' P' + p + ' L' + l + ' Qwertyuiop Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
-
-                                curr_y += VS_PX;
-                            }
-                            if (curr_y != TOP_MARGIN) {
-                                curr_y += PAR_SEP;
-                            }
-                        } else {
-                            // It must be a Floatable object
-                            floatQueue.push(PARAGRAPH_TREE[p]);
-                        }
-                    }
-
-                    // Now output as many floats as we can fit from the float queue
-                    console.log('a' + floatQueue);
-                    while (floatQueue.length > 0) {
-                        console.log('b' + floatQueue);
-                        // Scale width to fit column (and height proportionately)
-                        var floatable = floatQueue[0];
-
-                        var w = floatable.width;
-                        var h = floatable.height;
-
-                        var scale = galleywidth / w;
-
-                        w *= scale;
-                        h *= scale;
-
-                        if (h > BODYHEIGHT) {
-                            scale = BODYHEIGHT / h;
-                            w *= scale;
-                            h *= scale;
-                        }
-
-                        // If it's too big to fit, break out of the loop
-                        if (curr_y + h > (window.innerHeight - BOT_MARGIN)) {
-                            break;
-                        }
-                        console.log('c' + floatQueue);
-                        // Otherwise dequeue and output it
-                        floatQueue.shift();
-                         console.log('d' + floatQueue);
-                        outputFloat(w, h, curr_x, curr_y);
-                        curr_y += h;
-                    }
-
-                    // Now output the rest of the lines
-                    
-
-                } else {
-                    // output it in place
-                    outputFloat(w, h, curr_x, curr_y);
-                    curr_y += h;
-                }
-
-            } else {
-                    // Don't output anything.
-                    // console.log(FLOAT_TYPE);
-            }
-        }
-        curr_y += PAR_SEP;
-
-    }
-
+		}
+	}
 }
 
 function outputLine(width, height, x, y, text) {
@@ -317,3 +275,36 @@ function generatePar(width) {
         size -= width;
     }
 }
+
+function enqueueNext(galleywidth, min_badness_index) {
+	if (CURR_P >= PARAGRAPH_TREE.length) {
+		return false;
+	}
+	
+	if (Array.isArray(PARAGRAPH_TREE[CURR_P])) {
+		for (var l = 0; l < PARAGRAPH_TREE[CURR_P][min_badness_index].length; l++) {
+			LINE_QUEUE.push(PARAGRAPH_TREE[CURR_P][min_badness_index][l]);
+		}
+	} else {
+		
+		// Scale width to fit column (and height proportionately)
+        var w = PARAGRAPH_TREE[CURR_P].width;
+        var h = PARAGRAPH_TREE[CURR_P].height;
+
+        var scale = galleywidth / w;
+
+        w *= scale;
+        h *= scale;
+
+        if (h > BODYHEIGHT) {
+            scale = BODYHEIGHT / h;
+            w *= scale;
+            h = BODYHEIGHT;
+        }
+		
+		FLOAT_QUEUE.push(new Floatable(w, h));
+	}
+	CURR_P++;
+	return true;
+}
+
