@@ -1,0 +1,58 @@
+/*
+	Flowchart to describe a simple float layout algorithm.
+	Caveat: All floats are assumed to be able to fit in an
+	empty column. If this is not the case, the float queue
+	will never empty and the process will never terminate.
+*/
+
+digraph G {
+	node [shape=box];
+	rankdir=TB;
+/*	subgraph queues {
+		node [style=filled, fillcolor=red];
+		parTree;
+		lineQueue;
+		floatQueue;
+	}
+*/	
+	{	node [shape=box3d];
+		start [label="Start"];
+		stop  [label="Stop"];
+	}
+	
+	{	node [shape=diamond];
+		partree  [label="parTree\ndepleted?"];
+		pastbot  [label="Past\nbottom of\npage?"];
+		floatq   [label="Floats in\nqueue?"];
+		lineq    [label="Lines in\nqueue"];
+		floatfit [label="First float\nwill fit?"];
+	}
+	
+	enqueue [label="Place next\nitem in\nrequisite\nqueue"];
+	newcol  [label="Start new\ncolumn"];
+	placef  [label="Place float"];
+	placel  [label="Place line"];
+
+	start   -> partree;
+	enqueue -> pastbot;
+	newcol  -> floatq;
+	placef  -> pastbot;
+	placel  -> pastbot;
+	
+	{	edge [label="Y", color="forestgreen"];
+		partree  -> stop;
+		pastbot  -> newcol;
+		floatq   -> floatfit;
+		floatfit -> placef;
+		lineq    -> placel;
+	}
+	
+	{	edge [label="N", color=red];
+		pastbot  -> floatq;
+		partree  -> enqueue;
+		floatq   -> lineq;
+		floatfit -> lineq;
+		lineq    -> partree;
+	}
+	
+}
