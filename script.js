@@ -295,13 +295,13 @@ function doLayout() {
                 } else if (FLOAT_TYPE === FLOAT_TYPES.MSWORD) {
 
                     // check if it'll actually fit in the column, and if not, move to a new one
-                    if (curr_y + h > (window.innerHeight - BOT_MARGIN)) {
-                        curr_y = TOP_MARGIN;
-                        curr_x += colsep;
-                    }
+                    // if (curr_y + h > (window.innerHeight - BOT_MARGIN)) {
+                        // curr_y = TOP_MARGIN;
+                        // curr_x += colsep;
+                    // }
 
-                    getFloat(w, h, "FLOAT");
-                    curr_y += h;
+                    // getFloat(w, h, "FLOAT");
+                    // curr_y += h;
 
                 } else {
                         // Don't output anything.
@@ -344,7 +344,7 @@ function doLayout() {
 }
 
 function updateFloatType(dd) {
-    FLOAT_TYPE = dd.options[dd.selectedIndex].value;
+    FLOAT_TYPE = parseInt(dd.options[dd.selectedIndex].value);
     doLayout();
 }
 
