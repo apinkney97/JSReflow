@@ -33,7 +33,7 @@ var MULTI_COLUMN = false;
 
 var FLOAT_TYPE;
 
-FLOAT_TYPE = FLOAT_TYPES.DUMB;
+FLOAT_TYPE = FLOAT_TYPES.SIMPLEQUEUE;
 
 function Floatable(width, height) {
     this.width = width;
@@ -54,29 +54,6 @@ function getFloat(width, height, text) {
 
 function outputDiv(cssclass, x, y, text) {
     $('#main').append('<div class="' + cssclass + '" style="position:absolute; top: ' + y + 'px; left: ' + x + 'px">' + text + '</div>');
-}
-
-function nrand() { // thanks to http://www.protonfish.com/random.shtml
-    var r, mean, sd;
-    r = 2 * Math.random() - 1;
-    r += 2 * Math.random() - 1;
-    r += 2 * Math.random() - 1;
-    mean = 350;
-    sd = 100;
-    return PS_PX * Math.floor(sd * r + mean);
-}
-
-function generatePar(width) {
-    var size, j;
-    size = nrand();
-
-    for (j = 0; size > 0; j++) {
-        if (size < width) {
-            width = size;
-        }
-        $('#main').append('<div class="bgblue" style="width: ' + width + 'em; height: 12pt"></div>');
-        size -= width;
-    }
 }
 
 function nextPos() {
@@ -101,41 +78,64 @@ function nextPos() {
     }
 }
 
-function enqueueNext(galleywidth, min_badness_index) {
-    var l, w, h, scale;
-    if (CURR_P >= PARAGRAPH_TREE.length) {
+function checkSpace(nlines, span) {
+    var c, r;
+    // console.log(nlines, span);
+    if (nlines > NUM_ROWS && CURR_ROW === 0) { //if it's too big, put it at the top of a column
+        return true;
+    }
+
+    if (CURR_ROW + nlines > NUM_ROWS) {
+        // too far down
+        // console.log("too big: need ", nlines)
+        // console.log("rows: ", NUM_ROWS);
+        // console.log("curr: ", CURR_ROW);
         return false;
     }
 
-    if (Array.isArray(PARAGRAPH_TREE[CURR_P])) {
-        for (l = 0; l < PARAGRAPH_TREE[CURR_P][min_badness_index].length; l++) {
-            LINE_QUEUE.push(PARAGRAPH_TREE[CURR_P][min_badness_index][l]);
+    // Now check that there is enough contiguous space in both directions
+    for (r = CURR_ROW; r < CURR_ROW + nlines; r++) {
+        for (c = CURR_COL; c < CURR_COL + span; c++) {
+            if (!Array.isArray(COLUMNS[c])) {
+                COLUMNS[c] = [];
+            }
+            if (COLUMNS[c][r] !== undefined) {
+                //console.log("not undefined:", c, r);
+                return false;
+            }
         }
-    } else {
-
-        // Scale width to fit column (and height proportionately)
-        w = PARAGRAPH_TREE[CURR_P].width;
-        h = PARAGRAPH_TREE[CURR_P].height;
-
-        scale = galleywidth / w;
-
-        w *= scale;
-        h *= scale;
-
-        if (h > BODYHEIGHT) {
-            scale = BODYHEIGHT / h;
-            w *= scale;
-            h = BODYHEIGHT;
-        }
-
-        FLOAT_QUEUE.push(new Floatable(w, h));
     }
-    CURR_P++;
     return true;
 }
 
+function placeFloat(w, h, nlines, span, text) {
+    // Reserve space for the figure, and place it
+
+    // How many lines do we need to reserve?
+    // Let's say if it's less than n.5,  no need for an extra space
+
+    var i, j;
+
+    for (i = CURR_ROW; i < CURR_ROW + nlines; i++) {
+        for (j = CURR_COL; j < CURR_COL + span; j++) {
+            if (!Array.isArray(COLUMNS[j])) {
+                COLUMNS[j] = [];
+            }
+            COLUMNS[j][i] = "";
+        }
+    }
+
+    COLUMNS[CURR_COL][CURR_ROW] = getFloat(w, h, text);
+
+    if (CURR_ROW > 0) { // blank out any lines above
+        for (i = CURR_COL + 1; i < CURR_COL + span; i++) {
+            COLUMNS[i][CURR_ROW - 1] = "";
+        }
+    }
+}
+
 function doLayout() {
-    var i, nc, ex_ws, rq_ws, galleywidth, colsep, curr_x, curr_y, dropdown, pageWidth, numCols, badness, min_badness_index, name, p, l, w, h, scale, span;
+    var i, nc, ex_ws, rq_ws, galleywidth, colsep, dropdown, pageWidth, numCols, badness, min_badness_index, name, p, l, w, h, scale, span, nlines, currcol, currrow;
 
     pageWidth = window.innerWidth;
     badness = [];
@@ -189,135 +189,105 @@ function doLayout() {
     CURR_ROW = 0;
     CURR_COL = 0;
 
-    if (FLOAT_TYPE === FLOAT_TYPES.SIMPLEQUEUE) {/*
-        FLOAT_QUEUE = [];
-        LINE_QUEUE = [];
-        CURR_P = 0;
+    for (p = 0; p < PARAGRAPH_TREE.length; p++) {
 
-        while (enqueueNext(galleywidth, min_badness_index)) {
-            while ((FLOAT_QUEUE.length > 0 && ((FLOAT_QUEUE[0].height + curr_y) <= (window.innerHeight - BOT_MARGIN))) || LINE_QUEUE.length > 0) {
-                if (curr_y > (window.innerHeight - BOT_MARGIN)) { //start new column
-                    curr_y = TOP_MARGIN;
-                    curr_x += colsep;
-                }
-
-                if (FLOAT_QUEUE.length > 0 && (FLOAT_QUEUE[0].height + curr_y) <= (window.innerHeight - BOT_MARGIN)) {
-                    outputFloat(FLOAT_QUEUE[0].width, FLOAT_QUEUE[0].height, curr_x, curr_y);
-                    curr_y += FLOAT_QUEUE[0].height;
-                    curr_y += PAR_SEP;
-                    FLOAT_QUEUE.shift();
-                } else if (LINE_QUEUE.length > 0) {
-                    outputLine(LINE_QUEUE[0], PS_PX, curr_x, curr_y, 'W' + min_badness_index + ' Qwertyuiop Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
-                    curr_y += VS_PX;
-                    LINE_QUEUE.shift();
-                    if (LINE_QUEUE.length === 0) { // end of a paragraph
-                        curr_y += PAR_SEP;
-                    }
-                }
-
-            }
-        }
-*/
-    } else {
-
-        for (p = 0; p < PARAGRAPH_TREE.length; p++) {
-
-            if (Array.isArray(PARAGRAPH_TREE[p])) {
-                // We assume it's a normal paragraph
-                for (l = 0; l < PARAGRAPH_TREE[p][min_badness_index].length; l++) {
-                    nextPos();
-                    COLUMNS[CURR_COL][CURR_ROW] = getLine(PARAGRAPH_TREE[p][min_badness_index][l], PS_PX, 'W' + min_badness_index + ' P' + p + ' L' + l + ' Qwertyuiop Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
-                }
+        if (Array.isArray(PARAGRAPH_TREE[p])) {
+            // We assume it's a normal paragraph
+            for (l = 0; l < PARAGRAPH_TREE[p][min_badness_index].length; l++) {
                 nextPos();
-                if (CURR_ROW !== 0) {
-                    COLUMNS[CURR_COL][CURR_ROW] = "";
-                }
-            } else {
-                // It must be a Floatable object
-                if (FLOAT_TYPE === FLOAT_TYPES.NONE) {
-                    continue;
-                }
+                COLUMNS[CURR_COL][CURR_ROW] = getLine(PARAGRAPH_TREE[p][min_badness_index][l], PS_PX, 'W' + min_badness_index + ' P' + p + ' L' + l + ' Qwertyuiop Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
+            }
+            nextPos();
+            if (CURR_ROW !== 0) {
+                COLUMNS[CURR_COL][CURR_ROW] = "";
+            }
+        } else {
+            // It must be a Floatable object
+            if (FLOAT_TYPE === FLOAT_TYPES.NONE) {
+                continue;
+            }
 
-                // Scale width to fit column (and height proportionately)
-                w = PARAGRAPH_TREE[p].width;
-                h = PARAGRAPH_TREE[p].height;
+            // Scale width to fit column (and height proportionately)
+            w = PARAGRAPH_TREE[p].width;
+            h = PARAGRAPH_TREE[p].height;
 
-                // Firstly, scale down the height if it's bigger than the body height
-                if (h > BODYHEIGHT) {
-                    scale = BODYHEIGHT / h;
-                    w *= scale;
-                    h *= scale;
-                }
+            // Have a look at the width and see if it could span any columns
+            span = Math.round(w / galleywidth);
 
-                // Now have a look at the width and see if it could span any columns
-                span = Math.round(w / galleywidth);
+            if (span > numCols) {
+                span = numCols;
+            }
 
-                if (span > numCols) {
-                    span = numCols;
-                }
+            if (span < 1 || !MULTI_COLUMN) {
+                span = 1;
+            }
 
-                if (span < 1 || !MULTI_COLUMN) {
-                    span = 1;
-                }
+            scale = (span * galleywidth + (span - 1) * (colsep - galleywidth)) / w;
 
-                scale = (span * galleywidth + (span - 1) * (colsep - galleywidth)) / w;
+            w *= scale;
+            h *= scale;
 
+            // Is it too big to fit? If so scale down the height
+            if (h > BODYHEIGHT) {
+                scale = BODYHEIGHT / h;
                 w *= scale;
                 h *= scale;
-
-                if (FLOAT_TYPE === FLOAT_TYPES.DUMB) {
-
-                    // Just stick the figure out wherever
-                    nextPos();
-                    // Now reserve some space for the figure
-                    
-                    // How many lines do we need to reserve?
-                    // Let's say if it's less than n.5,  no need for an extra space
-                    var nlines = Math.round(h / VS_PX) + 1;
-                    for (i = CURR_ROW; i < CURR_ROW + nlines; i++) {
-                        for (j = CURR_COL; j < CURR_COL + span; j++) {
-                            if (!Array.isArray(COLUMNS[j])) {
-                                COLUMNS[j] = [];
-                            }
-                            COLUMNS[j][i] = "";
-                        }
-                    }
-                    
-                    COLUMNS[CURR_COL][CURR_ROW] = getFloat(w, h, "float scaled to " + (Math.round(scale * 10000)) / 100 + "%");
-                    
-                    if (CURR_ROW > 0) { // blank out any lines above
-                        for (i = CURR_COL + 1; i < CURR_COL + span; i++) {
-                            COLUMNS[i][CURR_ROW - 1] = "<!-- foo -->";
-                            console.log('foo');
-                        }
-                    }
-
-                } else if (FLOAT_TYPE === FLOAT_TYPES.MSWORD) {
-
-                    // check if it'll actually fit in the column, and if not, move to a new one
-                    // if (curr_y + h > (window.innerHeight - BOT_MARGIN)) {
-                        // curr_y = TOP_MARGIN;
-                        // curr_x += colsep;
-                    // }
-
-                    // getFloat(w, h, "FLOAT");
-                    // curr_y += h;
-
-                } else {
-                        // Don't output anything.
-                        // console.log(FLOAT_TYPE);
-                }
             }
-            //curr_y += PAR_SEP;
 
+            nlines = Math.round(h / VS_PX) + 1;
+
+            if (FLOAT_TYPE === FLOAT_TYPES.SIMPLEQUEUE) {
+                // Don't actually need a queue in gridlayout
+                nextPos();
+                currcol = CURR_COL;
+                currrow = CURR_ROW;
+
+                // check if it'll actually fit in the column, and if not, move to a new one
+                while (!checkSpace(nlines, span)) {
+                    CURR_COL++;
+                    CURR_ROW = 0;
+                    nextPos();
+                }
+
+                placeFloat(w, h, nlines, span, "float scaled to " + (Math.round(scale * 10000)) / 100 + "%");
+
+                CURR_COL = currcol;
+                CURR_ROW = currrow;
+
+            } else if (FLOAT_TYPE === FLOAT_TYPES.DUMB) {
+
+                // Just stick the figure out wherever
+                nextPos();
+
+                placeFloat(w, h, nlines, span, "float scaled to " + (Math.round(scale * 10000)) / 100 + "%");
+
+            } else if (FLOAT_TYPE === FLOAT_TYPES.MSWORD) {
+                nextPos();
+                // check if it'll actually fit in the column, and if not, move to a new one
+                while (!checkSpace(nlines, span)) {
+                    CURR_COL++;
+                    CURR_ROW = 0;
+                    nextPos();
+                }
+
+                placeFloat(w, h, nlines, span, "float scaled to " + (Math.round(scale * 10000)) / 100 + "%");
+
+            } /*else {
+                // Don't output anything.
+                // console.log(FLOAT_TYPE);
+            }*/
         }
+        //curr_y += PAR_SEP;
+
     }
 
     $('#main').empty(); //clear old stuff
 
     dropdown = '<select id="dropdown" onchange="updateFloatType(this)">\n';
     for (name in FLOAT_TYPES) {
-        dropdown += '<option value="' + FLOAT_TYPES[name] + '"' + (FLOAT_TYPE === FLOAT_TYPES[name] ? " selected" : "") + '>' + name + '</option>';
+        if (FLOAT_TYPES.hasOwnProperty(name)) {
+            dropdown += '<option value="' + FLOAT_TYPES[name] + '"' + (FLOAT_TYPE === FLOAT_TYPES[name] ? " selected" : "") + '>' + name + '</option>';
+        }
     }
     dropdown += "</select>\n";
 
@@ -344,7 +314,7 @@ function doLayout() {
 }
 
 function updateFloatType(dd) {
-    FLOAT_TYPE = parseInt(dd.options[dd.selectedIndex].value);
+    FLOAT_TYPE = parseInt(dd.options[dd.selectedIndex].value, 10);
     doLayout();
 }
 
