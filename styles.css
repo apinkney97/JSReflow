@@ -1,5 +1,4 @@
 body { background-color: #333; }
-div { white-space: nowrap; overflow: hidden; }
 .bgred, .floatable { background-color: red; }
-.bgblue, .line { background-color: blue; color: white; }
+.bgblue, .line { background-color: blue; color: white; white-space: nowrap; overflow: hidden; }
 .title { background-color: #CCC; font-weight: bold; text-align: center; border: 3px solid #0D0; }
