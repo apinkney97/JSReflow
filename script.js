@@ -18,6 +18,11 @@ var LINE_QUEUE;
 var CURR_P;
 var CURR_ROW;
 var CURR_COL;
+var CURR_PAGE;
+var PAGES;
+var NUM_COLS;
+var GALLEY_WIDTH;
+var COL_SEP;
 
 var COLUMNS;
 var NUM_ROWS;
@@ -35,9 +40,10 @@ var FLOAT_TYPE;
 
 FLOAT_TYPE = FLOAT_TYPES.SIMPLEQUEUE;
 
-function Floatable(width, height) {
+function Floatable(width, height, content) {
     this.width = width;
     this.height = height;
+	this.content = content;
 }
 
 function getDiv(cssclass, width, height, text) {
@@ -134,8 +140,57 @@ function placeFloat(w, h, nlines, span, text) {
     }
 }
 
+function paginate(offset) {
+    if (offset + CURR_PAGE > PAGES) {
+        $('#next').attr("disabled", true);
+    } else if (offset + CURR_PAGE < 1) {
+        $('#prev').attr("disabled", true);
+    } else {
+        CURR_PAGE += offset;
+        
+        if (CURR_PAGE > 1) {
+            $('#prev').attr("disabled", false);
+        }
+        if (CURR_PAGE < PAGES) {
+            $('#next').attr("disabled", false);
+        }
+        
+        if (CURR_PAGE >= PAGES) {
+            $('#next').attr("disabled", true);
+        } else if (CURR_PAGE <= 1) {
+            $('#prev').attr("disabled", true);
+        }
+        
+        
+        $('#pageno').html(CURR_PAGE);
+        
+        $('#main').html("");
+        
+        // Now we need to output the contents of the COLUMNS array
+		var start = (CURR_PAGE - 1) * NUM_COLS;
+		var end = CURR_PAGE * NUM_COLS;
+		
+        for (p = start; p < COLUMNS.length && p < end; p++) {
+            if (!Array.isArray(COLUMNS[p])) {
+                continue;
+            }
+
+            for (l = 0; l < COLUMNS[p].length; l++) {
+                if (COLUMNS[p][l] === undefined || COLUMNS[p][l] === "") {
+                    continue;
+                }
+
+                outputDiv("container", ((COL_SEP - GALLEY_WIDTH) / 2 + (p - start) * COL_SEP), TOP_MARGIN + l * VS_PX, COLUMNS[p][l]);
+            }
+        }
+        //console.log(COLUMNS);
+    }
+    
+    
+}
+
 function doLayout() {
-    var i, nc, ex_ws, rq_ws, galleywidth, colsep, dropdown, pageWidth, numCols, badness, min_badness_index, name, p, l, w, h, scale, span, nlines, currcol, currrow;
+    var i, nc, ex_ws, rq_ws, dropdown, pageWidth,badness, min_badness_index, name, p, l, w, h, scale, span, nlines, currcol, currrow;
 
     pageWidth = window.innerWidth;
     badness = [];
@@ -155,13 +210,13 @@ function doLayout() {
 
         if (badness[i] <= badness[min_badness_index]) {
             min_badness_index = i;
-            numCols = nc;
+            NUM_COLS = nc;
         }
     }
 
-    galleywidth = GALLEY_WIDTHS[min_badness_index];
+    GALLEY_WIDTH = GALLEY_WIDTHS[min_badness_index];
 
-    colsep = Math.floor(pageWidth / numCols);
+    COL_SEP = Math.floor(pageWidth / NUM_COLS);
 
     /*  
         Previously, we (and I quote) "just shove[d] lines onto screen" -- Now we need to populate the COLUMNS array and then output the contents of that to the screen.
@@ -212,17 +267,17 @@ function doLayout() {
             h = PARAGRAPH_TREE[p].height;
 
             // Have a look at the width and see if it could span any columns
-            span = Math.round(w / galleywidth);
+            span = Math.round(w / GALLEY_WIDTH);
 
-            if (span > numCols) {
-                span = numCols;
+            if (span > NUM_COLS) {
+                span = NUM_COLS;
             }
 
             if (span < 1 || !MULTI_COLUMN) {
                 span = 1;
             }
 
-            scale = (span * galleywidth + (span - 1) * (colsep - galleywidth)) / w;
+            scale = (span * GALLEY_WIDTH + (span - 1) * (COL_SEP - GALLEY_WIDTH)) / w;
 
             w *= scale;
             h *= scale;
@@ -277,9 +332,11 @@ function doLayout() {
                 // console.log(FLOAT_TYPE);
             }*/
         }
-        //curr_y += PAR_SEP;
 
     }
+    console.log(PARAGRAPH_TREE);
+    PAGES = Math.ceil(COLUMNS.length / NUM_COLS);
+    CURR_PAGE = 1;
 
     $('#main').empty(); //clear old stuff
 
@@ -291,25 +348,12 @@ function doLayout() {
     }
     dropdown += "</select>\n";
 
-    $('#main').append('<div class="title" style="position:absolute; width: ' + 1000 + 'px; height: ' + (PS_PX + 5) + 'px; left: ' + ((window.innerWidth - 1000) / 2) + 'px; top: ' + 3 + 'px">' + dropdown + (FLOAT_TYPE === FLOAT_TYPES.NONE ? "none" : (FLOAT_TYPE === FLOAT_TYPES.DUMB ? "dumb" : (FLOAT_TYPE === FLOAT_TYPES.MSWORD ? "MS Word" : (FLOAT_TYPE === FLOAT_TYPES.SIMPLEQUEUE ? "simple queue" : "unknown (" + FLOAT_TYPE + ")")))) + ", " + numCols + " cols, badness: " + Math.round(badness[min_badness_index] * 100) / 100 + ' <label><input id="multi" onclick="toggleMulti();" type="checkbox" ' + (MULTI_COLUMN ? 'checked' : '') + ' > multicolumn?</label></div>');
-
-    // Now we need to output the contents of the COLUMNS array
-    for (p = 0; p < COLUMNS.length; p++) {
-        //console.log("p is " + p);
-        if (!Array.isArray(COLUMNS[p])) {
-            continue;
-        }
-
-        for (l = 0; l < COLUMNS[p].length; l++) {
-            //console.log("\tl is " + l);
-            if (COLUMNS[p][l] === undefined || COLUMNS[p][l] === "") {
-                continue;
-            }
-
-            outputDiv("container", (colsep - galleywidth) / 2 + p * colsep, TOP_MARGIN + l * VS_PX, COLUMNS[p][l]);
-        }
-    }
-    //console.log(COLUMNS);
+    $('#top').html('<div class="title" style="position:absolute; width: ' + 100 + '%; height: ' + (PS_PX + 5) + 'px; left: ' + 0 + 'px; top: ' + 3 + 'px">' + dropdown + (FLOAT_TYPE === FLOAT_TYPES.NONE ? "none" : (FLOAT_TYPE === FLOAT_TYPES.DUMB ? "dumb" : (FLOAT_TYPE === FLOAT_TYPES.MSWORD ? "MS Word" : (FLOAT_TYPE === FLOAT_TYPES.SIMPLEQUEUE ? "simple queue" : "unknown (" + FLOAT_TYPE + ")")))) + ", " + NUM_COLS + " cols, " + PAGES + " pages, badness: " + Math.round(badness[min_badness_index] * 100) / 100 + ' <label><input id="multi" onclick="toggleMulti();" type="checkbox" ' + (MULTI_COLUMN ? 'checked' : '') + ' > multicolumn?</label> <input type="button" id="prev" value="prev" onclick="paginate(-1)" disabled> <span id="pageno">' + CURR_PAGE + '</span> <input type="button" id="next" value="next" onclick="paginate(1)" ' + (PAGES < 2 ? 'disabled' : '') + '></div>');
+    
+    
+    paginate(0);
+    
+    
 
 }
 
