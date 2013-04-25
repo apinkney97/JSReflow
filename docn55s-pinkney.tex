@@ -1,0 +1,218 @@
+%\documentclass{acm_proc_article-sp}
+\documentclass{sig-alternate}
+
+\conferenceinfo{DocEng'11,} {September 19--22, 2011, Mountain View, California, USA.}
+\CopyrightYear{2011}
+\crdata{978-1-4503-0863-2/11/09}
+\clubpenalty=10000
+\widowpenalty = 10000
+
+\usepackage{times}
+\usepackage{mathtime}
+
+\hyphenation{Post-Script Mobi-pocket dit-roff}
+
+\begin{document}
+
+\title{Reflowable Documents Composed from\\Pre-rendered Atomic Components}
+
+\numberofauthors{3}
+\author{
+	\alignauthor Alexander J. Pinkney\\
+	\affaddr{Document Engineering Lab.}\\
+	\affaddr{School of Computer Science}\\
+	\affaddr{University of Nottingham}\\
+	\affaddr{Nottingham, NG8 1BB, UK}\\
+	\email{azp@cs.nott.ac.uk}
+	\alignauthor Steven R. Bagley\\
+	\affaddr{Document Engineering Lab.}\\
+	\affaddr{School of Computer Science}\\
+	\affaddr{University of Nottingham}\\
+	\affaddr{Nottingham, NG8 1BB, UK}\\
+	\email{srb@cs.nott.ac.uk}
+	\alignauthor David F. Brailsford\\
+	\affaddr{Document Engineering Lab.}\\
+	\affaddr{School of Computer Science}\\
+	\affaddr{University of Nottingham}\\
+	\affaddr{Nottingham, NG8 1BB, UK}\\
+	\email{dfb@cs.nott.ac.uk}
+}
+
+\maketitle
+
+
+\begin{abstract}
+Mobile eBook readers are now commonplace in today's society, but their document layout algorithms remain basic, largely due to constraints imposed by short battery life. At present, with any eBook file format not based on PDF, the layout of the document, as it appears to the end user, is at the mercy of hidden reformatting and reflow algorithms interacting with the screen parameters of the device on which the document is rendered. Very little control is provided to the publisher or author, beyond some basic formatting options.
+
+This paper describes a method of producing well-typeset, scalable, document layouts by embedding several pre-rendered versions of a document within one file, thus enabling many computationally expensive steps (e.g.~hyphenation and line-breaking) to be carried out at document compilation time, rather than at `view time'. This system has the advantage that end users are not constrained to a single, arbitrarily chosen view of the document, nor are they subjected to reading a poorly typeset version rendered on the fly. Instead, the device can choose a layout appropriate to its screen size and the end user's choice of zoom level, and the author and publisher can have fine-grained control over all layouts.
+\end{abstract}
+
+\category{I.7.2}{Document and Text Processing}{Document Preparation}[format and notation, markup languages]
+\category{I.7.4}{Document and Text Processing}{Electronic Publishing}
+\terms{Algorithms, Documentation, Experimentation}
+\keywords{PDF, COGs, eBooks, Document layout}
+
+\section{Introduction}
+In recent years, the consumption of documents on mobile devices, such as eBook readers, has increased dramatically. However, the visual quality of a document on these devices is often lacking, when compared to other digital document systems (see figure \ref{kindle}). The result of an eBook reader's layout engine is often visually unappealing, with uneven spacing in consecutive lines of text, poor justification, and the lack of a sophisticated hyphenation system.
+
+This is a far cry from the quality of typesetting available from PDF or PostScript documents. These vector-based, de\-vice-in\-de\-pen\-d\-ent page description languages are able to create a digital version of the document that is identical to its printed counterpart. These page description languages, coupled with high-quality typesetting systems (such as \TeX{}, troff or Adobe InDesign) have produced an expectation that digital documents will be of similar quality to that achievable through hand composition. \TeX{} and Adobe InDesign, in particular, have excellent support for many of the subtle nuances used by hand compositors, which are often overlooked by more basic typesetting packages (e.g.~automated support for kerning and ligatures). This quality does not come without a price: the algorithms used to calculate the layout are computationally expensive and so are run only once, to produce a PDF with a fixed layout targeted at a fixed page size.
+
+eBook readers, it seems, have had to take a step backwards to simpler (and, therefore, less computationally expensive) algorithms to maximise the battery life of the device. The result is that the high-end hyphenation, kerning, and ligature support has had to be sacrificed and the on-screen result is reminiscent of the output of an HTML rendering engine or a very basic word processor.
+
+This paper investigates an alternative approach to generating the display for an eBook reader. Here, the text is pre-rendered (using a high-quality typesetting algorithm) in several column widths, prior to display, when the document is created. At view time, the most appropriate column width is selected for display, the system balancing between excessive white space and multiple columns. Section~\ref{problems} examines the problems posed by current eBook readers in further detail, while section~\ref{solution} presents our initial prototype solution to some of these problems.
+
+\section{Problems with Current eBook Readers}
+\label{problems}
+Three formats currently dominate the eBook market: EPUB and Mobipocket, which allow the document to be formatted to fit the device, and PDF, which does not. (Amazon's proprietary Kindle format is derived from Mobipocket; PDF and EPUB are open standards.) Both the EPUB and Mobipocket formats are largely based on XHTML. Whilst the use of XML-derived formats allow the semantic structure of documents to be very well defined, in general their presentation can only be specified in a very loose manner. The user is often presented with a choice of typefaces and point sizes, allowing the reader software to render the document in essentially any arbitrary way it chooses.
+
+Conversely, PDF is entirely presentation-oriented, stemming from its origin of being compiled PostScript. PDF, therefore, will often include no information on the semantic structure of the document, and will consist simply of drawing operators which describe the document pages. There is no compulsion for these drawing operators to render the page in an order that might be considered sensible: for example, if a PDF generator program decided to render every character on a page in alphabetical order, or radially outwards from the centre, the resulting file would still be semantically valid, and the result might well be unnoticeable to the end user. This lack of imposed semantic structure can make it difficult to infer the best way to `unpick' PDF files to allow their content to be reflowed into a new layout.
+
+Since an XHTML-derived format has no fixed presentation associated with it, this must be calculated each time the document is displayed, in a similar manner to the way an interpreted programming language needs to be interpreted each time it runs. For an eBook reader to maximise its battery life (the human reader will be annoyed if the device dies just before the climax of a novel!), the `interpretation' needs to be as simple as possible\,---\,i.e.~the algorithm used must not be too complex, since the more CPU cycles spent executing it, the less time the CPU can spend idle, and hence the greater the drain on the battery. Furthermore, the longer that is spent formatting the output, the longer the delay between page turns on the device, and with the speed of CPUs used in these devices (<~500~MHz) it does not take too large an increase in computation for the page turn to become noticeable.
+
+\begin{figure}
+	\centering
+	\epsfig{file=screen_shot-42583, height=1.76in}
+	\caption{The Kindle 3 appears to primarily use justified text, falling back to ragged-right when inter-word spacing would become too large.}\vspace{-6pt}
+	\label{kindle}
+\end{figure}
+
+\subsection{Hyphenation and Line-Breaking}
+eBook readers typically use a `greedy' algorithm to lay out their text\,---\,that is, they place as many words as will fit onto the current line without exceeding it, then start a new line and continue. Although this algorithm is optimal in that it will always fit text onto the fewest possible lines, it often causes consecutive lines to have wildly varying lengths, accentuating either the `ragged-right' effect of the text, or, in the case of justified text, the inter-word spacing. In general, eBook readers will only hyphenate in extreme cases\,---\,indeed the Kindle~3 seems not to do so at all. Knuth and Plass\cite{Knuth1981} developed a more advanced line-breaking algorithm (now used by \TeX{}) which attempts to minimise large discrepancies between consecutive lines by considering each paragraph as a whole. \TeX{} also uses the hyphenation algorithm designed by Liang\cite{Liang1983}, which has been ported to many other applications.
+
+\subsection{Other Typographical Techniques}
+Other techniques employed during hand-type\-set\-t\-ing and high-qua\-l\-ity electronic typesetting include the use of kerning and of ligatures. Kerning involves altering the spacing between certain glyph pairs in order to produce more consistent letter spacing, whilst ligatures are sin\-gle-glyph replacements for two or more single glyphs which may otherwise have clashing components. Some examples of these are shown in figure~\ref{kern-lig}.
+Kerning requires a table of kern-pairs, specific to each font; values from this table must then be looked up for every pair of adjacent glyphs in the document. Ligatures may or may not need to be inserted: if the component characters of the ligature lie over a potential hyphenation point, it cannot be decided whether to replace them with the ligature until it is known whether the hyphenation point needs to be used.
+
+
+\begin{figure}
+	
+	%\centering
+	\vspace{-24pt}
+	{\Huge \textbf{
+	\begin{tabbing}
+	\hspace{0.1in} \= T\mbox{}o \= A\mbox{}V \= V\mbox{}. \= W\mbox{}a\hspace{0.3in}\= f\mbox{}i \= f\mbox{}l\\
+	\> To \> AV \> V. \> Wa \> fi \> fl
+	\end{tabbing}
+	}}\vspace{-18pt}
+	\caption{Examples of various letter-pairs and their kerned (left) or ligature (right) equivalents, as typeset by \TeX{}.}\vspace{-3pt}
+	\label{kern-lig}
+\end{figure}
+
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\section{A Galley-Based Approach}
+\label{solution}
+%note that storage is \textbf{not} at a premium, but battery life/processor are.
+%Prerender as much as possible, ie at compile-time
+%Layout then becomes simple. Allows arbitrarily complex layout with no overheads at runtime
+%Include a tree so the semantic structure of the document is explicit
+Our proposed solution, of precomputing several text variants, revisits an approach to typesetting from before the advent of desktop publishing. In the days before DTP, newspaper articles were typeset into long columns known as \emph{galleys}. Since all columns in the newspaper would be of uniform width, all articles could be typeset into galleys of the same measure, and then broken as necessary between lines, in order to slot into the final layout of the newspaper. Once the text has been set in this manner, with appropriate hyphenation and justification, the individual lines can be treated as atomic units that will never have to be re-typeset. In essence, each article is `compiled' only once, but can be used anywhere in the final layout without penalty.
+
+%could this all be one paragraph?
+
+It is this behaviour we wish to emulate. So long as the atomic components of the document are tightly specified, and the reader software can obey the associated drawing instructions (essentially treating them as pre-typeset blocks), the resulting display of the document will be of as high typographic quality as that of the original galley, and the requirement for further computation will be vastly reduced. In order to permit aesthetic layout for a wider range of screen sizes, it seems sensible to create a document containing multiple renderings of the same content, and simply choosing the `best fit' rendering when the document is displayed.
+
+%Something about ideal text measure\cite{Bringhurst2008}
+
+%need to say several renderings included
+
+
+\subsection{A Sample Implementation}
+Our sample implementation is built around our existing work in PDF and Component-Object Graphics (COGs)\cite{Bagley2003}, but there is no reason why it could not be implemented in any other format capable of tightly specifying page imaging operations. It builds on existing software, principally \emph{pdfdit}, in conjunction with \emph{COG Manipulator}, as these tools are already capable of producing modular documents with tightly specified rendering.
+
+
+\subsubsection{The COG Model}
+%summary of cogs, what I've changed, ie line-level rather than default paragraph level. Put in tree to retain par details
+The Component Object Graphic (COG) model was developed to enable the reuse of semantic components within PDF documents, by breaking the traditional graphically-monolithic PDF page into a series of distinct, encapsulated graphical blocks, termed COGs. In its original incarnation, the COG model did not account for any relationship between individual COGs\,---\,it was simply designed as a method by which document components could be easily reused or reordered. The COGs it generates are largely at the granularity of a paragraph, and can still be imaged onto the page in any arbitrary order, independent of reading order.
+
+In order to implement our galley-based design, it is necessary to decrease this granularity, such that each line of text is represented by a separate COG. However, it is also important that the semantic structure of the document is explicitly stored. This is principally so that the reading order of the COGs is maintained, and also so that the reader software can identify paragraphs, headings etc.~to enable them to be laid out correctly.
+
+The COG model takes advantage of the fact that the PDF specification allows the content of a page to be described by an array of streams of imaging operators, rather than the more commonly encountered single, monolithic stream. Unfortunately, this array can only be one-di\-men\-sional, meaning that while it can enforce the reading order, it cannot be used to, say, group lines into paragraphs. Since the PDF specification allows essentially arbitrary insertion of data structures into a document (PDF readers which do not recognise these will simply ignore them), this flexibility was used to embed a simple tree structure representing the paragraphs, in parallel to the COGs themselves (an example of which is shown in figure~\ref{tree}). At the level of its leaves, this tree simply contains pointers to the COGs which make up the content of the document. In the simplest case, where the document contains only one rendering (and thus the pa\-ra\-graph-level items have only one child) the COGs pointed at by the leaves can simply be rendered in order, adding vertical space as appropriate.
+
+
+\begin{figure}
+	\centering
+	\epsfig{file=tree, width=3in}
+	\vspace{-12pt} %Should probably fix the BoundingBox on the ps file instead...
+	\caption{A simple document structure tree. The first level below the root represents all paragraph-level items: headings, paragraphs, figures etc. These items have one child for each galley rendering of the document. These in turn have one child for each COG comprising their content\,---\,in the case of a paragraph or heading: its lines; in the case of a figure: the figure itself and any associated caption.}\vspace{-3pt}
+	\label{tree}
+\end{figure}
+
+\subsubsection{The Source Document}
+Since the majority of available tools for producing COGged PDFs rely on the typesetting package \emph{ditroff}, it was decided to use this as the basis for the source document. Ditroff is particularly amenable to many of the features required here\,---\,it is quite happy to have its page length set to large numbers\,---\,one sample document used a page length of 2000 inches (approximately 50 metres) with no complaints from ditroff. The line length was set to a small value (approximately two inches) in order to produce a narrow column of text. Following this, the actual document content was inserted several times, and the line length incremented, producing one document effectively containing multiple galley renderings of the same content.
+
+
+%- troff source doc, long page, narrow column, creating galley
+
+\subsubsection{pdfdit}
+Having generated the source document, it was processed with ditroff to generate the intermediate code used to feed each typesetter post-pro\-cessor. This output is very expressive, and, unlike \TeX's DVI, contains enough information that post-processors are easily able to locate the start and end of lines and paragraphs within the document. This meant that only minimal changes were needed to be made to the \emph{pdfdit} package described in \cite{Bagley2003} to implement our design.
+
+The first change necessary was to decrease the granularity of the output COGs, producing them at the line level, rather than at the paragraph level. Secondly, some method of generating the requisite tree representing the document structure was required. This was solved by simply using the point at which the original version of pdfdit would have started a new paragraph-level COG, and, instead, starting a new paragraph-level block entry in the document structure tree. Each subsequent line-level COG produced can then be added as a child of this block.
+
+Once the entire output file has been parsed, the tree representations of the various width galleys are amalgamated per-paragraph, as indicated in figure~\ref{tree}, and finally the PDF file is serialised, replete with COGs and content tree.
+
+
+%Note also the inclusion of baseline/indent?
+
+%summary, plus what's changed (similar to the above)
+
+
+
+\subsubsection{Acrobat Plugin}
+\begin{figure}
+ \centering
+ \epsfig{file=renderings,width=3in}
+ \vspace{-6pt}
+ \caption{Sample renderings from the Acrobat plugin at page widths of 42, 48, and 54~em.}\vspace{-3pt}
+\end{figure}
+
+\begin{figure*}
+	\centering
+	\epsfig{file=graph-em,width=6in}
+	\vspace{-6pt}
+	\caption{Graph showing the minimum penalty value of all galleys in a reflowable document, over a range of page widths. The particular document used contained four galleys; these were rendered at widths of 15, 18, 21 and 24~em, with a minimum gutter width of 1~em. Each vertical band highlights a range of page widths within which only the horizontal spacing of the page is altered. The boundaries between vertical bands represent a switch between galley renderings\,---\,the galley used and number of columns is as annotated on the graph.}\vspace{-3pt}
+	\label{graph}
+\end{figure*}
+
+The decision to use Acrobat as an eBook `emulator' stemmed once again from the available existing COG-based tools, as well as the extensive API and developer support available for Acrobat. Moving a COG on a PDF page is as simple as deleting its associated spacer object from the content array of the page, creating a new spacer containing the COG's desired new position, and then adding that back to the content array.
+
+Since, by this point, most of the computationally expensive typesetting has already been carried out, the algorithm used to lay out the lines of the galleys can be very simple. The plugin chooses the most appropriate galley width to lay out, based on the current page width, and according to some measure of aesthetics, and then simply lays the document out line by line, with appropriate vertical spacing, until no more lines will fit in the current column. Any subsequent columns which will fit on the same page are then laid out in the same manner.
+
+%Probably don't need this:
+%For convenience of testing, the plugin also automatically resizes the page to that of the window of Acrobat, and re-lays out the text on the fly, allowing various combinations of page sizes, zoom levels, and aspect ratios to be trialled.
+
+\subsubsection{Layout and Metrics}
+
+
+Since galleys of text lend themselves to being used in a columnar format, a method of fitting columns appropriately to the available page width must be devised. A sensible first approach is simply to calculate how many columns of each galley rendering will fit, by adding the galley width to a specified minimum inter-column spacing, and dividing the page width by this. The remainder of this division will then specify the total extra amount of horizontal whitespace required, which can then divided up and inserted between the columns. A simple measure of aesthetic quality here is to apply a linear penalty for any extra whitespace required, as we seek to keep page margins and column gutters to a minimum.
+%\begin{math}
+%N_\text{cols}=\left\lfloor\frac{W_\text{page}}{W_\text{galley}+W_\text{ICS}}\right\rfloor
+%\end{math}
+
+As the page width increases, so must the widths of the inter-column gutters. In accordance with the extra-whitespace penalty, each galley rendering will produce penalties which vary in a sawtooth manner as the width of the page is increased. With a careful choice of galley widths, when these sawtooth penalties are overlaid, and the galley producing the minimum penalty chosen at each page width, a flatter and finer-toothed penalty graph emerges, as shown in figure~\ref{graph}.
+
+In addition to penalising extra whitespace, wider columns should, in general, be favoured over narrower ones, i.e.~for a given page width, fewer, wider columns are generally considered preferable to a greater number of narrower columns. By multiplying the existing penalty by a smaller-than-linear function of the number of columns (experiments have been carried out with both logarithms and roots) the penalty may be subtly increased for greater numbers of columns. The formula for the penalty used in figure~\ref{graph} is $P = (C + W_{ex})\cdot\sqrt{N_{cols}}$, where $P$ is the penalty, $W_{ex}$ is the extra whitespace required to be inserted, $N_{cols}$ is the number of columns which are required to fill the width of the page, and $C$ is a positive constant. The purpose of the constant is to prevent the penalty from ever evaluating to zero, which would have the effect of disregarding the weighting of the number of columns. Figure~\ref{graph} uses $C=1$.
+
+%\vspace{-8pt}
+
+\section{Conclusions and Future Work}
+This paper outlines our initial exploration of the idea of using pre-rendered galleys for eBooks. So far,  our initial implementation has generated multicolumn layouts that look acceptable, and we believe there is mileage in continuing to investigate this method. However, there is still a lot of work to be done. Firstly, a very simple formula is used to determine which column width variant to select, and we are investigating the suitability of other methods of determining aesthetically pleasing layouts (such as those outlined in \cite{Balinsky2009,Bringhurst2008,Goldenberg2002,Harrington2004,Johari1996,Purvis2003}). Also, our system does not currently allow the font size to be changed (since it is fixed when the galleys are created). One approach to allow the font size to be changed would be to scale smaller column width variants up to larger columns. For example, if the 15~em wide variant is scaled up to 18~em, then text would be scaled up by 20\%\,---\,the equivalent of converting 10~pt text to 12~pt.
+
+It should also be noted that optimal placement of floating blocks cannot be `compiled out' in the same manner that hyphenation and line breaking can; these will still need to be positioned into the relevant places as the document is displayed. If the simple approach is taken that floats should be placed at the top of a column or after another float, a document layout somewhat reminiscent of this one will emerge, although the floats will inevitably tend to drift towards the end of the document, away from their desired position.
+
+Finally, to confirm that this method has validity it needs to be implemented in an actual eBook system, rather than simulated in Acrobat. There, it will be possible to compare the performance of our system with both a normal eBook renderer, and one that has been enhanced to use a sophisticated hyphenation and justification algorithm.
+
+%port to actual ebook platform. Try to get \TeX's line breaking algorithm going with it. optimise rendered widths to get best coverage
+%Note that figure placement may still be a problem - optimal positioning will probably involve some lookahead. See Plass's thesis\cite{Plass1981}.
+%The COG-like objects can actually be structured in a tree in non-pdf formats, so we don't need the parallel tree.
+%note that this relies on the lines being rendered *precisely* as specified, otherwise we'll only end up with shoddy spacing again. Need to find a method by which ebook readers can do this, in a similar manner to formxobjects in pdf
+%include plaintext for emergencies? Cite Steve's paper??
+%Maybe allow new renderings to be saved within the document for later use?
+
+%\nocite{*}
+\bibliographystyle{abbrv}
+\bibliography{refs}
+
+
+\end{document}

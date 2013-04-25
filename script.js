@@ -1,17 +1,11 @@
-var PT_PER_IN = 72;
-var PX_PER_PT = 2;
-var PX_PER_IN = PX_PER_PT * PT_PER_IN;
 var PS = 12;
 var VS = 14;
-var PS_PX = PS * PX_PER_PT;
-var VS_PX = VS * PX_PER_PT;
-var TOP_MARGIN = 1.5 * VS_PX;
+var PT_PER_PX = 0.75; // 12pt = 16px
+var TOP_MARGIN = 2 * VS;
 var BOT_MARGIN = TOP_MARGIN;
-var PAR_SEP = VS_PX;
-var MIN_GUTTER = 12 * PX_PER_PT;
-var GALLEY_WIDTHS = [];
+var PAR_SEP = VS;
+var MIN_GUTTER = 12;
 var PARAGRAPHS = [];
-var PARAGRAPH_TREE;
 var BODYHEIGHT;
 var FLOAT_QUEUE;
 var LINE_QUEUE;
@@ -23,6 +17,7 @@ var PAGES;
 var NUM_COLS;
 var GALLEY_WIDTH;
 var COL_SEP;
+var SCALE = 1;
 
 var COLUMNS;
 var NUM_ROWS;
@@ -34,7 +29,7 @@ var FLOAT_TYPES = Object.freeze({
     SIMPLEQUEUE: 3
 });
 
-var MULTI_COLUMN = false;
+var MULTI_COLUMN = true;
 
 var FLOAT_TYPE;
 
@@ -47,19 +42,31 @@ function Floatable(width, height, content) {
 }
 
 function getDiv(cssclass, width, height, text) {
-    return '<div class="' + cssclass + '" style="width: ' + width + 'px; height: ' + height + 'px; font-size: ' + PS_PX + 'px">' + text + '</div>\n';
+    return '<div class="' + cssclass + '" style="width: ' + width + 'pt; height: ' + height + 'pt; font-size: ' + PS * SCALE + 'pt">' + text + '</div>\n';
 }
 
-function getLine(width, height, text) {
-    return getDiv("line", width, height, text);
+function getLine(words) {
+	var text = "<div class=\"rel\">";
+	var length = words.length,
+		element = null;
+		offset = null;
+		word = null;
+	for (var i = 0; i < length; i++) {
+	  element = words[i];
+	  offset = element.o;
+	  word = element.t;
+	  text += "<div class=\"inner\" style=\"left: " + offset * SCALE + "pt;\">" + word + "</div>";
+	}
+	text += "</div>";
+    return getDiv("line", 0, 0, text);
 }
 
 function getFloat(width, height, text) {
-    return getDiv("floatable", width, height, text);
+    return getDiv("floatable", width * SCALE, height * SCALE, text);
 }
 
 function outputDiv(cssclass, x, y, text) {
-    $('#main').append('<div class="' + cssclass + '" style="position:absolute; top: ' + y + 'px; left: ' + x + 'px">' + text + '</div>');
+    $('#main').append('<div class="' + cssclass + '" style="position:absolute; top: ' + y + 'pt; left: ' + x + 'pt">' + text + '</div>');
 }
 
 function nextPos() {
@@ -180,7 +187,7 @@ function paginate(offset) {
                     continue;
                 }
 
-                outputDiv("container", ((COL_SEP - GALLEY_WIDTH) / 2 + (p - start) * COL_SEP), TOP_MARGIN + l * VS_PX, COLUMNS[p][l]);
+                outputDiv("container", ((COL_SEP - GALLEY_WIDTH * SCALE) / 2 + (p - start) * COL_SEP), (TOP_MARGIN + l * VS) * SCALE, COLUMNS[p][l]);
             }
         }
         //console.log(COLUMNS);
@@ -191,17 +198,19 @@ function paginate(offset) {
 
 function doLayout() {
     var i, nc, ex_ws, rq_ws, dropdown, pageWidth,badness, min_badness_index, name, p, l, w, h, scale, span, nlines, currcol, currrow;
+	
+	$('body').css('font-size', (PS * SCALE) + 'pt');
 
-    pageWidth = window.innerWidth;
+    pageWidth = window.innerWidth * PT_PER_PX;
     badness = [];
     min_badness_index = 0;
 
-    BODYHEIGHT = (window.innerHeight - BOT_MARGIN - TOP_MARGIN);
+    BODYHEIGHT = window.innerHeight * PT_PER_PX - (BOT_MARGIN + TOP_MARGIN) * SCALE;
 
     for (i = 0; i < GALLEY_WIDTHS.length; i++) {
-        nc = Math.floor(pageWidth / (GALLEY_WIDTHS[i] + MIN_GUTTER));
-        ex_ws = pageWidth % ((GALLEY_WIDTHS[i] + MIN_GUTTER));
-        rq_ws = nc * MIN_GUTTER;
+        nc = Math.floor(pageWidth / ((GALLEY_WIDTHS[i] + MIN_GUTTER) * SCALE));
+        ex_ws = pageWidth % ((GALLEY_WIDTHS[i] + MIN_GUTTER) * SCALE);
+        rq_ws = nc * MIN_GUTTER * SCALE;
 
         badness.push((ex_ws /*+ rq_ws*/ + 100) * Math.sqrt(nc));
         if (nc === 0) {
@@ -224,7 +233,7 @@ function doLayout() {
         So, what goes into the COLUMNS array?
             - There must be one element for every column in the document
             - These can be .push()ed on the fly
-            - These are themselves arrays with one element per multiple of the main leading (VS_PX in this case) that will fit in the column
+            - These are themselves arrays with one element per multiple of the main leading (VS in this case) that will fit in the column
                 - If an element is undefined -- we assume it's available
                 - Otherwise the element will be a string containing the html to output (possibly the empty string)
                     - the html should specify its own dimensions, but not its position (this will be calculated by its position in the COLUMNS array)
@@ -235,8 +244,8 @@ function doLayout() {
 
     COLUMNS = [];
 
-    // How many lines? We have (window.innerHeight - TOP_MARGIN - BOT_MARGIN) total space, and each line is VS_PX high. So:
-    NUM_ROWS = Math.floor((window.innerHeight - TOP_MARGIN - BOT_MARGIN) / VS_PX);
+    // How many lines? We have (window.innerHeight - TOP_MARGIN - BOT_MARGIN) total space, and each line is VS high. So:
+    NUM_ROWS = Math.floor((window.innerHeight * PT_PER_PX - (TOP_MARGIN + BOT_MARGIN) * SCALE) / (VS * SCALE));
     if (NUM_ROWS < 1) {
         NUM_ROWS = 1;
     }
@@ -248,9 +257,12 @@ function doLayout() {
 
         if (Array.isArray(PARAGRAPH_TREE[p])) {
             // We assume it's a normal paragraph
+			if (PARAGRAPH_TREE[p][min_badness_index] == undefined) {
+				continue; // hack due to extra empty paragraph generated by the Java/C combo
+			}
             for (l = 0; l < PARAGRAPH_TREE[p][min_badness_index].length; l++) {
                 nextPos();
-                COLUMNS[CURR_COL][CURR_ROW] = getLine(PARAGRAPH_TREE[p][min_badness_index][l], PS_PX, 'W' + min_badness_index + ' P' + p + ' L' + l + ' Qwertyuiop Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
+                COLUMNS[CURR_COL][CURR_ROW] = getLine(PARAGRAPH_TREE[p][min_badness_index][l]);
             }
             nextPos();
             if (CURR_ROW !== 0) {
@@ -263,8 +275,8 @@ function doLayout() {
             }
 
             // Scale width to fit column (and height proportionately)
-            w = PARAGRAPH_TREE[p].width;
-            h = PARAGRAPH_TREE[p].height;
+            w = PARAGRAPH_TREE[p].width * SCALE;
+            h = PARAGRAPH_TREE[p].height * SCALE;
 
             // Have a look at the width and see if it could span any columns
             span = Math.round(w / GALLEY_WIDTH);
@@ -277,7 +289,8 @@ function doLayout() {
                 span = 1;
             }
 
-            scale = (span * GALLEY_WIDTH + (span - 1) * (COL_SEP - GALLEY_WIDTH)) / w;
+            scale = (COL_SEP * span) - COL_SEP +GALLEY_WIDTH * SCALE;
+			scale = scale / w / SCALE;//(span * GALLEY_WIDTH + (span - 1) * (COL_SEP - GALLEY_WIDTH)) / w;
 
             w *= scale;
             h *= scale;
@@ -289,7 +302,7 @@ function doLayout() {
                 h *= scale;
             }
 
-            nlines = Math.round(h / VS_PX) + 1;
+            nlines = Math.round(h / VS) + 1;
 
             if (FLOAT_TYPE === FLOAT_TYPES.SIMPLEQUEUE) {
                 // Don't actually need a queue in gridlayout
@@ -334,7 +347,7 @@ function doLayout() {
         }
 
     }
-    console.log(PARAGRAPH_TREE);
+    //console.log(PARAGRAPH_TREE);
     PAGES = Math.ceil(COLUMNS.length / NUM_COLS);
     CURR_PAGE = 1;
 
@@ -348,7 +361,7 @@ function doLayout() {
     }
     dropdown += "</select>\n";
 
-    $('#top').html('<div class="title" style="position:absolute; width: ' + 100 + '%; height: ' + (PS_PX + 5) + 'px; left: ' + 0 + 'px; top: ' + 3 + 'px">' + dropdown + (FLOAT_TYPE === FLOAT_TYPES.NONE ? "none" : (FLOAT_TYPE === FLOAT_TYPES.DUMB ? "dumb" : (FLOAT_TYPE === FLOAT_TYPES.MSWORD ? "MS Word" : (FLOAT_TYPE === FLOAT_TYPES.SIMPLEQUEUE ? "simple queue" : "unknown (" + FLOAT_TYPE + ")")))) + ", " + NUM_COLS + " cols, " + PAGES + " pages, badness: " + Math.round(badness[min_badness_index] * 100) / 100 + ' <label><input id="multi" onclick="toggleMulti();" type="checkbox" ' + (MULTI_COLUMN ? 'checked' : '') + ' > multicolumn?</label> <input type="button" id="prev" value="prev" onclick="paginate(-1)" disabled> <span id="pageno">' + CURR_PAGE + '</span> <input type="button" id="next" value="next" onclick="paginate(1)" ' + (PAGES < 2 ? 'disabled' : '') + '></div>');
+    $('#top').html('<div class="title" style="position:absolute; width: ' + 100 + '%; height: ' + (PS + 5) + 'pt; left: ' + 0 + 'pt; top: ' + 3 + 'pt">' + dropdown + (FLOAT_TYPE === FLOAT_TYPES.NONE ? "none" : (FLOAT_TYPE === FLOAT_TYPES.DUMB ? "dumb" : (FLOAT_TYPE === FLOAT_TYPES.MSWORD ? "MS Word" : (FLOAT_TYPE === FLOAT_TYPES.SIMPLEQUEUE ? "simple queue" : "unknown (" + FLOAT_TYPE + ")")))) + ", " + NUM_COLS + " cols, " + PAGES + " pages, badness: " + Math.round(badness[min_badness_index] * 100) / 100 + ' <label><input id="multi" onclick="toggleMulti();" type="checkbox" ' + (MULTI_COLUMN ? 'checked' : '') + ' > multicolumn?</label> <input type="button" id="prev" value="prev" onclick="paginate(-1)" disabled> <span id="pageno">' + CURR_PAGE + '</span> <input type="button" id="next" value="next" onclick="paginate(1)" ' + (PAGES < 2 ? 'disabled' : '') + '></div>');
     
     
     paginate(0);
@@ -376,48 +389,39 @@ $(window).resize(function() {
 });
 
 $(document).ready(function() {
-    var i, j, size_left, gw;
-    // Here's one I made earlier
-    PARAGRAPHS = [6408, new Floatable(2 * PX_PER_IN, 2 * PX_PER_IN), 10944, 8880, 8592, new Floatable(4 * PX_PER_IN, 2 * PX_PER_IN), new Floatable(2 * PX_PER_IN, 4 * PX_PER_IN), 3936, 7752, 10440, 7200, 11112, 10776, 12216, 7320, new Floatable(2 * PX_PER_IN, 1.5 * PX_PER_IN), 12504, 5904, 11496, 6144, 10944, 6216, 8640, 6336, 6312, 9888, 13176, 7176, 11712, 13104, 10752, 5880, 7320, 6792];
-
-    // Now populate the widths array
-    for (i = 5; i <= 30; i += 5) {
-        GALLEY_WIDTHS.push(PS_PX * i);
-    }
-
-    // Create the paragraph tree: one element per paragraph-level item
-    PARAGRAPH_TREE = [];
-
-    // Now fill the PARAGRAPH_TREE array
-
-    //For each paragraph-level item...
-    for (i = 0; i < PARAGRAPHS.length; i++) {
-
-        if (typeof PARAGRAPHS[i] === 'number') {
-            // ...if it's a normal paragraph, add an array with one element per galley width
-            PARAGRAPH_TREE.push([]);
-
-            //Now populate the array
-            for (j = 0; j < GALLEY_WIDTHS.length; j++) {
-
-                size_left = PARAGRAPHS[i];
-                gw = GALLEY_WIDTHS[j];
-                PARAGRAPH_TREE[i].push([]);
-
-                while (size_left > 0) {
-                    if (size_left < gw) {
-                        gw = size_left;
-                    }
-                    PARAGRAPH_TREE[i][j].push(gw);
-                    size_left -= gw;
-                }
-            }
-        } else {
-            // It must be a Floatable object. Just copy it across.
-            PARAGRAPH_TREE[i] = PARAGRAPHS[i];
-        }
-    }
-
     doLayout();
-
 });
+
+$("body").touchwipe({
+     wipeLeft: function() { paginate(1); },
+     wipeRight: function() { paginate(-1); },
+     wipeUp: function() { SCALE *= 1.05; doLayout(); },
+     wipeDown: function() { SCALE /= 1.05; doLayout(); },
+     min_move_x: 20,
+     min_move_y: 20,
+     preventDefaultEvents: true
+});
+
+$(document).keydown(function(e){
+		var key = e.which;
+
+		// stop page from scrolling with arrow keys
+		switch (key) {
+			case 37: case 38: case 39: case 40:
+			e.preventDefault();
+		}
+		//alert(key);
+		if (key === 37) { // left
+			paginate(-1);
+		} else if (key === 38) { //up
+			SCALE *= 1.01;
+			doLayout();
+		} else if (key === 39) { //right
+			paginate(1);
+		} else if (key === 40) { //down
+			SCALE /= 1.01;
+			doLayout();
+		} else if (key === 77) { // m ("multicolumn")
+			toggleMulti();
+		}
+	});
