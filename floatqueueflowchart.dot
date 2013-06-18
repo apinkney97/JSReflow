@@ -31,8 +31,8 @@ digraph G {
 	{	node [style=filled, fillcolor=yellow];
 		enqueue [label="Place next\nitem in\nrequisite\nqueue"];
 		newcol  [label="Start new\ncolumn"];
-		placef  [label="Place float"];
-		placel  [label="Place line"];
+		placef  [label="Place float;\nMove down"];
+		placel  [label="Place line;\nMove down"];
 	}
 
 	start   -> partree;
