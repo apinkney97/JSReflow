@@ -317,7 +317,7 @@ function doLayout() {
                     nextPos();
                 }
 
-                placeFloat(w, h, nlines, span, "float scaled to " + (Math.round(scale * 10000)) / 100 + "%");
+                placeFloat(w, h, nlines, span, "<div>" + PARAGRAPH_TREE[p].content + "</div>");
 
                 CURR_COL = currcol;
                 CURR_ROW = currrow;
@@ -327,7 +327,7 @@ function doLayout() {
                 // Just stick the figure out wherever
                 nextPos();
 
-                placeFloat(w, h, nlines, span, "float scaled to " + (Math.round(scale * 10000)) / 100 + "%");
+                placeFloat(w, h, nlines, span, "<div>" + PARAGRAPH_TREE[p].content + "</div>");
 
             } else if (FLOAT_TYPE === FLOAT_TYPES.MSWORD) {
                 nextPos();
@@ -338,7 +338,7 @@ function doLayout() {
                     nextPos();
                 }
 
-                placeFloat(w, h, nlines, span, "float scaled to " + (Math.round(scale * 10000)) / 100 + "%");
+                placeFloat(w, h, nlines, span, "<div>" + PARAGRAPH_TREE[p].content + "</div>");
 
             } /*else {
                 // Don't output anything.
@@ -395,8 +395,8 @@ $(document).ready(function() {
 $("body").touchwipe({
      wipeLeft: function() { paginate(1); },
      wipeRight: function() { paginate(-1); },
-     wipeUp: function() { SCALE *= 1.05; doLayout(); },
-     wipeDown: function() { SCALE /= 1.05; doLayout(); },
+     wipeUp: function() { SCALE *= 1.1; doLayout(); },
+     wipeDown: function() { SCALE /= 1.1; doLayout(); },
      min_move_x: 20,
      min_move_y: 20,
      preventDefaultEvents: true
@@ -423,5 +423,7 @@ $(document).keydown(function(e){
 			doLayout();
 		} else if (key === 77) { // m ("multicolumn")
 			toggleMulti();
+		} else if (key === 72) { // h ("hide bar")
+			$('#top').toggle();
 		}
 	});

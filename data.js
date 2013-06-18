@@ -1,6 +1,6 @@
 var GALLEY_WIDTHS = [108.0,144.0,180.0,216.0,252.0,288.0,324.0];
 var PARAGRAPH_TREE = [];
-PARAGRAPH_TREE[0] = new Floatable(504.0, 216.0, "<pre>Reflowable Documents Composed from\nPre-rendered Atomic Components\nAlexander J. Pinkney\nSteven R. Bagley\nDavid F. Brailsford\nDocument Engineering Lab.\nSchool of Computer Science\nUniversity of Nottingham\nNottingham, NG8 1BB, UK\n{azp|srb|dfb}@cs.nott.ac.uk\n</pre>");
+PARAGRAPH_TREE[0] = new Floatable(952.5, 342.75, "<img style=\"width:100%\" src=\"fig0.png\" alt=\"Reflowable Documents Composed from\nPre-rendered Atomic Components\nAlexander J. Pinkney\nSteven R. Bagley\nDavid F. Brailsford\nDocument Engineering Lab.\nSchool of Computer Science\nUniversity of Nottingham\nNottingham, NG8 1BB, UK\n{azp|srb|dfb}@cs.nott.ac.uk\n\">");
 PARAGRAPH_TREE[1] = [];
 PARAGRAPH_TREE[1][0] = [];
 PARAGRAPH_TREE[1][0][0] = [{o:0,t:'ABSTRACT'},];;
@@ -1151,7 +1151,7 @@ PARAGRAPH_TREE[19][6][7] = [{o:0,t:'general'},{o:40.7232,t:'their'},{o:68.1264,t
 PARAGRAPH_TREE[19][6][8] = [{o:0,t:'manner.'},{o:42.36,t:'The'},{o:64.392,t:'user'},{o:87.756,t:'is'},{o:99.132,t:'often'},{o:127.164,t:'presented'},{o:176.52,t:'with'},{o:201.228,t:'a'},{o:209.928,t:'choice'},{o:244.62,t:'of'},{o:257.988,t:'typefaces'},{o:306.672,t:'and'},];;
 PARAGRAPH_TREE[19][6][9] = [{o:0,t:'point'},{o:28.0452,t:'sizes,'},{o:57.7464,t:'allowing'},{o:103.12,t:'the'},{o:121.157,t:'reader'},{o:154.506,t:'software'},{o:199.195,t:'to'},{o:211.904,t:'render'},{o:245.926,t:'the'},{o:263.963,t:'document'},{o:314.664,t:'in'},];;
 PARAGRAPH_TREE[19][6][10] = [{o:0,t:'essentially'},{o:53.6772,t:'any'},{o:74.0184,t:'arbitrary'},{o:118.348,t:'way'},{o:141.353,t:'it'},{o:151.038,t:'chooses.'},];;
-PARAGRAPH_TREE[20] = new Floatable(144.0, 144.0, "<pre>Figure 1: The Kindle 3 appears to primarily use justified text,\nfalling back to ragged-right when inter-word spacing would become\ntoo large.\n</pre>");
+PARAGRAPH_TREE[20] = new Floatable(276.75, 309.0, "<img style=\"width:100%\" src=\"fig1.png\" alt=\"Figure 1: The Kindle 3 appears to primarily use justified text,\nfalling back to ragged-right when inter-word spacing would become\ntoo large.\n\">");
 PARAGRAPH_TREE[21] = [];
 PARAGRAPH_TREE[21][0] = [];
 PARAGRAPH_TREE[21][0][0] = [{o:0,t:'Conversely,'},{o:67.824,t:'PDF'},{o:99.996,t:'is'},];;
@@ -1693,7 +1693,7 @@ PARAGRAPH_TREE[24][6][10] = [{o:0,t:'by'},{o:16.0065,t:'TEX)'},{o:47.337,t:'whic
 PARAGRAPH_TREE[24][6][11] = [{o:0,t:'consecutive'},{o:60.624,t:'lines'},{o:87.264,t:'by'},{o:103.236,t:'considering'},{o:163.2,t:'each'},{o:189.156,t:'paragraph'},{o:241.104,t:'as'},{o:255.072,t:'a'},{o:264.372,t:'whole.'},{o:300.672,t:'TEX'},];;
 PARAGRAPH_TREE[24][6][12] = [{o:0,t:'also'},{o:23.628,t:'uses'},{o:48.588,t:'the'},{o:67.548,t:'hyphenation'},{o:131.172,t:'algorithm'},{o:182.136,t:'designed'},{o:229.092,t:'by'},{o:245.388,t:'Liang[8],'},{o:294.672,t:'which'},];;
 PARAGRAPH_TREE[24][6][13] = [{o:0,t:'has'},{o:19.0075,t:'been'},{o:44.675,t:'ported'},{o:78.3465,t:'to'},{o:90.694,t:'many'},{o:120.369,t:'other'},{o:148.041,t:'applications.'},];;
-PARAGRAPH_TREE[25] = new Floatable(216.0, 72.0, "<pre>To AV V. Wa fi fl\nTo AV V. Wa fi fl\nFigure 2: Examples of various letter-pairs and their kerned\n(left) or ligature (right) equivalents, as typeset by TEX.\n</pre>");
+PARAGRAPH_TREE[25] = new Floatable(483.75, 136.5, "<img style=\"width:100%\" src=\"fig2.png\" alt=\"To AV V. Wa fi fl\nTo AV V. Wa fi fl\nFigure 2: Examples of various letter-pairs and their kerned\n(left) or ligature (right) equivalents, as typeset by TEX.\n\">");
 PARAGRAPH_TREE[26] = [];
 PARAGRAPH_TREE[26][0] = [];
 PARAGRAPH_TREE[26][0][0] = [{o:0,t:'2.2'},{o:17.4,t:'Other'},{o:47.124,t:'Typographical'},];;
@@ -2417,7 +2417,7 @@ PARAGRAPH_TREE[34][6][6] = [{o:0,t:'method'},{o:39.7827,t:'by'},{o:55.5653,t:'wh
 PARAGRAPH_TREE[34][6][7] = [{o:0,t:'reordered.'},{o:53.0148,t:'The'},{o:75.7176,t:'COGs'},{o:109.76,t:'it'},{o:120.475,t:'generates'},{o:169.83,t:'are'},{o:188.525,t:'largely'},{o:225.892,t:'at'},{o:238.598,t:'the'},{o:257.305,t:'granularity'},{o:314.004,t:'of'},];;
 PARAGRAPH_TREE[34][6][8] = [{o:0,t:'a'},{o:8.862,t:'paragraph,'},{o:63.372,t:'and'},{o:84.234,t:'can'},{o:104.424,t:'still'},{o:125.97,t:'be'},{o:140.832,t:'imaged'},{o:179.694,t:'onto'},{o:204.564,t:'the'},{o:222.762,t:'page'},{o:248.952,t:'in'},{o:261.822,t:'any'},{o:282.684,t:'arbitrary'},];;
 PARAGRAPH_TREE[34][6][9] = [{o:0,t:'order,'},{o:31.3351,t:'independent'},{o:93.0061,t:'of'},{o:106.017,t:'reading'},{o:145.02,t:'order.'},];;
-PARAGRAPH_TREE[35] = new Floatable(216.0, 216.0, "<pre>Root\nParagraph-level items\nGalley renderings\nCOG pointers\nFigure 3: A simple document structure tree. The first level\nbelow the root represents all paragraph-level items: headings,\nparagraphs, figures etc. These items have one child for each\ngalley rendering of the document. These in turn have one child\nfor each COG comprising their content - in the case of a paragraph\nor heading: its lines; in the case of a figure: the figure\nitself and any associated caption.\n</pre>");
+PARAGRAPH_TREE[35] = new Floatable(471.0, 143.25, "<img style=\"width:100%\" src=\"fig3.png\" alt=\"Root\nParagraph-level items\nGalley renderings\nCOG pointers\nFigure 3: A simple document structure tree. The first level\nbelow the root represents all paragraph-level items: headings,\nparagraphs, figures etc. These items have one child for each\ngalley rendering of the document. These in turn have one child\nfor each COG comprising their content - in the case of a paragraph\nor heading: its lines; in the case of a figure: the figure\nitself and any associated caption.\n\">");
 PARAGRAPH_TREE[36] = [];
 PARAGRAPH_TREE[36][0] = [];
 PARAGRAPH_TREE[36][0][0] = [{o:0,t:'In'},{o:14,t:'order'},{o:43.324,t:'to'},{o:56.664,t:'implement'},];;
@@ -3004,7 +3004,7 @@ PARAGRAPH_TREE[41][6][4] = [{o:0,t:'able'},{o:23.997,t:'to'},{o:37.338,t:'locate
 PARAGRAPH_TREE[41][6][5] = [{o:0,t:'document.'},{o:54.592,t:'This'},{o:80.192,t:'meant'},{o:113.784,t:'that'},{o:136.048,t:'only'},{o:161.648,t:'minimal'},{o:205.92,t:'changes'},{o:248.836,t:'were'},{o:276.416,t:'needed'},{o:314.664,t:'to'},];;
 PARAGRAPH_TREE[41][6][6] = [{o:0,t:'be'},{o:15.7571,t:'made'},{o:46.1782,t:'to'},{o:59.9433,t:'the'},{o:79.0364,t:'pdfdit'},{o:112.133,t:'package'},{o:155.875,t:'described'},{o:206.288,t:'in'},{o:220.053,t:'[1]'},{o:238.474,t:'to'},{o:252.239,t:'implement'},{o:308.004,t:'our'},];;
 PARAGRAPH_TREE[41][6][7] = [{o:0,t:'design.'},];;
-PARAGRAPH_TREE[42] = new Floatable(288.0, 288.0, "<pre>Figure 4: Sample renderings from the Acrobat plugin at page\nwidths of 42, 48, and 54 em.\n</pre>");
+PARAGRAPH_TREE[42] = new Floatable(483.0, 373.5, "<img style=\"width:100%\" src=\"fig4.png\" alt=\"Figure 4: Sample renderings from the Acrobat plugin at page\nwidths of 42, 48, and 54 em.\n\">");
 PARAGRAPH_TREE[43] = [];
 PARAGRAPH_TREE[43][0] = [];
 PARAGRAPH_TREE[43][0][0] = [{o:0,t:'The'},{o:21.06,t:'first'},{o:42.792,t:'change'},{o:79.176,t:'necessary'},];;
@@ -3658,7 +3658,7 @@ PARAGRAPH_TREE[50][6][4] = [{o:0,t:'of'},{o:12.402,t:'galley'},{o:44.136,t:'widt
 PARAGRAPH_TREE[50][6][5] = [{o:0,t:'galley'},{o:32.0328,t:'producing'},{o:83.3976,t:'the'},{o:100.766,t:'minimum'},{o:150.151,t:'penalty'},{o:188.184,t:'chosen'},{o:224.213,t:'at'},{o:235.582,t:'each'},{o:260.27,t:'page'},{o:285.631,t:'width,'},{o:318.672,t:'a'},];;
 PARAGRAPH_TREE[50][6][6] = [{o:0,t:'flatter'},{o:32.0347,t:'and'},{o:52.7413,t:'finer-'},{o:79.3933,t:'toothed'},{o:118.772,t:'penalty'},{o:157.479,t:'graph'},{o:188.181,t:'emerges,'},{o:234.544,t:'as'},{o:247.919,t:'shown'},{o:282.629,t:'in'},{o:295.344,t:'figure'},];;
 PARAGRAPH_TREE[50][6][7] = [{o:0,t:'5.'},];;
-PARAGRAPH_TREE[51] = new Floatable(576.0, 288.0, "<pre>Figure 5: Graph showing the minimum penalty value of all galleys in a reflowable document, over a range of page widths. The\nparticular document used contained four galleys; these were rendered at widths of 15, 18, 21 and 24 em, with a minimum gutter\nwidth of 1 em. Each vertical band highlights a range of page widths within which only the horizontal spacing of the page is altered.\nThe boundaries between vertical bands represent a switch between galley renderings - the galley used and number of columns is as\nannotated on the graph.\n</pre>");
+PARAGRAPH_TREE[51] = new Floatable(963.75, 254.25, "<img style=\"width:100%\" src=\"fig5.png\" alt=\"Figure 5: Graph showing the minimum penalty value of all galleys in a reflowable document, over a range of page widths. The\nparticular document used contained four galleys; these were rendered at widths of 15, 18, 21 and 24 em, with a minimum gutter\nwidth of 1 em. Each vertical band highlights a range of page widths within which only the horizontal spacing of the page is altered.\nThe boundaries between vertical bands represent a switch between galley renderings - the galley used and number of columns is as\nannotated on the graph.\n\">");
 PARAGRAPH_TREE[52] = [];
 PARAGRAPH_TREE[52][0] = [];
 PARAGRAPH_TREE[52][0][0] = [{o:0,t:'In'},{o:12.396,t:'addition'},{o:54.132,t:'to'},{o:65.868,t:'penalising'},];;

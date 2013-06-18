@@ -1,11 +1,14 @@
 import java.io.*;
 import java.util.*;
+import javax.imageio.*;
+import java.awt.image.BufferedImage;
 
 public class ParSplitter {
 	public static final String FLOAT = "__FLOAT";
 	public static final String PARA = "__PARA";
 	public static final String PTREE = "PARAGRAPH_TREE";
 	public static final int PT_PER_IN = 72;
+	public static final double PT_PER_PX = 0.75;
 	
 	public static void main(String[] args) {
 		boolean floatMode = false;
@@ -43,18 +46,19 @@ public class ParSplitter {
 				if (line.length() > 0) {
 					if (line.startsWith(FLOAT)) { // start of a float
 						if (floatMode) {
-							currText += "</pre>"; // end of previous float
+							currText += ""\\\">\");"; // end of previous float
 							System.out.println(currText);
 							p++;
 						}
 						floatMode = true;
-						String[] bits = line.substring(FLOAT.length()).trim().split(" ");
-						fwd = Double.parseDouble(bits[0]) * PT_PER_IN;
-						fht = Double.parseDouble(bits[1]) * PT_PER_IN;
-						currText = PTREE + "[" + p + "] = new Floatable(" + fwd + ", " + fht + ", \"<pre>";
+						String fname = line.substring(FLOAT.length()).trim();
+						BufferedImage bimg = ImageIO.read(new File(fname));
+						fwd = bimg.getWidth() * PT_PER_PX;
+						fht = bimg.getHeight()  * PT_PER_PX;
+						currText = PTREE + "[" + p + "] = new Floatable(" + fwd + ", " + fht + ", \"<img style=\\\"width:100%\\\" src=\\\"" + fname + "\\\" alt=\\\"";
 					} else if (line.startsWith(PARA)) {
 						if (floatMode) {
-							currText += "</pre>\");"; // end of previous float
+							currText += "\\\">\");"; // end of previous float
 							System.out.println(currText);
 							p++;
 						}

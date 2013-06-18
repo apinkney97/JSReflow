@@ -1,4 +1,4 @@
-__FLOAT 7 3
+__FLOAT fig0.png
 Reflowable Documents Composed from
 Pre-rendered Atomic Components
 
@@ -123,7 +123,7 @@ user is often presented with a choice of typefaces and point sizes,
 allowing the reader software to render the document in essentially
 any arbitrary way it chooses.
 
-__FLOAT 2 2
+__FLOAT fig1.png
 Figure 1: The Kindle 3 appears to primarily use justified text,
 falling back to ragged-right when inter-word spacing would become
 too large.
@@ -175,7 +175,7 @@ lines by considering each paragraph as a whole. TEX also
 uses the hyphenation algorithm designed by Liang[8], which has
 been ported to many other applications.
 
-__FLOAT 3 1
+__FLOAT fig2.png
 To AV V. Wa fi fl
 To AV V. Wa fi fl
 
@@ -248,7 +248,7 @@ reordered. The COGs it generates are largely at the granularity of
 a paragraph, and can still be imaged onto the page in any arbitrary
 order, independent of reading order.
 
-__FLOAT 3 3
+__FLOAT fig3.png
 Root
 Paragraph-level items
 Galley renderings
@@ -315,7 +315,7 @@ the document. This meant that only minimal changes were needed
 to be made to the pdfdit package described in [1] to implement our
 design.
 
-__FLOAT 4 4
+__FLOAT fig4.png
 Figure 4: Sample renderings from the Acrobat plugin at page
 widths of 42, 48, and 54 em.
 
@@ -378,7 +378,7 @@ and the galley producing the minimum penalty chosen at each page
 width, a flatter and finer-toothed penalty graph emerges, as shown
 in figure 5.
 
-__FLOAT 8 4
+__FLOAT fig5.png
 Figure 5: Graph showing the minimum penalty value of all galleys in a reflowable document, over a range of page widths. The
 particular document used contained four galleys; these were rendered at widths of 15, 18, 21 and 24 em, with a minimum gutter
 width of 1 em. Each vertical band highlights a range of page widths within which only the horizontal spacing of the page is altered.
