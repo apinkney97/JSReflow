@@ -1,4 +1,6 @@
 *.class
 *.o
 LineBreak/LineBreak
+*.swp
+*~
 
