@@ -46,7 +46,7 @@ public class ParSplitter {
 				if (line.length() > 0) {
 					if (line.startsWith(FLOAT)) { // start of a float
 						if (floatMode) {
-							currText += ""\\\">\");"; // end of previous float
+							currText += "\\\">\");"; // end of previous float
 							System.out.println(currText);
 							p++;
 						}
