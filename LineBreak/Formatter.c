@@ -315,6 +315,7 @@ int Format(TEXTFORMATTER * f, double ro)
             n = nextA;
             dA = nextA->totalDemerits;
         }
+        nextA = nextA->next;
     }
 
     f->numLines = n->line + 1;
