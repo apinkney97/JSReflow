@@ -12,7 +12,7 @@ public class ParSplitter {
 	
 	public static void main(String[] args) {
 		boolean floatMode = false;
-		boolean inside = false;
+		boolean insidePara = false;
 		
 		
 		
@@ -38,7 +38,8 @@ public class ParSplitter {
 			}
 			System.out.println("];");
 			
-			System.out.println("var " + PTREE + " = [];");
+			// First (and hopefully only) use of PTREE -- where PARAGRAPH_TREE is defined
+			System.out.print("var " + PTREE + " = [");
 			
 			while (s.hasNextLine()) {
 				line = s.nextLine().trim();
@@ -46,8 +47,8 @@ public class ParSplitter {
 				if (line.length() > 0) {
 					if (line.startsWith(FLOAT)) { // start of a float
 						if (floatMode) {
-							currText += "\\\">\");"; // end of previous float
-							System.out.println(currText);
+							currText += "\\\">\"},"; // end of previous float
+							System.out.print(currText);
 							p++;
 						}
 						floatMode = true;
@@ -55,11 +56,11 @@ public class ParSplitter {
 						BufferedImage bimg = ImageIO.read(new File(fname));
 						fwd = bimg.getWidth() * PT_PER_PX;
 						fht = bimg.getHeight()  * PT_PER_PX;
-						currText = PTREE + "[" + p + "] = new Floatable(" + fwd + ", " + fht + ", \"<img style=\\\"width:100%\\\" src=\\\"" + fname + "\\\" alt=\\\"";
+						currText ="{w:" + fwd + ",h:" + fht + ",d:\"<img style=\\\"width:100%\\\" src=\\\"" + fname + "\\\" alt=\\\"";
 					} else if (line.startsWith(PARA)) {
 						if (floatMode) {
-							currText += "\\\">\");"; // end of previous float
-							System.out.println(currText);
+							currText += "\\\">\"},"; // end of previous float
+							System.out.print(currText);
 							p++;
 						}
 						floatMode = false;
@@ -67,10 +68,12 @@ public class ParSplitter {
 						if (floatMode) {
 							currText += (line + "\\n");
 						} else {
-							if (!inside) {
+							if (!insidePara) {
+								// Start of new paragraph, which is an array of arrays of objects
 								currText = "";
-								System.out.println(PTREE + "[" + p + "] = [];");
-								inside = true;
+								//System.out.println("\t[ //start of paragraph");
+								System.out.print("[");
+								insidePara = true;
 							}
 							line = line + " ";
 							currText += line;
@@ -78,9 +81,11 @@ public class ParSplitter {
 					}
 					
 				} else { // empty line -- either end of paragraph or gap inside float
-					if (!floatMode && inside) {
+					if (!floatMode && insidePara) {
+						// Within this, we create a new sub-array for each galley rendering
 						for (int g = 0; g < widths.length; g++) {
-							System.out.println(PTREE + "[" + p + "][" + g + "] = [];");
+							//System.out.println("\t\t[ //start of galley rendering");
+							System.out.print("[");
 							Process proc = rt.exec("./LineBreak/LineBreak - Times-Roman.afm 12 " + widths[g]);
 							OutputStream out = proc.getOutputStream();
 							out.write(currText.getBytes());
@@ -88,7 +93,8 @@ public class ParSplitter {
 							Scanner in = new Scanner(proc.getInputStream()); // from process's stdout
 							int l = 0;
 							while (in.hasNextLine()) {
-								System.out.println(PTREE + "["+ p +"][" + g + "][" + (l++) + "] = " + in.nextLine() + ";"); //.replaceAll("\\\"", "\\\\\""));
+								//System.out.println("\t\t\t" + in.nextLine());
+								System.out.print(in.nextLine());
 							}
 							
 							in = new Scanner(proc.getErrorStream()); // from process's stdout
@@ -98,13 +104,18 @@ public class ParSplitter {
 							
 							proc.destroy() ;
 							
+							//System.out.println("\t\t], //end of galley rendering");
+							System.out.print("],");
 						}
 						p++;
+						// System.out.println("\t], //end of paragraph");
+						System.out.print("],");
 					}
-					inside = false;
+					insidePara = false;
 				}
 			}
 			s.close();
+			System.out.println("];");
 		} catch (Exception e) {
 			//System.err.println("FATAL: File \"" + args[0] + "\"not found, dumbass.");
 			e.printStackTrace();

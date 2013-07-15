@@ -79,7 +79,7 @@ void ExportPS(TEXTFORMATTER * f)
         }
         lineStart = f->lines[i]->afterPosition;
 		
-		printf("];\n");
+		printf("],");
 		
     }
 
