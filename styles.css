@@ -1,6 +1,6 @@
 @font-face { font-family: myfont; src: url('times.ttf'); }
 body { font-family: myfont; }
-.bgred, .floatable { background-color: red; }
+.bgred { background-color: red; }
 .line { color: #000; white-space: nowrap; }
 .title { background-color: #CCC; font-weight: bold; text-align: center; border: 3px solid #0D0; border-left: none; border-right: none; }
 .rel { position: relative; height: 14pt; }
