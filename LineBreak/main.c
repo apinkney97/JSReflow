@@ -36,7 +36,7 @@ void ExportPS(TEXTFORMATTER * f)
         r = f->lines[i]->adjustmentRatio;
 		x = 0;
 		
-		printf("[", gLeading);
+		// printf("[", gLeading);
 		
         for (j = lineStart; j <= f->lines[i]->position; j++) {
             if (f->items[j].type == BOX) {
@@ -46,7 +46,7 @@ void ExportPS(TEXTFORMATTER * f)
                     ps = f->items[j].data.box.pointSize;
                     //printf("/%s %f selectfont\n", pf->gfi->fontName, ps);
                 }
-                printf("{o:%g,t:'", x);
+                printf("%g,", x);
 
                 p = f->items[j].data.box.text;
                 for (c = 0; c < f->items[j].data.box.textLength; c++) {
@@ -68,7 +68,7 @@ void ExportPS(TEXTFORMATTER * f)
                     p++;
                 }
 
-                printf("'},"); // trailing commas will probably be ok (see http://stackoverflow.com/questions/7246618/trailing-commas-in-javascript )
+                printf(" "); // trailing commas will probably be ok (see http://stackoverflow.com/questions/7246618/trailing-commas-in-javascript )
                 x += f->items[j].width;
             } else if (f->items[j].type == GLUE) {
                 x += f->items[j].width + (r < 0 ? (r * f->items[j].data.glue.shrink) : (r * f->items[j].data.glue.stretch));
@@ -79,7 +79,7 @@ void ExportPS(TEXTFORMATTER * f)
         }
         lineStart = f->lines[i]->afterPosition;
 		
-		printf("],");
+		printf("\n");
 		
     }
 

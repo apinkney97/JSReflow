@@ -4,7 +4,7 @@ OBJECTS = main.o Formatter.o parseAFM.o
 OUTNAME = LineBreak
 
 $(OUTNAME) : $(OBJECTS)
-	$(CC) $(CFLAGS) $(OBJECTS) -o $(OUTNAME)
+	$(CC) $(OBJECTS) -o $(OUTNAME) $(CFLAGS)
 
 main.o : main.c parseAFM.h Formatter.h
 	$(CC) $(CFLAGS) -c main.c

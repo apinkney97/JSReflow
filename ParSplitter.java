@@ -13,6 +13,8 @@ public class ParSplitter {
 	public static void main(String[] args) {
 		boolean floatMode = false;
 		boolean insidePara = false;
+		HashMap<String, Integer> hm = new HashMap<String, Integer>();
+		ArrayList<String> words = new ArrayList<String>();
 		
 		
 		
@@ -93,8 +95,21 @@ public class ParSplitter {
 							Scanner in = new Scanner(proc.getInputStream()); // from process's stdout
 							int l = 0;
 							while (in.hasNextLine()) {
-								//System.out.println("\t\t\t" + in.nextLine());
-								System.out.print(in.nextLine());
+								// System.out.println("\t\t\t" + in.nextLine());
+								System.out.print("[");
+								String[] wordpairs = in.nextLine().split(" ");
+								for (String wordpair : wordpairs) {
+									String[] bits = wordpair.split(",");
+									System.out.print("["+bits[0]+",");
+									if (!hm.containsKey(bits[1])) {
+										hm.put(bits[1],words.size());
+										words.add(bits[1]);
+									}
+									System.out.print(hm.get(bits[1]));
+									System.out.print("],");
+								}
+								System.out.print("],");
+								// System.out.println(in.nextLine());
 							}
 							
 							in = new Scanner(proc.getErrorStream()); // from process's stdout
@@ -115,6 +130,11 @@ public class ParSplitter {
 				}
 			}
 			s.close();
+			System.out.println("];");
+			System.out.print("var DICTIONARY = [");
+			for (String word : words) {
+				System.out.print("\"" + word + "\",");
+			}
 			System.out.println("];");
 		} catch (Exception e) {
 			//System.err.println("FATAL: File \"" + args[0] + "\"not found, dumbass.");
