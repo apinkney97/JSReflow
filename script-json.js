@@ -3,13 +3,8 @@ var VS = 14;
 var PT_PER_PX = 0.75; // 12pt = 16px
 var TOP_MARGIN = 2 * VS;
 var BOT_MARGIN = TOP_MARGIN;
-var PAR_SEP = VS;
 var MIN_GUTTER = 12;
-var PARAGRAPHS = [];
 var BODYHEIGHT;
-var FLOAT_QUEUE;
-var LINE_QUEUE;
-var CURR_P;
 var CURR_ROW;
 var CURR_COL;
 var CURR_PAGE;
@@ -48,9 +43,8 @@ function getDiv(cssclass, width, height, text) {
 function getLine(words) {
 	var text = "<div class=\"rel\">";
 	var length = words.length,
-		element = null;
 		offset = null;
-		word = null;
+    var word = null;
 	for (var i = 0; i < length; i++) {
 	  offset = words[i][0];
 	  word = words[i][1];
@@ -405,7 +399,8 @@ $(document).keydown(function(e){
 		var key = e.which;
 
 		// stop page from scrolling with arrow keys
-		switch (key) {
+		//noinspection FallthroughInSwitchStatementJS
+    switch (key) {
 			case 37: case 38: case 39: case 40:
 			e.preventDefault();
 		}
