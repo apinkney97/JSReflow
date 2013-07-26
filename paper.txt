@@ -473,3 +473,4 @@ thesis, Stanford University, 1983.
 Creating personalized documents: an optimization approach.
 In Proceedings of the 2003 ACM Symposium on Document
 Engineering, pages 68 - 77. ACM Press, 2003.
+
