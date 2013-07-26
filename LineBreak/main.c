@@ -4,6 +4,7 @@
 //
 //  Created by Steven Bagley on 30/03/2013.
 //  Copyright (c) 2013 Steven Bagley. All rights reserved.
+//  Modified by Alex Pinkney 2013 for use in Malleable Document project
 //
 
 #include <stdio.h>
@@ -36,15 +37,12 @@ void ExportPS(TEXTFORMATTER * f)
         r = f->lines[i]->adjustmentRatio;
 		x = 0;
 		
-		// printf("[", gLeading);
-		
         for (j = lineStart; j <= f->lines[i]->position; j++) {
             if (f->items[j].type == BOX) {
 
                 if (pf != f->items[j].data.box.font || ps != f->items[j].data.box.pointSize) {
                     pf = f->items[j].data.box.font;
                     ps = f->items[j].data.box.pointSize;
-                    //printf("/%s %f selectfont\n", pf->gfi->fontName, ps);
                 }
                 printf("%g,", x);
 
@@ -68,7 +66,7 @@ void ExportPS(TEXTFORMATTER * f)
                     p++;
                 }
 
-                printf(" "); // trailing commas will probably be ok (see http://stackoverflow.com/questions/7246618/trailing-commas-in-javascript )
+                printf(" ");
                 x += f->items[j].width;
             } else if (f->items[j].type == GLUE) {
                 x += f->items[j].width + (r < 0 ? (r * f->items[j].data.glue.shrink) : (r * f->items[j].data.glue.stretch));
@@ -170,7 +168,6 @@ int main(int argc, const char *argv[])
 
     if (state) {
         *p++ = '\0';
-        //   printf("[%s]\n", word);
         AddTextBox(formatter, word, (int) strlen(word), fontInfo, pointSize);
         AddGlue(formatter, pointSize / 4.0, pointSize / 3.0 - pointSize / 4.0, pointSize / 4.0 - pointSize / 5.0);
     }
