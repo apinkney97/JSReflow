@@ -35,7 +35,7 @@ JSReflow.getLine = function (words) {
     for (i = 0; i < length; i++) {
         offset = words[i][0];
         word = words[i][1];
-        text += "<div class=\"inner\" style=\"left: " + offset * JSReflow.scale + "pt;\">" + JSReflow.dictionary[word] + "</div>";
+        text += "<div class=\"inner\" style=\"left: " + offset * JSReflow.scale + "pt;\">" + JSReflow.dictionary[word] + " </div>";
     }
     text += "</div>";
     return JSReflow.getDiv("line", 0, 0, text);
@@ -350,7 +350,7 @@ JSReflow.doLayout = function () {
     }
     dropdown += "</select>\n";
 
-    $('#top').html('<div class="title" style="position:absolute; width: 100%; height: ' + (JSReflow.ps + 5) + 'pt; left: 0pt; top: 3pt">' + dropdown + (JSReflow.float_type === JSReflow.float_types.NONE ? "none" : (JSReflow.float_type === JSReflow.float_types.DUMB ? "dumb" : (JSReflow.float_type === JSReflow.float_types.MSWORD ? "MS Word" : (JSReflow.float_type === JSReflow.float_types.SIMPLEQUEUE ? "simple queue" : "unknown (" + JSReflow.float_type + ")")))) + ", " + JSReflow.num_cols + " cols, " + JSReflow.pages + " pages, badness: " + Math.round(badness[min_badness_index] * 100) / 100 + ' <label><input id="multi" onclick="JSReflow.toggleMulti();" type="checkbox" ' + (JSReflow.multi_column ? 'checked' : '') + ' > multicolumn?</label> <input type="button" id="prev" value="prev" onclick="paginate(-1)" disabled> <span id="pageno">' + JSReflow.curr_page + '</span> <input type="button" id="next" value="next" onclick="JSReflow.paginate(1)" ' + (JSReflow.pages < 2 ? 'disabled' : '') + '></div>');
+    $('#top').html('<div class="title" style="position:absolute; width: 100%; height: ' + (JSReflow.ps + 5) + 'pt; left: 0pt; top: 3pt">Press \'h\' to hide this bar ' + dropdown + (JSReflow.float_type === JSReflow.float_types.NONE ? "none" : (JSReflow.float_type === JSReflow.float_types.DUMB ? "dumb" : (JSReflow.float_type === JSReflow.float_types.MSWORD ? "MS Word" : (JSReflow.float_type === JSReflow.float_types.SIMPLEQUEUE ? "simple queue" : "unknown (" + JSReflow.float_type + ")")))) + ", " + JSReflow.num_cols + " cols, " + JSReflow.pages + " pages, badness: " + Math.round(badness[min_badness_index] * 100) / 100 + ' <label><input id="multi" onclick="JSReflow.toggleMulti();" type="checkbox" ' + (JSReflow.multi_column ? 'checked' : '') + ' > multicolumn?</label> <input type="button" id="prev" value="prev" onclick="paginate(-1)" disabled> <span id="pageno">' + JSReflow.curr_page + '</span> <input type="button" id="next" value="next" onclick="JSReflow.paginate(1)" ' + (JSReflow.pages < 2 ? 'disabled' : '') + '></div>');
 
 
     JSReflow.paginate(0);
