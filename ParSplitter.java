@@ -11,6 +11,10 @@ public class ParSplitter {
     public static final double PT_PER_PX = 0.75;
     
     public static void main(String[] args) {
+		if (args.length < 1) {
+            System.err.println("Error: call is \"java ParSplitter <filename> [width1[ width2 [...]]]\"");
+			System.exit(-1);
+		}	
         boolean floatMode = false;
         boolean insidePara = false;
         HashMap<String, Integer> hm = new HashMap<String, Integer>();
@@ -18,11 +22,22 @@ public class ParSplitter {
         
         
         
-        try {
-            int p = 0;
-            //double[] widths = {1.5, 2, 2.5, 3, 3.5, 4, 4.5};
-            double[] widths = {2, 3, 4,};
+        double[] widths = {1.5, 2, 2.5, 3, 3.5, 4, 4.5};
+		
+		if (args.length > 1) {
+			widths = new double[args.length - 1];
+			for (int i = 0; i < widths.length; i++) {
+				try {
+					widths[i] = Double.parseDouble(args[i + 1]);
+				} catch (NumberFormatException e) {
+					System.err.println("Error parsing \"" + args[i + 1] + "\" as a double");
+					System.exit(-1);
+				}
+			}
+		}
+			
             
+        try {
             Scanner s = new Scanner(new File(args[0]));
             String line;
             String currText = null;
@@ -52,7 +67,6 @@ public class ParSplitter {
                         if (floatMode) {
                             currText += "\\\">\"},"; // end of previous float
                             System.out.println(currText);
-                            p++;
                         }
                         floatMode = true;
                         String[] bits = line.substring(FLOAT.length()).trim().split("\\s+");
@@ -76,7 +90,6 @@ public class ParSplitter {
                         if (floatMode) {
                             currText += "\\\">\"},"; // end of previous float
                             System.out.println(currText);
-                            p++;
                         }
                         floatMode = false;
                     } else { // Do something with the line
@@ -135,7 +148,6 @@ public class ParSplitter {
                             //System.out.println("\t\t], //end of galley rendering");
                             System.out.println("],");
                         }
-                        p++;
                         // System.out.println("\t], //end of paragraph");
                         System.out.println("],");
                     }
