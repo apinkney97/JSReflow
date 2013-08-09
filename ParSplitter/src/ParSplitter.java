@@ -152,28 +152,38 @@ public class ParSplitter {
 								for (Object o : arr) {
 									// For each line
 									JSONArray typesetwords = (JSONArray) o;
-									TextLine textline = new TextLine();
 
-									for (Object p : typesetwords) {
-										// For each word
-										JSONObject typesetword = (JSONObject) p;
+									if (typesetwords.size() > 0) {
+										// workaround for bug in C linebreaker
 
-										String key = typesetword.get("word") + " " + typesetword.get("width");
-										DictionaryWord dw = dictionary.get(key);
+										TextLine textline = new TextLine();
 
-										if (dw == null) {
-											dw = new DictionaryWord((String) typesetword.get("word"),
-													Double.parseDouble((String) typesetword.get("width")));
-											dictionary.put(key, dw);
+										for (Object p : typesetwords) {
+											// For each word
+											JSONObject typesetword = (JSONObject) p;
+
+											String key = typesetword.get("word") + " " + typesetword.get("width");
+											DictionaryWord dw = dictionary.get(key);
+
+											if (dw == null) {
+												dw = new DictionaryWord((String) typesetword.get("word"),
+														Double.parseDouble((String) typesetword.get("width")));
+												dictionary.put(key, dw);
+											}
+
+											WordData worddata = new WordData(Double.parseDouble((String) typesetword
+													.get("position")), dw);
+											textline.add(worddata);
 										}
-
-										WordData worddata = new WordData(Double.parseDouble((String) typesetword
-												.get("position")), dw);
-										textline.add(worddata);
+										galley.add(textline);
 									}
-									galley.add(textline);
 								}
 								paragraph.add(galley);
+							} else {
+								System.err.println("ARR WAS NULL AT\n\tg = [" + g + "]\n\tcurrtext = [" + currText
+										+ "]\n\tsb.toString() = [" + sb.toString() + "]\n");
+								System.err.println("Call was: ./LineBreak/LineBreak - Times-Roman.afm 12 " + widths[g]
+										+ "\n");
 							}
 						}
 						md.add(paragraph);
@@ -198,7 +208,7 @@ public class ParSplitter {
 		}
 
 		StringBuilder sb = new StringBuilder();
-		
+
 		sb.append("var JSReflow = JSReflow || {};\n");
 
 		sb.append("JSReflow.galley_widths = [");

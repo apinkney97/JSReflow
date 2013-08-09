@@ -193,7 +193,10 @@ int main(int argc, const char *argv[])
     AddPenalty(formatter, 0, -PEN_INF, 1);
     formatter->lineWidth = lineWidth;
 
-    Format(formatter, 15);
+    if (0 != Format(formatter, 15)) {
+		fprintf(stderr, "Something went wrong\n");
+		return 4;
+	}
 
     gLeading = pointSize * 1.2;
     exportJSON(formatter);

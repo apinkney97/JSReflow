@@ -170,7 +170,7 @@ int Format(TEXTFORMATTER * f, double ro)
     f->a->previous = NULL;
     f->a->next = NULL;
 
-    f->activeNodes = f->a;
+    f->activeNodes = f->a; if (f->activeNodes == NULL) fprintf(stderr, "line 173 :(\n");
 
     f->Sw = f->Sy = f->Sz = 0.0;
     for (f->i = 0; f->i < f->nextFreeItem; (f->i)++) {
@@ -204,7 +204,11 @@ int Format(TEXTFORMATTER * f, double ro)
                         if (nextA == NULL && dA == DBL_MAX && r < -1) {
                             r = -1;
                         } else
-                            f->activeNodes = nextA;
+                            if (NULL != nextA) { // this might be a bit of a fudge
+								f->activeNodes = nextA;
+							} else {
+								r = -1;
+							}
                     } else {
                         prevA->next = nextA;
                     }
@@ -279,7 +283,7 @@ int Format(TEXTFORMATTER * f, double ro)
                         n->next = f->a;
 
                         if (prevA == NULL) {
-                            f->activeNodes = n;
+                            f->activeNodes = n; if (f->activeNodes == NULL) fprintf(stderr, "Line 282 :(\n");
                         } else {
                             prevA->next = n;
                         }
