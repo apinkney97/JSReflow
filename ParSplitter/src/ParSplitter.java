@@ -1,11 +1,17 @@
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.OutputStream;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 public class ParSplitter {
 	public static final String FLOAT = "__FLOAT";
@@ -14,16 +20,15 @@ public class ParSplitter {
 	public static final int PT_PER_IN = 72;
 	public static final double PT_PER_PX = 0.75;
 
+	private String filename;
+
 	public static void main(String[] args) {
 		if (args.length < 1) {
 			System.err.println("Error: call is \"java ParSplitter <filename> [width1[ width2 [...]]]\"");
 			System.exit(-1);
 		}
-		boolean floatMode = false;
-		boolean insidePara = false;
-		HashMap<String, Integer> hm = new HashMap<String, Integer>();
-		ArrayList<String> words = new ArrayList<String>();
 
+		String filename = args[0];
 		double[] widths = { 1.5, 2, 2.5, 3, 3.5, 4, 4.5 };
 
 		if (args.length > 1) {
@@ -38,8 +43,22 @@ public class ParSplitter {
 			}
 		}
 
+		String output = new ParSplitter(filename).renderDocument(widths);
+		System.out.println(output);
+	}
+
+	public ParSplitter(String filename) {
+		this.filename = filename;
+	}
+
+	public String renderDocument(double[] widths) {
+		boolean floatMode = false;
+		boolean insidePara = false;
+		HashMap<String, DictionaryWord> dictionary = new HashMap<String, DictionaryWord>();
+		MalleableDocument md = new MalleableDocument();
+
 		try {
-			Scanner s = new Scanner(new File(args[0]));
+			Scanner s = new Scanner(new File(filename));
 			String line;
 			String currText = null;
 			double fwd = 0;
@@ -47,27 +66,14 @@ public class ParSplitter {
 
 			Runtime rt = Runtime.getRuntime();
 
-			System.out.print("JSReflow.galley_widths = [");
-			for (int i = 0; i < widths.length; i++) {
-				System.out.print(widths[i] * PT_PER_IN);
-				if (i + 1 < widths.length) {
-					System.out.print(",");
-				}
-			}
-			System.out.println("];");
-
-			// First (and hopefully only) use of PTREE -- where PARAGRAPH_TREE
-			// is defined
-			System.out.print(PTREE + " = [");
-
 			while (s.hasNextLine()) {
 				line = s.nextLine().trim();
 
 				if (line.length() > 0) {
 					if (line.startsWith(FLOAT)) { // start of a float
 						if (floatMode) {
-							currText += "\\\">\"},"; // end of previous float
-							System.out.println(currText);
+							currText += "\\\">"; // end of previous float
+							md.add(new Floatable(fwd, fht, currText));
 						}
 						floatMode = true;
 						String[] bits = line.substring(FLOAT.length()).trim().split("\\s+");
@@ -88,12 +94,11 @@ public class ParSplitter {
 							fwd = Double.parseDouble(bits[1]);
 							fht = Double.parseDouble(bits[2]);
 						}
-						currText = "{w:" + fwd + ",h:" + fht
-								+ ",d:\"<img style=\\\"width:100%; height:100%\\\" src=\\\"" + fname + "\\\" alt=\\\"";
+						currText = "<img style=\\\"width:100%; height:100%\\\" src=\\\"" + fname + "\\\" alt=\\\"";
 					} else if (line.startsWith(PARA)) {
 						if (floatMode) {
-							currText += "\\\">\"},"; // end of previous float
-							System.out.println(currText);
+							currText += "\\\">"; // end of previous float
+							md.add(new Floatable(fwd, fht, currText));
 						}
 						floatMode = false;
 					} else { // Do something with the line
@@ -101,11 +106,8 @@ public class ParSplitter {
 							currText += (line + "\\n");
 						} else {
 							if (!insidePara) {
-								// Start of new paragraph, which is an array of
-								// arrays of objects
+								// Start of new paragraph
 								currText = "";
-								// System.out.println("\t[ //start of paragraph");
-								System.out.print("[");
 								insidePara = true;
 							}
 							line = line + " ";
@@ -116,67 +118,267 @@ public class ParSplitter {
 				} else { // empty line -- either end of paragraph or gap inside
 							// float
 					if (!floatMode && insidePara) {
-						// Within this, we create a new sub-array for each
-						// galley rendering
+
+						Paragraph paragraph = new Paragraph();
+
 						for (int g = 0; g < widths.length; g++) {
-							// System.out.println("\t\t[ //start of galley rendering");
-							System.out.print("[");
+							// start of galley rendering");
 							Process proc = rt.exec("./LineBreak/LineBreak - Times-Roman.afm 12 " + widths[g]);
 							OutputStream out = proc.getOutputStream();
 							out.write(currText.getBytes());
 							out.close();
-							Scanner in = new Scanner(proc.getInputStream()); // from
-																				// process's
-																				// stdout
-							int l = 0;
+							Scanner in = new Scanner(proc.getInputStream());
+							// from process's stdout
+
+							StringBuilder sb = new StringBuilder();
+
 							while (in.hasNextLine()) {
-								// System.out.println("\t\t\t" + in.nextLine());
-								System.out.print("[");
-								String[] wordpairs = in.nextLine().split(" ");
-								for (String wordpair : wordpairs) {
-									String[] bits = wordpair.split(",", 2);
-									System.out.print("[" + bits[0] + ",");
-									if (!hm.containsKey(bits[1])) {
-										hm.put(bits[1], words.size());
-										words.add(bits[1]);
-									}
-									System.out.print(hm.get(bits[1]));
-									System.out.print("], ");
-								}
-								System.out.print("], ");
-								// System.out.println(in.nextLine());
+								sb.append(in.nextLine());
 							}
 
-							in = new Scanner(proc.getErrorStream()); // from
-																		// process's
-																		// stdout
+							in = new Scanner(proc.getErrorStream());
+							// from process's stderr
 							while (in.hasNextLine()) {
 								System.err.println("LineBreak Error: " + in.nextLine());
 							}
 
 							proc.destroy();
 
-							// System.out.println("\t\t], //end of galley rendering");
-							System.out.println("],");
+							JSONArray arr = (JSONArray) (JSONValue.parse(sb.toString()));
+
+							if (arr != null) {
+								Galley galley = new Galley();
+
+								for (Object o : arr) {
+									// For each line
+									JSONArray typesetwords = (JSONArray) o;
+									TextLine textline = new TextLine();
+
+									for (Object p : typesetwords) {
+										// For each word
+										JSONObject typesetword = (JSONObject) p;
+
+										String key = typesetword.get("word") + " " + typesetword.get("width");
+										DictionaryWord dw = dictionary.get(key);
+
+										if (dw == null) {
+											dw = new DictionaryWord((String) typesetword.get("word"),
+													Double.parseDouble((String) typesetword.get("width")));
+											dictionary.put(key, dw);
+										}
+
+										WordData worddata = new WordData(Double.parseDouble((String) typesetword
+												.get("position")), dw);
+										textline.add(worddata);
+									}
+									galley.add(textline);
+								}
+								paragraph.add(galley);
+							}
 						}
-						// System.out.println("\t], //end of paragraph");
-						System.out.println("],");
+						md.add(paragraph);
 					}
 					insidePara = false;
 				}
 			}
 			s.close();
-			System.out.println("];");
-			System.out.print("JSReflow.dictionary = [");
-			for (String word : words) {
-				System.out.print("\"" + word + "\",");
-			}
-			System.out.println("];");
 		} catch (Exception e) {
 			// System.err.println("FATAL: File \"" + args[0] +
 			// "\"not found, dumbass.");
 			e.printStackTrace();
 			System.exit(1);
+		}
+
+		// Move the dictionary to an ArrayList so we can sort it, and assign IDs
+		ArrayList<DictionaryWord> sorteddict = new ArrayList<DictionaryWord>(dictionary.values());
+		Collections.sort(sorteddict);
+
+		for (int i = 0; i < sorteddict.size(); i++) {
+			sorteddict.get(i).setKey(i);
+		}
+
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("var JSReflow = JSReflow || {};\n");
+
+		sb.append("JSReflow.galley_widths = [");
+		for (int i = 0; i < widths.length; i++) {
+			sb.append(widths[i] * PT_PER_IN);
+			if (i + 1 < widths.length) {
+				sb.append(",");
+			}
+		}
+		sb.append("];\n");
+
+		sb.append(md.render());
+
+		sb.append("\n");
+
+		sb.append("JSReflow.dictionary = [");
+		for (DictionaryWord dictword : sorteddict) {
+			sb.append("\"" + dictword.word + "\",");
+		}
+		sb.append("];\n");
+		return sb.toString();
+	}
+
+	private class MalleableDocument {
+		private ArrayList<ParLevelElement> paragraphs;
+
+		public MalleableDocument() {
+			paragraphs = new ArrayList<ParLevelElement>();
+		}
+
+		public void add(ParLevelElement e) {
+			paragraphs.add(e);
+		}
+
+		public String render() {
+			StringBuilder sb = new StringBuilder("JSReflow.paragraph_tree = [");
+			for (ParLevelElement e : paragraphs) {
+				sb.append(e.render());
+				sb.append(",");
+			}
+			sb.append("];\n");
+			return sb.toString();
+		}
+	}
+
+	private interface ParLevelElement {
+		public String render();
+	}
+
+	private class Floatable implements ParLevelElement {
+		private double width;
+		private double height;
+		private String data;
+
+		public Floatable(double width, double height, String data) {
+			this.width = width;
+			this.height = height;
+			this.data = data;
+		}
+
+		@Override
+		public String render() {
+			return "{w:" + width + ",h:" + height + ",d:\"" + data + "\"}";
+		}
+
+	}
+
+	private class Paragraph implements ParLevelElement {
+		private ArrayList<Galley> galleys;
+
+		public Paragraph() {
+			galleys = new ArrayList<Galley>();
+		}
+
+		public void add(Galley galley) {
+			galleys.add(galley);
+		}
+
+		@Override
+		public String render() {
+			StringBuilder sb = new StringBuilder("[");
+			for (Galley g : galleys) {
+				sb.append(g.render());
+				sb.append(",");
+			}
+			sb.append("]");
+			return sb.toString();
+		}
+
+	}
+
+	private class Galley {
+
+		private ArrayList<TextLine> lines;
+
+		public Galley() {
+			lines = new ArrayList<TextLine>();
+		}
+
+		public void add(TextLine line) {
+			lines.add(line);
+		}
+
+		public String render() {
+			StringBuilder sb = new StringBuilder("[");
+			for (TextLine l : lines) {
+				sb.append(l.render());
+				sb.append(",");
+			}
+			sb.append("]");
+			return sb.toString();
+		}
+
+	}
+
+	private class TextLine {
+		private ArrayList<WordData> words;
+
+		public TextLine() {
+			words = new ArrayList<WordData>();
+		}
+
+		public void add(WordData worddata) {
+			words.add(worddata);
+			worddata.word.incrementCount();
+		}
+
+		public String render() {
+			StringBuilder sb = new StringBuilder("[");
+			for (WordData w : words) {
+				sb.append(w.render());
+				sb.append(",");
+			}
+			sb.append("]");
+			return sb.toString();
+		}
+	}
+
+	private class WordData {
+		private double position;
+		private DictionaryWord word;
+
+		public WordData(double position, DictionaryWord word) {
+			this.position = position;
+			this.word = word;
+		}
+
+		public String render() {
+			return "[" + new DecimalFormat().format(position) + "," + word.key + "]";
+		}
+	}
+
+	private class DictionaryWord implements Comparable<DictionaryWord> {
+		private String word;
+		private double width;
+		private int count;
+		private int key;
+
+		public DictionaryWord(String word, double width) {
+			this.word = word;
+			this.width = width;
+			count = 0;
+		}
+
+		public void incrementCount() {
+			count++;
+		}
+
+		public void setKey(int k) {
+			this.key = k;
+		}
+
+		@Override
+		public int compareTo(DictionaryWord w) {
+			int retval = w.count - this.count;
+
+			if (retval == 0) {
+				retval = w.word.length() - this.word.length();
+			}
+			return retval;
 		}
 	}
 

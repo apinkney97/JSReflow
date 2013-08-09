@@ -23,7 +23,7 @@ double lineWidth(int line)
 }
 
 
-void ExportPS(TEXTFORMATTER * f)
+void exportJSON(TEXTFORMATTER * f)
 {
     int i, j;
     int lineStart = 0;
@@ -33,10 +33,15 @@ void ExportPS(TEXTFORMATTER * f)
     int c;
     char *p;
 	double x;
+	
+	printf("[");
+	
     for (i = 0; i < f->numLines; i++) {
         r = f->lines[i]->adjustmentRatio;
 		x = 0;
 		
+		printf("\n\t[");
+
         for (j = lineStart; j <= f->lines[i]->position; j++) {
             if (f->items[j].type == BOX) {
 
@@ -44,7 +49,7 @@ void ExportPS(TEXTFORMATTER * f)
                     pf = f->items[j].data.box.font;
                     ps = f->items[j].data.box.pointSize;
                 }
-                printf("%g,", x);
+                printf("\n\t\t{\"position\":\"%g\",\"width\":\"%g\",\"word\":\"", x, f->items[j].width);
 
                 p = f->items[j].data.box.text;
                 for (c = 0; c < f->items[j].data.box.textLength; c++) {
@@ -66,7 +71,7 @@ void ExportPS(TEXTFORMATTER * f)
                     p++;
                 }
 
-                printf(" ");
+                printf("\"},");
                 x += f->items[j].width;
             } else if (f->items[j].type == GLUE) {
                 x += f->items[j].width + (r < 0 ? (r * f->items[j].data.glue.shrink) : (r * f->items[j].data.glue.stretch));
@@ -75,12 +80,13 @@ void ExportPS(TEXTFORMATTER * f)
             }
 
         }
+		printf("\n\t],");
         lineStart = f->lines[i]->afterPosition;
 		
-		printf("\n");
 		
     }
 
+	printf("\n]\n");
 
 }
 
@@ -104,7 +110,7 @@ int main(int argc, const char *argv[])
     /* Default: LineBreak <textfile> <afm_file> <point_size> */
 
     if (argc < 4) {
-        fprintf(stderr, "%s <textfile> <afm_file> <point_size>\n", argv[0]);
+        fprintf(stderr, "Error: call is \"%s <textfile> <afm_file> <point_size> [<line_width_in_inches>]\"\n", argv[0]);
         return 1;
     }
 
@@ -190,7 +196,7 @@ int main(int argc, const char *argv[])
     Format(formatter, 15);
 
     gLeading = pointSize * 1.2;
-    ExportPS(formatter);
+    exportJSON(formatter);
 
 
     return 0;
