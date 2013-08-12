@@ -158,22 +158,29 @@ public class ParSplitter {
 
 										TextLine textline = new TextLine();
 
+										double offset = 0;
+
 										for (Object p : typesetwords) {
 											// For each word
 											JSONObject typesetword = (JSONObject) p;
 
-											String key = typesetword.get("word") + " " + typesetword.get("width");
+											String word = (String) typesetword.get("word");
+											double width = Double.parseDouble((String) typesetword.get("width"));
+											String key = word + " " + width;
+											double absposition = Double.parseDouble((String) typesetword
+													.get("position"));
+
 											DictionaryWord dw = dictionary.get(key);
 
 											if (dw == null) {
-												dw = new DictionaryWord((String) typesetword.get("word"),
-														Double.parseDouble((String) typesetword.get("width")));
+												dw = new DictionaryWord(word, width);
 												dictionary.put(key, dw);
 											}
 
-											WordData worddata = new WordData(Double.parseDouble((String) typesetword
-													.get("position")), dw);
+											WordData worddata = new WordData(absposition - offset, dw);
 											textline.add(worddata);
+
+											offset = absposition + width;
 										}
 										galley.add(textline);
 									}
@@ -226,7 +233,7 @@ public class ParSplitter {
 
 		sb.append("JSReflow.dictionary = [");
 		for (DictionaryWord dictword : sorteddict) {
-			sb.append("\"" + dictword.word + "\",");
+			sb.append("[\"" + dictword.word + "\"," + new DecimalFormat().format(dictword.width) + "],");
 		}
 		sb.append("];\n");
 		return sb.toString();
