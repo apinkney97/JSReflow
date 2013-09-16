@@ -54,7 +54,8 @@ public class ParSplitter {
 	public String renderDocument(double[] widths) {
 		boolean floatMode = false;
 		boolean insidePara = false;
-		HashMap<String, DictionaryWord> dictionary = new HashMap<String, DictionaryWord>();
+		HashMap<String, DictionaryWord> wordsdict = new HashMap<String, DictionaryWord>();
+		HashMap<String, PositionDelta> deltasdict = new HashMap<String, PositionDelta>();
 		MalleableDocument md = new MalleableDocument();
 
 		try {
@@ -170,14 +171,25 @@ public class ParSplitter {
 											double absposition = Double.parseDouble((String) typesetword
 													.get("position"));
 
-											DictionaryWord dw = dictionary.get(key);
+											String deltastring = new DecimalFormat().format(absposition - offset);
+
+											PositionDelta pd = deltasdict.get(deltastring);
+
+											if (pd == null) {
+												pd = new PositionDelta(deltastring);
+												deltasdict.put(deltastring, pd);
+											}
+
+											pd.incrementCount();
+
+											DictionaryWord dw = wordsdict.get(key);
 
 											if (dw == null) {
 												dw = new DictionaryWord(word, width);
-												dictionary.put(key, dw);
+												wordsdict.put(key, dw);
 											}
 
-											WordData worddata = new WordData(absposition - offset, dw);
+											WordData worddata = new WordData(pd, dw);
 											textline.add(worddata);
 
 											offset = absposition + width;
@@ -206,12 +218,21 @@ public class ParSplitter {
 			System.exit(1);
 		}
 
-		// Move the dictionary to an ArrayList so we can sort it, and assign IDs
-		ArrayList<DictionaryWord> sorteddict = new ArrayList<DictionaryWord>(dictionary.values());
-		Collections.sort(sorteddict);
+		// Sort the deltas dictionary
+		ArrayList<PositionDelta> sorteddeltasdict = new ArrayList<PositionDelta>(deltasdict.values());
+		Collections.sort(sorteddeltasdict);
+		
+		for (int i = 0; i < sorteddeltasdict.size(); i++) {
+			sorteddeltasdict.get(i).setKey(i);
+		}
+		
 
-		for (int i = 0; i < sorteddict.size(); i++) {
-			sorteddict.get(i).setKey(i);
+		// Move the dictionary to an ArrayList so we can sort it, and assign IDs
+		ArrayList<DictionaryWord> sortedwordsdict = new ArrayList<DictionaryWord>(wordsdict.values());
+		Collections.sort(sortedwordsdict);
+
+		for (int i = 0; i < sortedwordsdict.size(); i++) {
+			sortedwordsdict.get(i).setKey(i);
 		}
 
 		StringBuilder sb = new StringBuilder();
@@ -232,10 +253,18 @@ public class ParSplitter {
 		sb.append("\n");
 
 		sb.append("JSReflow.dictionary = [");
-		for (DictionaryWord dictword : sorteddict) {
+		for (DictionaryWord dictword : sortedwordsdict) {
 			sb.append("[\"" + dictword.word + "\"," + new DecimalFormat().format(dictword.width) + "],");
 		}
 		sb.append("];\n");
+		
+		sb.append("JSReflow.deltasdict = [");
+		for (PositionDelta pd : sorteddeltasdict) {
+			sb.append(pd.delta + ",");
+		}
+		sb.append("];\n");
+		
+		
 		return sb.toString();
 	}
 
@@ -355,16 +384,16 @@ public class ParSplitter {
 	}
 
 	private class WordData {
-		private double position;
+		private PositionDelta delta;
 		private DictionaryWord word;
 
-		public WordData(double position, DictionaryWord word) {
-			this.position = position;
+		public WordData(PositionDelta delta, DictionaryWord word) {
+			this.delta = delta;
 			this.word = word;
 		}
 
 		public String render() {
-			return "[" + new DecimalFormat().format(position) + "," + word.key + "]";
+			return "[" + delta.key + "," + word.key + "]";
 		}
 	}
 
@@ -394,6 +423,35 @@ public class ParSplitter {
 
 			if (retval == 0) {
 				retval = w.word.length() - this.word.length();
+			}
+			return retval;
+		}
+	}
+
+	private class PositionDelta implements Comparable<PositionDelta> {
+		private String delta;
+		private int count;
+		private int key;
+
+		public PositionDelta(String delta) {
+			this.delta = delta;
+			count = 0;
+		}
+
+		public void incrementCount() {
+			count++;
+		}
+
+		public void setKey(int k) {
+			this.key = k;
+		}
+
+		@Override
+		public int compareTo(PositionDelta d) {
+			int retval = d.count - this.count;
+
+			if (retval == 0) {
+				retval = d.delta.length() - this.delta.length();
 			}
 			return retval;
 		}

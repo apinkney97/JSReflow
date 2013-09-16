@@ -34,7 +34,7 @@ JSReflow.getLine = function (words) {
     word = null;
 	pos = 0;
     for (i = 0; i < length; i++) {
-        offset = words[i][0];
+        offset = JSReflow.deltasdict[words[i][0]];
         word = words[i][1];
         text += "<div class=\"inner\" style=\"left: " + (pos + offset) * JSReflow.scale + "pt;\">" + JSReflow.dictionary[word][0] + " </div>";
 		pos = pos + JSReflow.dictionary[word][1] + offset;
