@@ -11,6 +11,7 @@ JSReflow.multi_column = true;
 JSReflow.current_paragraph = 0;
 JSReflow.current_line = 0;
 JSReflow.min_badness_index = 0;
+JSReflow.cols_per_page = 1;
 
 JSReflow.float_types = Object.freeze({
     NONE: 0,
@@ -81,8 +82,14 @@ JSReflow.nextPos = function () {
 
 JSReflow.checkSpace = function (nlines, span) {
     "use strict";
-    var c, r;
-    // console.log(nlines, span);
+    var c, r, cols_left_on_page;
+
+    cols_left_on_page = JSReflow.cols_per_page - (JSReflow.curr_col % JSReflow.cols_per_page);
+    if (cols_left_on_page < span) { // don't span page boundaries
+        console.log(JSReflow.curr_col, JSReflow.cols_per_page, span, cols_left_on_page);
+        return false;
+    }
+
     if (nlines > JSReflow.num_rows && JSReflow.curr_row === 0) { //if it's too big, put it at the top of a column
         return true;
     }
@@ -166,8 +173,8 @@ JSReflow.paginate = function (offset) {
         $('#main').html("");
 
         // Now we need to output the contents of the JSReflow.columns array
-        start = (JSReflow.curr_page - 1) * JSReflow.num_cols;
-        end = JSReflow.curr_page * JSReflow.num_cols;
+        start = (JSReflow.curr_page - 1) * JSReflow.cols_per_page;
+        end = JSReflow.curr_page * JSReflow.cols_per_page;
 
         for (p = start; p < JSReflow.columns.length && p < end; p++) {
             if (!Array.isArray(JSReflow.columns[p])) {
@@ -202,11 +209,11 @@ JSReflow.computePagination = function () {
             for (l = JSReflow.current_line; l < JSReflow.paragraph_tree[p][JSReflow.min_badness_index].length; l++) {
                 prev_col = JSReflow.curr_col;
                 JSReflow.nextPos();
-                if (Math.floor(JSReflow.curr_col / JSReflow.num_cols) > Math.floor(prev_col / JSReflow.num_cols)) {
+                if (Math.floor(JSReflow.curr_col / JSReflow.cols_per_page) > Math.floor(prev_col / JSReflow.cols_per_page)) {
                     // Reached a page boundary
                     JSReflow.current_paragraph = p;
                     JSReflow.current_line = l;
-                    console.log(JSReflow.current_paragraph, JSReflow.current_line)
+                    //console.log(JSReflow.current_paragraph, JSReflow.current_line)
                     return;
                 }
                 JSReflow.columns[JSReflow.curr_col][JSReflow.curr_row] = JSReflow.getLine(JSReflow.paragraph_tree[p][JSReflow.min_badness_index][l]);
@@ -228,8 +235,8 @@ JSReflow.computePagination = function () {
             // Have a look at the width and see if it could span any columns
             span = Math.round(w / JSReflow.galley_width);
 
-            if (span > JSReflow.num_cols) {
-                span = JSReflow.num_cols;
+            if (span > JSReflow.cols_per_page) {
+                span = JSReflow.cols_per_page;
             }
 
             if (span < 1 || !JSReflow.multi_column) {
@@ -331,13 +338,13 @@ JSReflow.pageInit = function() {
 
         if (badness[i] <= badness[JSReflow.min_badness_index]) {
             JSReflow.min_badness_index = i;
-            JSReflow.num_cols = nc;
+            JSReflow.cols_per_page = nc;
         }
     }
 
     JSReflow.galley_width = JSReflow.galley_widths[JSReflow.min_badness_index];
 
-    JSReflow.col_sep = Math.floor(pageWidth / JSReflow.num_cols);
+    JSReflow.col_sep = Math.floor(pageWidth / JSReflow.cols_per_page);
 
     /*
      Previously, we (and I quote) "just shove[d] lines onto screen" -- Now we need to populate the JSReflow.columns array and then output the contents of that to the screen.
@@ -363,7 +370,7 @@ JSReflow.pageInit = function() {
     }
 
 
-    JSReflow.pages = 10;//Math.ceil(JSReflow.columns.length / JSReflow.num_cols);
+    JSReflow.pages = 100;//Math.ceil(JSReflow.columns.length / JSReflow.cols_per_page);
     JSReflow.curr_page = 1;
 
     $('#main').empty(); //clear old stuff
@@ -376,7 +383,7 @@ JSReflow.pageInit = function() {
     }
     dropdown += "</select>\n";
 
-    $('#top').html('<div class="title" style="position:absolute; width: 100%; height: ' + (JSReflow.ps + 5) + 'pt; left: 0pt; top: 3pt">Press \'h\' to hide this bar ' + dropdown + (JSReflow.float_type === JSReflow.float_types.NONE ? "none" : (JSReflow.float_type === JSReflow.float_types.DUMB ? "dumb" : (JSReflow.float_type === JSReflow.float_types.MSWORD ? "MS Word" : (JSReflow.float_type === JSReflow.float_types.SIMPLEQUEUE ? "simple queue" : "unknown (" + JSReflow.float_type + ")")))) + ", " + JSReflow.num_cols + " cols, " + JSReflow.pages + " pages, badness: " + Math.round(badness[JSReflow.min_badness_index] * 100) / 100 + ' <label><input id="multi" onclick="JSReflow.toggleMulti();" type="checkbox" ' + (JSReflow.multi_column ? 'checked' : '') + ' > multicolumn?</label> <input type="button" id="prev" value="prev" onclick="paginate(-1)" disabled> <span id="pageno">' + JSReflow.curr_page + '</span> <input type="button" id="next" value="next" onclick="JSReflow.paginate(1)" ' + (JSReflow.pages < 2 ? 'disabled' : '') + '></div>');
+    $('#top').html('<div class="title" style="position:absolute; width: 100%; height: ' + (JSReflow.ps + 5) + 'pt; left: 0pt; top: 3pt">Press \'h\' to hide this bar ' + dropdown + (JSReflow.float_type === JSReflow.float_types.NONE ? "none" : (JSReflow.float_type === JSReflow.float_types.DUMB ? "dumb" : (JSReflow.float_type === JSReflow.float_types.MSWORD ? "MS Word" : (JSReflow.float_type === JSReflow.float_types.SIMPLEQUEUE ? "simple queue" : "unknown (" + JSReflow.float_type + ")")))) + ", " + JSReflow.cols_per_page + " cols, " /* + JSReflow.pages + " pages, */ + "badness: " + Math.round(badness[JSReflow.min_badness_index] * 100) / 100 + ' <label><input id="multi" onclick="JSReflow.toggleMulti();" type="checkbox" ' + (JSReflow.multi_column ? 'checked' : '') + ' > multicolumn?</label> <input type="button" id="prev" value="prev" onclick="paginate(-1)" disabled> <span id="pageno">' + JSReflow.curr_page + '</span> <input type="button" id="next" value="next" onclick="JSReflow.paginate(1)" ' + (JSReflow.pages < 2 ? 'disabled' : '') + '></div>');
 
     JSReflow.computePagination();
     JSReflow.paginate(0);
