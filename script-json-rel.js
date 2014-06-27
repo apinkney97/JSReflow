@@ -90,15 +90,11 @@ JSReflow.checkSpace = function (nlines, span) {
         return false;
     }
 
-    if (nlines > JSReflow.num_rows && JSReflow.curr_row === 0) { //if it's too big, put it at the top of a column
+    if (nlines > JSReflow.num_rows && JSReflow.curr_row === 0) { //too big, so put it at the top of a column
         return true;
     }
 
-    if (JSReflow.curr_row + nlines > JSReflow.num_rows) {
-        // too far down
-        // console.log("too big: need ", nlines)
-        // console.log("rows: ", JSReflow.num_rows);
-        // console.log("curr: ", JSReflow.curr_row);
+    if (JSReflow.curr_row + nlines > JSReflow.num_rows) { // too far down
         return false;
     }
 
@@ -413,6 +409,7 @@ $(window).resize(function () {
 $(document).ready(function () {
     "use strict";
     JSReflow.pageInit();
+	$('#top').hide();
 });
 
 $("body").touchwipe({
