@@ -1,7 +1,6 @@
 # coding=utf-8
 import json
 import sys
-from sys import stdin, stderr
 from hyphenate import hyphenate_word
 from afm import AFM
 
@@ -78,7 +77,7 @@ class Paragraph(object):
         """
             From BPIL, a legal breakpoint is one of:
                 - Penalty with p < infinity
-                - Glue directly prededed by a box
+                - Glue directly preceded by a box
         """
         this_item = self.items[pos]
         prev_item = self.items[pos - 1] if pos > 0 else None
@@ -115,25 +114,28 @@ class Paragraph(object):
         elif isinstance(last_item, Penalty):  # Add width of penalty
             length += last_item.w
 
-        return length, stretch, shrink
+        return {
+            'length': length,
+            'stretch': stretch,
+            'shrink': shrink,
+        }
 
     def first_fit(self, width, justify=True):
-        legal_breakpoints = self.get_breakpoints()
+        legal_bps = self.get_breakpoints()
         start = 0
         end = 1
         lines = []
-        while end < len(legal_breakpoints) - 1:
-            while end < len(legal_breakpoints) and \
-                    self.get_line_metrics(legal_breakpoints[start], legal_breakpoints[end])[0] <= width:
+        while end < len(legal_bps) - 1:
+            while end < len(legal_bps) and self.get_line_metrics(legal_bps[start], legal_bps[end])['length'] < width:
                 end += 1
-            if start + 1 > end and self.get_line_metrics(legal_breakpoints[start], legal_breakpoints[end])[0] > width:
+            if end >= len(legal_bps):
+                end = len(legal_bps) - 1
+            elif start + 1 < end and self.get_line_metrics(legal_bps[start], legal_bps[end])['length'] > width:
                 end -= 1
-            if end >= len(legal_breakpoints):
-                end = len(legal_breakpoints) - 1
-            start_item = legal_breakpoints[start]
-            end_item = legal_breakpoints[end]
+            start_item = legal_bps[start] + 1
+            end_item = legal_bps[end] + 1
             line = self.items[start_item:end_item]
-            line_width = self.get_line_metrics(start_item, end_item)[0]
+            line_width = self.get_line_metrics(start_item, end_item)['length']
             lines.append((line_width, line))
             start = end
             end += 1
@@ -226,7 +228,7 @@ def to_json(lines):
         offset = 0
         for item in items:
             # Want to print item, unless it's a penalty that's not at the end of a line
-            sys.stderr.write("[%s, %s]" % (type(items[-1]).__name__, type(items[-2]).__name__))
+            # sys.stderr.write("%s [%s, %s]\n" % (type(items[0]).__name__, type(items[-2]).__name__, type(items[-1]).__name__))
             if len(item.content) and (not isinstance(item, Penalty) or item is items[-1]):
                 this_line.append({'position': "%.3f" % offset, 'width': "%.3f" % item.w, 'word': item.content})
             if not isinstance(item, Penalty):
