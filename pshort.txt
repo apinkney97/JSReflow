@@ -1,0 +1,20 @@
+__FLOAT fig0.png
+Reflowable Documents Composed from
+Pre-rendered Atomic Components
+
+Alexander J. Pinkney
+
+Steven R. Bagley
+
+David F. Brailsford
+
+Document Engineering Lab.
+School of Computer Science
+University of Nottingham
+Nottingham, NG8 1BB, UK
+
+{azp|srb|dfb}@cs.nott.ac.uk
+
+__PARA
+ABSTRACT
+

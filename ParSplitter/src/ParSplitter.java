@@ -124,7 +124,7 @@ public class ParSplitter {
 
 						for (int g = 0; g < widths.length; g++) {
 							// start of galley rendering");
-							Process proc = rt.exec("./LineBreak/LineBreak - Times-Roman.afm 12 " + widths[g]);
+							Process proc = rt.exec("python pyLineBreak/kp.py - Times-Roman.afm 12 " + widths[g]);
 							OutputStream out = proc.getOutputStream();
 							out.write(currText.getBytes());
 							out.close();
@@ -201,8 +201,7 @@ public class ParSplitter {
 							} else {
 								System.err.println("ARR WAS NULL AT\n\tg = [" + g + "]\n\tcurrtext = [" + currText
 										+ "]\n\tsb.toString() = [" + sb.toString() + "]\n");
-								System.err.println("Call was: ./LineBreak/LineBreak - Times-Roman.afm 12 " + widths[g]
-										+ "\n");
+								// System.err.println("Call was: ./LineBreak/LineBreak - Times-Roman.afm 12 " + widths[g] + "\n");
 							}
 						}
 						md.add(paragraph);
