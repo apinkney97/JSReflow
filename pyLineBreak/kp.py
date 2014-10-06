@@ -120,7 +120,7 @@ class Paragraph(object):
             'shrink': shrink,
         }
 
-    def first_fit(self, width, justify=True):
+    def first_fit(self, width, justify=False):
         legal_bps = self.get_breakpoints()
         start = 0
         end = 1
@@ -136,6 +136,13 @@ class Paragraph(object):
             end_item = legal_bps[end] + 1
             line = self.items[start_item:end_item]
             line_width = self.get_line_metrics(start_item, end_item)['length']
+            if justify:
+                extra_space = width - line_width
+                glue_items = [item for item in line if isinstance(item, Glue)]
+                glue_width = sum([item.w for item in glue_items])
+                stretch_factor = 1 + (extra_space / glue_width)
+                for glue_item in glue_items:
+                    glue_item.w *= stretch_factor
             lines.append((line_width, line))
             start = end
             end += 1
@@ -257,7 +264,7 @@ if __name__ == '__main__':
     text = ''.join(text)
     items = tokenise(text, font_size, font_file)
     par = Paragraph(items)
-    lines = par.first_fit(col_wid)
+    lines = par.first_fit(col_wid, justify=True)
 
     json = to_json(lines)
     print json
