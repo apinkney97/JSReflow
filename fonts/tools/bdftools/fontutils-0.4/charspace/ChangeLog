@@ -1,0 +1,118 @@
+Sat Mar 28 07:46:29 1992  Karl Berry  (karl at hayley)
+
+        * Version 0.4.
+
+        * Change copyright years to 1992 only.
+
+Fri Mar 27 14:57:14 1992  Karl Berry  (karl at hayley)
+
+        * symbol_table.?: rename to symtab.?.
+        * perc_table.?: to perctab.?.
+        * GNUmakefile (c_and_h): as above.
+
+Wed Mar 25 08:31:49 1992  Karl Berry  (karl at hayley)
+
+        * perc_table.c (add_to_perc_def_table): use xstrdup, not strdup.
+
+Wed Mar 11 14:03:53 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * char.c (get_char_info): make CODE charcode_type.
+
+        * main.c (main): make `charcode' type `charcode_type'.
+          (do_char): ditto for CODE.
+
+        * sbi.c (read_sbi_file): added `encoding_name' and `displacement'.
+
+        * main.c [USAGE]: corrected -sbi-files option comment.
+
+Mon Mar  9 12:26:26 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * sbi.h: changed comment.
+
+Sat Mar  7 13:06:11 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * main.c (main): fatal if the output filename has a suffix.
+
+Sat Mar  7 09:32:20 1992  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (files): replace with `c_and_h', etc.
+
+        * GNUmakefile (libraries): define correctly.
+
+Wed Mar  4 14:46:33 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * output.c (write_files): construct output filenames using
+          make_output_filename. 
+
+Wed Mar  4 11:54:05 1992  Karl Berry  (karl at hayley)
+
+        * input.c: rename to sbi.c.
+        * GNUmakefile (files): corresponding.
+
+Sun Feb 16 12:24:16 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * output.c (find_widths): set freed tfm char kern list to NULL.
+
+Sat Feb  1 15:04:16 1992  Karl Berry  (karl at hayley)
+
+        * main.c (read_sbi_file_list): use basename, not depath.
+
+Fri Jan 31 17:04:20 1992  Karl Berry  (karl at hayley)
+
+        * main.c (read_command_line): declare `option_index' (for new
+          getopt).
+
+Wed Jan 22 13:12:21 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * input.c (read_sbi_file): copy the string before doing the below.
+
+        * input.c (read_sbi_file): in case char-percent, assign a string
+          to the displacement field of the character.
+
+        * char.h (displacement_type): made the displacement field a string.
+
+        * char.c (sym_string_to_value): changed sb_string_to_value to this
+          name.  
+          (do_displacement): call sym_string_to_value on the character's
+          displacement.
+
+        * input.c (read_sbi_file): added `char-percent' command.
+
+        * char.h [CHAR_UNSET_VALUE]: added definition.
+
+        * char.c (init_char): added routine to initialize the parts of a
+          character needed to calculate sidebearings.
+
+        * main.c (do_char): now call do_displacement if the character's
+          displacement and left sidebearing percentage are set; otherwise
+          call do_sidebearings.
+
+        * char.c (do_displacement): added routine to calculate
+          sidebearings using a displacement and a left sidebearing
+          percentage. 
+
+        * output.c (write_files): now give a warning and prepend an `x'
+          instead of an `o' to the filename if the output file is the same
+          one as the input file.
+
+Mon Jan 20 13:51:42 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * main.c (read_sbi_file_list): call `depath' on the current sbi name in
+          the list and on `font_name' when comparing them.
+
+Wed Jan 15 12:25:26 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * main.c (scan_string_list, read_sbi_files): added these so could
+          read a list of SBI files.
+
+        * main.c: call add_perc_defs_to_symbol_table instead of
+          calculating percentages ``by hand.''
+
+        * input.c (read_sbi_file): added `define_perc' case.
+
+        * perc_def_table.[ch]: added for percentage definitions.
+
+        * input.c (read_sbi_file): don't fatal, only give warnings about
+          characters in SBI files which aren't in the encoding if a
+          boolean is sent in.  (This gets around getting warnings for the
+          default alphabet SBI file.)

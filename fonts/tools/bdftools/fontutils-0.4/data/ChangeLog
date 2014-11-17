@@ -1,0 +1,311 @@
+Sat Mar 28 07:46:49 1992  Karl Berry  (karl at hayley)
+
+        * Version 0.4.
+
+        * Change copyright years to 1992 only.
+
+
+        * defs.make (xlibdirslash): define this to work around dynamic
+          linking problems on the Sun.
+
+Sun Mar  8 12:54:14 1992  Karl Berry  (karl at hayley)
+Sun Mar  8 12:54:14 1992  Karl Berry  (karl at hayley)
+
+        * defsprog.make ($(program)): lose our_X_library.
+
+        * defs.make (mostlyclean): new target.
+        (clean): remove extra stuff.
+        (realclean): remove everything.
+        * defslibs.make (clean): change to mostlyclean.
+        * defsprog.make (clean): likewise.
+
+Sun Mar  8 08:43:21 1992  Karl Berry  (karl at fosse)
+
+        * defs.make (CFLAGS): include XCFLAGS.
+        (XCFLAGS) [fosse]: define.
+
+Sat Mar  7 09:19:34 1992  Karl Berry  (karl at hayley)
+
+        * defs.make: set CC for fosse.
+
+        * defs.make (sources, headers): define these.
+
+        * defs.make (ourlib): add lib here.
+        (fontutil_libraries, our_X_library): remove these.
+        (bitmap_libs): define this, for callers to use.
+        (librarytags): use $(libraries), remove stuff about X and pbm.
+
+Wed Mar  4 10:33:52 1992  Karl Berry  (karl at hayley)
+
+        * defs.make (our_X_library): change `gnuw' to `widgets'.
+
+        * defs.make (headertags): remove; just use all of include/.
+        (librarytags): use all the libraries.
+
+        * defs.make (clean): remove TAGS here.
+        (realclean): not here.
+
+Sun Mar  1 13:02:31 1992  Karl Berry  (karl at hayley)
+
+        * zdingbat.enc: new file.
+
+        * defslib.make ($(library).a): use ar q, not ar r.
+
+        * defs.make [need_pbm_library] (pbm_library): define.
+        (fontutil_libraries): include $(pbm_library).
+
+Fri Feb 28 16:06:54 1992  Karl Berry  (karl at hayley)
+
+        * dvips.enc: new file.
+
+Sat Feb 22 12:52:16 1992  Karl Berry  (karl at hayley)
+
+        * adobestd.enc: rename from standard.enc.
+
+Mon Feb 17 15:59:52 1992  Karl Berry  (karl at hayley)
+
+        * postscript.map (cmtext): this is now named textext.
+
+        * defs.make (our_X_library): define this to be gnuw.
+        * defsprog.make (program): depend on $(our_X_library).
+
+Sun Feb 16 09:31:32 1992  Karl Berry  (karl at hayley)
+
+        * defs.make (X_libraries): include gnuw.a here.
+        (ourlibs): not here.
+
+Tue Feb 11 10:14:18 1992  Karl Berry  (karl at hayley)
+
+        * defs.make (X_libraries): append $(wlibs), add -l to each.
+        (syslibs): remove this.
+        (sys_libraries): rename to LIBS.
+        (LOADLIBES): include LIBS and X_libraries.
+        (copt): remove this.
+
+Mon Feb 10 09:39:54 1992  Karl Berry  (karl at hayley)
+
+        * defs.make (CFLAGS): include copt.
+        [hayley]: define copt=-posix.
+
+Sat Feb  8 07:05:04 1992  Karl Berry  (karl at hayley)
+
+        * defs.make ({extra_,}X_libraries): only define these if
+          `need_X_libraries' is defined.
+
+Thu Jan  9 07:55:08 1992  Karl Berry  (karl at hayley)
+
+        * defslib.make (install): use `INSTALL_DATA' (except it's
+          commented out).
+        * defsprog.make (install): use `INSTALL_PROGRAM'.
+        * defs.make: rename `kbase' to `lib', remove `getopt', etc.
+
+Sun Nov 17 06:55:50 1991  Karl Berry  (karl at hayley)
+
+        * postscript.map: don't refer to `postscript.c', since it's been
+          renamed to pstype3.c.
+
+Tue Jul 30 13:19:05 1991  Karl Berry  (karl at ra.cs.umb.edu)
+
+        * Version 0.3.
+
+Fri Jul 19 09:11:07 1991  Karl Berry  (karl at hayley)
+
+        * defs.make (XINCLUDES): remove this.
+        [hayley.fsf.org]: use XCFLAGS instead.
+
+        * *.make: change `fileinstall' to `INSTALLDATA' and `proginstall'
+          to `INSTALL'.
+
+Fri Jun 28 08:59:06 1991  Karl Berry  (karl at hayley)
+
+        * defslib.make ($(library).a): remove the .a file before remaking it.
+
+Fri Jun 14 15:35:46 1991  Karl Berry  (karl at hayley)
+
+        * defs.make (OPT, LDOPT): replace with XCFLAGS and XLDFLAGS.
+        (gnu): remove.
+        (LOADLIBES): rework so that our libraries aren't looked for in lib.
+        * defsprog.make ($(program)): redo the library dependencies.
+        * defslib.make (install): remove this target; the libraries don't
+          get installed anywhere anymore.
+
+Tue Jun 11 16:40:34 1991  Karl Berry  (karl at hayley)
+
+        * defsprog.make (default): rename to `all'.
+
+        * defs.make (default): new dependency `all'.
+        (tags): rename to `TAGS'.
+        (webclean): delete.
+
+Sun Jun  9 13:44:07 1991  Karl Berry  (karl at hayley)
+
+        * defs.make (proginstall, fileinstall): use -f for installation.
+
+Thu Jun  6 07:30:56 1991  Karl Berry  (karl at hayley)
+
+        * *.make: change to version 2 of the GPL.
+
+Sat Apr 13 17:06:15 1991  Karl Berry  (karl at hayley)
+
+        * cmtext.enc: rename to textext.enc.
+
+Mon Apr  8 08:34:13 1991  Karl Berry  (karl at hayley)
+
+        * cmtext.enc: add ligatures.
+
+Sat Mar 30 03:54:14 1991  Karl Berry  (karl at hayley)
+
+        * texlatin.enc: change `quoteright' to `caron', on the advice of
+          the linguists.
+
+Wed Mar 27 10:28:45 1991  Karl Berry  (karl at hayley)
+
+        * texlatin.enc: change code 055 to `asciihyphen', and 0177 to
+          `hyphen'.
+
+Sun Mar 24 16:59:49 1991  Karl Berry  (karl at hayley)
+
+        * texlatin.enc: new file.
+
+Thu Mar  7 07:33:13 1991  Karl Berry  (karl at hayley)
+
+        * Version 0.2.
+
+Sat Feb 16 17:43:01 1991  Karl Berry  (karl at hayley)
+
+        * defs.make (OS): remove this, since we use a configuration file
+          now.
+
+Mon Jan  7 09:20:23 1991  Karl Berry  (karl at hayley)
+
+        * defs.make [HOSTNAME=hayley] (sys_libraries): do not include
+          cposix anymore; gcc is configured to do so automatically. [No,
+          rescind this, because of shared libraries gcc doesn't do this
+          anymore.]
+
+        * defs.make: doc fix.
+
+Wed Dec 12 15:49:27 1990  Karl Berry  (karl at ra.cs.umb.edu)
+
+        * defs.make (OS): allow for SunOS 4.1.
+
+Fri Nov 23 09:45:16 1990  Karl Berry  (karl at hayley)
+
+        * defs.make (research_libraries): add bzr.
+        (LOADLIBES): don't use `libraries'.
+
+Fri Oct  5 07:13:30 1990  Karl Berry  (karl at hayley)
+
+        * defs.make (INCLUDES): use XINCLUDES to get extra directories
+          into the list.
+
+Mon Sep 24 16:40:17 1990  Karl Berry  (karl at claude)
+
+        * defslib.make (install): remove the library after installing it.
+
+        * defs.make: use `SunOS41', not `SUNOS4'.
+
+Mon Sep 17 18:56:34 1990  Karl Berry  (karl at aten)
+
+        * defs.make (gnu_libraries): only use malloc if I'm at home.
+        
+Fri Sep 14 10:41:38 1990  Karl Berry  (karl at hayley)
+
+        * defslib.make (install): use `libdir', not `researchdir'; use
+        `$(fileinstall)', not `mv'; use `$(AR)', not `ar'.
+        * defsprog.make (install): use `$(proginstall)', not `mv'.
+        * defs.make (researchdir): rename to libdir.
+        
+
+Sat Sep  8 09:01:02 1990  Karl Berry  (karl at hayley)
+
+        * defs.make: check the envvar HOSTNAME instead of HOSTTYPE.
+
+Fri Sep  7 13:43:18 1990  Karl Berry  (karl at hayley)
+
+        * defs.make (LINT): remove this.
+
+Sat Aug  4 14:01:09 1990  Karl Berry  (karl at hayley)
+
+        * defs.make (OPT) [i386]: define USG instead of USGr3, for the
+        sake of X.
+        (LDFLAGS): search /usr/local/lib.
+        (INCLUDES): search /usr/local/include.
+
+Fri Jul 13 16:52:35 1990  Karl Berry  (karl at hayley)
+
+        * defsprog.make (library_files): compose list from both
+        $(libraries) and $(research_libraries), not just the former.
+
+Thu Jul 12 09:05:47 1990  Karl Berry  (karl at hayley)
+
+        * defs.make (realclean): remove .dvi and .log files.
+
+Fri Jun 22 15:16:52 1990  Karl Berry  (karl at hayley)
+
+        * defsprog.make ($(program)): make dependent on the libraries as
+        well as the objects.
+
+        * defs.make (CFLAGS, extra_X_libraries): make definitions depend
+        on whether we're running under system V (to make development
+        easier).
+
+Thu Jun 21 14:27:14 1990  Karl Berry  (karl at claude)
+
+        * defs.make (default): define as a :: rule.
+        * defslib.make (default): define to be `install'.
+        * defsprog.make (default): define to be `$(program)', so the
+        program doesn't get installed by default.
+
+        * defs.make (LDFLAGS): use LDOPT, not LOPT.
+
+Mon Jun  4 15:40:00 1990  Karl Berry  (karl at hayley)
+
+        * defs.make (load_libraries): change the name to $(LOADLIBES). 
+        * defsprog.make: ($(program)): likewise.
+
+        * defs.make (LFLAGS): don't include $(OPT); instead, make a new
+        variable, $(LDOPT).  Also, change the name to $(LDFLAGS).
+
+Sat Jun  2 16:09:22 1990  Karl Berry  (karl at hayley)
+
+        * defs.make (link_libraries): add $(libraries) back in.
+
+Wed May  2 11:53:13 1990  Karl Berry  (karl at claude)
+
+	* defslib.make (researchinstall): do mv -f, not just mv.
+
+Thu Apr 12 14:28:39 1990  Karl Berry  (karl at hayley)
+
+	* defs.make: always link with the font libraries, since
+	kbase/font.c needs them.
+
+Wed Apr  4 16:45:36 1990  Karl Berry  (karl at aten)
+
+	* defsprog.make: do mv -f, not just mv.
+
+Tue Apr  3 08:59:09 1990  Karl Berry  (karl at hayley)
+
+	* defs.make: new variables `gnu_libraries', `X_libraries',
+	`extra_X_libraries', `sys_libraries', linked with in that order.
+
+Sun Mar 25 12:00:43 1990  Karl Berry  (karl at aten)
+
+	* defs.make: don't define the `libraries' variable to be empty.
+
+Mon Nov 13 08:16:53 1989  Karl Berry  (karl at hayley)
+
+	* defs.make (realclean): delete #* and *~, also.
+
+Mon Oct 30 19:18:40 1989  Karl Berry  (karl at hayley)
+
+	* all files: add the copyleft.
+
+Tue Oct 10 10:05:53 1989  Karl Berry  (karl at hayley)
+
+	* defs.make: delete the ifdef profile definitions, and define OPT,
+        which is included in CFLAGS and LFLAGS, instead.  Now can say,
+        e.g., `make OPT=-pg', instead of `make profile=t'.
+
+	* defsprogram.make: rename this to defsprog.make, for the sake of
+	system V.

@@ -1,0 +1,12 @@
+This library provides for reading and writing of generic font (GF)
+bitmap files.  Only a single file may be read or written at a time.
+
+None of the code that processes the GF commands actually explains what
+the precise definition of those commands are.  For that, you should look
+at the definition of the GF format in Metafont: The Program, by Don
+Knuth, chapter 45.  It is also in the METAFONTware programs that convert
+to or from GF format.
+
+The header file is ../include/gf.h.  It explains the basics of how to
+use the routines.  The source files in this directory do not repeat that
+explanation.

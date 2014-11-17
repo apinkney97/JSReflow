@@ -1,0 +1,271 @@
+Sat Mar 28 07:44:42 1992  Karl Berry  (karl at hayley)
+
+        * Version 0.4.
+
+        * Change copyright years to 1992 only.
+
+Fri Mar 27 19:46:49 1992  Karl Berry  (karl at hayley)
+
+        * PROJECTS: move to doc.
+        * Makefile.in (topfiles): remove it.
+
+Thu Mar 26 19:54:28 1992  Karl Berry  (karl at claude.cs.umb.edu)
+
+        * Makefile.in (makeargs): pass xlibdir.
+
+        * Makefile.in (installargs): missing quote.
+        (install): do `install' in subdirs.
+
+Thu Mar 26 06:37:55 1992  Karl Berry  (karl at hayley)
+
+        * Makefile.in (dist): remove include/paths.h.
+
+Wed Mar 25 07:20:10 1992  Karl Berry  (karl at hayley)
+
+        * Makefile.in (topfiles): remove PROBLEMS, add COPYING.LIB.
+
+Tue Mar 10 10:48:19 1992  Karl Berry  (karl at hayley)
+
+        * Makefile.in (programs): replace xbce and xlse with xbfe.
+        (dist): similarly.
+
+Sun Mar  8 12:48:52 1992  Karl Berry  (karl at hayley)
+
+        * configure.in: guess the value for `prefix'.
+        * Makefile.in (prefix): define it as a substitution.
+
+        * Makefile.in (mostlyclean): new target.
+        (distclean): remove.
+        (clean): remove the config files here, not at realclean.
+
+Sat Mar  7 13:34:55 1992  Karl Berry  (karl at fosse)
+
+        * Makefile.in (xincludedir): new variable.
+        (CFLAGS): use it.
+        * configure.in: test for it.
+
+Sat Mar  7 09:59:10 1992  Karl Berry  (karl at hayley)
+
+        * configure.in: change config-auto.h to c-auto.h.
+
+        * configure.in: substitute for LDFLAGS.
+
+Thu Mar  5 17:31:06 1992  Karl Berry  (karl at claude.cs.umb.edu)
+
+        * Makefile.in (makeargs): don't double the $'s.
+
+Thu Mar  5 07:12:13 1992  Karl Berry  (karl at hayley)
+
+        * Makefile.in (dist): add version numbers automatically; add in
+          special files in bzrto and gsrenderfont.
+        (bzrtospecial, gsrenderspecial): new variables.
+
+Wed Mar  4 11:24:12 1992  Karl Berry  (karl at hayley)
+
+        * gnuw: rename to `widgets'.
+        * Makefile.in (libraries): corresponding.
+
+Sun Mar  1 12:59:09 1992  Karl Berry  (karl at hayley)
+
+        * Makefile.in (libraries): add pbm.
+        pbm: new directory.
+
+Tue Feb 25 10:48:47 1992  Karl Berry  (karl at hayley)
+
+        * AUTHORS: new file.
+        Makefile.in (topfiles): dist it.
+
+Mon Feb 24 08:36:00 1992  Karl Berry  (karl at hayley)
+
+        * configure.in [isc]: include -shlib in LDFLAGS.
+
+Sun Feb 23 09:04:51 1992  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (dist): update for various new directories and files.
+
+Tue Feb 11 09:56:23 1992  Karl Berry  (karl at hayley)
+
+        * configure.in: test for memcpy et al. only in <memory.h>.
+
+        * configure.in: test for <limits.h> missing.
+
+        * configure.in: test for extra window system libraries.
+        Makefile.in (wlibs): new variables.
+        (makeargs): pass it down to submakes.
+
+        * configure.in: test M_ISC early, before any compiles.
+
+        * Makefile.in (copt): remove it; use CC instead.
+
+Mon Feb 10 09:36:22 1992  Karl Berry  (karl at hayley)
+
+        * Makefile.in (copt): new variable.
+
+Sat Feb  8 14:48:28 1992  Karl Berry  (karl at hayley)
+
+        * Makefile.in (realclean): remove config.status and Makefile.
+
+Sun Feb  2 13:50:53 1992  Karl Berry  (karl at hayley)
+
+        * Makefile.in: rename paths.h-dist to paths.h.in.
+
+Sat Feb  1 14:57:12 1992  Karl Berry  (karl at hayley)
+
+        * Makefile.in (default_subdir_path): remove.
+        (default_tfm_path): change to new syntax for subdirs.
+
+Wed Jan 15 13:00:59 1992  Karl Berry  (karl at hayley)
+
+        * configure.in: do not test for getwd.
+
+Sun Jan 12 12:13:59 1992  Karl Berry  (karl at hayley)
+
+        * Makefile.in (default_lib_path): remove `.', as it is added
+          automatically now.
+
+        * Makefile.in (.NOEXPORT): new target.
+
+Sat Jan 11 09:53:56 1992  Karl Berry  (karl at hayley)
+
+        * Makefile.in (CFLAGS): remove -I$(srcdir), and use
+          -I../$(srcdir)/include.
+
+Fri Jan 10 15:36:17 1992  Karl Berry  (karl at hayley)
+
+        * Makefile.in (default_tfm_path): set to null.
+
+Wed Jan  8 15:41:13 1992  Karl Berry  (karl at hayley)
+
+        * config: we don't need this directory any more.
+        * configure: or this script.
+        * fontutils.in: the input to autoconf, so it can make the
+          configure script.
+
+        * GNUmakefile (programs): remove ospace and gsrenderfont, add
+          charspace.
+
+        * rename `lib' as `data', and `kbase' as `lib'.  Merge `getopt'
+          into `lib'.
+        * GNUmakefile (libraries): change to match.
+
+Tue Dec 24 16:41:51 1991  Kathy Hargreaves  (kathy at hayley)
+
+        * GNUmakefile (DEFAULT_LIB_PATH): define using $(shell pwd), not
+          the nonexistent $(PWD).
+
+Tue Oct  1 10:07:34 1991  Karl Berry  (karl at hayley)
+
+        * all files: change copyright notices to not use dashes.
+
+Tue Jul 30 13:16:38 1991  Karl Berry  (karl at ra.cs.umb.edu)
+
+        * Version 0.3.
+
+Fri Jul 26 10:33:26 1991  Karl Berry  (karl at hayley)
+
+        * PROJECTS: new file.
+
+        * GNUmakefile (programs): `fit-outlines' is now `limn'; include
+          `gsrenderfont'.
+
+Wed Jul 24 15:17:33 1991  Karl Berry  (karl at ra.cs.umb.edu)
+
+        * configure: exit 0 at the end.
+
+Mon Jul 22 06:08:10 1991  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (programs): add imagetofont.
+
+Fri Jul 19 08:31:06 1991  Karl Berry  (karl at hayley)
+
+        * GNUmakefile: add many variables to be overridden.
+
+        * config: rename to configure.
+        * configfiles: rename to config.
+
+Wed Jun 12 05:42:44 1991  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (tags): rename to `TAGS'.
+        (distclean): new target.
+
+Thu Jun  6 07:11:45 1991  Karl Berry  (karl at hayley)
+
+        * COPYING: change to version 2 of the GPL.
+
+Sun Mar 24 16:17:03 1991  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (dist): new dependencies `depend' and `TAGS'.
+
+Mon Mar 11 08:19:59 1991  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (dist): put bzrto/KKBuildChar.PS in the
+          distribution.
+
+Sun Mar 10 16:26:14 1991  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (DEFAULT_TFM_PATH): change the default to `.'.
+
+Fri Mar  8 08:42:49 1991  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (install): pass bindir as an arg to make.
+
+        * GNUmakefile (dist): make an empty directory `bin'.  (from
+          rich@rice.edu)
+
+        * GNUmakefile (include/s.h): run ./config, not config, for the
+          sake of people who might have a system config earlier in their
+          path.  (from ian@sq.com)
+
+Thu Mar  7 07:30:59 1991  Karl Berry  (karl at hayley)
+
+        * Version 0.2.
+
+Wed Mar  6 10:05:28 1991  Kathy Hargreaves  (kathy at hayley)
+
+        * config: use `sunosNNN' instead of `sunNNN'.
+
+Mon Mar  4 15:14:41 1991  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (programs): fontconcat is gone.
+
+Fri Mar  1 09:53:28 1991  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (completedirs, topfiles): new variables to help in
+          `make dist'.
+
+Mon Feb 25 09:20:37 1991  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (programs): include `bzrto'.
+
+        * GNUmakefile (DEFAULT_LIB_PATH): include `pwd`/lib.
+
+Sun Feb 17 09:54:28 1991  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (realclean): remove include/{s,paths}.h.
+
+Sat Feb 16 17:21:39 1991  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (all): new dependencies, on include/paths.h
+          and include/s.h.
+        * GNUmakefile (include/paths.h): new target.
+
+Sat Nov 17 11:28:25 1990  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (programs): add fit-outlines.
+
+Thu Nov  1 08:51:29 1990  Karl Berry  (karl at hayley)
+
+        * INSTALL: DEFAULT_TFM_PATH has moved from kbase/filename.c to
+          kbase/font.c.
+
+Wed Oct 24 14:57:57 1990  Karl Berry  (karl at aten)
+
+        * Version 0.1.
+
+Sun Oct 21 16:23:20 1990  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (libraries): add gnuw.
+
+Sun Sep 30 08:43:44 1990  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (programs): add fontconcat.

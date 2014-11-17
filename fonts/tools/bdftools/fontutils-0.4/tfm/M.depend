@@ -1,0 +1,17 @@
+tfm_input.o : tfm_input.c ../include/config.h ../include/c-auto.h \
+  ../include/c-std.h ../include/c-memstr.h ../include/c-errno.h \
+  ../include/c-minmax.h ../include/c-limits.h ../include/c-seek.h \
+  ../include/c-proto.h ../include/global.h ../include/lib.h \
+  ../include/types.h ../include/file-input.h ../include/tfm.h \
+  ../include/fix-num.h ../include/list.h 
+tfm_output.o : tfm_output.c ../include/config.h ../include/c-auto.h \
+  ../include/c-std.h ../include/c-memstr.h ../include/c-errno.h \
+  ../include/c-minmax.h ../include/c-limits.h ../include/c-seek.h \
+  ../include/c-proto.h ../include/global.h ../include/lib.h \
+  ../include/types.h ../include/file-output.h ../include/filename.h \
+  ../include/report.h ../include/tfm.h ../include/fix-num.h ../include/list.h 
+tfm_util.o : tfm_util.c ../include/config.h ../include/c-auto.h \
+  ../include/c-std.h ../include/c-memstr.h ../include/c-errno.h \
+  ../include/c-minmax.h ../include/c-limits.h ../include/c-seek.h \
+  ../include/c-proto.h ../include/global.h ../include/lib.h \
+  ../include/types.h ../include/list.h ../include/tfm.h ../include/fix-num.h 

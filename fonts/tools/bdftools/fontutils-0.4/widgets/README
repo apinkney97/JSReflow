@@ -1,0 +1,9 @@
+This library provides some widgets for use with the standard X11R4
+toolkit.  It also redefines some of the Athena widgets with added
+functionality.
+
+See the header files in ../include for details on the resources the
+former use and functionality they provide.
+
+The Fontview widget is no longer used by any program here.  It's
+included for your hacking pleasure.

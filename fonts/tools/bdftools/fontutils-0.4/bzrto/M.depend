@@ -1,0 +1,51 @@
+metafont.o : metafont.c ../include/config.h ../include/c-auto.h \
+  ../include/c-std.h ../include/c-memstr.h ../include/c-errno.h \
+  ../include/c-minmax.h ../include/c-limits.h ../include/c-seek.h \
+  ../include/c-proto.h ../include/global.h ../include/lib.h \
+  ../include/types.h ../include/bzr.h ../include/bounding-box.h \
+  ../include/font.h ../include/bitmap.h ../include/tfm.h ../include/fix-num.h \
+  ../include/list.h ../include/spline.h ../include/filename.h metafont.h 
+oblique.o : oblique.c ../include/config.h ../include/c-auto.h \
+  ../include/c-std.h ../include/c-memstr.h ../include/c-errno.h \
+  ../include/c-minmax.h ../include/c-limits.h ../include/c-seek.h \
+  ../include/c-proto.h ../include/global.h ../include/lib.h \
+  ../include/types.h ../include/spline.h ../include/bounding-box.h oblique.h 
+pstype1.o : pstype1.c ../include/config.h ../include/c-auto.h \
+  ../include/c-std.h ../include/c-memstr.h ../include/c-errno.h \
+  ../include/c-minmax.h ../include/c-limits.h ../include/c-seek.h \
+  ../include/c-proto.h ../include/global.h ../include/lib.h \
+  ../include/types.h ../include/bounding-box.h ../include/bzr.h \
+  ../include/font.h ../include/bitmap.h ../include/tfm.h ../include/fix-num.h \
+  ../include/list.h ../include/spline.h ../include/filename.h \
+  ../include/hexify.h ../include/varstring.h pstype1.h psutil.h 
+pstype3.o : pstype3.c ../include/config.h ../include/c-auto.h \
+  ../include/c-std.h ../include/c-memstr.h ../include/c-errno.h \
+  ../include/c-minmax.h ../include/c-limits.h ../include/c-seek.h \
+  ../include/c-proto.h ../include/global.h ../include/lib.h \
+  ../include/types.h ../include/bounding-box.h ../include/bzr.h \
+  ../include/font.h ../include/bitmap.h ../include/tfm.h ../include/fix-num.h \
+  ../include/list.h ../include/spline.h ../include/filename.h pstype3.h \
+  psutil.h 
+psutil.o : psutil.c ../include/config.h ../include/c-auto.h \
+  ../include/c-std.h ../include/c-memstr.h ../include/c-errno.h \
+  ../include/c-minmax.h ../include/c-limits.h ../include/c-seek.h \
+  ../include/c-proto.h ../include/global.h ../include/lib.h \
+  ../include/types.h ../include/encoding.h ../include/font.h \
+  ../include/bitmap.h ../include/bounding-box.h ../include/tfm.h \
+  ../include/fix-num.h ../include/list.h ../include/libfile.h psutil.h 
+text.o : text.c ../include/config.h ../include/c-auto.h ../include/c-std.h \
+  ../include/c-memstr.h ../include/c-errno.h ../include/c-minmax.h \
+  ../include/c-limits.h ../include/c-seek.h ../include/c-proto.h \
+  ../include/global.h ../include/lib.h ../include/types.h text.h \
+  ../include/bzr.h ../include/bounding-box.h ../include/font.h \
+  ../include/bitmap.h ../include/tfm.h ../include/fix-num.h ../include/list.h \
+  ../include/spline.h 
+main.o : main.c ../include/config.h ../include/c-auto.h ../include/c-std.h \
+  ../include/c-memstr.h ../include/c-errno.h ../include/c-minmax.h \
+  ../include/c-limits.h ../include/c-seek.h ../include/c-proto.h \
+  ../include/global.h ../include/lib.h ../include/types.h ../include/bzr.h \
+  ../include/bounding-box.h ../include/font.h ../include/bitmap.h \
+  ../include/tfm.h ../include/fix-num.h ../include/list.h ../include/spline.h \
+  ../include/cmdline.h ../include/filename.h ../include/getopt.h \
+  ../include/report.h metafont.h oblique.h pstype1.h pstype3.h text.h 
+version.o : version.c 

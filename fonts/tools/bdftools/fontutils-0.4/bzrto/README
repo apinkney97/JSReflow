@@ -1,0 +1,10 @@
+This program converts outline fonts in the homegrown BZR format to a
+form usable for typesetting, such as Metafont or PostScript.
+
+The Metafont file `bzrsetup.mf' is input by the MF code output by this
+program, so mf must be able to find it.  You can generate a font at a
+given size with a command line such as (`$ ' being the shell prompt):
+$ mf '\mode:=localfont; designsize:=24pt#; input foofont'
+To make a 24pt version of foofont.  The default size is 10pt.
+
+The BZR format is described in `../bzr/README'.

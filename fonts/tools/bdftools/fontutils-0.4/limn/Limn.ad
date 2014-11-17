@@ -1,0 +1,8 @@
+*Viewport.allowHoriz: true
+*Viewport.allowVert: true
+
+*Label.internalWidth: 0
+*Label.internalHeight: 0
+
+*translations: #augment \n\
+  <ClientMessage>: MessageHandler()

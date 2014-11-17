@@ -1,0 +1,642 @@
+% writefont.PS: make a bitmap and image-information file for a font.
+% 
+% Copyright (C) 1991, 92 Free Software Foundation, Inc.
+%
+% This program is free software; you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation; either version 2, or (at your option)
+% any later version.
+%
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+%
+% You should have received a copy of the GNU General Public License
+% along with this program; if not, write to the Free Software
+% Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
+% Make a local environment.
+% 
+100 dict begin
+
+/verbose false def
+
+
+% Utilities.
+
+% Traditional.
+% 
+/bdef { bind def } bind def
+
+
+% /VAR incr  sets /VAR to VAR + 1.
+% 
+/incr { dup load 1 add def } bdef
+
+
+% /VAR NUMBER max=  sets /VAR to the maximum of VAR and NUMBER.
+% 
+/max= { 1 index load max def } bdef
+
+
+% Print a string if we are verbose, else do nothing.
+% 
+/vreport { verbose { = } { pop } ifelse } bdef
+
+
+
+% Leaves the concatenation of two string arguments on the stack.
+% 
+/concat-strings
+{
+  /string-2 exch def
+  /string-1 exch def	
+  /after-string-1 string-1 length def
+  /answer-string-length string-1 length string-2 length add def
+  /answer-string answer-string-length string def
+  string-1 answer-string copy pop
+  answer-string after-string-1 string-2 putinterval
+  answer-string
+}
+bdef
+
+
+% DICT pdict prints all the components in the dictionary in a
+% human-readable way.
+/pdict
+{
+    { exch
+      dup =only length 8 lt {(\t) =only } if
+      (\t=> ) =only
+      ==
+    }
+  forall
+}
+bdef
+
+
+% Point and pixel conversions.
+% 
+/inches-per-pixel {1 pixels-per-inch div} bdef
+
+% Use the real definition of points, not PostScript's.
+/points-per-inch 72.27 def
+/inches-per-point 1 points-per-inch div def
+
+/points-per-pixel {points-per-inch inches-per-pixel mul} bdef
+/pixels-per-point {pixels-per-inch inches-per-point mul} bdef
+
+/points {points-per-pixel mul} bdef	% Use on stuff expressed in pixels.
+/pixels {pixels-per-point mul} bdef	% Use on stuff expressed in points.
+
+
+
+% Set the font to `gs-fontname', with encoding `output-encoding'.
+% We cannot rely on the encoding vector only for whether the font defines a
+% certain character; we must also look in the CharStrings.  (The
+% Ghostscript fonts are all StandardEncoding, yet not all characters are
+% defined.)  Unfortunately, this makes this program only work with Type
+% 1 fonts (or Type 3 fonts which store the character definitions in a
+% dictionary named `CharStrings').
+% 
+/set-font
+{
+  gs-fontname cvlit /newfont output-encoding reencode-font
+  /newfont point-size cvi selectfont
+  /font-encoding currentfont /Encoding get def
+  /font-charstrings currentfont /CharStrings get def
+}
+bdef
+
+% /OLD-FONTNAME /NEW-FONTNAME NEW-ENCODING defines the font NEW-FONTNAME
+% to be just like OLD-FONTNAME except that the encoding is NEW-ENCODING.
+% Based on the Cookbook encoding vector examples.
+% 
+/reencode-font
+{
+  /new-encoding exch def
+  /new-fontname exch def
+  
+  /old-fontdict exch findfont def
+  /new-fontdict old-fontdict maxlength dict def
+  
+  % Copy all the elements except FID and Encoding.
+  old-fontdict
+    {
+      exch % now have key at top the stack
+      dup /FID ne  dup /Encoding ne  dup /FontName ne  and and
+        { exch new-fontdict 3 1 roll put }
+        { pop pop}
+      ifelse
+    }
+  forall
+  
+  % Install the new Encoding and FontName.
+  new-fontdict /Encoding new-encoding put
+  new-fontdict /FontName new-fontname put
+  
+  % Define the font.
+  new-fontname new-fontdict definefont pop
+}
+bdef
+
+
+
+
+% FILENAME parse-encoding-file tries to read the encoding file
+% `FILENAME.enc'.  If the file can't be found, we quit.  Otherwise, we
+% parse it into an encoding vector and return that on the stack.
+% 
+/parse-encoding-file
+{
+  /charcode 0 def
+
+  open-encoding-file 
+
+  % We've opened the file.  Begin the encoding array.
+  256 array
+  
+  % Ignore the coding scheme (assumption here that the .enc file does
+  % not have zero or one non-blank non-comment lines):
+  encoding-line pop
+
+  % Read the rest of file:
+    {
+      % If at EOF, stop.
+      encoding-line dup null eq
+        { pop exit }
+      if
+
+      % Otherwise, we're at the next character.  Define it.
+      1 index	% array charname  on the stack.
+      exch	% charname array
+      charcode	% charcode charname array
+      exch	% charname charcode array
+      put
+      
+      % Increment /charcode.
+      /charcode charcode 1 add def
+    }
+  loop
+  
+  % The .enc file is not required to define all 256 characters.  Any
+  % characte codes after the last one in the file go to .notdef.
+  charcode 1 255
+    {
+      1 index	% array charcode
+      exch	% charcode array
+      /.notdef
+      put
+    }
+  for
+  
+  % Leave the array on the stack as the return value.
+}
+bdef
+
+
+% FILENAME open-encoding-file opens `encodingfile' as FILENAME.enc, or quits.
+% 
+/open-encoding-file
+{
+  (.enc) concat-strings
+  findlibfile
+    { exch pop /encodingfile exch def }
+    { =only (: Cannot find encoding file.) == quit }
+  ifelse
+}
+bdef
+
+
+% encoding-line reads to the next non-blank non-comment line in the
+% `encodingfile'.  If we hit EOF, it returns null.  Otherwise, it
+% returns the first token on the line (i.e., a name).
+% 
+/line-buffer 1000 string def
+
+/encoding-line
+{
+  % Read lines from `encodingfile' until we get to one that is neither blank
+  % nor starts with a comment.
+    {
+      encodingfile line-buffer readline
+        % If can get a token, pop the rest of the string after it, and
+        % return that first token (it is a name object).
+        { token { exch pop cvlit exit } if }
+        
+        % At EOF, return null.
+        { pop null exit }
+      ifelse
+    }
+  loop
+}
+bdef
+
+
+
+
+% Expects a character code on the stack.  Sets /char to that integer,
+% /char-name to the character name for that code in the Encoding vector,
+% and /char-in-font to either true or false.
+% 
+/set-char-variables
+{
+   /char exch def
+   /char-name font-encoding char get def
+   /char-in-font
+     char-name /.notdef ne
+     font-charstrings char-name known
+     and
+   def
+}
+bdef
+
+
+% Expects the integer representation of a character in `char'.
+% 
+/char-buffer 1 string def
+
+/put-char-in-buffer
+{
+  char-buffer 0 char put
+}
+bdef
+
+
+% Expects to find the character in char-buffer.  Sets dimensions in pixels.
+% 
+/find-char-dimensions-in-pixels
+{
+  gsave
+    newpath
+    0 0 moveto
+    char-buffer true charpath      
+    flattenpath
+    pathbbox % returns ury urx lly llx
+      /char-height exch pixels def
+      /char-width exch pixels def
+      /char-depth exch pixels def
+      /char-left-sidebearing exch pixels def
+      
+      % The bounding-box width is urx - llx.
+      /char-width char-width char-left-sidebearing sub def
+      
+      % The bounding-box height is ury - lly.
+      /char-tall char-height char-depth sub def
+      
+      % The set width.
+      /char-stringwidth char-buffer stringwidth pop pixels def
+
+      /char-right-sidebearing		% Calculate in terms of pixels.
+        char-stringwidth
+          char-width sub
+          char-left-sidebearing sub
+      def
+  grestore
+}
+bdef
+
+% Expects a label string.
+% 
+/print-char-dimensions
+{
+  /label exch def
+  verbose 
+    {() = label =
+     char-buffer (char: ) =only = 
+     char-height (char-height: ) =only =
+     char-depth (char-depth: ) =only =
+     char-tall (char-tall: ) =only =
+     char-stringwidth (char-stringwidth: ) =only =
+     char-width (char-width: ) =only =
+     char-left-sidebearing (char-left-sidebearing: ) =only =
+     char-right-sidebearing (char-right-sidebearing: ) =only =
+     flush
+    }
+  if
+}
+bdef
+
+
+
+
+% If the char is defined in the font, show it on on a line by itself, ni
+% a space that is max-char-tall-in-pixels pixels high.
+% 
+% Expects an integer, the character code to show.
+% 
+/show-char
+{
+  set-char-variables
+  char-in-font
+    {
+      put-char-in-buffer
+      find-char-dimensions-in-pixels
+      %%char-name print-char-dimensions
+      % Move down by char's ascender height.
+      0 char-height points neg rmoveto
+
+      % Show the character.
+      char-buffer show
+
+      % Move to the beginning of the next line.
+      % 
+      % Move back by the width, and leave enough blank rows to fill up
+      % the max-char-tall-in-pixels space.  This will always be more
+      % than the descender.
+        char-stringwidth points neg 
+        max-char-tall-in-pixels char-height sub points neg
+      rmoveto
+    }
+  if
+}
+bdef % show-char
+
+
+
+
+% .ifi stuff.
+
+/max-output-buffer 8 def
+/output-buffer max-output-buffer string def
+
+
+/ifi-charcode
+{
+  char output-buffer cvs
+  %verbose { char-name =only  ( @ ) =only char = } if
+}
+bdef
+
+% We round the character's depth.
+% 
+/baseline-adjustment
+{
+  char-depth round cvi 1 sub output-buffer cvs
+}
+bdef
+
+% We cannot easily compute the number of bounding boxes in a rendered
+% character in Ghostscript.  A `%' might have three bounding boxes at a
+% high resolution, but only two at a lower one (one of the circles might
+% touch the slash).  So we use an external program, `bbcount'. 
+% 
+/num-bounding-boxes
+{
+  (00)
+}
+bdef
+
+/side-bearings
+{
+  char-left-sidebearing round output-buffer cvs
+  ( ) concat-strings
+  char-right-sidebearing round output-buffer cvs 
+  concat-strings
+}
+bdef
+
+% Expects an integer, the character code.  If the char is defined in the
+% font and the output encoding, output it.  That is, output the
+% character code, baseline adjustment, number of bounding boxes, and
+% left and right sidebearings.
+% 
+/output-char-info
+{
+  set-char-variables
+  char-in-font 
+    {
+      put-char-in-buffer
+      find-char-dimensions-in-pixels
+
+      ifi-charcode ifi-writestring
+      baseline-adjustment ifi-writestring
+      num-bounding-boxes ifi-writestring
+      side-bearings ifi-writestring
+      ifi-file (\n) writestring
+    }
+  if % char-in-font 
+}
+bdef % output-char-info
+
+
+% STRING ifi-writestring writes STRING to ifi-file, followed by a space.
+% 
+/ifi-writestring
+{
+  ifi-file exch writestring
+  ifi-file ( ) writestring
+}
+bdef
+
+
+
+
+% Expects a label string.
+% 
+/print-current-device
+{
+  /label exch def
+  (\n) = label =
+  currentdevice getdeviceprops
+  (Current device's height, width and matrix are: ) =print = = == flush
+  cleartomark
+}
+bdef
+
+% Make and set a monochrome image device with the normal PostScript
+% convention: (0,0) is at the lower left.  Expects a device
+% resolution, height, and width.
+% 
+/make-image-device
+{
+  /width exch def
+  /height exch def
+  /scale-factor exch def
+
+    [scale-factor 0 0 scale-factor neg 0 height]
+    width height
+    <ff 00>
+  makeimagedevice 
+  setdevice
+  erasepage
+}
+bdef
+
+
+
+
+% Figure out the maximum height + depth and width over all characters.
+% Also count the number of characters we will eventually output.
+% 
+/compute-max-char-dimens
+{
+  (Computing maximum character dimensions...) vreport
+
+  /max-char-width-in-pixels 0 def
+  /max-char-tall-in-pixels 0 def
+  /extant-char-count 0 def
+  
+  0 1 255
+    {
+      set-char-variables
+      char-in-font
+        {
+          /extant-char-count incr
+          
+          put-char-in-buffer
+          find-char-dimensions-in-pixels
+          
+          % The set width might be smaller than the bounding box if we
+          % have negative side bearings.
+          char-stringwidth char-width max
+          /max-char-width-in-pixels exch  max=
+          
+          /max-char-tall-in-pixels char-tall max=
+        }
+      if
+    }
+  for
+
+  % We also want to have at least a couple blank rows between each character.
+  % The constant here is also used in bbcount's pbm-reading routines.
+  /max-char-tall-in-pixels max-char-tall-in-pixels 4 add ceiling def
+  
+  verbose
+    {
+      max-char-width-in-pixels (  max-char-width-in-pixels: )=only =
+      max-char-tall-in-pixels  (   max-char-tall-in-pixels: )=only =
+      flush
+    }
+  if
+}
+bdef % compute-max-char-dimens
+
+
+% We use the max character dimensions to figure out the final size of
+% the device.  We also need to add a couple pixels to account for
+% roundoff error.  And makeimagedevice works with integers only.
+% 
+% We will output each character in a space max-char-tall-in-pixels high.
+% This makes it easier to write the `bbcount' program, at the expense of
+% making the PBM file somewhat larger.  Since the PBM file is only
+% temporary, I thought it was worth it.  We cannot compute the bounding
+% boxes ourselves without essentially implementing bbcount in
+% Ghostscript -- a task I thought extremely unappealing.
+% 
+/compute-final-device-dimens
+{
+  (Computing final device dimensions...) vreport
+
+  /device-width-in-pixels max-char-width-in-pixels ceiling cvi def
+  /device-height-in-pixels max-char-tall-in-pixels extant-char-count mul cvi
+  def
+
+  verbose
+    {
+      device-width-in-pixels  (   device-width-in-pixels: )=only =
+      device-height-in-pixels (  device-height-in-pixels: )=only =
+      flush
+    }
+  if
+
+  device-height-in-pixels 0 eq
+    { (Device height would be zero.  No characters?) = flush quit }
+  if
+} % compute-final-device-dimens
+bdef
+
+
+
+% make-gsfont, the main program.
+
+% Arguments:
+%   gs-fontname (e.g., Helvetica---no slash in front)
+%   font-basename (e.g., hvr -- to get hvr.pbm and hvr.ifi)
+%   point-size
+%   pixels-per-inch (e.g., 300 -- can't have nonsquare pixels)
+%   output-encoding-filename (e.g., textext -- to find the .enc file)
+% 
+/make-gsfont
+{
+  /gs-fontname exch def
+  /font-basename exch def
+  /point-size exch cvi def
+  /pixels-per-inch exch cvi def
+  /output-encoding-filename exch def
+
+  % Look for the file `output-encoding-name.enc' and parse it,
+  % returning an encoding dictionary.
+  % 
+    (Parsing encoding file ) output-encoding-filename concat-strings
+    (.enc...) concat-strings
+  vreport
+  /output-encoding output-encoding-filename parse-encoding-file def
+
+  % Now that we know the encoding, we can make the font we're going to
+  % render the current font.
+  % 
+  (Reencoding and setting font...) vreport
+  set-font
+
+  % First make an image device one inch square for finding heights of
+  % all the characters.  We should make it larger if necessary, i.e., if
+  % a character is larger than 1", but we don't.
+  %
+    pixels-per-point pixels-per-inch pixels-per-inch
+  make-image-device
+
+  compute-max-char-dimens
+
+  compute-final-device-dimens
+
+  % Now we know how many pixels we'll need to output the whole font.  So
+  % make another device that is big enough.
+  % 
+    pixels-per-point device-height-in-pixels device-width-in-pixels
+  make-image-device    
+
+  % Move to the upper left-hand corner.
+  % 
+  0 device-height-in-pixels points moveto
+
+  (Rendering characters to memory...) vreport
+  0 1 255 { show-char } for
+
+  (Writing PBM file...) vreport
+  /pbm-filename font-basename (.pbm) concat-strings def
+  /pbm-file pbm-filename (w) file def
+  pbm-file currentdevice writeppmfile
+  pbm-file closefile
+
+  (Writing BFI file...) vreport
+  /bfi-filename font-basename (.bfi) concat-strings def
+  /bfi-file bfi-filename (w) file def
+  bfi-file extant-char-count output-buffer cvs writestring
+  bfi-file (\n) writestring
+  bfi-file max-char-tall-in-pixels output-buffer cvs writestring
+  bfi-file (\n) writestring
+  bfi-file closefile
+  
+  (Writing XIFI file...) vreport
+  /ifi-filename font-basename (.xifi) concat-strings def
+  /ifi-file ifi-filename (w) file def
+  0 1 255 { output-char-info } for
+  ifi-file closefile 
+}
+bdef  % End of main program
+
+
+currentdict end /envGSRF exch def
+
+
+
+% Enter the main program in the current dictionary, most likely userdict.
+% 
+/make-gsfont { envGSRF begin  make-gsfont  end } bind def
+
+
+% If the program was invoked from the command line, run it now.
+% 
+shellarguments { make-gsfont } if

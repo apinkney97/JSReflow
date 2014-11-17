@@ -124,7 +124,7 @@ public class ParSplitter {
 
 						for (int g = 0; g < widths.length; g++) {
 							// start of galley rendering");
-							Process proc = rt.exec("python pyLineBreak/kp.py - Times-Roman.afm 12 " + widths[g]);
+							Process proc = rt.exec("python pyLineBreak/kp.py - Futura.afm 12 " + widths[g]);
 							OutputStream out = proc.getOutputStream();
 							out.write(currText.getBytes());
 							out.close();
@@ -253,7 +253,9 @@ public class ParSplitter {
 
 		sb.append("JSReflow.dictionary = [");
 		for (DictionaryWord dictword : sortedwordsdict) {
-			sb.append("[\"" + dictword.word + "\"," + new DecimalFormat().format(dictword.width) + "],");
+			String word = dictword.word;
+			word = word.replaceAll("\"", "\\\\\"");
+			sb.append("[\"" + word + "\"," + new DecimalFormat().format(dictword.width) + "],");
 		}
 		sb.append("];\n");
 		

@@ -1,0 +1,108 @@
+longname	Hershey-Plain-Oblique
+shortname	HerPlaO
+troffname	hP
+penwidth	0.8
+italicangle	-20
+#
+space		2698
+.notdef		735
+a		2601	+1 -1
+b		2602	+1 -1
+c		2603	+1 -1
+d		2604	+1 -1
+e		2605	+1 -1
+f		2606	+1 -1
+g		2607	+1 -1
+h		2608	+1 -1
+i		2609	+1 -1
+j		2610	+1 -1
+k		2611	+1 -1
+l		2612	+1 -1
+m		2613	+1 -1
+n		2614	+1 -1
+o		2615	+1 -1
+p		2616	+1 -1
+q		2617	+1 -1
+r		2618	+1 -0
+s		2619	+1 -1
+t		2620	+0 -1
+u		2621	+1 -1
+v		2622	+1 -1
+w		2623	+1 -1
+x		2624	+1 -1
+y		2625	+1 -1
+z		2626	+1 -1
+A		2501	+1 -1
+B		2502	+1 -1
+C		2503	+1 -1
+D		2504	+1 -1
+E		2505	+1 -1
+F		2506	+1 -1
+G		2507	+1 -1
+H		2508	+1 -1
+I		2509	+1 -1
+J		2510	+1 -1
+K		2511	+1 -1
+L		2512	+1 -1
+M		2513	+1 -1
+N		2514	+1 -1
+O		2515	+1 -1
+P		2516	+1 -1
+Q		2517	+1 -1
+R		2518	+1 -1
+S		2519	+1 -1
+T		2520	+1 -1
+U		2521	+1 -1
+V		2522	+1 -1
+W		2523	+1 -1
+X		2524	+1 -1
+Y		2525	+1 -1
+Z		2526	+1 -1
+zero		2700
+one		2701
+two		2702
+three		2703
+four		2704
+five		2705
+six		2706
+seven		2707
+eight		2708
+nine		2709
+period		2710
+comma		2711
+colon		2712
+semicolon	2713
+exclam		2714
+question	2715
+quotesingle	2727
+dollar		2719
+slash		802
+backslash	804
+parenleft	2721	+0 -2
+parenright	2722	+2 -0
+bar		723
+hyphen		224
+plus		2725
+equal		2726
+asterisk	2723
+periodcentered	729
+quoteleft	2716
+quoteright	2717
+numbersign	733
+ampersand	2718
+bullet		751
+bracketleft	1405
+bracketright	1406
+braceleft	1407
+braceright	1408
+asciitilde	2246
+asciicircum	2247
+less		2241
+greater		2242
+at		2273
+percent		2271
+section		2276
+quotedbl	2728
+tilde		1246
+dagger		2277
+daggerdbl	2278

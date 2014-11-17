@@ -1,0 +1,75 @@
+This library provides for reading and writing of bezier (BZR) files.
+BZR format is a binary font format for an outline font that we invented
+in which the characters are made from Bezier splines and straight lines.
+
+Only a single file may be read or written at a time.
+
+
+An abbreviated description of the file format:
+
+
+types:
+
+A scaled is 24 bits: 16 bits of fraction and 8 bits of integer.  We can
+get away with this because all the number in the character definitions
+and postamble are also scaled by the design size--so usually, all
+numbers are less than one.
+
+Negative numbers are in 2's complement.
+
+Multibyte values are stored in BigEndian order.
+
+The file consists of a preamble, zero or more characters, and a postamble.
+
+
+preamble:
+
+designsize[3]  (scaled) in points
+k[1] x[k]  a comment
+
+
+characters:
+
+BOC
+char_code[1]
+set_width[3] (dscaled)
+bounding_box llx[3]...ury[3] (dscaled)
+<shape>
+EOC
+
+<shape> ::= <path command>*
+
+<path command> ::=
+PATH x[3]y[3] (dscaled)  start a new path at (x,y)
+or SPLINE c1x[3]c1y[3]c2x[3]c2y[3]ex[3]ey[3] (dscaled) the given spline
+or LINE ex[3]ey[3] (dscaled) the given line
+
+Outer curves must go counterclockwise, inner ones clockwise.
+Each PATH opcode starts a new closed path.
+
+
+postamble:
+POST
+font-bounding-box llx[3]...ury[3] (dscaled)
+<character locators>
+POST_POST
+nchars[1]
+post_ptr[4]
+id[1]
+1 to any number of NO_OP's.
+
+The post_ptr points back to the POST byte.
+
+<character_locator> ::=
+CHAR_LOC code[1] pointer[4]
+Each pointer points back to the BOC for the given code.
+
+
+Any number of NO_OPs can occur before characters, or before the
+postamble, but not within characters or the postamble.
+
+
+Improvements:
+allow for dscaled numbers that have no whole part, since most do not.
+allow for character locators with smaller pointers.
+allow for character codes outside of 0..255.

@@ -1,0 +1,41 @@
+Here is a simple picture of the input and output of these programs.
+
+                                             ---------------
+                                             | fontconvert |
+                                           / ---------------
+                                  /-------/         ^
+                                 /                  |
+scanned                         /                   |
+image                          /                    v
+and IFI   ---------------   GF    -------------  GF, TFM   --------  BZR
+========> | imagetofont | ======> | charspace | =========> | limn | ======...
+  ^       ---------------         -------------     ^      --------
+  |                                                 |		    (continued)
+  |                                                 |
+  v                                                 v
+-------------                                   --------
+| imgrotate |                                   | xbfe |
+-------------                                   --------
+
+
+
+                        Metafont
+                       /
+ (continued)	      /
+		     /
+      BZR   ---------    PostScript Type 1
+... ======= | bzrto |  =====================
+            --------- 
+                     \
+                      \ 
+                        PostScript Type 3
+
+
+The ``scanned image'' can be in either IMG or PBM format.
+The IFI (image font information) file is described in comments at the
+  `get_image_info' routine in imagetofont/main.c
+
+GF  = generic font, the bitmap format written by Metafont.
+TFM = TeX font metrics, the metric information written by Metafont and
+      read by TeX.
+BZR = Bezier, invented by us to describe outlines.

@@ -1,0 +1,35 @@
+This program will take the Hershey Font files in the format recently
+posted to USENET and converts them to a PostScript language stream
+that will print sampler pages when shipped to a PostScript printer.
+
+It won't generate anything suitable for consumption by troff, but it
+gives you a starting point.
+
+Usage:
+	cat hersh.o?? ^ herps ^ lp -dPostScript
+
+	(or "lpr something" on Berkeley UNIX) 
+
+Notes:
+	1.  The fonts look better than I expected, and certainly scale
+	better than other bit-mapped fonts I've played with.  I'm particularly
+	fond of the two Grade-School Script fonts and think a memo written
+	using them might really impress a Vice President.
+
+	2.  I set the baseline as if all characters were the large ("regular")
+	size.  If you really want to use the smaller characters instead of
+	scaling the larger ones to the right size, you'll have to tweak this.
+
+	3.  I generated all characters with the same pen width, you might
+	experiment with modifying that, too.
+
+	4.  The program is lazy, takes no arguments, gives no usage message,
+	and may be used only as a filter.  Sorry.
+
+Author:
+	Guy Riddle
+	AT&T Bell Laboratories
+	184 Liberty Corner Road
+	Liberty Corner, NJ  07938
+
+	<ihnp4!nomad!ggr> or <ggr@btl.csnet>

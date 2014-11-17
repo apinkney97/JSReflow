@@ -1,0 +1,17 @@
+This library provides for reading and writing of TeX font metric (TFM)
+files.  Only a single file may be read or written at a time.
+
+None of the code that processes the TFM commands actually explains what
+the precise definition of those commands are.  For that, you should look
+at the definition of the TFM format in Metafont: The Program, by Don
+Knuth, chapter 46.  It is also in the TeXware program tftopl,
+TeX: The Program, and other places.
+
+The header file is ../include/tfm.h.  It explains the basics of how to
+use these routines.  The source files in this directory do not repeat
+that explanation.
+
+TFM format was extended in 1990 to allow for complicated ligatures.
+We do not recognize all the distinctions; all ligatures are simply
+collapsed into the pre-1990 form, character A followed by character B
+leads to character C.

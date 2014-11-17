@@ -1,0 +1,278 @@
+Sat Mar 28 07:48:16 1992  Karl Berry  (karl at hayley)
+
+        * Version 0.4.
+
+        * Change copyright years to 1992 only.
+
+Sat Mar  7 13:18:42 1992  Karl Berry  (karl at fosse)
+
+        * gf_input.c (gf_get_three): complete prototype.
+        * gf_output.c (init_locators, put_locators): likewise.
+
+Sat Mar  7 09:12:14 1992  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (files, headers, sources): replace with `c_and_h', etc.
+
+        * gf_input.c (get_character_bitmap): use puts instead of printf
+          where possible.
+
+Thu Jan  9 08:30:06 1992  Karl Berry  (karl at hayley)
+
+        * *.c: do not include global.h.
+
+        * *.h: remove #pragma once.
+
+Wed Jan  8 15:28:34 1992  Karl Berry  (karl at hayley)
+
+        * update copyright messages.
+
+        * change `allocate to `xmalloc', `reallocate' to `xrealloc', and
+          `string_copy' to `strdup'.
+
+Wed Jan  1 16:45:14 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * gf_output.c (gf_put_preamble): Just truncate comment if it's too
+          long, instead of fataling.
+
+Tue Oct  1 07:52:47 1991  Karl Berry  (karl at hayley)
+
+        * gf_input.c (deblank): remove blank rows at the top and bottom.
+
+Tue Jul 30 13:18:02 1991  Karl Berry  (karl at ra.cs.umb.edu)
+
+        * Version 0.3.
+
+Sat Jun 15 09:50:04 1991  Karl Berry  (karl at hayley)
+
+        * all files: change `checked_' to `x'.
+
+Thu Jun  6 07:28:10 1991  Karl Berry  (karl at hayley)
+
+        * all files: change to version 2 of the GPL.
+
+Tue Apr 23 13:39:09 1991  Karl Berry  (karl at ra.cs.umb.edu)
+
+        * gf_input.c (get_paint): remove assertion that we're at a valid
+          location.
+
+Thu Mar  7 07:32:38 1991  Karl Berry  (karl at hayley)
+
+        * Version 0.2.
+
+Mon Feb 25 16:15:06 1991  Karl Berry  (karl at hayley)
+
+        * gf_output.c (put_boc): declare static
+
+        * gf_{input,output}.c: change names to `gf_...' from `..._gf_...'.
+
+        * GNUmakefile (sources): remove `gf_common.c'.
+        * gf_input.c (gf_get_postamble): initialize the postamble inline.
+
+Sun Feb 17 09:31:14 1991  Karl Berry  (karl at hayley)
+
+        * *.c: include config.h.
+
+Sun Jan 13 09:37:11 1991  Karl Berry  (karl at hayley)
+
+        * gf_input.c (get_raw_gf_char, append_byte, append_n_bytes): use
+          `raw_char_type' instead of `raw_gf_char_type', and RAW_...
+          macros instead of GF_RAW...
+        * gf_output.c (put_raw_gf_char): likewise.
+
+        * gf_input.c (get_raw_gf_char): loop until eoc reading the
+          character, instead of while (0).
+
+        * gf_input.c (ENSURE_AVAILABLE): loop as long as we need more
+          space, instead of testing once.
+
+        * gf_input.c (get_raw_gf_char): allocate the space for the new
+          character before storing into it.
+
+Sat Jan 12 14:56:18 1991  Karl Berry  (karl at hayley)
+
+        * gf_input.c (get_raw_gf_char, append_byte, append_n_bytes,
+          new_gf_raw_char): new routines to handle reading raw characters.
+        * gf_output.c (start_put_char, put_raw_gf_char): more new
+          routines.
+
+Sat Nov 17 12:46:52 1990  Karl Berry  (karl at hayley)
+
+        * gf_input.c, gf_output.c: include appropriate file-...h files.
+
+Wed Oct 17 18:06:17 1990  Karl Berry  (karl at aten)
+
+        * gf_input.c (deblank): when the bitmap is all zero, ensure that
+          all its dimensions are also zero.
+
+Fri Oct  5 07:03:35 1990  Karl Berry  (karl at hayley)
+
+        * gf_input.c (close_gf_input_file): null the elements of
+          `char_list'.
+        (get_given_gf_char): make `char_list' global to the file.
+
+Wed Aug 29 14:13:08 1990  Karl Berry  (karl at hayley)
+
+        * gf_input.c (gf_get_byte, ...): pass gf_input_filename, and
+        rewrite as macros.
+        * gf_output.c (gf_put_byte, ...): likewise.
+
+Tue Jul 24 13:19:40 1990  Karl Berry  (karl at hayley)
+
+        * gf_output.c (put_gf_postamble): the pointer after the POST byte
+        is still wrong.
+
+Thu Jul  5 06:30:56 1990  Karl Berry  (karl at hayley)
+
+        * gf_output.c (put_gf_postamble): output the right pointer after
+        the POST byte.
+
+Wed Jul  4 09:00:19 1990  Karl Berry  (karl at hayley)
+
+        * gf_input.c (get_full_boc): allow the character with code
+        MAX_CHAR_CODE.
+
+Wed Jun 20 07:24:23 1990  Karl Berry  (karl at hayley)
+
+        * gf_output.c (put_gf_preamble): just output the characters of the
+        comment here, instead of calling gf_put_string.  Also, don't give
+        a fatal message if the comment is too long.
+        (gf_put_string): delete this.
+
+        * gf_input.c (gf_cur_pos): use checked_ftell; rename to gf_ftell,
+        and change callers.
+        (gf_set_pos): rename to gf_fseek.
+        * gf_output.c (gf_cur_pos): likewise.
+
+Tue Jun 19 10:56:10 1990  Karl Berry  (karl at hayley)
+
+        * gf_input.c (open_gf_input_file): complain if the input file
+        already exists and the caller tries to open a second.
+
+Sun Jun  3 11:06:31 1990  Karl Berry  (karl at hayley)
+
+        * gf_input.c (get_character_bitmap): ignore NO_OPs before the EOC
+        of a blank character.
+
+Fri Jun  1 15:14:29 1990  Karl Berry  (karl at hayley)
+
+        * gf_output.c (close_gf_output_file): use checked_fclose.
+
+        * gf_output.c (open_gf_output_file): make sure the output file
+        hasn't already been opened.
+
+Wed May 30 15:36:46 1990  Karl Berry  (karl at hayley)
+
+        * gf_input.c (get_full_boc): make sure the character code is in
+        range.
+
+Thu May  3 09:29:17 1990  Karl Berry  (karl at hayley)
+
+	* gf_common.c (new_gf_char): delete this.
+        * gf_input.c (get_gf_char): don't call it.
+
+Sat Apr 21 09:43:34 1990  Karl Berry  (karl at hayley)
+
+	* gf_input.c (gf_get_string): add a trailing null to the end of
+	the returned string.
+
+Thu Apr 19 16:10:21 1990  Karl Berry  (karl at hayley)
+
+	* gf_common.c (new_gf_postamble): forgot to initialize character
+	#255 in a new postamble.
+
+	* gf_input.c (get_postamble): don't ignore the checksum.
+
+Mon Apr 16 07:21:42 1990  Karl Berry  (karl at hayley)
+
+	* gf_opcodes.h: add #pragma once.
+
+Sat Apr 14 17:04:40 1990  Karl Berry  (karl at hayley)
+
+	* gf_input.c (get_character_bitmap): call get_specials when we see
+	a special opcode, so that we skip over the arguments.
+
+Mon Apr  9 07:11:48 1990  Karl Berry  (karl at hayley)
+
+	* gf_common.c (new_gf_postamble): remove references to the
+	specials; upcase `max_char_code' and `null_byte_ptr'.
+        (new_gf_char): new name for `new_generic_char'; remove references
+        to the specials.
+        gf_input.c (thoughout): use macros to look at the postamble and
+        character structures; upcase `fatal' and other global macros.
+        gf_output.c: likewise.
+        GNUmakefile: remove references to gf_util.c and generic.h.
+
+Tue Apr  3 17:32:24 1990  Karl Berry  (karl at hayley)
+
+	* gf_input.c (deblank): forgot to initialize width and height.
+
+Thu Mar  1 11:19:06 1990  Karl Berry  (karl at hayley)
+
+	* gf_output.c (put_gf_char): don't fail when a character is output
+        more than once; just give a warning (and only outpt the first one).
+
+	* gf_input.c (deblank): don't fail if the character is all white
+        (in which case white_on_right=white_on_left, and we don't want to
+        subtract them both from the width).
+
+	* gf_input.c (get_character_bitmap): and fix the same off-by-one
+        bug fixed on Feb 23, this time for the height. Will I ever get
+        this right?
+        [no, rescind that. The height IS inclusive, and the width is NOT
+        inclusive.]
+
+	* gf_input.c (get_character_bitmap): if the character is zero
+        wide, read the EOC following.
+
+	* gf_input.c (get_character_bitmap): don't assert that the
+        max_row >= min_row (or col), because if the character is zero
+        high (or wide), it won't be.
+        (deblank): make this_col be int, not unsigned, since we subtract
+        one from it.
+
+Tue Feb 27 20:58:52 1990  Kathy Hargreaves  (kathy at hayley)
+
+	* gf_input.c (gf_get_string): if the length is zero, don't try to
+	read anything from the file.
+
+Fri Feb 23 13:28:07 1990  Karl Berry  (karl at hayley)
+
+	* gf_input.c (get_character_bitmap): fix off-by-one in deciding how
+	wide the bitmap should be.
+
+Sat Feb  3 10:28:28 1990  Karl Berry  (karl at hayley)
+
+	* Makefile: rename to GNUmakefile.
+
+Wed Jan 24 17:49:01 1990  Karl Berry  (karl at hayley)
+
+	* gf_util.c (ascender_part): new routine.
+
+Mon Oct 30 18:41:42 1989  Karl Berry  (karl at hayley)
+
+	* all files: add the copyleft.
+
+Sun Oct 29 07:33:50 1989  Karl Berry  (karl at hayley)
+
+	* gf_output.c (put_boc): have to test the maximums of the bounding
+	box for sign, as well as the deltas.
+
+Sat Oct 28 15:20:26 1989  Karl Berry  (karl at hayley)
+
+	* gf_output.c (put_skip): correct misinterpretation of the SKIP0
+	opcode.
+
+	* gf_output.c (put_paint, put_skip, put_new_row): define these.
+
+	* gf_output.c (font_bb): initialize using MAXINT, from <values.h>.
+
+Tue Oct 17 21:36:31 1989  Karl Berry  (karl at hayley)
+
+	* gf_input.c (get_locators): CHAR_LOC commands take a one-byte
+	character residue, like CHAR_LOC0 commands, not four-byte
+	character codes.
+
+Fri Oct  6 19:18:58 1989  Karl Berry  (karl at hayley)
+
+	* gf_util.c (print_gf_char): pass in a file parameter, instead of
+	always writing to stdout.

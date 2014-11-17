@@ -1,0 +1,88 @@
+#!/bin/sh
+DIR="fonts"
+PRINTER=$LASER
+TMP=/tmp/font$$
+PROG="`basename $0`"
+STDOUT=false
+USAGE="$PROG: usage: $PROG [ -help ] [ -l ] [ -t ] [ -Pprinter ] FontName [ fontfile ]"
+
+trap "rm -f $TMP; exit" 0 1 2 3 15
+
+while [ $# -gt 0 ]
+do
+	case $1 in
+	-P*)	PRINTER=`echo $1 | sed 's/-P//'`;;
+	-t)	STDOUT=true;;
+	-l)	DIR="logo";;
+	-*)	echo $USAGE 1>&2
+		exit 1;;
+	*)	break;;
+	esac
+
+	shift
+done
+
+if [ $# -lt 1 ]
+then	echo $USAGE 1>&2; exit 1
+fi
+
+FONT=$1
+shift
+
+$STDOUT && PRINTER="standard output"
+echo downloading $FONT to $PRINTER as $DIR/$FONT > /dev/tty
+
+	sed -e "s/DIR/$DIR/" -e "s/DUMMYFONTNAME/$FONT/" <<'EOF' > $TMP
+%!
+% writetodisk.ps			greid Fri Apr 24 12:59:28 1987
+% Writes a font (or anything else, for that matter) to a disk file in
+% the font directory area. To use, tack the font file to be written
+% onto the end of this file modify it to contain the correct font
+% name in place of "DUMMYFONTNAME".  Note that this may be accomplished
+% by removing that line from this file and generating it on the fly.
+
+/fd (DIR/DUMMYFONTNAME) (w) file def
+
+/buff 128 string def
+{
+    currentfile buff readstring {
+	fd exch writestring
+    }{
+	dup length 0 gt {
+	    fd exch writestring
+	}{
+	    pop
+	} ifelse
+	fd closefile
+	exit
+    } ifelse
+} bind loop
+EOF
+
+if [ $# -gt 0 ]
+then	echo Using font/logo file $1 > /dev/tty
+	if [ -r $1 ]
+	then
+		cat $1 >> $TMP
+	else
+		echo "$PROG: no such file $1" 1>&2
+		exit 1
+	fi
+else	echo Using standard input as fontfile > /dev/tty
+	cat - >> $TMP
+fi
+
+$STDOUT || {
+	echo -n "Ready to download, okay? [y/n] " > /dev/tty
+	read reply
+	case $reply in
+	[Yy]*)  ;;
+	*)	echo "$PROG: download of $FONT to $PRINTER aborted" 1>&2
+		exit 1;;
+	esac
+}
+
+$STDOUT && cat $TMP
+$STDOUT || lpr -P$PRINTER $TMP
+
+echo "$PROG: downloaded $FONT to $PRINTER" > /dev/tty

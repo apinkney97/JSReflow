@@ -1,0 +1,47 @@
+bitmap2.o : bitmap2.c ../include/config.h ../include/c-auto.h \
+  ../include/c-std.h ../include/c-memstr.h ../include/c-errno.h \
+  ../include/c-minmax.h ../include/c-limits.h ../include/c-seek.h \
+  ../include/c-proto.h ../include/global.h ../include/lib.h \
+  ../include/types.h ../include/bitmap.h ../include/bounding-box.h bitmap2.h 
+extract.o : extract.c ../include/config.h ../include/c-auto.h \
+  ../include/c-std.h ../include/c-memstr.h ../include/c-errno.h \
+  ../include/c-minmax.h ../include/c-limits.h ../include/c-seek.h \
+  ../include/c-proto.h ../include/global.h ../include/lib.h \
+  ../include/types.h ../include/bitmap.h ../include/bounding-box.h bitmap2.h \
+  extract.h main.h image-header.h input-img.h input-pbm.h 
+image-char.o : image-char.c ../include/config.h ../include/c-auto.h \
+  ../include/c-std.h ../include/c-memstr.h ../include/c-errno.h \
+  ../include/c-minmax.h ../include/c-limits.h ../include/c-seek.h \
+  ../include/c-proto.h ../include/global.h ../include/lib.h \
+  ../include/types.h image-char.h 
+input-img.o : input-img.c ../include/config.h ../include/c-auto.h \
+  ../include/c-std.h ../include/c-memstr.h ../include/c-errno.h \
+  ../include/c-minmax.h ../include/c-limits.h ../include/c-seek.h \
+  ../include/c-proto.h ../include/global.h ../include/lib.h \
+  ../include/types.h ../include/file-input.h main.h image-header.h \
+  input-img.h 
+input-pbm.o : input-pbm.c ../include/config.h ../include/c-auto.h \
+  ../include/c-std.h ../include/c-memstr.h ../include/c-errno.h \
+  ../include/c-minmax.h ../include/c-limits.h ../include/c-seek.h \
+  ../include/c-proto.h ../include/global.h ../include/lib.h \
+  ../include/types.h ../include/file-input.h main.h image-header.h \
+  input-pbm.h ../include/pbmplus.h ../include/pbm.h 
+main.o : main.c ../include/config.h ../include/c-auto.h ../include/c-std.h \
+  ../include/c-memstr.h ../include/c-errno.h ../include/c-minmax.h \
+  ../include/c-limits.h ../include/c-seek.h ../include/c-proto.h \
+  ../include/global.h ../include/lib.h ../include/types.h \
+  ../include/cmdline.h ../include/filename.h ../include/getopt.h \
+  ../include/gf.h ../include/bitmap.h ../include/bounding-box.h \
+  ../include/font.h ../include/tfm.h ../include/fix-num.h ../include/list.h \
+  ../include/libfile.h ../include/report.h ../include/bb-outline.h bitmap2.h \
+  extract.h image-char.h image-header.h input-img.h input-pbm.h main.h \
+  strips.h 
+strips.o : strips.c ../include/config.h ../include/c-auto.h \
+  ../include/c-std.h ../include/c-memstr.h ../include/c-errno.h \
+  ../include/c-minmax.h ../include/c-limits.h ../include/c-seek.h \
+  ../include/c-proto.h ../include/global.h ../include/lib.h \
+  ../include/types.h ../include/gf.h ../include/bitmap.h \
+  ../include/bounding-box.h ../include/font.h ../include/tfm.h \
+  ../include/fix-num.h ../include/list.h input-img.h image-header.h \
+  input-pbm.h main.h strips.h 
+version.o : version.c 

@@ -1,0 +1,85 @@
+Sat Mar 28 07:48:55 1992  Karl Berry  (karl at hayley)
+
+        * Version 0.4.
+
+        * Change copyright years to 1992 only.
+
+Mon Mar  9 15:24:15 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * main.c (main): use make_prefix to prepend `n' to output_name.
+
+Sat Mar  7 13:44:12 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * main.c (global): stripped img_ off front of input and output names.
+          (main): use STREQ instead of strcmp.
+          Appended ".img" to output name if it doesn't have a suffix using
+            make_output_filename.
+          Moved test of equal input and output filenames to outside case
+          where output filename is NULL.
+
+Sat Mar  7 09:56:33 1992  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (libraries): define again.
+        (files, headers, sources): replace with `c_and_h', etc.
+
+Thu Mar  5 07:55:32 1992  Karl Berry  (karl at hayley)
+
+        * README: new file.
+
+Fri Jan 31 17:09:45 1992  Karl Berry  (karl at hayley)
+
+        * main.c (read_command_line): declare `option_index' (for new
+          getopt).
+
+Thu Jan  9 08:29:44 1992  Karl Berry  (karl at hayley)
+
+        * *.h: remove #pragma once.
+
+Wed Jan  8 15:27:41 1992  Karl Berry  (karl at hayley)
+
+        * update copyright messages.
+
+        * change `allocate to `xmalloc', `reallocate' to `xrealloc', and
+          `string_copy' to `strdup'.
+
+Thu Sep 12 10:48:01 1991  Karl Berry  (karl at hayley)
+
+        * main.c (read_command_line): move argument checking to before the
+          return.
+
+        * all files: bring include files up to date.
+
+Sat Jun 15 09:51:11 1991  Karl Berry  (karl at hayley)
+
+        * all files: change `checked_' to `x'.
+
+Thu Jun  6 07:29:22 1991  Karl Berry  (karl at hayley)
+
+        * All files: change to version 2 of the GPL.
+
+Sun Feb 17 09:38:03 1991  Karl Berry  (karl at hayley)
+
+        * *.c: include config.h.
+
+Sun Sep 16 11:27:59 1990  Karl Berry  (karl at hayley)
+
+        * main.c (flip): output newlines at appropriate points if giving
+        verbose output.
+
+        * img-input.c (IMG_MATCH_BYTE, IMG_GET_TWO, IMG_GET_FOUR): pass
+        the filename.
+        * img-output.c (put_img_header); call IMG_PUT_TWO, etc.
+        (IMG_PUT_TWO, IMG_PUT_FOUR): new macros.
+
+        * main.c: include "getopt.h" instead of <getopt.h>.
+
+Tue Aug  7 13:53:46 1990  Karl Berry  (karl at hayley)
+
+        * img-output.h (img_put_n_bytes): remove declaration.
+        * img-output.c (img_put_n_bytes): remove definition.
+        * main.c (flip): also reverse left and right.
+
+        * main.c (read_command_line): new option `output-name'.
+        (USAGE): document it.
+
+        * main.c (flip): multiply the image row by the width in bytes.

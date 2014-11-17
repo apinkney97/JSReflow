@@ -1,0 +1,1131 @@
+
+char.h,332
+#define BCHAR_BB(37,1140
+#define BCHAR_BITMAP(38,1191
+#define BCHAR_MAX_COL(39,1250
+#define BCHAR_MAX_ROW(41,1346
+#define BCHAR_MIN_COL(40,1298
+#define BCHAR_MIN_ROW(42,1394
+#define BCHAR_SET_WIDTH(43,1442
+#define BCHAR_TFM_WIDTH(44,1507
+#define CHAR_BITMAP_INFO(36,1094
+#define CHAR_TFM_INFO(47,1631
+} char_type;33,1019
+
+commands.h,0
+
+kern.h,0
+
+main.h,233
+#define FONT_CHAR(57,1595
+#define FONT_CURRENT_CHAR(60,1714
+#define FONT_CURRENT_CHARCODE(63,1857
+#define FONT_DPI(47,1255
+#define FONT_INFO(54,1527
+#define FONT_MODIFIED(50,1358
+#define FONT_NAME(44,1167
+} font_type;41,1088
+
+char.c,84
+font_read_char 58,1704
+read_char 45,1391
+show_bitmap 150,4741
+show_char 87,2535
+
+commands.c,350
+#define CHECK_DECIMAL(183,5363
+#define COMMON_CHANGE(196,5888
+#define OUTPUT_CHAR(323,9701
+char_change_callback 160,4777
+enlarge_bitmap 293,8886
+exit_command 56,1680
+expand_command 253,7490
+lsb_change_callback 210,6490
+next_command 77,2145
+prev_command 99,2702
+revert_command 125,3510
+rsb_change_callback 231,7018
+save_command 344,10299
+
+kern.c,179
+add_kern_callback 100,2713
+add_kern_widget 143,4169
+change_kern_callback 40,1130
+find_char_in_kern_list 219,6731
+find_kern_item_width 243,7316
+remove_kern_callback 175,5225
+
+main.c,95
+create_widgets 124,3808
+main 57,1556
+read_command_line 452,16858
+update_position 378,14237
+
+version.c,0
+
+../include/Bitmap.h,110
+typedef struct _BitmapRec *BitmapWidget;119,4785
+typedef struct _BitmapClassRec *BitmapWidgetClass;118,4734
+
+../include/Item.h,100
+typedef struct _ItemRec *ItemWidget;70,2429
+typedef struct _ItemClassRec *ItemWidgetClass;69,2382
+
+../include/bb-outline.h,124
+#define BB_LIST_DATA(37,1140
+#define BB_LIST_ELT(40,1219
+#define BB_LIST_LENGTH(34,1052
+} bounding_box_list_type;31,994
+
+../include/bitmap.h,242
+#define BITMAP_BITS(48,1573
+#define BITMAP_DIMENSIONS(44,1393
+#define BITMAP_HEIGHT(52,1750
+#define BITMAP_PIXEL(58,1994
+#define BITMAP_ROW(55,1881
+#define BITMAP_VALID_PIXEL(61,2093
+#define BITMAP_WIDTH(51,1684
+} bitmap_type;41,1329
+
+../include/bounding-box.h,216
+#define BB_HEIGHT(49,1611
+#define BB_WIDTH(48,1560
+#define MAX_COL(44,1401
+#define MAX_ROW(42,1331
+#define MIN_COL(43,1366
+#define MIN_ROW(41,1296
+} bounding_box_type;31,1071
+} real_bounding_box_type;37,1160
+
+../include/bzr.h,398
+#define BZR_CHAR_BB(88,2855
+#define BZR_CHAR_MAX_COL(90,2943
+#define BZR_CHAR_MAX_ROW(92,3055
+#define BZR_CHAR_MIN_COL(89,2887
+#define BZR_CHAR_MIN_ROW(91,2999
+#define BZR_COMMENT(50,1639
+#define BZR_DESIGN_SIZE(53,1734
+#define BZR_FONT_BB(126,4257
+#define BZR_NCHARS(129,4362
+#define BZR_SHAPE(97,3275
+} bzr_char_type;76,2422
+} bzr_postamble_type;122,4128
+} bzr_preamble_type;46,1508
+
+../include/c-auto.h,0
+
+../include/c-errno.h,0
+
+../include/c-fopen.h,0
+
+../include/c-limits.h,0
+
+../include/c-memstr.h,24
+#define memcpy(39,1157
+
+../include/c-minmax.h,0
+
+../include/c-namemx.h,0
+
+../include/c-pathch.h,0
+
+../include/c-pathmx.h,0
+
+../include/c-proto.h,420
+#define P1C(36,1337
+#define P1C(51,1775
+#define P1H(30,1161
+#define P1H(45,1639
+#define P2C(37,1363
+#define P2C(52,1806
+#define P2H(31,1182
+#define P2H(46,1658
+#define P3C(38,1403
+#define P3C(53,1855
+#define P3H(32,1210
+#define P3H(47,1681
+#define P4C(39,1457
+#define P4C(54,1922
+#define P4H(33,1245
+#define P4H(48,1708
+#define P5C(40,1525
+#define P5C(56,2011
+#define P5H(34,1287
+#define P5H(49,1739
+
+../include/c-seek.h,0
+
+../include/c-std.h,0
+
+../include/cmdline.h,190
+#define ARGUMENT_IS(31,1044
+#define FIND_CMDLINE_DPI(66,2103
+#define FIND_CMDLINE_DPI(68,2153
+#define FINISH_COMMAND_LINE(84,2679
+#define GET_PERCENT(36,1189
+#define GET_RANGE(49,1580
+
+../include/config.h,0
+
+../include/dirio.h,48
+#define NLENGTH(24,864
+#define NLENGTH(27,981
+
+../include/encoding.h,204
+#define ENCODING_CHAR_ELT(50,1580
+#define ENCODING_CHAR_LIG(59,2019
+#define ENCODING_CHAR_NAME(54,1752
+#define ENCODING_SCHEME_NAME(47,1481
+} encoding_char_type;34,1125
+} encoding_info_type;44,1411
+
+../include/file-input.h,0
+
+../include/file-output.h,0
+
+../include/filename.h,0
+
+../include/fix-num.h,30
+typedef long fix_word;27,878
+
+../include/font.h,1166
+#define BITMAP_FONT_CHECKSUM(51,1737
+#define BITMAP_FONT_COMMENT(48,1645
+#define BITMAP_FONT_DESIGN_SIZE(44,1481
+#define BITMAP_FONT_FILENAME(54,1839
+#define CHARCODE(138,4784
+#define CHAR_BB(152,5364
+#define CHAR_BITMAP(155,5429
+#define CHAR_BITMAP_HEIGHT(160,5598
+#define CHAR_BITMAP_WIDTH(159,5538
+#define CHAR_DEPTH(176,6268
+#define CHAR_HEIGHT(171,6038
+#define CHAR_MAX_COL(164,5775
+#define CHAR_MAX_ROW(166,5867
+#define CHAR_MIN_COL(163,5729
+#define CHAR_MIN_ROW(165,5821
+#define CHAR_RSB(183,6471
+#define CHAR_SET_WIDTH(142,4947
+#define CHAR_TFM_WIDTH(146,5098
+#define FONT_BITMAP_FONT(81,2719
+#define FONT_COMMENT(97,3352
+#define FONT_DESIGN_SIZE(93,3171
+#define FONT_NCHARS(100,3460
+#define FONT_SPACE(106,3728
+#define FONT_TFM_FILENAME(87,2893
+#define FONT_TFM_FONT(84,2794
+#define RAW_CHAR_ALLOCATED(230,8019
+#define RAW_CHAR_BITMAP_FORMAT(224,7787
+#define RAW_CHAR_BYTES(227,7913
+#define RAW_CHAR_UNUSED_START(236,8203
+#define RAW_CHAR_USED(233,8110
+} bitmap_font_type;38,1231
+typedef enum { pk_format, gf_format } bitmap_format_type;205,7278
+} char_info_type;135,4697
+} font_info_type;78,2635
+} raw_char_type;217,7547
+
+../include/getopt.h,0
+
+../include/getpagesize.h,84
+#define getpagesize(12,137
+#define getpagesize(15,191
+#define getpagesize(20,302
+
+../include/gf.h,588
+#define GF_BITMAP(114,3669
+#define GF_CHARCODE(111,3595
+#define GF_CHAR_BB(118,3823
+#define GF_CHAR_LOC(84,2725
+#define GF_CHAR_MAX_COL(128,4143
+#define GF_CHAR_MAX_ROW(130,4257
+#define GF_CHAR_MIN_COL(127,4086
+#define GF_CHAR_MIN_ROW(129,4200
+#define GF_CHAR_RSB(136,4453
+#define GF_CHECKSUM(74,2356
+#define GF_DESIGN_SIZE(70,2206
+#define GF_FONT_BB(81,2628
+#define GF_H_ESCAPEMENT(121,3891
+#define GF_H_RESOLUTION(77,2470
+#define GF_TFM_WIDTH(124,3983
+#define GF_V_RESOLUTION(78,2517
+} gf_char_locator_type;57,1920
+} gf_char_type;107,3460
+} gf_postamble_type;67,2123
+
+../include/global.h,595
+#define CUBE(77,2809
+#define FATAL(35,1210
+#define FATAL1(37,1293
+#define FATAL2(39,1379
+#define FATAL3(41,1472
+#define FATAL_PERROR(29,1022
+#define MAX(83,3026
+#define MAX_EQUALS(90,3190
+#define MIN(86,3087
+#define MIN_EQUALS(91,3255
+#define PIXELS_TO_POINTS(71,2501
+#define POINTS_TO_PIXELS(72,2566
+#define ROUND(79,2911
+#define	SAME_SIGN(78,2843
+#define SIGN(80,2964
+#define SQUARE(76,2779
+#define START_FATAL(32,1091
+#define START_WARNING(45,1575
+#define STREQ(93,3321
+#define WARNING(48,1707
+#define WARNING1(50,1796
+#define WARNING2(52,1888
+#define WARNING3(54,1987
+
+../include/hexify.h,0
+
+../include/lib.h,52
+#define XRETALLOC(51,1842
+#define XTALLOC(50,1787
+
+../include/libfile.h,32
+#define LIBFILE_ERROR1(38,1283
+
+../include/line.h,0
+
+../include/list.h,99
+#define LIST_DATA(35,1004
+#define LIST_ELT(38,1101
+#define LIST_SIZE(32,929
+} list_type;29,884
+
+../include/logreport.h,131
+#define LOG(36,1112
+#define LOG1(38,1191
+#define LOG2(40,1276
+#define LOG3(42,1371
+#define LOG4(44,1473
+#define LOG5(46,1583
+
+../include/paths.h,0
+
+../include/pathsrch.h,0
+
+../include/pbm.h,332
+bit*38,937
+typedef unsigned char 9,117
+#define 10,144
+#define 11,164
+#define 16,210
+#define 17,233
+#define 18,256
+#define 19,280
+#define 20,331
+#define 21,384
+#define 26,475
+#define 33,646
+#define 34,734
+#define 35,805
+#define 36,877
+void 31,595
+void 39,1001
+void 40,1082
+void 42,1160
+void 43,1248
+void 44,1328
+
+../include/pbmplus.h,218
+#define ARGS(130,4687
+#define ARGS(132,4732
+#define abs(122,4524
+#define bcopy(96,3766
+#define bzero(95,3723
+#define 14,522
+#define max(118,4420
+#define min(120,4472
+#define odd(124,4574
+#define putc(54,2119
+
+../include/pk.h,354
+#define PK_BITMAP(86,2808
+#define PK_CHARCODE(73,2364
+#define PK_CHAR_BB(83,2730
+#define PK_CHECKSUM(50,1700
+#define PK_COMMENT(43,1439
+#define PK_DESIGN_SIZE(46,1550
+#define PK_H_ESCAPEMENT(80,2615
+#define PK_H_RESOLUTION(53,1814
+#define PK_TFM_WIDTH(77,2508
+#define PK_V_RESOLUTION(54,1861
+} pk_char_type;69,2217
+} pk_preamble_type;40,1361
+
+../include/report.h,123
+#define REPORT(30,899
+#define REPORT1(34,1001
+#define REPORT2(38,1110
+#define REPORT3(42,1227
+#define REPORT4(46,1352
+
+../include/scaled-num.h,28
+typedef long scaled;27,890
+
+../include/spline.h,504
+#define CONTROL1(47,1494
+#define CONTROL2(48,1530
+#define END_POINT(49,1566
+#define LAST_SPLINE_LIST_ELT(83,2523
+#define NEXT_SPLINE_LIST_ELT(87,2672
+#define PREV_SPLINE_LIST_ELT(89,2784
+#define SPLINE_DEGREE(50,1603
+#define SPLINE_LINEARITY(51,1645
+#define SPLINE_LIST_DATA(77,2345
+#define SPLINE_LIST_ELT(80,2422
+#define SPLINE_LIST_LENGTH(74,2239
+#define START_POINT(46,1456
+} polynomial_degree;31,975
+} spline_list_array_type;113,3606
+} spline_list_type;71,2158
+} spline_type;44,1440
+
+../include/statistics.h,26
+} statistics_type;29,883
+
+../include/tfm.h,719
+#define TFM_CHARCODE(208,7406
+#define TFM_CHAR_EXISTS(205,7336
+#define TFM_CHECKSUM(90,3114
+#define TFM_CHECK_DESIGN_SIZE(70,2532
+#define TFM_CODING_SCHEME(96,3274
+#define TFM_DEPTH(215,7672
+#define TFM_DESIGN_SIZE(93,3196
+#define TFM_FIX_DEPTH(216,7708
+#define TFM_FIX_HEIGHT(214,7626
+#define TFM_FIX_ITALIC_CORRECTION(218,7812
+#define TFM_FIX_WIDTH(212,7544
+#define TFM_FONT_PARAMETER(104,3646
+#define TFM_FONT_PARAMETER_COUNT(99,3382
+#define TFM_HEIGHT(213,7588
+#define TFM_ITALIC_CORRECTION(217,7752
+#define TFM_KERN(221,7903
+#define TFM_LIGATURE(224,7964
+#define TFM_WIDTH(211,7508
+} tfm_char_type;202,7255
+} tfm_global_info_type;87,3068
+} tfm_kern_type;263,9285
+} tfm_ligature_type;256,9178
+
+../include/types.h,733
+#define DIMENSIONS_HEIGHT(79,2236
+#define DIMENSIONS_WIDTH(80,2278
+typedef void *address;36,1119
+typedef enum { false = 0, true = 1 } boolean;23,797
+typedef int byte_count_type;54,1652
+typedef unsigned char 44,1394
+typedef unsigned char 48,1462
+typedef signed char 49,1494
+} complex;68,1990
+typedef enum { first_complex_part, second_complex_part} complex_part_type;69,2001
+typedef enum { polar_rep, rectangular_rep} complex_rep_type;70,2076
+} coordinate_type;87,2374
+} dimensions_type;77,2216
+typedef unsigned int 52,1591
+typedef double real;39,1198
+} real_coordinate_type;92,2426
+typedef unsigned short 50,1527
+typedef short signed_2_bytes;51,1561
+typedef int signed_4_bytes;53,1624
+typedef char *string;33,1060
+
+../include/varstring.h,106
+#define VS_ALLOCATED(37,1075
+#define VS_CHARS(34,980
+#define VS_USED(40,1159
+} variable_string;31,932
+
+../include/vector.h,74
+#define Padd(79,2779
+#define Pmult_scalar(81,2878
+} vector_type;30,932
+
+../include/xmessage.h,0
+
+../include/xstat.h,280
+#define SAME_FILE_P(59,1947
+#define	S_ISBLK(29,912
+#define	S_ISCHR(32,1008
+#define	S_ISDIR(35,1104
+#define	S_ISFIFO(41,1297
+#define	S_ISLNK(44,1394
+#define S_ISMPB(50,1599
+#define S_ISMPC(51,1646
+#define S_ISNWK(54,1754
+#define	S_ISREG(38,1200
+#define	S_ISSOCK(47,1492
+
+../include/xt-common.h,395
+#define DECLARE_BUTTON(51,1871
+#define DEFINE_BUTTON(67,2549
+#define DEFINE_RESOURCE(119,4312
+#define IMMEDIATE_RESOURCE(127,4707
+#define IMMEDIATE_RESOURCE2(124,4557
+typedef XtPointer Pointer;113,4103
+#define STRING_RESOURCE(130,4833
+#define XFIND_WIDGET(99,3660
+#define XTPARSE_CHARCODE(77,2979
+typedef void action_proc_type 29,978
+#define 33,1143
+#define 36,1244
+#define 43,1536
+
+../gf/gf_input.c,994
+#define APPEND_BYTES(741,21207
+#define APPEND_VAR_BYTES(742,21256
+#define COMMON_APPEND(731,20858
+#define ENSURE_AVAILABLE(852,24309
+#define GF_FSEEK(41,1292
+#define GF_FTELL(40,1231
+#define GF_GET_BYTE(43,1395
+#define GF_GET_FOUR(46,1604
+#define GF_GET_PREVIOUS(44,1461
+#define GF_GET_PREVIOUS_FOUR(49,1754
+#define GF_GET_SIGNED_FOUR(47,1670
+#define GF_GET_TWO(45,1540
+#define GF_MATCH_BYTE(51,1842
+append_byte 864,24668
+append_n_bytes 876,24959
+deblank 408,11230
+get_abbreviated_boc 368,9994
+get_character_bitmap 532,15820
+get_full_boc 342,9177
+get_locators 232,6659
+get_new_row 711,20205
+get_paint 610,18173
+get_postamble 204,5739
+get_postamble_info 389,10637
+get_skip 672,19422
+get_specials 918,26255
+gf_close_input_file 110,3621
+gf_get_char 269,7631
+gf_get_next_char 304,8470
+gf_get_postamble 159,4693
+gf_get_preamble 137,4287
+gf_get_raw_char 745,21325
+gf_get_string 956,26796
+gf_get_three 973,27115
+gf_open_input_file 96,3325
+new_raw_gf_char 890,25363
+
+../gf/gf_opcodes.h,0
+
+../gf/gf_output.c,514
+#define GF_FTELL(62,1899
+#define GF_PUT_BYTE(63,1962
+#define GF_PUT_FOUR(66,2178
+#define GF_PUT_SIGNED_FOUR(67,2250
+#define GF_PUT_THREE(65,2104
+#define GF_PUT_TWO(64,2034
+gf_close_output_file 95,2777
+gf_open_output_file 77,2506
+gf_put_char 261,6900
+gf_put_postamble 136,3478
+gf_put_preamble 110,2981
+gf_put_raw_char 441,11501
+init_locators 214,5598
+put_bitmap 319,8886
+put_boc 277,7347
+put_locators 177,4714
+put_new_row 425,11222
+put_paint 373,10188
+put_skip 398,10660
+start_put_char 227,5841
+
+../pk/pk_input.c,1341
+#define INTERNAL_CHARS_READ(88,3132
+#define INTERNAL_FILE(78,2742
+#define INTERNAL_PACKED_BLACK_FIRST(96,3374
+#define INTERNAL_PACKED_CHAR(85,2996
+#define INTERNAL_PACKED_DATA(102,3673
+#define INTERNAL_PACKED_DATA_LENGTH(100,3574
+#define INTERNAL_PACKED_DYN_F(94,3286
+#define INTERNAL_PACKED_PARAM_LENGTH(98,3473
+#define INTERNAL_PK_CHAR(82,2880
+#define LONG_FORMAT(57,2171
+#define PACKED_BLACK_FIRST(51,1865
+#define PACKED_DATA(63,2411
+#define PACKED_DATA_LENGTH(60,2293
+#define PACKED_DYN_F(48,1763
+#define PACKED_PARAM_LENGTH(56,2116
+#define PK_GET_BYTE(116,4144
+#define PK_GET_FOUR(118,4272
+#define PK_GET_N_BYTES(119,4337
+#define PK_GET_TWO(117,4209
+#define PK_MATCH_BYTE(114,4053
+data_get_bit 568,18086
+data_get_four 612,18922
+data_get_n_byte_value 619,18999
+data_get_nybble 591,18437
+data_get_signed_n_byte_value 631,19164
+data_get_three 605,18844
+delete_internal_font 718,21546
+find_internal_font 698,20889
+get_all_pk_chars 252,8311
+get_bitmap 508,16834
+get_one_pk_char 287,9260
+get_packed_bitmap 390,12934
+get_run_count 452,15036
+} internal_font_type;75,2679
+} packed_char_type;45,1671
+pk_close_input_file 172,6021
+pk_get_char 217,7180
+pk_get_n_byte_value 547,17622
+pk_get_preamble 183,6268
+pk_get_string 531,17402
+pk_open_input_file 156,5672
+save_internal_font 662,19858
+unpack 335,10865
+
+../pk/pk_opcodes.h,0
+
+../tfm/tfm_input.c,647
+#define TFM_FSEEK(63,2125
+#define TFM_FTELL(62,2061
+#define TFM_GET_BYTE(65,2231
+#define TFM_GET_FOUR(67,2367
+#define TFM_GET_TWO(66,2300
+get_char 356,10661
+get_lig_kern_program 425,12570
+get_tfm_header 178,4631
+get_tfm_params 242,7237
+tfm_close_input_file 97,3114
+tfm_get_bcpl_string 497,14168
+tfm_get_char 316,9497
+tfm_get_chars 291,8861
+tfm_get_checksum 134,3875
+tfm_get_coding_scheme 150,4089
+tfm_get_design_size 142,3979
+tfm_get_fix_word 481,13928
+tfm_get_global_info 115,3510
+tfm_get_interword_space 158,4203
+tfm_get_scaled_fix 490,14069
+tfm_get_x_height 166,4341
+} tfm_header_type;55,1861
+tfm_open_input_file 83,2811
+
+../tfm/tfm_output.c,515
+finish_prop_list 302,8051
+put_indentation 369,9223
+put_integer_prop 329,8510
+put_kern_prop 320,8338
+put_lig_kern_info 229,6156
+put_lig_prop 311,8176
+put_octal_prop 337,8655
+put_real_prop 352,8905
+put_scaled_prop 345,8798
+put_string_prop 360,9043
+start_integer_prop_list 293,7880
+start_prop_list 284,7717
+tfm_close_pl_output_file 74,2241
+tfm_convert_pl 89,2538
+tfm_init_global_info 124,3424
+tfm_open_pl_output_file 62,2041
+tfm_put_char 200,5393
+tfm_put_chars 185,5111
+tfm_put_global_info 143,3848
+
+../tfm/tfm_util.c,290
+} font_param_type;229,5943
+tfm_get_kern 104,2547
+tfm_new_char 36,1154
+tfm_new_chars 56,1518
+tfm_set_design_size 331,9662
+tfm_set_font_parameter 343,9934
+tfm_set_fontdimens 233,5969
+tfm_set_fontsize 366,10558
+tfm_set_header 163,3813
+tfm_set_kern 72,1785
+tfm_set_ligature 130,2998
+
+../widgets/Bitmap.c,843
+BitmapBits 286,10142
+BitmapExpansion 278,10026
+BitmapModified 294,10258
+#define COMPUTE_SHADOW_COORD(957,32553
+#define EXPANSION_ROUND(553,18906
+#define EXPANSION_TRUNC(557,19037
+#define OFFSET(71,2623
+accept_paste 847,28764
+accept_selection 761,25848
+adjust_selection 739,25221
+bitmap_destroy 264,9707
+bitmap_initialize 153,5676
+bitmap_set_values 209,7941
+bitmap_to_pixmap 309,10648
+check_action_parameters 486,16748
+fill_selection 683,23256
+find_bitmap_position 566,19343
+find_selection_bb 933,31797
+get_pointer_position 444,15998
+invert_pixel 596,20334
+move_paste 820,27774
+param_value 509,17568
+redraw_pixel 408,14622
+redraw_selection 962,32739
+redraw_selection_bitmap 979,33173
+show_selection 1013,34546
+start_paste 797,27014
+start_selection 716,24462
+unshow_selection 1026,34953
+update_selection 1046,35543
+
+../widgets/BitmapP.h,96
+} BitmapClassPart;35,1144
+} BitmapClassRec;44,1359
+} BitmapPart;79,2270
+} BitmapRec;89,2435
+
+../widgets/Fontview.c,211
+#define OFFSET(45,1310
+bitmap_to_pixmap 369,12673
+find_keycode 451,15377
+fontview_destroy 236,8131
+fontview_initialize 133,4751
+fontview_resize 178,6104
+fontview_set_values 226,7918
+self_insert 259,8748
+
+../widgets/Fontview.h,116
+typedef struct _FontviewRec *FontviewWidget;80,2492
+typedef struct _FontviewClassRec *FontviewWidgetClass;79,2437
+
+../widgets/FontviewP.h,104
+} FontviewClassPart;36,1156
+} FontviewClassRec;45,1379
+} FontviewPart;72,2095
+} FontviewRec;82,2268
+
+../widgets/Form.c,705
+static void ChangeManaged(566,18705
+static void ClassInitialize(191,6747
+static void ClassPartInitialize(208,7387
+static void ConstraintInitialize(543,18085
+static Boolean ConstraintSetValues(560,18587
+static XtGeometryResult GeometryManager(435,14120
+static void Initialize(219,7609
+static Boolean Layout(246,8204
+static void LayoutChild(324,11043
+#define Offset(39,1534
+#define Offset(48,1792
+static XtGeometryResult PreferredGeometry(604,19685
+static void RefigureLocations(232,7908
+static void Resize(386,12541
+static Boolean SetValues(535,17961
+static Position TransformCoord(368,12121
+void XawFormDoLayout(635,20569
+static void _CvtStringToEdgeType(153,5821
+#define	done(146,5688
+
+../widgets/Item.c,260
+ItemGetLabelString 334,11659
+ItemGetValueString 325,11509
+ItemGetValueWidget 345,11899
+#define OFFSET(45,1432
+accept_value 358,12229
+item_destroy 308,11081
+item_expose 293,10633
+item_initialize 129,4753
+item_realize 211,7706
+item_set_values 237,8681
+
+../widgets/ItemP.h,88
+} ItemClassPart;34,1057
+} ItemClassRec;42,1234
+} ItemPart;61,1616
+} ItemRec;70,1754
+
+../widgets/Label.c,467
+static void ClassInitialize(133,4678
+static void Destroy(461,14117
+static void GetgrayGC(213,6977
+static void GetnormalGC(198,6654
+static void Initialize(235,7579
+static XtGeometryResult QueryGeometry(473,14376
+static void Redisplay(267,8506
+static void Resize(365,11394
+static void SetTextWidthAndHeight(151,5253
+static Boolean SetValues(383,11706
+#define XtStrlen(32,1333
+static void _Reposition(335,10636
+#define offset(56,1868
+#define streq(44,1600
+
+../widgets/Viewport.c,663
+static void ChangeManaged(294,9595
+static void ComputeLayout(411,12884
+ComputeWithForceBars(622,21019
+static void ConstraintInitialize(241,8050
+static Widget CreateScrollbar(122,4504
+GeometryManager 759,24628
+static Boolean GetGeometry(909,30061
+static void Initialize(174,6070
+static Boolean Layout(693,22957
+static void MoveChild(387,12297
+static XtGeometryResult PreferredGeometry(939,30867
+static void Realize(247,8206
+static void RedrawThumbs(370,11858
+static void Resize(685,22826
+static void ScrollUpDownProc(704,23226
+static void SetBar(362,11675
+static Boolean SetValues(273,8983
+static void ThumbProc(723,23735
+#define offset(38,1555
+
+../lib/atou.c,13
+atou 22,798
+
+../lib/basename.c,17
+basename 27,939
+
+../lib/bb-outline.c,409
+append_bb 401,11890
+append_bounding_box_list 430,12530
+edge_name 370,11114
+} edge_type;30,946
+find_one_bb 132,4921
+find_outline_bbs 67,2523
+free_bounding_box_list 454,13169
+init_bounding_box_list 415,12287
+is_marked_edge 351,10663
+is_outline_edge 300,9288
+mark_edge 339,10335
+next_edge 363,11009
+next_outline_edge 171,6205
+next_unmarked_outline_edge 275,8615
+offset_bounding_box_list 382,11318
+
+../lib/bitmap.c,235
+#define INSERT_TRANSITION(123,3728
+bitmap_find_transitions 130,3891
+bitmap_to_bb 104,3068
+copy_bitmap 58,1669
+extract_subbitmap 79,2266
+free_bitmap 46,1346
+new_bitmap 29,901
+print_bitmap 214,6248
+print_bounded_bitmap 196,5728
+
+../lib/bounding-box.c,114
+bb_to_dimensions 45,1377
+dimensions_to_bb 28,978
+update_bounding_box 71,1939
+update_real_bounding_box 60,1653
+
+../lib/charcode.c,49
+parse_charcode 28,1062
+xparse_charcode 74,2284
+
+../lib/cmdline.c,46
+find_dpi 53,1594
+scan_unsigned_list 29,1004
+
+../lib/concat.c,82
+concat P2C(26,869
+concat3 P3C(37,1040
+concat4 P4C(49,1261
+concat5 P5C(63,1559
+
+../lib/dir-p.c,42
+dir_p P1C(29,891
+leaf_dir_p P1C(40,1146
+
+../lib/encoding.c,134
+#define GET_WORD(99,2537
+encoding_number 35,1050
+parse_encoding_line 102,2613
+parse_ligature 132,3234
+read_encoding_file 54,1487
+
+../lib/file-input.c,258
+#define MOVE_BACK(96,2146
+get_byte 26,880
+get_four 50,1197
+get_n_bytes 76,1734
+get_previous_byte 99,2225
+get_previous_four 125,2531
+get_previous_two 111,2377
+get_signed_four 67,1568
+get_two 38,1050
+match_byte 141,2734
+match_previous_byte 151,2940
+
+../lib/file-output.c,93
+put_byte 32,1198
+put_four 57,1746
+put_n_bytes 67,1998
+put_three 48,1543
+put_two 40,1347
+
+../lib/file-p.c,24
+same_file_p P2C(28,952
+
+../lib/filename.c,227
+find_gf_filename 58,1670
+find_pk_filename 31,1072
+find_suffix 106,2651
+find_tfm_filename 84,2224
+make_output_filename 178,4064
+make_prefix 150,3523
+make_stem_suffix 165,3815
+make_suffix 120,2928
+remove_suffix 141,3373
+
+../lib/fix-num.c,41
+fix_to_real 29,882
+real_to_fix 38,1013
+
+../lib/fmod.c,58
+_fmod(59,1958
+doit(99,2642
+fmod(62,1998
+main(112,2991
+
+../lib/font.c,457
+#define INTERNAL_BITMAP_FORMAT(42,1220
+#define INTERNAL_BITMAP_NAME(49,1473
+#define INTERNAL_BITMAP_ONLY(46,1380
+#define INTERNAL_FONT_INFO(53,1660
+close_font 246,8311
+delete_internal_font 561,17259
+find_internal_font 544,16777
+free_raw_char 376,11617
+get_bitmap_font 68,2118
+get_char 287,9283
+get_font 156,5093
+get_raw_char 344,10941
+} internal_font_type;39,1145
+print_char 473,14566
+save_internal_font 510,15805
+string_to_bitmap 391,12094
+
+../lib/getopt.c,145
+_getopt_internal 280,9808
+exchange 204,6478
+getopt 596,17514
+main 613,17851
+#define	my_bcopy(152,5210
+my_bcopy 175,5566
+my_index 161,5393
+
+../lib/getopt1.c,61
+getopt_long 40,1182
+getopt_long_only 56,1685
+main 71,1995
+
+../lib/hexify.c,41
+#define HEX_DIGIT(26,896
+hexify 29,965
+
+../lib/libfile.c,117
+libfile_close 66,1912
+libfile_line 99,2448
+libfile_linenumber 88,2214
+libfile_start 43,1305
+libfilename 79,2085
+
+../lib/line.c,18
+read_line 30,990
+
+../lib/list.c,41
+append_element 41,1136
+new_list 25,832
+
+../lib/logreport.c,25
+flush_log_output 32,985
+
+../lib/malloc.c,1551
+#define UPDATE_STATS(29,1071
+#define UPDATE_STATS(31,1112
+static inline int aligned_OK(331,10939
+void* calloc(1023,28559
+void cfree(1032,28761
+static inline void* chunk2mem(607,19086
+#define clear_inuse(580,18517
+static inline void consollink(700,21160
+static void do_free_stats(532,17766
+static void do_malloc_stats(522,17491
+750,22066
+extern 746,21997
+  for 1244,34039
+void free(1012,28420
+static inline void frontlink(716,21479
+static unsigned int gcd(545,18001
+  if 1196,32301
+  if 1200,32456
+  if 1204,32611
+  if 1208,32754
+  if 1213,32968
+  if 1217,33125
+  if 1222,33337
+  if 1226,33483
+  if 1231,33613
+#define inuse(578,18430
+static inline unsigned int lcm(568,18290
+void* malloc(923,26188
+static mchunkptr malloc_find_space(842,24337
+void malloc_sanity_check(614,19252
+void malloc_stats(1185,32130
+static inline void malloc_unlink(655,20018
+unsigned int malloc_usable_size(1038,28803
+static volatile void malloc_user_error(274,9507
+static void malloc_user_error(276,9554
+typedef struct malloc_bin* mbinptr;308,10386
+typedef struct malloc_chunk* mchunkptr;297,9997
+static inline mchunkptr mem2chunk(627,19514
+void* memalign(1102,30237
+#define next_chunk(588,18660
+#define prev_chunk(592,18773
+void* realloc(1055,29130
+static inline unsigned int request2size(323,10743
+#define set_inuse(579,18473
+static inline void set_size(597,18899
+static inline mbinptr size2bin(487,16664
+static inline void split(669,20225
+static 752,22074
+void* valloc(1178,31981
+typedef volatile void 744,21946
+748,22033
+
+../lib/math.c,220
+acosd 56,1662
+distance 38,1265
+epsilon_equal 27,1040
+find_bounds 131,3048
+int_distance 46,1424
+int_to_real_coord 88,2239
+map_to_unit 159,3780
+points_adjacent_p 114,2706
+real_to_int_coord 100,2431
+slope 77,1984
+
+../lib/now.c,12
+now 26,898
+
+../lib/numtoa.c,40
+dtoa 42,1028
+itoa 24,823
+utoa 33,923
+
+../lib/pathsrch.c,265
+absolute_p P1C(185,5445
+expand_tilde P1C(396,11889
+find_path_filename P2C(67,2423
+initialize_path_list P3C(214,6365
+add_directory 295,8979
+expand_default 373,11362
+expand_subdir 327,9926
+parse_envpath 245,7378
+readable 116,3959
+truncate_pathname 146,4567
+
+../lib/report.c,0
+
+../lib/safe-free.c,18
+safe_free 26,871
+
+../lib/scaled-num.c,69
+print_scaled 31,986
+real_to_scaled 70,1637
+scaled_to_real 61,1506
+
+../lib/spline.c,294
+append_spline 142,3715
+append_spline_list 210,5363
+concat_spline_lists 157,4086
+evaluate_spline 74,2127
+free_spline_list 132,3491
+free_spline_list_array 193,4879
+init_spline_list 115,3034
+new_spline 30,973
+new_spline_list 101,2765
+new_spline_list_array 178,4608
+print_spline 48,1262
+
+../lib/statistics.c,62
+mean 31,1127
+standard_deviation 49,1528
+statistics 69,1955
+
+../lib/strstr.c,15
+strstr 24,956
+
+../lib/substring.c,18
+substring 26,896
+
+../lib/varstring.c,79
+vs_append_char 78,2047
+vs_free 49,1356
+vs_init 33,1131
+vs_set_char 60,1572
+
+../lib/vector.c,418
+IPadd 233,4038
+IPequal 269,4511
+IPmult_real 257,4365
+IPmult_scalar 245,4206
+IPsubtract 209,3673
+IPsubtractP 221,3864
+Padd 169,3055
+Pmult_scalar 181,3258
+Psubtract 194,3461
+Vabs 153,2837
+Vadd 76,1506
+Vadd_int_point 142,2645
+Vadd_point 120,2263
+Vangle 110,2045
+Vdot 88,1668
+Vmult_scalar 95,1782
+Vsubtract_point 131,2454
+magnitude 54,1233
+make_vector 27,883
+normalize 61,1318
+vector_to_point 41,1092
+
+../lib/xcalloc.c,16
+xcalloc 23,774
+
+../lib/xchdir.c,15
+xchdir 25,789
+
+../lib/xfopen.c,32
+xfclose 38,1056
+xfopen 26,911
+
+../lib/xfseek.c,15
+xfseek 23,769
+
+../lib/xftell.c,15
+xftell 23,775
+
+../lib/xgetcwd.c,16
+xgetcwd 29,976
+
+../lib/xmalloc.c,20
+xmalloc P1C(23,774
+
+../lib/xmessage.c,60
+message_over 92,2980
+x_message 35,1105
+x_warning 84,2876
+
+../lib/xopendir.c,39
+xopendir P1C(25,807
+xclosedir 37,937
+
+../lib/xrealloc.c,21
+xrealloc P2C(23,776
+
+../lib/xrename.c,16
+xrename 27,978
+
+../lib/xstat.c,34
+xstat P1C(25,812
+xlstat 39,1024
+
+../lib/xstrdup.c,20
+xstrdup P1C(25,816

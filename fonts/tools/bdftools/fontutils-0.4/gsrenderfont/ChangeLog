@@ -1,0 +1,100 @@
+Sat Mar 28 07:48:23 1992  Karl Berry  (karl at hayley)
+
+        * Version 0.4.
+
+        * Change copyright years to 1992 only.
+
+Sat Mar  7 09:39:06 1992  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (files, headers, source): replace with `c_and_h', etc.
+        (libraries): define.
+
+Wed Mar  4 16:05:51 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * main.c (main): set output_filename to font_basename if the
+          former is unset; then call make_output_filename to really make it.
+
+Wed Mar  4 07:15:39 1992  Karl Berry  (karl at hayley)
+
+        * gsrenderfont: compute the resolution of the final GF file from
+          both the point size and the given resolution.
+
+Tue Mar  3 07:45:27 1992  Karl Berry  (karl at hayley)
+
+        * writefont.PS (set-char-variables): use font-* variables; check
+          if the character is in the CharStrings to see if it is in the
+          font. 
+        (set-font): set font-encoding and font-charstrings.
+
+Mon Mar  2 08:33:53 1992  Karl Berry  (karl at hayley)
+
+        * gsrenderfont: add options, etc.
+        
+        * input-pbm.c (pbm_get_block): if one of the last few scanlines
+          that is supposed to be blank isn't, then save it and return,
+          instead of including it in the image.  Also ignore all-white
+          rows at the top of a block.
+
+        * writefont.PS (side-bearings): don't bother to cvi the side bearings.
+        (make-gsfont): write onto name.xifi, not .ifi.
+        * fixifibb.awk: new file.
+
+Sun Mar  1 11:22:55 1992  Karl Berry  (karl at hayley)
+
+        * main.c, version.c: sources for bbcount.
+        * GNUmakefile (program): set to bbcount.
+        (sources): set to the new source files.
+        Also, include the usual submakefiles from data.
+
+        * writefont.PS (ifi-writestring): new routine.
+        (output-char-info): use it.
+
+        * writefont.PS (bounding-boxes): remove the dictionary.
+        (num-bounding-boxes): just output a constant `00'.
+
+        * writefont.PS (compute-{max-char,final-image}-dimens): new routines.
+
+Sat Feb 29 06:48:09 1992  Karl Berry  (karl at hayley)
+
+        * writefont.PS (find-char-dimensions-in-pixels): subtract the left
+          sidebearings from the (purported) bounding-box width.
+
+Fri Feb 28 07:32:11 1992  Karl Berry  (karl at hayley)
+
+        * writefont.PS (bounding-boxes): add many accented characters to
+          the dictionary.
+
+        * writefont.PS (reencode-font): new routine; we now reencode the
+          font instead of keeping its original encoding, so we can get at
+          characters that Adobe did not encode.
+
+        * writefont.PS (baseline-adjustment, side-bearings): round, don't
+          take the ceiling.
+
+        * writefont.PS (parse-encoding-file): don't define charcode in the
+          encoding dictionary.
+
+        * writefont.PS (make-gsfont): if we end up with a device height of
+          zero, give an error message, instead of letting makeimagedevice
+          catch it with a rangecheck.
+
+Tue Feb 25 08:04:23 1992  Karl Berry  (karl at hayley)
+
+        * writefont.PS (make-image-device): update the call to
+          makeimagedevice for the new version of Ghostscript -- the
+          palette is specified differently.
+
+        * writefont.PS: read a .enc file, instead of duplicating the
+          information in dictionaries.
+        (parse-encoding-file, open-encoding-file, encoding-line): new routines.
+
+        * gsrenderfnt.PS: rename to `writefont.PS', so avoid dumb
+          autosaving errors.  Hmph.
+
+Tue Jul 30 13:18:20 1991  Karl Berry  (karl at ra.cs.umb.edu)
+
+        * Version 0.3.
+
+Sat Jul 27 17:47:52 1991  Karl Berry  (karl at ra.cs.umb.edu)
+
+        * GNUmakefile (all): put first in the list.

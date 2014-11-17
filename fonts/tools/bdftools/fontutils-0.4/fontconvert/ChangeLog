@@ -1,0 +1,397 @@
+Sat Mar 28 07:48:07 1992  Karl Berry  (karl at hayley)
+
+        * Version 0.4.
+
+        * Change copyright years to 1992 only.
+
+Wed Mar 25 08:30:41 1992  Karl Berry  (karl at hayley)
+
+        * random.c [!STDC_HEADERS]: declare rand, srand.
+        [!RAND_MAX]: define RAND_MAX.
+        (random_number): use rand instead of drand48.
+
+Mon Mar 23 14:59:49 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * output-tfm.c (tfm_start_output): only try to set design size to
+          user's if it's been set.
+
+Sun Mar 22 13:46:31 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * output_gf.[hc] (gf_output_char): added DESIGN_SIZE_RATIO.
+          Multiply char's TFM width by this.
+
+        * main.c [design_size_ratio]: added.
+
+        * main.c (main): if unset, set design_size to the bitmap one *after*
+          calling tfm_set_design_size, and then check that it's in range. 
+
+        * output_tfm.c (tfm_start_output): added USER_DESIGN_SIZE.
+          Call with `design_size' for USER_DESIGN_SIZE and the bitmap's
+          design size for DEFAULT_DESIGN_SIZE.
+          After saving value in new variable `tfm_file_design_size', zero
+          out tfm_info's design size if got it from a TFM file.  After
+          calling tfm_set_header, try setting design_size in following
+          order: to USER_DESIGN_SIZE, tfm_file_design_size, 
+          DEFAULT_DESIGN_SIZE.
+
+Sat Mar 21 11:53:04 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * output_tfm.c (tfm_start_output): set the fontsize if wasn't done
+          already as a TFM header option.
+          Move TFM_CHECK_DESIGNSIZE from main.
+          Set design size to the default only if it isn't set yet.
+
+Thu Mar 19 12:52:46 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * output_tfm.c (tfm_output_char): OR (not AND) the conditions for
+          recalculating dimensions and italic corrections.
+
+Wed Mar 18 12:20:38 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * output-tfm.c (tfm_do_chars_defaults): added.
+
+        * output-tfm.c (tfm_output_char): only recalculate dimensions and
+          initialize the italic correction if we've altered the bitmap;
+          otherwise, use that of the original TFM character.
+
+        * output-tfm.c (tfm_finish_output): moved tfm_close_input_file
+          from tfm_start_output to here.
+
+Tue Mar 17 16:01:09 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * main.c [USAGE], (read_command_line): added design-size option.
+          (global): moved `design_size' from main.
+          
+        * main.c (do_char): filter bitmap if `filter_passes' > 0.
+
+        * filter.[hc]: deleted `wants_filter'; default `filter_passes' to 0.
+
+        * main.c [USAGE], (read_command_line): deleted -filter option.
+
+        * output_tfm.c (tfm_start_ouput): fill in nonrequested TFM header
+          items and fontdimens with tfm_info from input_basename.tfm, if
+          it exists.  If it does, zero out the checksum.
+          
+
+Mon Mar 16 12:28:15 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * output_tfm.c (tfm_start_ouput): call tfm_set_header.
+          Set tfm_info's design size only if unset.
+
+        * main.c [USAGE], (read_command_line): added -tfm-header option.
+
+Sun Mar 15 16:49:32 1992  Karl Berry  (karl at hayley)
+
+        * main.c: doc fix.
+
+Sat Mar  7 13:11:59 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * main.c (main): fatal if wants_gf and want_tfm and the output
+          filename has a suffix.
+
+Sat Mar  7 09:52:57 1992  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (libraries): define again.
+        (files, headers, sources): replace with `c_and_h', etc.
+
+Thu Mar  5 17:50:04 1992  Karl Berry  (karl at claude.cs.umb.edu)
+
+        * main.c (do_char): do the baseline adjustment after
+          randomization, to preserve the baselines when randomizing.
+        * random.c (randomize_bitmap): return the number of rows/columns
+          added at each side of the bitmap.
+        * random.h (randomize_bitmap): change declaration.
+
+        * main.c (do_char): use puts instead of printf where possible.
+
+Wed Mar  4 15:31:23 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * output_tfm.c (tfm_start_output): changed OUTPUT_BASENAME to
+          OUTPUT_NAME and call make_output_filename to make pl_name.
+
+        * output_epst.c (epsf_start_output): changed global
+          `output_basename' to `output_name' and BASE_NAME to NAME.
+          Fatal if NAME has a suffix.
+
+        * output-gf.c (gf_start_output): changed `font_basename' to
+          `output_name' and call make_output_filename to make gf_name.
+
+Wed Mar  4 11:18:22 1992  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (libraries): remove.
+
+Mon Feb 10 16:09:25 1992  Karl Berry  (karl at claude.cs.umb.edu)
+
+        * random.c (random_threshold): new global to say how often to move a
+          pixel at all.
+        * random.h (random_threshold): declare it.
+        * main.c (read_command_line): new option `random-threshold.
+
+        * output-tfm.c (tfm_start_output): check for a TFM file if the
+          user hasn't given us a fontdimen string.  Take the input
+          filename to construct the TFM name.
+        * output-tfm.h (tfm_start_output): change declaration.
+        * main.c (main): change call.
+
+Mon Feb 10 10:04:00 1992  Karl Berry  (karl at hayley)
+
+        * main.c (do_split_char, do_char): free the bitmap here.
+        (main): not here.
+
+        * random.c (randomize_bitmap): fix algorithm for pixels moved more
+          than one.
+
+Thu Feb  6 18:26:11 1992  Karl Berry  (karl at claude.cs.umb.edu)
+
+        * random.c (enlarge_bitmap): return the result, of changing an arg.
+
+        * random.c: do not include global.h and <math.h>; they already are.
+
+Sat Feb  1 15:16:13 1992  Karl Berry  (karl at hayley)
+
+        * output-gf.c: include filename.h.
+
+Fri Jan 31 17:07:31 1992  Karl Berry  (karl at hayley)
+
+        * main.c (read_command_line): declare `option_index' (for new
+          getopt).
+
+Wed Jan 22 12:49:25 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * output-gf.c (gf_start_output): use make_prefix instead of concat
+          when prepending an `x' onto a filename.
+
+Thu Jan  9 08:30:12 1992  Karl Berry  (karl at hayley)
+
+        * main.c (scan_column_split): rename `scan_integer_list' to
+          `scan_unsigned_list'.
+
+        * *.c: do not include global.h.
+
+        * *.h: remove #pragma once.
+
+Wed Jan  8 15:28:56 1992  Karl Berry  (karl at hayley)
+
+        * update copyright messages.
+
+        * change `allocate to `xmalloc', `reallocate' to `xrealloc', and
+          `string_copy' to `strdup'.
+
+Mon Jan  6 16:49:26 1992  Karl Berry  (karl at claude.cs.umb.edu)
+
+        * main.c (USAGE): new option `randomize'.
+        (do_char): if set, call `randomize_bitmap'.
+        * random.[ch]: new files.
+        (random_max): new global.
+
+Thu Sep 12 10:24:14 1991  Karl Berry  (karl at hayley)
+
+        * main.c (read_command_line): new option, `-epsf'.
+        (main): initialize and finalize epsf output (if desired).
+        (do_char): output the characters in epsf (if desired).
+        * epsf-output.[ch]: new files.
+        * GNUmakefile (files): add `epsf-output'.
+
+        * output-tfm.c (tfm_output_char): set the character code.
+
+Tue Jul 30 13:17:47 1991  Karl Berry  (karl at ra.cs.umb.edu)
+
+        * Version 0.3.
+
+Mon Jun 17 15:21:49 1991  Karl Berry  (karl at hayley)
+
+        * output-tfm.c (tfm_output_char): change calls to `PIXELS_TO_POINTS'.
+
+Thu Jun  6 07:26:13 1991  Karl Berry  (karl at hayley)
+
+        * All files: change to version 2 of the GPL.
+
+Sun Mar 24 16:22:44 1991  Karl Berry  (karl at hayley)
+
+        * main.c (read_command_line): don't concatenate with the old
+          fontdimens, just assign `fontdimens' from the argument.
+        * output-tfm.c (fontdimens): move definition of global here from
+          `main.c'.
+        * output-tfm.h (fontdimens): declare it.
+
+Sun Mar 10 10:21:52 1991  Karl Berry  (karl at hayley)
+
+        * output-tfm.c (tfm_start_output): call `tfm_init_global_info',
+          and don't bother setting the checksum and coding scheme.
+
+Sat Mar  9 16:17:39 1991  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (files): add main, since we now have main.h.
+        * main.h: new file.
+        * main.c (read_command_line): new option `-fontdimens'.
+        * output-tfm.c (tfm_start_output): set the font parameters
+          according to -fontdimens.
+
+Thu Mar  7 07:32:21 1991  Karl Berry  (karl at hayley)
+
+        * Version 0.2.
+
+Tue Mar  5 15:19:04 1991  Karl Berry  (karl at hayley)
+
+        * main.c (scan_baseline_adjust): new routine.
+        (baseline_adjust): new global variable.
+        (read_command_line): new option `-baseline-adjust'.
+        (do_char): adjust the baselines of each character before we
+          process it.
+
+Mon Mar  4 14:42:30 1991  Karl Berry  (karl at hayley)
+
+        * main.c (do_char): don't do a character if we've already done it.
+
+        * main.c (fontname_list): new global variable to hold all the
+          fonts we deal with.
+        (read_command_line): new option `-concat-lists'.
+
+Tue Feb 26 06:45:57 1991  Karl Berry  (karl at hayley)
+
+        * output-tfm.c (tfm_finish_output): call `tfm_convert_pl' with the
+          argument `verbose'.
+
+Mon Feb 25 13:30:57 1991  Karl Berry  (karl at hayley)
+
+        * output-gf.c: use `gf_...' instead of `..._gf_...'.
+
+        * output-tfm.c: use `tfm_...' instead of `..._tfm_...'.
+
+        * output-gf.c: include file-misc.h.
+
+Sun Feb 17 09:30:23 1991  Karl Berry  (karl at hayley)
+
+        * *.c: include config.h.
+
+Sun Jan 13 16:49:03 1991  Karl Berry  (karl at hayley)
+
+        * main.c (read_command_line): set `explicit_dpi' via the option
+          table. 
+
+Mon Jan  7 15:09:15 1991  Karl Berry  (karl at hayley)
+
+        * main.c: include file-misc.h.
+
+Sun Nov  4 09:23:28 1990  Karl Berry  (karl at hayley)
+
+        * filter.c (read_command_line): use atou to do -filter-size.
+
+        * These changes suggested by rich@rice.edu:
+        * filter.h (filter_passes): declare it.
+        * filter.c (filter_passes): new variable.
+        (filter_bitmap): loop through the number of passes.
+        (filter_once): new routine.
+        * main.c (read_command_line): new option, `filter-passes'.
+        * README: warn that filtering rounds off corners.
+
+Wed Oct 24 14:58:15 1990  Karl Berry  (karl at aten)
+
+        * Version 0.1.
+
+Sun Oct 14 07:05:51 1990  Karl Berry  (karl at hayley)
+
+        * filter.c (filter_bitmap): don't invert the pixel, set it to the
+          right intensity.
+
+Tue Oct  9 09:43:03 1990  Karl Berry  (karl at hayley)
+
+        * main.c (read_command_line): new option, -output-file.
+        (output_name): new global.
+        (main): use it, if it's set.
+
+        * main.c (do_split_char, do_char, scan_column_split): new
+        routines.
+        (read_command_line): new argument, -column-split.
+        (main): split each character at given columns, if requested.
+
+Mon Oct  8 05:55:50 1990  Karl Berry  (karl at hayley)
+
+        * main.c: include cmdline.h.
+
+        * main.c (main): filter the character, if desired.
+        (read_command_line): new options -filter, -filter-size,
+        -filter-threshold.
+        * filter.h, filter.c: new files.
+        * GNUmakefile (files): add filter.
+        (This stuff contributed by rich@rice.edu.)
+
+Tue Oct  2 17:25:22 1990  Karl Berry  (karl at hayley)
+
+        * output-gf.c (gf_start_output): assign to gf_name after the
+          warning, not before.
+
+Sat Sep 29 07:10:11 1990  Karl Berry  (karl at hayley)
+
+        * output-gf.c (gf_start_output): announce it to the user when we
+        change the output filename.
+
+        * main.c (main): use atou (dpi), not atoi.
+
+Fri Sep 28 13:47:34 1990  Karl Berry  (karl at hayley)
+
+        * main.c (read_command_line): new argument, `omit'.
+        (scan_remap_list): don't make a target character code of -1 mean
+        omit the original.
+        (scan_omit_list): new routine.
+
+Fri Sep 21 11:32:45 1990  Karl Berry  (karl at hayley)
+
+        * main.c (read_command_line): return NULL at the end.
+
+Fri Sep 14 12:01:26 1990  Karl Berry  (karl at hayley)
+
+        * main.c: include "getopt.h", not <getopt.h>.
+
+Thu Sep 13 10:58:45 1990  Karl Berry  (karl at hayley)
+
+        * main.c (main): report omitted characters.
+
+Tue Sep 11 07:02:50 1990  Karl Berry  (karl at hayley)
+
+        * main.c (scan_remap_list): set `omit' if a target ``character
+        code'' is -1.  Also, parse the character codes correctly.
+        (omit): new global variable.
+        (main): if `omit' is true, skip the character.
+
+Sat Sep  8 10:58:03 1990  Karl Berry  (karl at hayley)
+
+        * main.c (scan_remap_list): use PARSE_CHAR_CODE.
+
+        * main.c (read_command_line): use GET_RANGE.
+
+Thu Sep  6 06:42:24 1990  Karl Berry  (karl at hayley)
+
+        * main.c (scan_remap_list): new routine.
+        (read_command_line): new option, -remap.
+        (translate): new global to remap character codes.
+        (main): map each character as we read it.
+
+Wed Sep  5 06:22:18 1990  Karl Berry  (karl at hayley)
+
+        * output-gf.c (gf_start_output): don't overwrite the input file.
+        * main.c (main): pass the filename of the input font.
+
+        * main.c (main): output a GF file if asked.
+        (read_command_line): new option, -gf.
+        * output-gf.[ch]: new files.
+        * GNUmakefile (files): add them.
+
+        * main.c (main): free the bitmap for each character.  */
+
+        * main.c (main): output a TFM file if asked.
+        (read_command_line): new option, -tfm.
+        * output-tfm.[ch]: new files.
+        * GNUmakefile (files): add them.
+
+Sat Sep  1 09:27:14 1990  Karl Berry  (karl at hayley)
+
+        * main.c (main): output a newline at the end of the program if
+        warranted.
+
+        * main.c (main): use `get_bitmap_font' instead of `get_font'.
+
+Sat Aug 25 13:52:43 1990  Karl Berry  (karl at hayley)
+
+        * main.c (main): print a newline before each character output as
+        text.

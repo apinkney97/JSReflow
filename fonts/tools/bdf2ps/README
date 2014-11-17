@@ -1,0 +1,37 @@
+--------------------------------------------------------------------
+Copyright (C) 1990 Mark Leisher.
+
+Author: Mark Leisher (mleisher@nmsu.edu)
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 1, or (at your option)
+any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+A copy of the GNU General Public License can be obtained from this
+program's author (send electronic mail to mleisher@nmsu.edu) or from
+the Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA
+02139, USA.
+--------------------------------------------------------------------
+
+This program makes a Postscript font out from a BDF font.  It will not
+work with large, two byte BDF fonts such as Chinese or Japanese BDF
+fonts.  It also ignores any entries that have an ENCODING value less
+than zero.
+
+You might want to tune some of the Postscript parameters by hand to
+get the output closer to what you want.  There is a short description
+of this in the man page.
+
+This program depends heavily on the SWIDTH entry for each character.
+Please see the "Bitmaps Distribution Format 2.1" document for details
+on SWIDTH.  You can also send me email for a copy of this document.
+
+Please send bug reports, enhancements, etc. to:
+Internet: mleisher@nmsu.edu
+Bitnet  : mleisher@nmsu.bitnet

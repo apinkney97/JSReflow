@@ -1,0 +1,634 @@
+Sat Mar 28 07:48:43 1992  Karl Berry  (karl at hayley)
+
+        * Version 0.4.
+
+        * Change copyright years to 1992 only.
+
+Mon Mar  9 16:46:10 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * main.c (main): move setting of dpi to above (and out of)
+          do_strips test.
+
+        * main.c (main): set output_name_suffix with static strings
+          and xmalloc dpi and design_size_str.
+
+        * main.c (main): if output_name has no suffix, append either
+          output_name_suffix or design_size to its stem before appending
+          a suffix.
+
+Sat Mar  7 09:55:42 1992  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (libraries): define again.
+        (files, headers, sources): replace with `c_and_h', etc.
+
+Thu Mar  5 06:47:26 1992  Karl Berry  (karl at hayley)
+
+        * main.c (output_filename): rename to `output_name', and remove
+          the other `output_name' declaration.
+
+Wed Mar  4 17:21:32 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * main.c (main) changed `output_basename' to `output_name'.
+          Deleted add_suffix and add_design_size.
+          Added dpi, design_size_str, and output_name_suffix.
+          Use make_output_filename to check if output name has a suffix.
+          If output_name not given and not doing strips, set design_size_str.
+          If doing strips, set output_name_suffix to "sp".
+          Always set dpi.
+
+Mon Mar  2 12:15:52 1992  Karl Berry  (karl at hayley)
+
+        * main.c (main): decrease nchars_per_line to 11.
+
+Sun Mar  1 13:03:23 1992  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (files): remove bb-outline.
+
+        * GNUmakefile (need_pbm_library): define.
+        (sources): remove the PBM stuff.
+
+Fri Feb 28 07:53:09 1992  Karl Berry  (karl at hayley)
+
+        * extract.c (image_row_transitions): new routine.
+        (some_black_to_all_white_row): call it after getting the image row.
+        (append_next_image_row): call it after appending.
+        (get_image_row): do not compute the transitions here.
+
+        * main.c (bitmap_to_gf_char): the GF min_row is the depth, the GF
+          max_row is the height; we had it the other way around.  Also,
+          `row_baseline' is one-origin, but char rows are 0-origin.
+
+Tue Feb 25 14:40:54 1992  Karl Berry  (karl at hayley)
+
+        * main.c (main): decrease number of chars reported without
+          guidelines to 12.
+
+        * input-pbm.c (pbm_get_scanline): declare the test character for
+          EOF as int, not char.  Also, print the scanlines if
+          trace_scanlines is set.
+        * main.c (trace_scanlines): new global.
+          (read_command_line): new option.
+
+        * bitmap2.c (bitmap_vconcat): put one blank row between the
+          bitmaps, to compensate for what some_black... removed.
+
+        * extract.c (get_image_row): don't keep leading white rows if
+          there weren't any; always append scanline, even if there were.
+
+Fri Jan 31 17:08:38 1992  Karl Berry  (karl at hayley)
+
+        * main.c (read_command_line): declare `option_index' (for new
+          getopt).
+
+Tue Jan 21 11:47:26 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * main.c (main): wasn't putting the suffix on the gf name when
+          gave an output filename without a suffix because was finding the
+          dot in the pathname `../fonts'.
+
+        * main.c (bitmap_to_gf_char): were switching the minimum and
+          maximum rows when assigning to the gf char.
+
+        * main.c (main): malloc gf_name more precisely.
+
+        * main.c (bitmap_to_gf_char): fixed calculation of gf char's rows.
+          (main): changed how build the gf output filename: if the user
+          specifies an output file, don't ever add on a design size and don't
+          add a suffix if there's one already.
+
+        * main.c (bitmap_to_gf_char): now print gf character's (baseline-
+          adjusted) row instead of the bounding box's (unadjusted) ones.
+
+Mon Jan 20 14:46:16 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * main.c (main): added variable `output_basename' so user could
+          specify an output file basename.  
+          (read_command_line): Added `output-file' option.
+
+Tue Jan 14 13:14:46 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * main.c (get_image_info): when call libfile_start with
+          info_filename, specify "ifi" as the (now-default) suffix.
+
+        * main.c [USAGE] (info-file): use <filename>.ifi if <filename>
+          doesn't have a dotted suffix; otherwise use <filename>.
+
+Thu Jan  9 08:29:52 1992  Karl Berry  (karl at hayley)
+
+        * main.c (read_command_line): rename `scan_integer_list' to
+          `scan_unsigned_list'.
+
+        * *.c: do not include global.h.
+
+        * *.h: remove #pragma once.
+
+Wed Jan  8 15:28:00 1992  Karl Berry  (karl at hayley)
+
+        * update copyright messages.
+
+        * change `allocate to `xmalloc', `reallocate' to `xrealloc', and
+          `string_copy' to `strdup'.
+
+Tue Jul 30 13:18:48 1991  Karl Berry  (karl at ra.cs.umb.edu)
+
+        * Version 0.3.
+
+Fri Jul 26 07:02:28 1991  Karl Berry  (karl at hayley)
+
+        * main.c (get_image_info): read the left and side bearings from
+          the IFI file, if present.
+        (bitmap_to_gf_char): use these numbers.
+        * image-char.h (image_char_type): new members `lsb' and `rsb'.
+        (IMAGE_CHAR_{L,R}SB): new accessor macros.
+
+Wed Jul 24 06:07:11 1991  Karl Berry  (karl at hayley)
+
+        * bitmap2.c (bitmap_concat): the height of the result is the
+          height of one, not twice that.
+
+        * main.c (do_image_line): rename `concat_bitmaps' to
+          `bitmap_concat'.
+        * GNUmakefile (files): new file `bitmap2'.
+
+        * main.c (do_image_line): return a boolean saying if we need
+          another image row.
+        (main): if `do_image_line' fails, read more of the image.
+        * extract.h (append_next_image_row): declare new routine.
+        * extract.c (append_next_image_row): define it.
+        (get_image_row): new routine.
+        (some_black_to_all_white_row): call `get_image_row'.
+
+        * make-gsfont.ps (octal-value): prepend 0 to the character code.
+
+        * extract.c (some_black_to_all_white_row): use xcalloc to initialize
+          `or_of_all', not allocate.  We need it to be all zeroes
+          initially.
+
+        * main.c, version.c: change `imgtogf' to `imagetofont'.
+
+        * make-gsfont.ps: remove all the if-verbose's.
+
+        * main.c: doc fix.
+
+Mon Jul 22 07:54:42 1991  Karl Berry  (karl at hayley)
+
+        * make-gsfont.ps (output-encoding): set /output-encoding to the
+          dictionary.
+
+        * main.c: output ``imagetofont'' as our name in the GF file header,
+          instead of ``IMGtoGF''.
+
+        * make-gsfont.ps (print-char-dimensions-if-verbose): lose the
+          `-if-verbose'.
+
+        * make-gsfont.ps (octal-value): `get' the character name, don't
+          `load' it, so we find it in the right dictionary.
+
+        * libpbm1.c: declare parms, external functions to avoid warnings.
+
+Sat Jun 15 09:50:46 1991  Karl Berry  (karl at hayley)
+
+        * input-*.c: change `checked_' to `x'.
+
+Thu Jun  6 07:29:06 1991  Karl Berry  (karl at hayley)
+
+        * All files: change to version 2 of the GPL.
+
+Sat Jun  1 15:18:11 1991  Kathy Hargreaves  (kathy at hayley)
+
+        * main.c (get_image_info): Now build an info filename if the
+          variable info_filename *is* NULL, not when it's not.
+          (USAGE): Deleted that resolution was set only for pbm input.
+          Stated that input-format is required and shortened comment.
+
+Fri May 31 14:30:01 1991  Kathy Hargreaves  (kathy at hayley)
+
+        * imgtogf: Moved directory to `imagetofont'.
+
+        * GNUmakefile: Changed program name from `imgtogf' to `imagetofont'.
+    
+        * main.c (get_image_info): Make default image info file be
+          <fontname>.ifi instead of imginf.<fontname>.
+
+        * main.[hc], input-*.[hc]: *_get_header now don't return a
+          header but rather modify the global header in main.c.  Changed
+          all references to `[img, pbm]_header->' to `image_header.'.
+           
+        * main.c, image-char.[hc]: Replaced all instances of `img_char'
+          with `image_char'.
+
+        * image-char.[hc]: Moved from img-char.[hc].
+
+        * main.h (image_header): Made this visible to the outside.
+
+        * input-[pbm, img].c ([pbm, img]_get_header): Set h to
+          image_header in main.c. #include main.h.
+
+        * main.c (read_command_line): Cast the assignment to
+          image_header.hres to type two_bytes.
+         
+        * image-header.h, input-*.[hc], main.[hc]: Changed `img-header.h'
+          to `image-header.h'.
+
+        * main.c: Replaced all instances of `img_header*' with
+          `image_header*'.  Moved `img_' and `pbm_' to the front of the
+          function names.
+
+        * img-header.h: Moved to image_header.h and replaced all
+          instances of `img_header*' with `image_header*'.
+
+        * input-img.[hc] (*_img_*): Moved `img_' to the front of the
+          variable names.  Replaced instances of `img_header_type' with
+          `image_header_type'. 
+
+        * input-pbm.[hc] (*_pbm_*): Moved `pbm_' to the front of the
+          variable names.
+
+        * extract.c, strips.c: (ptr_get_scanline): Removed `ptr_' from in
+          front of this function's name and replaced it with `image'.
+          Replaced instances of `img_header*' with `image_header*', if any.
+
+        * main.h (ptr_open_input_file, ptr_close_input_file, ptr_get_header,
+          ptr_get_scanline): Removed `ptr_' from the front of all these
+          names and replaced it with `image'.  Replaced `img_header_type'
+          with `image_header_type'.
+
+        * main.c (ptr_open_input_file, ptr_close_input_file, ptr_get_header,
+          ptr_get_scanline): Moved and set all to NULL.
+          Removed `ptr_' from the front of all these names and replaced it
+          with `image'.
+          (read_command_line): Remove "img-input-format" from option
+          structure. 
+          Removed variable need_resolutions, as don't need it.
+          Force them to specify the input format on the command line
+          rather than having a default.
+          
+Wed May 29 16:19:57 1991  Kathy Hargreaves  (kathy at hayley)
+
+        * input-pbm.c (line_in_bytes): Deleted this global variable, as
+          don't need it.  (pbm_readpbmrow reads right into line_in_bits in
+          get_pbm_scanline.)
+
+        * pbm.h: Took out #include for types.h.
+
+        * input-pbm.c (get_pbm_scanline): Check if at EOF before calling
+          pbm_readpbmrow. 
+
+        * libpbm2.c (pbm_readpbmrow): Restored to original; can test if at
+          EOF in the wrapper get_pbm_scanline.
+          Took out #include for types.h.
+
+        * input-pbm.c (get_pbm_scanline): Hooked up to libpbm2.c routine.
+    
+        * main.c (read_command_line): Combined some options and changed
+          their names and their input.
+          Make input-format take an argument.
+
+Mon May 27 14:52:45 1991  Kathy Hargreaves  (kathy at hayley)
+
+        * main.c (read_commandline): If both resolutions are missing and
+          are required on the commandline, print that they both are, not
+          just that the horizontal one is.
+
+        * bb-outline.c (is_outline_edge): Changed VALID_LOCATION to
+          BITMAP_VALID_PIXEL. 
+          
+        * pbmplus.h: Commented out malloc, etc. declarations.
+
+        * libpbm2.c (pbmreadpbmrow): Make it return a boolean instead of a
+          void, so will fit into our code.
+          Make it return false instead of an error message.
+
+        * pbm.h (top): pbmplus.h is in the current directory, so take out
+          the `../' before it in the #include.
+          (pbmreadpbmrow): Make it return a boolean instead of a void, so
+          will fit into our code.
+
+        * extract.c (top): Now #include input-pbm.h.
+          (some_black_to_all_white_row): Changed all instances of
+          get_img_scanline to get_scanline.
+          
+        * input-img.c (top): Now #include img-header.h.
+          (get_img_header): Got rid of variable format, as now put that in
+          the header.
+
+        * main.c: (open_input_file, close_input_file, get_header, 
+          get_scanline): Declared these pointers to functions so could set
+          them to a set of routines belonging to the type of input we're
+          using.  Set them to .pbm input format routines as a default.
+          (font_name_extension): Added this static variable so could set
+          it when get read the input format on the command line.  Set to
+          `.pbm' by default.
+          (main): Initialize img_header to all zeros so will know if the
+          user set them using the command line.
+          Changed call to open_img_input_file to open_input_file and
+          concat font_name_extension instead of ".img" for the argument.
+          Changed some comments.
+          Changed the call to get_img_header to get_header.
+          Changed the call to close_img_input_file to close_input_file.
+          (USAGE): Added horz-resolution, img-input-format,
+          pbm-input-format, and vert-resolution.
+          (read_command_line): Added boolean variable need_resolutions to
+          keep track of whether or not the user needs to input the
+          horizontal and vertical resolutions on the command line.
+          Added horz-resolution, img-input-format, pbm-input-format, and
+          vert-resolution to the option variable long_options.
+          If the argument is horz-resolution or vert-resolution, then set
+          the appropriate field in the header.
+          If the argument if img-input-format or pbm-input-format, the set
+          the input function pointers in main to the appropriate set of
+          functions that belong to the input format.  If the argument is
+          the former, then set needs_resolution to false; if it's the latter,
+          set it to true. 
+          If the user wants .pbm input format, then check that the header's 
+          resolutions are set; if not, issue an error message and exit. 
+          
+        * main.h (open_input_file, close_input_file, get_header, get_scanline):
+          Added these function pointer declarations so extract.c and strips.c
+          could use them.
+
+        * strips.c (top): Now #include input-pbm.h.
+          (write_chars_as_strips): Changed the call to get_img_scanline to
+          a call to get_scanline.
+
+Sat Apr 13 17:13:51 1991  Karl Berry  (karl at hayley)
+
+        * main.c (get_image_info): use the libfile routines to read the
+          image info files.
+
+        * main.c, input-img.c: new includes from the library
+          rearrangements.
+
+Mon Feb 25 16:32:45 1991  Karl Berry  (karl at hayley)
+
+        * main.c, strips.c: use `gf_...' instead of `..._gf_...'.
+
+Sun Feb 17 09:39:20 1991  Karl Berry  (karl at hayley)
+
+        * *.c: include config.h.
+
+Tue Jan 22 15:43:19 1991  Karl Berry  (karl at hayley)
+
+        * extract.[ch] (extract_subimage): move to kbase.
+
+Thu Jan 17 10:32:09 1991  Karl Berry  (karl at hayley)
+
+        * main.c (main): don't put the day of the week in the font comment.
+
+Tue Oct  9 09:07:02 1990  Karl Berry  (karl at hayley)
+
+        * main.c (scan_baseline_list): move to kbase.
+        (baseline_list): make a vector of ints, not unsigneds.
+        (main): test for the end of the baseline list being -1, not 0.
+
+Mon Oct  8 16:37:07 1990  Karl Berry  (karl at hayley)
+
+        * main.c: #include cmdline.h.
+        (read_command_line): call FINISH_COMMAND_LINE.
+
+Sun Sep 30 09:15:25 1990  Karl Berry  (karl at hayley)
+
+        * main.c (do_image_line): don't give a report when we read part of
+        the line, after all.
+
+Fri Sep 28 13:47:15 1990  Karl Berry  (karl at hayley)
+
+        * main.c (scan_integer_list): use strtok, instead of doing the
+        work ourselves.
+
+Sat Sep 22 06:16:49 1990  Karl Berry  (karl at hayley)
+
+        * main.c (output_chars): don't increment `current_char' if we've
+        already seen the box.
+
+Fri Sep 21 08:40:49 1990  Karl Berry  (karl at hayley)
+
+        * img-char.h (img_char_type): new element, `alternating'.
+        (IMG_CHAR_BB_ALTERNATING): macro to access it.
+        * main.c (get_image_info): if the bb count is negative, set
+        `alternating' (and make it positive).
+        (output_chars): handle the bounding boxes alternating.
+
+        * main.c (do_image_line): give a progress report when we read part
+        of the line.
+
+        * main.c (read_command_line): return NULL at the end; the POSIX
+        include files don't declare `exit' as volatile, more's the pity.
+        * bb-output.c (is_outline_edge): return false at the end, for the
+        same reason.
+
+Sun Sep 16 11:13:43 1990  Karl Berry  (karl at hayley)
+
+        * main.c: include "getopt.h" instead of <getopt.h>.
+
+        * main.c (read_command_line): change call of PARSE_CHAR_CODE to
+        xparse_char_code.
+
+        * main.c (main): make the default info filename `imginf.<name>',
+        not `imginfo.<name>'.
+
+Sat Sep  8 10:06:19 1990  Karl Berry  (karl at hayley)
+
+        * main.c (read_command_line): remove any suffix on the font name
+        before returning it.
+
+        * main.c (read_command_line): use GET_RANGE.
+
+        * main.c (get_image_info): use PARSE_CHAR_CODE to get the
+        character code from the file.
+
+Thu Sep  6 06:16:29 1990  Karl Berry  (karl at hayley)
+
+        * main.c (scan_integer_list): doc fix.
+
+Wed Sep  5 06:19:53 1990  Karl Berry  (karl at hayley)
+
+        * main.c (USAGE): doc fix in -range.
+
+Tue Sep  4 09:33:49 1990  Karl Berry  (karl at hayley)
+
+        * main.c (do_image_line): pass the current character to
+        output_chars, not the current box count.
+
+        * extract.c (REPORT_SCANLINE): output to stderr instead of stdout.
+
+        * main.c (get_image_info): always assign to the character code and
+        omit fields.
+
+Mon Sep  3 16:57:02 1990  Karl Berry  (karl at hayley)
+
+        * main.c (get_image_info): use NULL in subsequent calls to strtok.
+
+        * main.c (get_encoding): replace with get_image_info; change
+        callers.
+        * img-char.[ch]: new files to support the data structure.
+
+Thu Aug 16 08:00:19 1990  Karl Berry  (karl at hayley)
+
+        * bb-outline.c (free_bounding_box_list): check if the list is
+        allocated before freeing it.
+
+        * main.c (do_image_line): only say that we've read too many boxes
+        once.
+
+Wed Aug  8 08:06:53 1990  Karl Berry  (karl at hayley)
+
+        * main.c (read_command_line): change `encoding-file' to
+        `info-file'.
+
+Tue Aug  7 08:53:13 1990  Karl Berry  (karl at hayley)
+
+        * main.c (main): use the basename of the image filename to
+        construct the output name, instead of the full name.
+
+        * main.c (USAGE): explain `-baselines' better.
+
+Thu Jul 26 06:54:56 1990  Karl Berry  (karl at hayley)
+
+        * extract.c (find_transitions): move to kbase.
+
+Tue Jul 24 13:09:38 1990  Karl Berry  (karl at hayley)
+
+        * main.c: don't include time.h.
+
+Thu Jul 19 15:22:29 1990  Karl Berry  (karl at aten)
+
+        * main.c (main): don't dereference baseline_list if it's null.
+
+Mon Jul 16 08:56:41 1990  Karl Berry  (karl at hayley)
+
+        * main.c (clean_bitmap): only print the `. ' if we're printing the
+        cleaning info.
+
+Sun Jul 15 08:27:52 1990  Karl Berry  (karl at hayley)
+
+        * bb-outline.c (append_bounding_box_list): don't change anything
+        if we're appending a list of length zero.
+
+Fri Jul 13 11:35:15 1990  Karl Berry  (karl at hayley)
+
+        * main.c (clean_bitmap): also potentially clean bounding boxes on
+        the bottom edge.
+
+        * main.c (SET_EDGES): make coordinates relative to the bitmap of
+        the character.
+
+        * main.c (clean_bitmap): only test the gray value for bounding
+        boxes that are on the edge.
+
+        * main.c (output_chars): return the number of characters actually
+        output, omitting the ones out of range.
+        
+        * main.c (clean_bitmap): print gray values for the bounding boxes
+        if requested.
+        (read_command_line): new option, `print_clean_info'.
+
+Thu Jul 12 06:08:33 1990  Karl Berry  (karl at hayley)
+
+        * extract.c (some_black_to_all_white_row): don't output a newline
+        after reading the scanlines. 
+
+        * main.h: new file.
+        * extract.c: include it, remove declaration of verbose.
+
+        * strips.[ch]: new files.
+        * main.c (main): cut the image into strips if requested.
+        (read_command_line): new option `strips'.
+
+        * extract.c (find_transitions): new routine.
+        (some_black_to_all_white_row): call it, at the end, with a new
+        variable that is the logical or of all the rows we read.
+        (some_black_to_all_white_column, found_color_in_column): these
+        routines aren't needed any more.
+        * main.c (do_image_line): use the transition vector to set
+        `char_bitmap'.
+
+        * main.c (scan_integer_list): increment length after checking the
+        exit condition.
+
+        * main.c (do_image_line): new routine, consisting of a lot of the
+        main loop.
+
+        * main.c (bitmap_to_gf_char): determine the baseline.
+        (read_command_line): new option `baselines' to set the baselines.
+        (scan_integer_list): new routine.
+
+        * extract.c (found_color_in_column): start halfway down the
+        bitmap.
+
+Wed Jul 11 06:19:51 1990  Karl Berry  (karl at hayley)
+
+        * main.c (bitmap_to_gf_char): take another argument, the character
+        code, to consolidate where the GF char is set.
+
+        * main.c (nchars_per_line): new static to say how many characters
+        we can report on per line; different for `print_guidelines' being
+        set and not set.
+
+        * main.c (print_guidelines): new global.
+        (read_command_line): new option to set it.
+        (bitmap_to_gf_char): print the row numbers if it's set.
+
+        * bb-outline.c (find_outline_bbs): take two additional arguments:
+        column numbers between which we don't look.
+        * bb-outline.h (find_outline_bbs): change the declaration.
+        * main.c (main), (clean_bitmap): change the calls.
+
+        * bb-outline.c (append_bounding_box_list): reallocate based on the
+        element size, not the list size.
+
+        * bb-outline.c (set_bounding_box_list_offset): replace by
+        `offset_bounding_box_list'.
+        (append_bb): don't offset the bounding boxes as they come in.
+        * bb-outline.h (set_bounding_box_list_offset): likewise.
+        * main.c (main): change call.
+
+        * main.c (output_chars): set char_code to *next_code at the bottom
+        of the loop, and increment next_code.
+
+Tue Jul 10 06:10:05 1990  Karl Berry  (karl at hayley)
+
+        * bb-outline.c (set_bounding_box_list_offset): new routine.
+        (append_bb): move the bounding box to the right by the offset.
+        * bb-outline.h (set_bounding_box_list_offset): declare it.
+
+        * main.c (get_char_code): rename to get_encoding, and read the
+        whole file.
+
+        * bb-outline.h (init_bounding_box_list, append_bounding_box_list):
+        declare new routines.
+        bb-outline.c (same): define them.
+
+Mon Jul  9 08:10:20 1990  Karl Berry  (karl at hayley)
+
+        * main.c (main): don't split each line at white columns.
+
+        * extract.c (clean_bitmap): set verbose to false before calling
+        find_outline_bbs.
+
+        * main.c (get_char_code): make sure we actually find a character
+        code.
+
+        * main.c (output_chars): don't extract or clean anything if the
+        character isn't within range.
+
+        * extract.c (REPORT_SCANLINE): report every 100 scanlines.
+
+        * main.c (output_chars): only give the status report if we
+        actually output the character.
+
+Sat Jul  7 10:43:18 1990  Karl Berry  (karl at hayley)
+
+        * bb-outline.c (append_bb): changed MAX_ROW, instead of MAX_COL.
+
+        * main.c (clean_bitmap): new routine.
+        (output_gf_chars): call it.
+        * bb-outline.c (find_outline_bbs): take an additional parameter to
+        determine whether to look for inside outlines or not.
+
+        * extract.c (REPORT_SCANLINE): report every 50 scanlines, instead
+        of every 10.
+        
+        * bb-outline.c (find_outline_bbs): look for outlines in
+        column-major order, instead of row-major.
+

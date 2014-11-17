@@ -1,0 +1,39 @@
+This is the GNU font manipulation utilities distribution.
+
+Send suggestions and bug reports for this software to 
+bug-gnu-utils@prep.ai.mit.edu or karl@cs.umb.edu.
+
+See `INSTALL' for installation instructions.
+See `doc/*' for some random documentation.
+See `README' in each directory for program- or library-specific information.
+See `COPYING*' for copying permissions; these programs are free software.
+See `ChangeLog' or `Makefile.in' for the version number.
+
+Here is a brief description of the various programs, in the order in
+which you might want to use them:
+* imagetofont reads an image in PBM or IMG format, and writes
+  a bitmap font in GF format.
+* charspace reads a bitmap font and tries to figure out reasonable side
+  bearing values; it outputs a revised bitmap font and a font metric file.
+* xbfe is a hand-editor for bitmap fonts which runs under X11.
+* limn reads a bitmap font and fits splines to the bitmaps; outputs a
+  BZR file. 
+* bzrto reads a BZR file and outputs it in Metafont or PostScript.
+
+We've also written the following:
+* gsrenderfont uses Ghostscript to render a PostScript font at a
+  particular point size and resolution into a PBM file, then uses
+  imagetofont to make a bitmap font out of it.
+* fontconvert reads one or more bitmap font(s) and can rearrange the
+  characters, filter them, omit them, split them into pieces, combine
+  them, etc., etc.  It can also output a TFM file.
+* imgrotate rotates or flips an IMG file.
+
+Some of this software was originally written as part of the research
+project in digital typography at the University of Massachusetts at
+Boston, directed by Robert A. Morris.  UMB has also been kind enough to
+let us to continue to use their computers, despite our completing the
+Master's program there.
+
+karl@cs.umb.edu		(Karl Berry)
+letters@cs.umb.edu	(Kathryn Hargreaves)

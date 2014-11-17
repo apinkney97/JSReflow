@@ -1,0 +1,16 @@
+See `doc/prereqs' for what you need to have installed before you compile
+or use these programs.
+
+Here's what to do:
+
+* `./configure'.  This tries to figure out system dependencies.
+
+* if necessary, edit the paths or other definitions in `Makefile'.
+
+* `make' (GNU make, that is).
+
+* `make install'.
+
+If you encounter problems anywhere along the line, let us know.
+See doc/bugs for a skeleton bug report.
+See doc/problems for known problems.

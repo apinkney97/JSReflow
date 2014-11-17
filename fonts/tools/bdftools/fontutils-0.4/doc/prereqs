@@ -1,0 +1,15 @@
+To compile these programs, you must have the following installed:
+
+* GCC, version 1.40 or greater.
+* GNU make; probably any version > 3.50 or so will do.
+
+To compile and use the programs which use X, you also need:
+* X11R5 or R5 unshared libraries and headers.
+* An X11 server.
+
+To use gsrenderfont, you will need Ghostscript, version 2.4 or greater.
+
+To make any use of the fonts, you will probably need TeX, Metafont and
+their friends, especially pltotf and gftopk.
+
+See `doc/archives' for information on how to get all these things.

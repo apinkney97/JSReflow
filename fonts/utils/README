@@ -1,0 +1,17 @@
+/ep/archive/fonts/utils/fontsinmem.ps
+	lpr this to the printer to generate a sample of all fonts in the
+	printer's memory
+
+/ep/archive/fonts/utils/testall.ps
+	this samples all fonts in memory and on disk, but only works on level
+	2 PostScript printers
+
+/ep/archive/fonts/utils/lev1testall.ps
+	this attempts to do the above for level 1 printers but will probably
+	run out of memory after two or three pages
+
+/ep/archive/fonts/utils/listallfiles.ps
+			listfontfiles.ps
+	these do as their names suggest, just listing the names of the files
+	on the disk, plus file lengths and total length
+

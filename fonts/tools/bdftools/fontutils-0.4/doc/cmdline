@@ -1,0 +1,13 @@
+The programs here do not have counterparts on Unix systems.  Therefore,
+I didn't have to conform to an existing interface; therefore, the
+programs use `getopt_long_only' to parse the command lines.  As a
+result, you can use `-', `--', or `+' to start an option; you can use
+unambiguous abbreviations for option names; you can separate option
+names and values with either `=' or ` '; you can use filenames that
+would otherwise look like options by putting them after an option `--'.
+
+All the programs have an option `-help' (or `+help', or `--help'), which
+prints all the possible options.  I haven't written any ``real''
+documentation.  To quote the X documentation, paraphrasing George Lucas,
+``Use the source, Luke''.
+

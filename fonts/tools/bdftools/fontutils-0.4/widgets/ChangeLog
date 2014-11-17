@@ -1,0 +1,297 @@
+Thu Mar 26 15:27:24 1992  Karl Berry  (karl at claude.cs.umb.edu)
+
+        * Label.c (SetTextWidthAndHeight): use strchr, not index.
+
+        * most files: cast specific widgets to (Widget) to avoid warnings.
+
+Tue Mar 17 08:07:56 1992  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (c_only): remove Box.
+
+Sat Mar  7 14:09:37 1992  Karl Berry  (karl at fosse)
+
+        * Item.c (accept_value): declare as static.
+
+Sat Mar  7 09:51:18 1992  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (files, headers, sources): replace with `c_and_h', etc.
+
+Wed Mar  4 11:25:19 1992  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (library): rename to `Widgets'.
+
+Tue Jan 14 15:58:13 1992  Karl Berry  (karl at hayley)
+
+        * Bitmap.c (bitmap_to_pixmap): remove the code that handled the
+          case of an odd number of transitions; bitmap_find_transitions
+          now adds an implicit transition to white at the end of each row.
+
+Thu Jan  9 11:21:13 1992  Karl Berry  (karl at hayley)
+
+        * *.c: do not include global.h.
+
+Wed Jan  8 15:28:22 1992  Karl Berry  (karl at hayley)
+
+        * update copyright messages.
+
+        * change `allocate to `xmalloc', `reallocate' to `xrealloc', and
+          `string_copy' to `strdup'.
+
+Tue Oct  1 14:59:02 1991  Karl Berry  (karl at hayley)
+
+        * Bitmap.c (param_value): new routine.
+        (accept_paste): allow flipping the selection either vertically or
+          horizontally or both.
+
+Tue Sep 24 10:56:07 1991  Karl Berry  (karl at hayley)
+
+        * Label.c (SetTextWidthAndHeight): set label_x and label_y to 
+
+        * Item.c (accept_value): highlight the widget while we're
+          performing the action.
+        (item_initialize): set normal and inverse GC's.
+        * ItemP.h (ItemPart): declare the GC's.
+
+Tue Sep 17 15:13:00 1991  Karl Berry  (karl at hayley)
+
+        * Bitmap.c (redraw_selection_bitmap): use XClearArea instead of
+          XCopyPlane, to avoid a server bug.
+
+        * Bitmap.c (accept_paste): compute the coordinates of the paste
+          point from `row' and `col', not from themselves (uninitialized).
+
+Thu Sep 12 15:33:45 1991  Karl Berry  (karl at hayley)
+
+        * Bitmap.c (bitmap_to_pixmap): save the original rectangle list,
+          so we can free it.
+
+Tue Sep 10 06:55:40 1991  Karl Berry  (karl at hayley)
+
+        * Label.c (Resize): do SetTextWidthAndHeight; perhaps the pixmap is
+          bigger now.
+
+Tue Jul 30 13:18:12 1991  Karl Berry  (karl at ra.cs.umb.edu)
+
+        * Version 0.3.
+
+Sat Jul  6 09:23:48 1991  Karl Berry  (karl at hayley)
+
+        * Item.c: remove item_translations after all; we have to pass the
+          translations on to the text subwidget.
+        (item_initialize): set the translations resource for the text widget.
+        [no, don't do this; it causes some internal error in the toolkit.
+        Obviously I don't understand this yet.]
+
+Fri Jul  5 07:59:38 1991  Karl Berry  (karl at hayley)
+
+        * Bitmap.c (bitmap_to_pixmap): use XRETALLOC; free the rectangle
+          list when we are done.
+
+Thu Jul  4 13:48:26 1991  Karl Berry  (karl at hayley)
+
+        * Item.c (item_translations): new variable.
+        (itemClassRec): set the default translations.
+
+        * Item.c (accept_value): declare as `action_proc_type'.
+
+Sun Jun 30 09:15:53 1991  Karl Berry  (karl at hayley)
+
+        * Bitmap.c (bitmap_resources): use IMMEDIATE_RESOURCE.
+        * Item.c (item_resources): likewise.
+
+        * {Bitmap,Item}P.h: include IntrinsicP.h and CoreP.h again.
+        * Bitmap.c: don't bother to include IntrinsicP.h.
+
+Fri Jun 28 08:51:13 1991  Karl Berry  (karl at hayley)
+
+        * Item.c (item_destroy): new routine.
+        * Bitmap.c (bitmap_destroy): new routine.
+
+        * Bitmap.c (Bitmap.c): change return value to `Boolean'.
+
+        * GNUmakefile (sources): add `Box.c'.
+
+Thu Jun 27 10:59:09 1991  Karl Berry  (karl at hayley)
+
+        * {BitmapP,ItemP}.h: include CoreP.h; no, we can't, it makes gdb
+          core dump.
+
+Tue Jun 25 09:11:33 1991  Karl Berry  (karl at hayley)
+
+        * Bitmap.c (bitmap_resources): use `BITMAP_DEFAULT_EXPANSION'.
+
+Mon Jun 17 15:14:13 1991  Karl Berry  (karl at hayley)
+
+        * Item.c (ItemGetLabelString): new routine.
+
+Thu Jun  6 07:28:44 1991  Karl Berry  (karl at hayley)
+
+        * All files: change to version 2 of the GPL.
+
+Thu May 16 11:33:50 1991  Karl Berry  (karl at hayley)
+
+        * Item.c: doc fix.
+
+Thu Mar  7 07:32:44 1991  Karl Berry  (karl at hayley)
+
+        * Version 0.2.
+
+Mon Feb 25 13:22:41 1991  Karl Berry  (karl at hayley)
+
+        * Label.c: include <X11/Xmu/Drawing.h>.
+
+Sun Feb 24 12:08:07 1991  Karl Berry  (karl at ra.cs.umb.edu)
+
+        * Bitmap.c (bitmap_set_values): remove dead code.
+
+        * Viewport.c (ComputeLayout): declare `clip_width' and
+          `clip_height' as `Dimension' instead of `int'.
+
+        * Label.c (Redisplay): only call XClipBox if `region' is not null;
+          otherwise, redraw the whole thing.
+
+        * Bitmap.c (accept_paste): cast to prevent warning.
+
+Sun Feb 17 09:33:50 1991  Karl Berry  (karl at hayley)
+
+        * Bitmap.c, Item.c: include config.h.
+
+Sun Feb 10 13:41:55 1991  Karl Berry  (karl at hayley)
+
+        * Bitmap.c (redraw_selection): rename to
+          `redraw_selection_bitmap'.
+        (redraw_selection): call `redraw_selection_bitmap' on both the
+          normal and the shadow bitmap.
+        (accept_paste): move shadow computations to `redraw_selection'.
+
+        * Bitmap.c (fill_selection): new action routine.
+
+        * Bitmap.c (erase_selection): rename to `unshow_selection'.
+
+Wed Jan 30 06:53:21 1991  Karl Berry  (karl at hayley)
+
+        * Viewport.c (GeometryManager): set reconfigured when the request
+          is to be smaller.
+
+Tue Jan 29 16:42:35 1991  Karl Berry  (karl at hayley)
+
+        * Bitmap.c (bitmap_set_values): remove dead code.
+
+        * Viewport.c (GeometryManager): always allow requests to be smaller.
+
+Mon Jan 28 11:17:04 1991  Karl Berry  (karl at hayley)
+
+        * Item.c (item_set_values): have to call XtSetValues twice to make
+          Saturday's change effective.  [No, not even that works right.
+          Forget the whole thing.]
+
+        * Viewport.c (GeometryManager): rewrite to allow changing the
+          width or height even when other changes are requested.
+
+Sat Jan 26 07:58:45 1991  Karl Berry  (karl at hayley)
+
+        * Item.c (item_set_values): initialize the insert position to the
+          end of the string.
+
+        * Bitmap.c (find_selection_bb): new routine.
+        (accept_paste): copy the bitmap if we are pasting transparently.
+
+Thu Jan 24 07:43:07 1991  Karl Berry  (karl at hayley)
+
+        * Bitmap.c (accept_selection): subtract one from the bounding box
+          row.
+
+Wed Jan 23 10:04:14 1991  Karl Berry  (karl at hayley)
+
+        * Bitmap.c (accept_paste): take a parameter that says whether to
+          paste opaquely or transparently.
+
+        * Bitmap.c (EXPANSION_TRUNC,EXPANSION_ROUND): new macros.
+        (update_selection, start_selection, start_paste): truncate when
+          determining the upper left point; otherwise, round.
+
+        * Bitmap.c (find_bitmap_position): return the row and column in
+          unrounded coordinates; change callers.
+        (update_selection): round the current coordinate, instead of
+          truncating.
+
+        * Bitmap.c (find_bitmap_position): use the unrounded coordinates
+          to test against zero.
+
+        * Bitmap.c (*selection, *paste): always use erase_selection to get
+          rid of the selection rectangle.
+
+        * Bitmap.c (redraw_selection): new routine; use label.normal_GC to
+          do the drawing.
+
+        * Bitmap.c (bitmap_initialize): use the same GC for the shadow
+          bitmap as the main one.
+
+Tue Jan 22 16:12:08 1991  Karl Berry  (karl at hayley)
+
+        * Bitmap.c (update_selection): fix updates of width and height.
+
+        * BitmapP.h (BitmapPart): new fields to handle selections; also
+          save the GC's we need.
+
+        * Bitmap.c (bitmap_initialize): initialize the GC and selection
+          components.
+
+        * Bitmap.c (find_bitmap_position, check_action_parameters,
+          show_selection, update_selection): new utility routines.
+
+        * Bitmap.c (start_selection, adjust_selection, finish_selection):
+          new action routines to select a rectangle within a bitmap.
+        (start_paste, move_paste, finish_paste): corresponding routines to
+          paste the selected rectangle.
+
+Mon Jan 21 15:51:03 1991  Karl Berry  (karl at hayley)
+
+        * Bitmap.c (redraw_pixel): cache the foreground color.
+
+Sat Jan 19 06:00:16 1991  Karl Berry  (karl at hayley)
+
+        * Item.c (ItemGetValueWidget): new routine.
+
+        * Item.c (item_initialize): put the initial insert position at the
+          end of the value string, instead of the beginning.
+
+        * Item.c (item_initialize): compute the initial width of the value
+          widget, instead of leaving the default.
+
+        * Bitmap.c (BitmapExpansion): new routine.
+
+Fri Nov 23 09:36:22 1990  Karl Berry  (karl at hayley)
+
+        * Viewport.c (CheckHoriz, ComputeLayout): no, that was the right
+          idea, but the wrong change.  Instead, don't change the preferred
+          width.  Also, treat the horizontal and vertical cases in the
+          same way.
+
+        * Viewport.c (CheckHoriz, ComputeLayout): set the intended
+          dimensions to the clip dimensions, not the preferred dimensions,
+          since the latter may not have been allowed by our parent.
+
+Sat Nov 17 08:38:40 1990  Karl Berry  (karl at hayley)
+
+        * Viewport.c (GeometryManager): if the requested dimensions are
+          less than the current ones, allow them.
+
+        * Bitmap.c (bitmap_expose): we can use the Label's expose routine
+          now, so remove this.
+
+        * Label.c: new file, with better implementation of the Expose
+        routine.
+        * GNUmakefile (sources): list the file.
+
+Tue Oct 23 07:25:42 1990  Karl Berry  (karl at hayley)
+
+        * Viewport.c (GeometryManager): set reconfigured if the child
+          requested a smaller size than we are.
+
+Sun Oct 21 16:20:30 1990  Karl Berry  (karl at hayley)
+
+        * Viewport.c (GeometryManager): make the allowed width and height
+          be the requested width and height, even if we can allow more.
+
+        * New directory: previous changes to some files in ../xbce/ChangeLog.

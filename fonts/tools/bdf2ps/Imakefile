@@ -1,0 +1,14 @@
+#
+# Make file for the BDF font to Postscript font converter
+#
+# If TOP is incorrectly defined, uncomment and change the following
+# line to point at the X11 distribution source.
+
+#        TOP = /usr/local/src/X11/mit
+
+      SRCS  = bdftops.c
+      OBJS  = bdftops.o
+   INCLUDES = -I.
+   PROGRAM  = bdftops
+
+ComplexProgramTarget(bdftops)

@@ -1,0 +1,7 @@
+Karl Berry and Kathryn Hargreaves wrote all files except as noted below:
+
+Richard Murphey -- original version of fontconvert/filter.c.
+Erik Wallin -- modifications to the X files in limn:
+  xserver.c (start_server), display.c (search_children,
+  get_client_identity, get_server_info, init_display), and corresponding
+  declarations in xserver.h and display.h.  (3 March 1992)

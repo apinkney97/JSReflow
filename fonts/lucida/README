@@ -1,0 +1,9 @@
+These fonts were extracted from the tape sent from Charles Bigelow, of Bigelow
+and Holmes.  There are 112 files which have been extracted using the "extract"
+script, and renamed using the "rename" script which I wrote.  Nothing else has
+been done to these fonts, and it is presumed that they have been extracted
+from the tape okay, though they may not.  The file "header" was extracted first
+with the command "dd if=/dev/nrmt0 of=header files=1".
+
+David R Evans
+June, 1989

@@ -1,0 +1,27 @@
+gsrenderfont produces bitmaps for a PostScript font, using Ghostscript
+(version 2.4).  Following is an outline (no pun intended) of the algorithm.
+
+It first runs Ghostscript on `writefont.PS' on a PostScript
+input font, call it `foo'.  This produces
+  1) foo.pbm (the bitmaps)
+  2) foo.xifi (an ifi without bounding box counts)
+  3) foo.bfi (the character bitmap heights and character count)
+
+Then it runs bbcount.  This reads
+  1) foo.pbm and
+  2) foo.bfi
+and writes
+  1) foo.bbs (bounding box counts for each character).
+
+Then it runs awk on `fixifibb.awk'.  This reads
+  1) foo.xifi
+  2) foo.bbs
+and writes
+  1) foo.ifi (the image information for foo, including the bounding box counts)
+
+Then it runs imagetofont (which has its own source directory).  This reads
+  1) foo.pbm
+  2) foo.ifi
+and writes
+  1) foo.NNNNgf
+where the NNNN is the resolution.

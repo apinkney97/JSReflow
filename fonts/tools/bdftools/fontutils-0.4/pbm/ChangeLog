@@ -1,0 +1,15 @@
+Sat Mar 28 07:49:22 1992  Karl Berry  (karl at hayley)
+
+        * Version 0.4.
+
+        * Change copyright years to 1992 only.
+
+Sat Mar  7 10:00:47 1992  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (files, headers, sources): replace with `c_and_h', etc.
+
+        * libpbm1.c: use #if __STDC__, not #ifdef.
+
+Thu Mar  5 07:53:37 1992  Karl Berry  (karl at hayley)
+
+        * Created.

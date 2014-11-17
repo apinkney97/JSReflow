@@ -1,0 +1,908 @@
+Sat Mar 28 07:49:09 1992  Karl Berry  (karl at hayley)
+
+        * Version 0.4.
+
+        * Change copyright years to 1992 only.
+
+Wed Mar 25 08:37:28 1992  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (c_only): add fmod.
+        * fmod.c: new file.
+
+Thu Mar 19 07:47:30 1992  Karl Berry  (karl at hayley)
+
+        * pathsearch.c, libfile.c, filename.c: include paths.h.
+
+        * pathsearch.c: rename to pathsrch.c; new version.
+
+Wed Mar 11 10:03:12 1992  Karl Berry  (karl at hayley)
+
+        * bitmap.c (bitmap_find_transitions): handle the pixel at the end
+          of the row specially, unfortunately.
+
+Tue Mar 10 12:17:09 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * libfile.c (libfile_start): use find_suffix instead of finding a
+          dot position.
+
+Mon Mar  9 16:42:49 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * filename.c (make_stem_suffix): remove suffix from name before
+          adding stem_suffix and putting suffix back on.
+
+        * filename.c (make_stem_suffix): don't add a dot if no suffix.
+
+        * filename.c (make_stem_suffix): added.
+
+Sun Mar  8 17:08:06 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * filename.c (make_output_filename): put dot between NAME and
+          DEFAULT_SUFFIX. 
+
+Sun Mar  8 08:37:46 1992  Karl Berry  (karl at fosse)
+
+        * numtoa.c (dtoa): rename from ftoa.
+
+        * strstr.c: new file.
+        GNUmakefile (c_only): add strstr.
+
+Sat Mar  7 17:00:44 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * filename.c (sizeless_font_name): removed.
+
+Sat Mar  7 13:21:33 1992  Karl Berry  (karl at fosse)
+
+        * xmessage.c: include xmessage.h.
+
+        * GNUmakefile (c_only): remove statistics; we never use it.
+
+        * pathsearch.c: add prototypes for the subroutines.
+
+        * line.c: include line.h.
+
+        * bb-outline.c (find_outlines_bbs): rename parameters to avoid
+          shadow warnings.
+
+Sat Mar  7 09:14:00 1992  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (files, headers, sources): replace with `c_and_h', etc.
+
+        * scaled-num.c (print_scaled): use putchar instead of printf where
+          possible.
+
+Wed Mar  4 10:40:02 1992  Karl Berry  (karl at hayley)
+
+        * filename.c (remove_suffix): don't include the `.' in what we
+          return.
+
+Tue Mar  3 16:28:38 1992  Karl Berry  (karl at hayley)
+
+        * filename.c (find_suffix): new routine.
+          (remove_suffix, make_output_filename, make_suffix): write in terms
+          of it.
+
+Sun Mar  1 16:33:49 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * filename.c (make_output_file): use concat instead of make_suffix.
+
+Sun Mar  1 15:17:28 1992  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (files): add bb-outline.
+
+Sun Mar  1 14:48:41 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * filename.c (make_output_file): added.
+
+Mon Feb 24 08:38:56 1992  Karl Berry  (karl at hayley)
+
+        * pathsearch.c (truncate_pathname): separate this out from `readable'.
+
+        * concat.c dir-p.c file-p.c pathsearch.c xmalloc.c xopendir.c
+          xrealloc.c xstat.c xstrdup.c: redo with (un)prototype macros.
+
+Wed Feb 19 10:00:35 1992  Karl Berry  (karl at hayley)
+
+        * varstring.c (vs_set_char): set the allocated field after we
+          allocate more space.
+
+        * hexify.c (hexify): add 'a' to each hex char to make it visible
+          ASCII; shift the upper nybble down before adding.
+
+Mon Feb 17 07:38:27 1992  Karl Berry  (karl at hayley)
+
+        * filename.c (sizeless_font_name): new routine.
+
+        * line.c (read_line): use vs_append_char, and generally simplify.
+
+        * varstring.c (vs_append_char): don't append a null afterwards.
+
+        * GNUmakefile (files): add it.
+        * hexify.c: new file.
+
+Sun Feb 16 10:31:41 1992  Karl Berry  (karl at hayley)
+
+        * pathsearch.c (readable): keep track of the component lengths
+          properly; do the second test on the new name, not the old.
+
+Sat Feb 15 16:10:30 1992  Karl Berry  (karl at hayley)
+
+        * pathsearch.c (READABLE): redo the macro as a function, and
+          truncate the pathname if necessary.
+
+Fri Feb 14 07:26:35 1992  Karl Berry  (karl at hayley)
+
+        * varstring.c (vs_append_char): use VS_USED instead of strlen.
+        (vs_init): initialize VS_USED to zero.
+        (vs_set_char): set VS_USED.
+        All routines: rename `VS_LENGTH to `VS_ALLOCATED'.
+
+        * varstring.c (vs_free): new routine.
+
+        * math.c (acosd): clear errno before testing it.
+
+Thu Feb 13 13:32:54 1992  Karl Berry  (karl at hayley)
+
+        * pathsearch.c (READABLE): call it readable if the error is
+          ENAMETOOLONG; include <errno.h> and declare errno if that is
+          undefined.
+
+Sun Feb  2 16:08:44 1992  Karl Berry  (karl at hayley)
+
+        * filename.c (find_{gf,pk}_filename): allocate enough space for
+          the null sprintf writes.
+
+Sat Feb  1 14:53:39 1992  Karl Berry  (karl at hayley)
+
+        * filename.c (depath): remove.
+
+        * pathsearch.c (initialize_path_list): subdirectories are now
+          indicated by // terminating a path element, instead of as
+          a separate envvar/path.
+        * filename.c (find*filename): remove subdirectory stuff.
+        * libfile.c (libfile_start): likewise.
+
+Mon Jan 20 11:09:10 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * filename.c (depath): added this routine to take the path off the
+          front of a filename.
+
+        * filename.c (make_prefix): added this routine to add a prefix to
+          a filename which may or may not be the full pathname.
+
+Wed Jan 15 16:57:36 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * libfile.c (libfile_start): when FATAL, report `name', not it
+          concatenated with the default suffix.
+
+Wed Jan 15 13:01:30 1992  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (c_only): remove xchdir and xgetcwd, as we don't
+          need them anymore.
+        * pathsearch.c: changes from TeX.
+
+Wed Jan 15 11:59:56 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * filename.c (find_*_filename): only free `name' if it's not the
+          same string as `*_name'.
+
+Tue Jan 14 12:36:15 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * bitmap.c (bitmap_find_transitions): make the last transition
+          always imply a black-to-white transition, even if ROW's last
+          pixel is black.
+
+        * libfile.c (libfile_start): make FATAL2 report `name', not
+          `filename' as the library file not found.  Also, only add suffix
+          to the library file name if it doesn't have one already.
+
+Sun Jan 12 16:29:11 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * filename.c (make_suffix): copy suffix into new_s, not s.
+
+Sun Jan 12 14:57:24 1992  Karl Berry  (karl at hayley)
+
+        * pathsearch.c (check_subdir): add every existing subdirectory,
+          even if it's not a leaf.
+
+Sun Jan 12 12:47:57 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * libfile.c (libfile_start): don't prepend a dot to the suffix.
+
+        * dir-p.c (dir_p): call stat instead of xstat.
+
+Sat Jan 11 15:01:02 1992  Karl Berry  (karl at hayley)
+
+        * filename.c (find_*_filename): set cwd_first_p.
+
+        * pathsearch.c (initialize_path_list): take an additional
+          argument, saying whether to search `.' first.
+
+Fri Jan 10 07:40:50 1992  Karl Berry  (karl at hayley)
+
+        * xgetcwd.c (xgetcwd) [GETWD_MISSING]: if it's not missing, use
+          it.
+
+        * filename.c (find_*_filename): only initialize the path lists
+          once.
+
+        * pathsearch.c (expand_colon): if env_path is null, return the
+          default path.
+
+        * file-input.c (MOVE_BACK): use xfseek.
+
+        * filename.c (*_suffix): use strrchr instead of rpos.
+
+        * varstring.c: change names to start with `vs'.
+
+        * memory.c: split into various files.
+
+        * math.c (adjacent_points): rename to `points_adjacent_p'.
+
+        * math.c (find_bounds): use MAXDOUBLE and MINDOUBLE instead of
+          MAXFLOAT and MINFLOAT.
+
+        * filename.c (find_dpi): move to cmdline.c.
+        (basename): move to basename.c.
+
+Thu Jan  9 08:57:39 1992  Karl Berry  (karl at hayley)
+
+        * convert.c: split into various files.
+        * GNUmakefile: update.
+
+        * cmdline.c (scan_integer_list): rename to `scan_unsigned_list'.
+
+        * *.c: do not include global.h.
+
+        * arith.c: split into `scaled-num.c' and `fix-num.c'.
+        * GNUmakefile: update.
+
+Wed Jan  8 09:14:45 1992  Karl Berry  (karl at hayley)
+
+        * update copyright messages.
+
+        * change `allocate to `xmalloc', `reallocate' to `xrealloc', and
+          `string_copy' to `strdup'.
+
+        * list.c: doc fix.
+
+Tue Jan  7 17:28:07 1992  Karl Berry  (karl at hayley)
+
+        * filename.c (expand_colon): don't put the default value at the
+          end if we've already put it at the beginning.
+
+Thu Sep 12 11:06:58 1991  Karl Berry  (karl at hayley)
+
+        * malloc.c (malloc_sanity_check): new function.
+
+        * bitmap.c (bitmap_find_transitions): rearrange logic for clarity.
+
+        * malloc.c, getpagesize.h: new files.
+        * GNUmakefile (c_only): add Doug Lea's malloc.
+        (malloc_stats, malloc_inline): new variables.
+        (malloc.o): rule to explicitly use them.
+
+Tue Jul 30 13:18:12 1991  Karl Berry  (karl at ra.cs.umb.edu)
+
+        * Version 0.3.
+
+Wed Jul 24 06:34:11 1991  Karl Berry  (karl at hayley)
+
+        * bitmap.c (concat_bitmaps): remove; it's only used in one program.
+
+        * bitmap.c (new_bitmap): call it.
+
+        * memory.c (xcalloc): new routine.
+
+Tue Jul 16 08:24:08 1991  Karl Berry  (karl at hayley)
+
+        * memory.c (allocate): don't do assignment inside if.
+
+        * bitmap.c (bitmap_find_transitions): we don't need to look at the
+          first black pixel twice.
+
+Fri Jun 28 09:09:59 1991  Karl Berry  (karl at hayley)
+
+        * font.c (close_font): only close the TFM file if the font is not
+          bitmap-only.
+
+Sat Jun 15 09:51:45 1991  Karl Berry  (karl at hayley)
+
+        * font.c (get_font): set the new `tfm_font' and `tfm_filename'
+          members.
+
+        * {dirio,file-misc,file-open,filename,libfile}.c: change
+          `checked_' to `x'.
+
+Tue Jun 11 16:46:25 1991  Karl Berry  (karl at hayley)
+
+        * font.c (get_char): use XTALLOC.
+
+        * font.c (close_font): close the TFM file here, instead of in
+          `get_font'.
+
+Sun Jun  9 13:23:59 1991  Karl Berry  (karl at hayley)
+
+        * font.c (string_to_bitmap): use `BITMAP_PIXEL (CHAR_BITMAP'...
+          instead of `CHAR_BITMAP_PIXEL'.
+
+Thu Jun  6 07:30:07 1991  Karl Berry  (karl at hayley)
+
+        * All files: change to version 2 of the GPL.
+
+Sat Jun  1 16:00:03 1991  Kathy Hargreaves  (kathy at hayley)
+
+        * libfile.c (libfile_start): Don't concat a `.' to suffix if it's
+          the empty string.
+
+Thu May 16 07:35:47 1991  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (files): include `xmessage' (from xbce).
+        * xmessage.c: new file.
+
+Sun Apr 21 17:38:48 1991  Karl Berry  (karl at hayley)
+
+        * bitmap.c (bitmap_to_bb): declare the arg as const.
+
+Sun Apr 14 13:45:29 1991  Karl Berry  (karl at hayley)
+
+        * bitmap.c (print_bitmap): use `bitmap_to_bb' instead of
+          `dimensions_to_bb'.
+
+Fri Apr 12 15:12:32 1991  Karl Berry  (karl at hayley)
+
+        * math.c: doc fix.
+
+        * GNUmakefile (files): add `report' and `logreport'.
+        * {log,}report.c: new files.
+
+Wed Apr 10 11:27:49 1991  Karl Berry  (karl at hayley)
+
+        * font.c (save_internal_font): omit needless casts.
+
+Mon Apr  8 07:57:20 1991  Karl Berry  (karl at hayley)
+
+        * font.c (ascender_part): move to ospace.
+
+        * encoding.c (parse_encoding_line): make a copy of the character
+          name, since the line gets freed.
+
+        * encoding.c (read_encoding_file): reinitialize the character
+          code, so we fill up the right array.
+
+        * libfile.c (libfile_start): prepend the `.' to the suffix.
+
+Sun Apr  7 14:34:06 1991  Karl Berry  (karl at hayley)
+
+        * file-output.c (put_signed_four): declare this as a macro in the
+          .h file.
+
+Thu Apr  4 07:03:36 1991  Karl Berry  (karl at hayley)
+
+        * font.c (get_char): don't allocate any space unless the character
+          actually exists in the font.
+
+Mon Apr  1 07:57:58 1991  Karl Berry  (karl at hayley)
+
+        * {encoding,libfile}.c: new files.
+        GNUmakefile (files): add them to the list.
+
+Sat Mar 23 16:42:39 1991  Karl Berry  (karl at hayley)
+
+        * font.c (delete_internal_font): free the memory for the internal
+          font, and for the font name.
+
+Sat Mar  9 17:06:57 1991  Karl Berry  (karl at hayley)
+
+        * string.c: declare args to routines as const.
+
+        * string.c (lowercasify): new routine.
+
+Thu Mar  7 07:33:05 1991  Karl Berry  (karl at hayley)
+
+        * Version 0.2.
+
+Mon Mar  4 15:06:59 1991  Karl Berry  (karl at hayley)
+
+        * font.c (delete_internal_font): new routine.
+        (close_font): call it, thus preventing us from finding a font that
+        has been closed.
+
+Mon Feb 25 15:58:21 1991  Karl Berry  (karl at hayley)
+
+        * font.c (get_font): use `tfm_...' instead of `..._tfm_...'; use
+          `pk_...' instead of `..._pk_...'; use `gf_...' instead of
+          `..._gf_...'.
+
+Sun Feb 24 15:34:36 1991  Karl Berry  (karl at ra.cs.umb.edu)
+
+        * math.c (int_distance): cast the arguments to `double'.
+
+Sun Feb 17 09:43:06 1991  Karl Berry  (karl at hayley)
+
+        * *.c: include config.h.
+
+Sat Feb 16 16:54:18 1991  Karl Berry  (karl at hayley)
+
+        * dirio.c (checked_lstat) [HAVE_SYMBOLIC_LINKS]: change
+          conditional from being on S_ISLNK and S_IFLNK.
+
+Tue Jan 22 15:44:43 1991  Karl Berry  (karl at hayley)
+
+        * bitmap.c (extract_subbitmap): new routine from imgtogf.
+
+Fri Jan 18 08:14:23 1991  Karl Berry  (karl at hayley)
+
+        * vector.c (all routines): declare args to be const.
+
+        * vector.c (Vabs): new routine.
+
+Tue Jan 15 15:29:38 1991  Karl Berry  (karl at hayley)
+
+        * spline.c (append_spline): use LAST_SPLINE_LIST_ELT.
+
+        * spline.c (new_spline_list_array, free_spline_list_array,
+          append_spline_list): new routines.
+
+        * spline.c (append_spline_list): rename to concat_spline_lists.
+
+Sun Jan 13 09:48:56 1991  Karl Berry  (karl at hayley)
+
+        * font.c (bitmap_format_type): move to font.h.
+
+        * file-output.c (put_n_bytes): give the arguments to fwrite in the
+          correct order.
+
+Sat Jan 12 16:46:44 1991  Karl Berry  (karl at hayley)
+
+        * file-output.c (put_n_bytes): use fwrite to do all the bytes at
+          one shot.
+
+Mon Jan  7 10:42:22 1991  Karl Berry  (karl at hayley)
+
+        * spline.c (evaluate_spline): no compiler bug anymore without
+          temporaries (as of gcc 1.38).
+
+Sat Dec 29 17:43:40 1990  Karl Berry  (karl at hayley)
+
+        * spline.c (print_spline): make the output lines shorter.
+
+Wed Dec 26 15:13:26 1990  Karl Berry  (karl at hayley)
+
+        * math.c (find_bounds): use MAXFLOAT and MINFLOAT, instead of
+          MAXDOUBLE and MINDOUBLE, since Sun's atof can't deal with
+          the latter.
+
+Sun Dec  9 11:02:20 1990  Karl Berry  (karl at hayley)
+
+        * spline.c: doc fix.
+
+        * dirio.c (getwd): close each directory after we read it.
+
+        * filename.c (find_subdir_path_filename): use getwd instead of
+          getcwd, and use checked_chdir.
+
+        * dirio.c (checked_opendir, is_dir): make arguments be const strings.
+
+        * dirio.c (checked_chdir, checked_stat, checked_lstat, getwd): new
+        routines.
+
+Sat Nov 17 11:09:56 1990  Karl Berry  (karl at hayley)
+
+        * file-*.c: include the appropriate file-....h file.
+
+        * math.c (distance): put this back; it's too annoying to call
+          hypot with the x and y arguments.
+
+Thu Oct 18 15:00:32 1990  Karl Berry  (karl at hayley)
+
+        * filename.c (find_subdir_path_filename): initialize the list of
+          subdirectories to the empty string.
+
+Wed Oct 17 17:54:40 1990  Karl Berry  (karl at aten)
+
+        * filename.c (find_subdir_path_filename): do not do strlen when
+          the path is empty.
+
+Tue Oct  9 08:59:43 1990  Karl Berry  (karl at hayley)
+
+        * filename.c (find_dpi): don't crash if the argument doesn't have
+          a `.' at all.
+
+        * cmdline.c: new file.
+        * GNUmakefile (files): add it.
+
+Mon Oct  8 09:08:30 1990  Karl Berry  (karl at hayley)
+
+        * filename.c (find_dpi): new routine.
+
+Wed Oct  3 07:33:07 1990  Karl Berry  (karl at hayley)
+
+        * filename.c (find_tfm_filename, find_pk_filename,
+          find_gf_filename): new routines.
+
+Sat Sep 29 08:34:52 1990  Karl Berry  (karl at hayley)
+
+        * bitmap.c (new_bitmap): don't use memset if the bitmap is null.
+
+        * font.c (find_internal_font): use STREQ.
+
+Fri Sep 28 08:30:04 1990  Karl Berry  (karl at hayley)
+
+        * filename.c (next_component): return NULL after we've read all
+        the directories in the list.
+
+        * filename.c (next_component): omit the path separator from the
+        returned directory.
+
+Thu Sep 27 11:45:36 1990  Karl Berry  (karl at hayley)
+
+        * font.c (DEFAULT_SUBDIR_PATH): new macro.
+        (get_bitmap_font): try to open the PK and GF files using
+        subdirectories if opening without them fails.
+        (get_font): likewise, for the TFM file.
+        * filename.c (get_subdir_path_filename): new routine.
+        (next_component): new routine, replaces `find_components'.
+
+Fri Sep 21 09:15:28 1990  Karl Berry  (karl at hayley)
+
+        * dirio.o (is_dir): use S_ISDIR.
+
+Thu Sep 13 10:38:32 1990  Karl Berry  (karl at hayley)
+
+        * convert.c (parse_char_code): new routine to replace the
+        PARSE_CHAR_CODE macro; return a status indicator.
+        (xparse_char_code): like the above, but gives a fatal error.
+
+Wed Sep 12 18:19:13 1990  Karl Berry  (karl at aten)
+
+        * font.c (get_font): set `bitmap_only' to false.
+        (save_internal_font): overwrite the old value if we're called with
+        the same key twice.
+
+Sun Sep  9 07:10:29 1990  Karl Berry  (karl at hayley)
+
+        * convert.c: new file for some numeric conversions.
+        * math.c: move atou to convert.c.
+
+Mon Sep  3 11:05:19 1990  Karl Berry  (karl at hayley)
+
+        * line.c (read_line): doc fix.
+
+Fri Aug 31 11:04:02 1990  Karl Berry  (karl at hayley)
+
+        * font.c (get_bitmap_font): new routine, taken from get_font.
+
+Thu Aug 30 16:32:25 1990  Karl Berry  (karl at hayley)
+
+        * file-misc.c (same_file_p): new function.
+
+Wed Aug 29 11:37:24 1990  Karl Berry  (karl at hayley)
+
+        * fileio.c: split up into several new files: file-open.c,
+        file-input.c, file-output.c, file-misc.c.
+
+Thu Aug 23 07:26:58 1990  Karl Berry  (karl at hayley)
+
+        * filename.c (remove_suffix): new routine.
+        (make_suffix): if the `.' is before a `/', it doesn't start the
+        extension.
+
+Thu Aug 16 07:10:48 1990  Karl Berry  (karl at hayley)
+
+        * memory.c (safe_free): use fprintf instead of FATAL, so the core dump
+        will happen.
+
+Thu Jul 26 06:53:33 1990  Karl Berry  (karl at hayley)
+
+        * bitmap.c (bitmap_find_transitions): new routine (from imgtogf).
+
+Wed Jul 25 08:20:12 1990  Karl Berry  (karl at hayley)
+
+        * string.c (concat5): new routine.
+
+Tue Jul 24 10:24:59 1990  Karl Berry  (karl at hayley)
+
+        * font.c (get_font): save the design size in points instead of
+        pixels.
+
+        * filename.c: new file.
+        * fileio.c (find_path_filename): move there.
+        * string.c (make_suffix): ditto.
+
+        * font.c (get_char): retrieve the TFM width also.
+
+Mon Jul 16 07:30:33 1990  Karl Berry  (karl at hayley)
+
+        * bitmap.c (bitmap_to_bb): new routine.
+
+Thu Jul 12 06:01:16 1990  Karl Berry  (karl at hayley)
+
+        * bitmap.c (copy_bitmap): don't use `new_bitmap', to avoid setting
+        all the bits twice.
+
+Tue Jul 10 06:23:54 1990  Karl Berry  (karl at hayley)
+
+        * bitmap.c (concat_bitmaps): new routine.
+
+Mon Jul  9 08:27:09 1990  Karl Berry  (karl at hayley)
+
+        * bitmap.c (get_bitmap_bounding_box): delete this.
+        (print_bitmap): use dimensions_to_bb.
+
+        * bitmap.c (free_bitmap): don't free the bitmap if it's null.
+
+        * bitmap.c (new_bitmap): use memset.
+        (copy_bitmap): use memcpy if the bitmap's size is greater than
+        zero.
+
+Sat Jul  7 18:22:55 1990  Karl Berry  (karl at hayley)
+
+        * memory.c (safe_free): dump core if we are freeing a null item.
+
+Fri Jul  6 14:21:07 1990  Karl Berry  (karl at hayley)
+
+        * bounding-box.c (bb_to_dimensions): ensure that the dimensions
+        are nonnegative.
+
+Wed Jul  4 12:06:49 1990  Karl Berry  (karl at hayley)
+
+        * memory.c (allocate): dump core if we run out of memory.
+        (reallocate): ditto.
+
+        * bounding-box.c (dimensions_to_bb): don't subtract one from the
+        width, so it will work with the GF routines.
+        (bb_to_dimensions): use BB_WIDTH and BB_HEIGHT, instead of doing
+        the subtraction out here.
+
+        * bounding-box.c (update_bounding_box): new routine.
+
+Sun Jul  1 15:11:56 1990  Karl Berry  (karl at hayley)
+
+        * font.c (ascender_part): new routine.
+
+Tue Jun 26 11:27:15 1990  Karl Berry  (karl at hayley)
+
+        * spline.c (evaluate_spline): use temporaries in the computation
+        to avoid a compiler bug.
+
+        * vector.c (Padd, Pmult_scalar): remove definitions, since they
+        are defined as macros now.
+
+Sun Jun 24 15:31:34 1990  Karl Berry  (karl at claude)
+
+        * font.c (get_font): don't check the checksums if either one is
+        zero.
+
+Sat Jun 23 12:11:47 1990  Karl Berry  (karl at hayley)
+
+        * font.c (print_char): change precision for printing the row numbers.
+
+Tue Jun 19 11:50:52 1990  Karl Berry  (karl at hayley)
+
+        * fileio.c (move_to_byte): delete this.
+        
+        * fileio.c (cur_pos): rename to checked_ftell, and take a filename
+        argument for perror.
+
+Mon Jun 18 12:47:17 1990  Karl Berry  (karl at hayley)
+
+        * font.c (find_internal_font): return a pointer to an
+        internal_font_type, instead of a structure, and change callers.
+        (get_font): if we have already saved the font, return it, instead
+        of opening the files again.
+
+Mon Jun  4 16:20:32 1990  Karl Berry  (karl at hayley)
+
+        * math.c (find_bounds): use MAXDOUBLE and MINDOUBLE, instead of
+        MAXFLOAT and MINFLOAT.
+
+        * spline.c (spline_bounding_box): remove this routine.
+
+Sun Jun  3 10:51:28 1990  Karl Berry  (karl at hayley)
+
+        * arith.c, math.c, vector.c: add const declarations.
+
+        * fileio.c (get_two, get_four): don't bother to initialize the
+        variable before we read it.
+
+        * fileio.c (get_n_bytes): improve the error message if the read
+        fails.
+
+Sat Jun  2 07:51:08 1990  Karl Berry  (karl at hayley)
+
+        * bounding-box.c (increase_int_bound): remove this.
+
+        * spline.c (print_spline): print different things for lines and
+        splines.
+
+Wed May 30 16:02:26 1990  Karl Berry  (karl at hayley)
+
+        * bitmap.c (new_bitmap): if the bitmap is going to be zero bits,
+        don't try to allocate it.
+
+        * font.c (get_font): figure out how many characters are in the
+        font by testing the `exists' member of the TFM structure.
+
+        * font.c (get_font): don't try to open the GF file if we couldn't
+        find it.
+
+Tue May 22 09:51:20 1990  Karl Berry  (karl at hayley)
+
+        * fileio.c (find_path_filename): close the directories in the path.
+
+Sat May 19 10:30:39 1990  Karl Berry  (karl at hayley)
+
+        * fileio.c (find_path_filename): return NULL if we can't find the
+        file, instead of the original name.
+        * font.c (get_font): rewrite the file-opening code.
+
+Wed May 16 18:02:54 1990  Karl Berry  (karl at aten)
+
+        * font.c (string_to_bitmap): if the character doesn't exist in the
+        font, don't crash.
+
+        * fileio.c (find_path_filename): don't get a fatal error when a
+        directory in the path doesn't exist.
+
+Sun May 13 13:45:12 1990  Karl Berry  (karl at hayley)
+
+	* dirio.c (is_dir): new routine.
+
+	* fileio.c (find_path_filename): just return the name we're given
+	if the path is relative; move the suffix concatenation out of the
+	loop; search in subdirectories.
+
+Tue May  8 12:08:57 1990  Karl Berry  (karl at hayley)
+
+	* math.c: doc fix.
+
+Thu May  3 10:45:05 1990  Karl Berry  (karl at hayley)
+
+	* line.c (read_line): use VS_CHARS.
+
+Wed May  2 12:25:08 1990  Karl Berry  (karl at claude)
+
+	* font.c (string_to_bitmap): don't close the font when we're done.
+
+Wed Apr 25 13:16:28 1990  Karl Berry  (karl at aten)
+
+	* font.c (string_to_bitmap): don't asked for chars[x] when x is a
+	character that isn't there.
+
+Tue Apr 24 18:35:08 1990  Karl Berry  (karl at hayley)
+
+	* math.c (real_to_int_coord): new routine.
+
+Sun Apr 22 06:42:37 1990  Karl Berry  (karl at hayley)
+
+	* font.c (string_to_bitmap): initialize char_y properly.
+        [whoops, I mean test it properly, and initialize y.]
+        Pass the row and column to BITMAP_PIXEL in the right order.
+        Give the row and column to the constructor in the right order,
+        too.  Use MAX to find the depth, not MIN.
+
+	* font.c (print_char): print the bitmap here, so we can print out
+	the Cartesian row number, instead of calling `print_bitmap'.
+
+Sat Apr 21 09:49:42 1990  Karl Berry  (karl at hayley)
+
+	* fileio.c (get_n_bytes): use fread to read the whole block,
+	instead of getting them one byte at a time.
+
+Thu Apr 19 16:19:33 1990  Karl Berry  (karl at hayley)
+
+	* font.c (get_font): do checksum test before getting the
+	postamble. 
+
+Tue Apr 17 16:53:31 1990  Karl Berry  (karl at hayley)
+
+	* font.c (print_char): new routine to print a text representation
+	of a character.
+
+Mon Apr 16 11:12:28 1990  Karl Berry  (karl at hayley)
+
+	* font.c (get_font): get the design size from the TFM file,
+	instead of the bitmap file.
+
+Sun Apr 15 07:34:19 1990  Karl Berry  (karl at hayley)
+
+	* font.c (get_font): do not set the font bounding box.
+
+Sat Apr 14 15:11:19 1990  Karl Berry  (karl at hayley)
+
+	* fileio.c (checked_fseek): make argument type be
+	seek_direction_type.
+
+	* fileio.c (checked_fclose): new (trivial) routine.
+
+Thu Apr 12 12:06:17 1990  Karl Berry  (karl at hayley)
+
+	* GNUmakefile: do not define USG and USGr3.
+
+	* time.c: include <sys/types.h> and declare time(2) and ctime(3)
+        using time_t.
+
+	* fileio.c (find_path_filename): use access(2) instead of
+	fopen(3); pass the default path to find_components.
+        (find_components): use a default path if the environment variable
+        doesn't exist.
+
+Mon Apr  9 08:19:53 1990  Karl Berry  (karl at hayley)
+
+	* math.c (distance): remove this, I came across hypot(3).
+
+	* all files: upcase macro names.
+
+Sun Mar 18 14:58:23 1990  Kathy Hargreaves  (kathy at hayley)
+
+	* bounding_box.[hc] (increase_int_bound): added this to increase a
+	bounding boxes bounds nicely, i.e., if the bound is negative, it
+	gets decreased, and increased otherwise.
+
+Tue Feb 27 21:01:24 1990  Kathy Hargreaves  (kathy at hayley)
+
+	* fileio.c (get_n_bytes): don't try to read zero bytes.
+
+Wed Feb  7 17:00:47 1990  Karl Berry  (karl at hayley)
+
+	* time.c (now): chop off the trailing space.
+
+Mon Jan 29 12:46:56 1990  Karl Berry  (karl at hayley)
+
+	* bounding-box.c (bb_to_dimensions): new routine.
+
+	* math.c (atou): like atoi but < 0 is a fatal error.
+
+Sun Jan 21 09:55:14 1990  Karl Berry  (karl at hayley)
+
+	* Makefile: rename to GNUmakefile.
+
+	* bounding_box.c (dimensions_to_bounding_box): rename to
+	dimensions_bb.  Remove other conversion routines.  And rename to
+	bounding-box.c.
+
+Tue Oct 31 07:24:05 1989  Karl Berry  (karl at hayley)
+
+	* math.c (int_to_real_coordinate): remove this.
+
+Mon Oct 30 14:03:57 1989  Karl Berry  (karl at hayley)
+
+	* all files: add the copyleft.
+
+	* string.c (concat4): define this.
+
+Sun Oct 29 18:37:33 1989  Karl Berry  (karl at claude)
+
+	* math.c (undefined_real_coordinate): remove this.
+
+Sat Oct 28 15:55:59 1989  Karl Berry  (karl at hayley)
+
+	* arith.c (real_to_scaled, real_to_fix): multiply the integer part
+        by scaled_one and fix_one, respectively.
+
+	* fileio.c (put_three): define this.
+	(put_three, put_four): had the mask wrong for the
+          low-order byte.
+        (put_two, put_three, put_four): a & b >> c is
+          a & (b >> c), not (a & b) >> c.
+        
+Fri Oct 27 22:14:05 1989  Karl Berry  (karl at hayley)
+
+	* bitmap.c (new_bitmap): use the bitmap_dimensions macro.
+
+Sun Oct  8 15:41:01 1989  Karl Berry  (karl at hayley)
+
+	* math.c (epsilon_equal): new function to test if two values are
+	within epsilon of each other.
+        (acosd): changed to call that one.
+
+	* bitmap.c (free_bitmap): new function to deallocate storage
+	used in a bitmap_type.
+
+	* math.c (acosd): normalize to 1.0 or -1.0 if the argument is
+	within an epsilon of that anyway.
+
+Fri Oct  6 22:12:05 1989  Karl Berry  (karl at hayley)
+
+	* line.c (read_line): overwrite the newline at the end of the
+	string with a null.

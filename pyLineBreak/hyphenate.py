@@ -50,9 +50,15 @@ class Hyphenator:
         """ Given a word, returns a list of pieces, broken at the possible
             hyphenation points.
         """
+        # Strip off trailing punctuation
+        addendum = ''
+        if word[-1] in ('.', ','):
+            addendum = word[-1]
+            word = word[:-1]
+
         # Short words aren't hyphenated.
         if len(word) <= 4:
-            return [word]
+            return [word + addendum]
         # If the word is an exception, get the stored points.
         if word.lower() in self.exceptions:
             points = self.exceptions[word.lower()]
@@ -79,6 +85,7 @@ class Hyphenator:
             pieces[-1] += c
             if p % 2:
                 pieces.append('')
+        pieces[-1] += addendum
         return pieces
 
 patterns = (

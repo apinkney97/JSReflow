@@ -1,0 +1,19 @@
+The canonical source for GNU software is prep.ai.mit.edu [18.71.0.38]:pub/gnu.
+That directory is shadowed at many other sites; for example,
+archive.cis.ohio-state.edu and gatekeeper.dec.com.
+
+You can also order a tape from the Free Software Foundation (thereby
+indirectly supporting this software and the rest of the GNU project);
+send mail to gnu@prep.ai.mit.edu for the latest prices and ordering
+information.
+
+The canonical source for the X window system is
+export.lcs.mit.edu:pub/R5.  That directory is also shadowed at many
+other sites, including gatekeeper.dec.com.
+
+TeX is more scattered.  The complete Unix TeX distribution is available
+on byron.u.washington.edu.  The canonical sources for just web2c -- the
+port of the TeX project programs to Unix, without drivers, fonts, etc.
+-- are ftp.cs.umb.edu [192.12.26.23]:pub/tex and ics.uci.edu
+[128.195.1.1]:TeX.  The DVI-to-PostScript driver I recommend is Tom
+Rokicki's dvips, available from labrea.stanford.edu:pub.

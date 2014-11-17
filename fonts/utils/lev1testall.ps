@@ -1,0 +1,211 @@
+%!
+/ystart 700 def
+/ymin 60 def
+/y ystart def
+/x 40 def
+/xtab 200 def
+/ps 12 def
+/vs 14 def
+
+/Helv /Helvetica findfont 10 scalefont def
+/test {
+    Helv setfont
+    dup 50 string cvs show
+    findfont ps scalefont setfont
+    currentpoint exch dup xtab lt {pop xtab} if
+    /tab exch def tab exch moveto
+    (The quick brown fox jumps over the lazy dog) show
+} def
+
+/SortDict 10 dict def
+SortDict begin
+  /nametype {} def
+end
+/sort {  % Selection sort - see Baase p. 50
+  SortDict begin
+  /n exch def
+
+  dup /names? exch type currentdict exch known def
+
+  [ n 1 add 1 roll ] /L exch def
+
+  names? {
+    0 1 n 1 sub {
+      L exch dup L exch get
+      50 string cvs put
+    } for
+  } if
+
+  1 1 n 1 sub {
+    /ind exch def
+    /x L ind get def
+    /j ind 1 sub def
+    {
+      j 0 lt {exit} if
+      L j get x le {exit} if
+      L j 1 add L j get put
+      /j j 1 sub def
+    } loop
+    L j 1 add x put
+  } for
+
+  n 1 sub -1 0 {
+    L exch get
+    names? {cvn} if
+  } for
+
+  end
+} def
+
+%(Bauhaus-Bold.ps) run
+%(Bauhaus-Demi.ps) run
+%(Bauhaus-Heavy.ps) run
+%(Bauhaus-Light.ps) run
+%(Bauhaus-Medium.ps) run
+%(Bodoni-Bold.ps) run
+%(Bodoni-BoldItalic.ps) run
+%(Bodoni-Italic.ps) run
+%(Bodoni-Poster.ps) run
+%(Bodoni.ps) run
+%(Carta.ps) run
+%(FranklinGothic-Book.ps) run
+%(FranklinGothic-BookOblique.ps) run
+%(FranklinGothic-Demi.ps) run
+%(FranklinGothic-DemiOblique.ps) run
+%(FranklinGothic-Heavy.ps) run
+%(FranklinGothic-HeavyOblique.ps) run
+%(Futura-Bold.ps) run
+%(Futura-BoldOblique.ps) run
+%(Futura-Book.ps) run
+%(Futura-BookOblique.ps) run
+%(Futura-ExtraBold.ps) run
+%(Futura-ExtraBoldOblique.ps) run
+%(Futura-Heavy.ps) run
+%(Futura-HeavyOblique.ps) run
+%(Futura-Light.ps) run
+%(Futura-LightOblique.ps) run
+%(Futura-Oblique.ps) run
+%(Futura.ps) run
+%(Galliard-Bold.ps) run
+%(Galliard-BoldItalic.ps) run
+%(Galliard-Italic.ps) run
+%(Galliard-Roman.ps) run
+%(Goudy-Bold.ps) run
+%(Goudy-BoldItalic.ps) run
+%(Goudy-Italic.ps) run
+%(Goudy.ps) run
+%(JansonText-Bold.ps) run
+%(JansonText-BoldItalic.ps) run
+%(JansonText-Italic.ps) run
+%(JansonText-Roman.ps) run
+%(LetterGothic-Bold.ps) run
+%(LetterGothic-BoldSlanted.ps) run
+%(LetterGothic-Slanted.ps) run
+%(LetterGothic.ps) run
+%(Lucida-Bold.ps) run
+%(Lucida-BoldItalic.ps) run
+%(Lucida-Italic.ps) run
+%(Lucida.ps) run
+%(LucidaBlackletter.ps) run
+%(LucidaBright-Demi.ps) run
+%(LucidaBright-DemiItalic.ps) run
+%(LucidaBright-Italic.ps) run
+%(LucidaBright-Oblique.ps) run
+%(LucidaBright.ps) run
+%(LucidaCalligraphy-Italic.ps) run
+%(LucidaFax-Demi.ps) run
+%(LucidaFax-DemiItalic.ps) run
+%(LucidaFax-Italic.ps) run
+%(LucidaFax.ps) run
+%(LucidaHandwriting-Italic.ps) run
+%(LucidaNewMath-AltItalic.ps) run
+%(LucidaNewMath-Arrows.ps) run
+%(LucidaNewMath-Extension.ps) run
+%(LucidaNewMath-Italic.ps) run
+%(LucidaNewMath-Symbol.ps) run
+%(LucidaSans-Demi.ps) run
+%(LucidaSans-DemiItalic.ps) run
+%(LucidaSans-Italic.ps) run
+%(LucidaSans-Typewriter.ps) run
+%(LucidaSans-TypewriterBold.ps) run
+%(LucidaSans-TypewriterBoldOblique.ps) run
+%(LucidaSans-TypewriterOblique.ps) run
+%(LucidaSans.ps) run
+%(MBembo-Bold.ps) run
+%(MBembo-BoldItalic.ps) run
+%(MBembo-ExtraBold.ps) run
+%(MBembo-ExtraBoldItalic.ps) run
+%(MBembo-Italic.ps) run
+%(MBembo-SemiBold.ps) run
+%(MBembo-SemiBoldItalic.ps) run
+%(MBembo.ps) run
+%(NewBaskerville-Bold.ps) run
+%(NewBaskerville-BoldItalic.ps) run
+%(NewBaskerville-Italic.ps) run
+%(NewBaskerville-Roman.ps) run
+%(Optima-Bold.ps) run
+%(Optima-BoldOblique.ps) run
+%(Optima-Oblique.ps) run
+%(Optima.ps) run
+%(ParkAvenue.ps) run
+%(Peignot-Bold.ps) run
+%(Peignot-Demi.ps) run
+%(Peignot-Light.ps) run
+%(Sonata.ps) run
+%(Souvenir-Demi.ps) run
+%(Souvenir-DemiItalic.ps) run
+%(Souvenir-Light.ps) run
+%(Souvenir-LightItalic.ps) run
+%(StempelGaramond-Bold.ps) run
+%(StempelGaramond-BoldItalic.ps) run
+%(StempelGaramond-Italic.ps) run
+%(StempelGaramond-Roman.ps) run
+%(Tiffany-Demi.ps) run
+%(Tiffany-DemiItalic.ps) run
+%(Tiffany-Italic.ps) run
+%(Tiffany.ps) run
+%(TrumpMediaeval-Bold.ps) run
+%(TrumpMediaeval-BoldItalic.ps) run
+%(TrumpMediaeval-Italic.ps) run
+%(TrumpMediaeval-Roman.ps) run
+%(Universal-GreekwithMathPi.ps) run
+%(Universal-NewswithCommPi.ps) run
+%(Walbaum-Bold.ps) run
+%(Walbaum-BoldItalic.ps) run
+%(Walbaum-Italic.ps) run
+%(Walbaum-Roman.ps) run
+
+FontDirectory dup length /n exch def
+{pop} forall
+n sort
+1 1 n {
+  pop
+  x y moveto
+  test
+  currentpoint exch pop
+  /y exch vs sub def
+  y ymin lt { /y ystart def showpage } if
+} for
+showpage
+/y ystart def
+[
+(fonts/*) {50 string copy} 50 string filenameforall
+counttomark /n exch def
+%1 1 n {
+%  pop
+%  x y moveto
+%  show
+%  /y y vs sub def
+%  y ymin lt { /y ystart def showpage } if
+%} for
+n sort
+1 1 n {
+  pop dup length 6 sub 6 exch getinterval
+  x y moveto
+  cvn test
+  currentpoint exch pop
+  /y exch vs sub def
+  y ymin lt { /y ystart def showpage } if
+} for
+pop  % pop the mark
+showpage

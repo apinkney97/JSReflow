@@ -1,0 +1,9 @@
+:
+tex testfont << eof
+o$1
+\\text
+\\init
+$1
+\\text
+\\bye
+eof

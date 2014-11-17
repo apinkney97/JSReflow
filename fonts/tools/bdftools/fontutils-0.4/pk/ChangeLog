@@ -1,0 +1,126 @@
+Sat Mar 28 07:49:27 1992  Karl Berry  (karl at hayley)
+
+        * Version 0.4.
+
+        * Change copyright years to 1992 only.
+
+Sat Mar  7 14:07:52 1992  Karl Berry  (karl at fosse)
+
+        * pk_input.c: complete prototypes for static fns.
+
+Sat Mar  7 11:16:20 1992  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (files, headers, sources): replace with `c_and_h', etc.
+
+Thu Jan  9 08:29:21 1992  Karl Berry  (karl at hayley)
+
+        * *.c: do not include global.h.
+
+        * *.h: remove #pragma once.
+
+Wed Jan  8 15:05:33 1992  Karl Berry  (karl at hayley)
+
+        * update copyright messages.
+
+        * change `allocate to `xmalloc', `reallocate' to `xrealloc', and
+          `string_copy' to `strdup'.
+
+Tue Jul 30 13:19:47 1991  Karl Berry  (karl at ra.cs.umb.edu)
+
+        * Version 0.3.
+
+Sat Jun 15 09:53:33 1991  Karl Berry  (karl at hayley)
+
+        * all files: change `checked_' to `x'.
+
+Thu Jun  6 07:31:28 1991  Karl Berry  (karl at hayley)
+
+        * All files: change to version 2 of the GPL.
+
+Thu Mar  7 07:33:24 1991  Karl Berry  (karl at hayley)
+
+        * Version 0.2.
+
+Mon Mar  4 15:00:02 1991  Karl Berry  (karl at hayley)
+
+        * pk_input.c: doc fix.
+
+Mon Feb 25 16:04:52 1991  Karl Berry  (karl at hayley)
+
+        * pk_input.c: use `pk_...' instead of `..._pk_...'.
+
+Sun Feb 17 09:48:32 1991  Karl Berry  (karl at hayley)
+
+        * pk_input.c: include config.h.
+
+Sat Nov 17 12:52:59 1990  Karl Berry  (karl at hayley)
+
+        * pk_input.c: include appropriate file-...h files.
+
+Sat Sep 29 09:01:25 1990  Karl Berry  (karl at hayley)
+
+        * pk_input.c (find_internal_font): return null at the end.
+
+Sun Sep  9 12:37:53 1990  Karl Berry  (karl at hayley)
+
+        * pk_input.c (pk_get_string): append a trailing null to the
+        string.
+
+Wed Aug 29 14:23:26 1990  Karl Berry  (karl at hayley)
+
+        * pk_input.c (pk_get_byte, ...): add the filename argument, and
+        rewrite as macros.
+
+Sat Aug 25 13:42:42 1990  Karl Berry  (karl at hayley)
+
+        * pk_input.c (get_bitmap): ignore bits remaining in the last byte.
+
+Wed May 30 15:32:37 1990  Karl Berry  (karl at hayley)
+
+        * pk_input.c (get_one_pk_char): give a better error message if the
+        character code is out of range; allow for it to be negative.
+
+Wed May  2 12:14:57 1990  Karl Berry  (karl at claude)
+
+	* pk_input.c (delete_internal_font): new routine.
+        (close_pk_input_file): call it, instead of doing the work here.
+
+Sun Apr 22 07:04:07 1990  Karl Berry  (karl at hayley)
+
+	* pk_input.c (unpack): off by one in calculation of the minimum row.
+
+Tue Apr 17 07:17:33 1990  Karl Berry  (karl at hayley)
+
+	* pk_input.c (pk_get_two): new routine.
+        (get_one_pk_char): call it to get the packet length in the
+        extended short format.
+
+	* pk_input.c (unpack): get the h and v_offset values as signed
+	numbers. 
+
+	* pk_input.c: make `do_upper_nybble' visible to the file, so that
+	we can set it to true before reading each character.
+
+Mon Apr 16 16:53:36 1990  Karl Berry  (karl at hayley)
+
+	* pk_input.c (get_packed_bitmap): don't overwrite the repeat count
+	for a row on a subsequent run count.
+
+	* pk_input.c (get_run_count): forgot to initialize *repeat_count
+	to zero, and to only look for it once.
+
+	* pk_input.c (data_get_nybble): returned the upper nybble when we
+	wanted the lower, and vice versa.
+
+	* pk_input.c (get_one_pk_char): tested wrong bit to see which
+	preamble format we were supposed to read.
+
+	* pk_input.c (get_one_pk_char): allocate the space for each packed
+	character before we fill it in.
+
+	* pk_input.c (get_one_pk_char): the flag byte has already been
+	read; get it as a parameter, not by reading it from the file.
+
+	* pk_input.c (get_all_pk_chars): test for a non-command first,
+	since that is so common.  And give a fatal error if we hit a
+	command that isn't undefined.

@@ -1,0 +1,146 @@
+! If you don't have the Lucida fonts (which come with X11R4), I suggest
+! the commented-out alternatives here.
+
+! Use this font for buttons:
+*Command.font: *-lucida-medium-r-normal-sans-24-*
+!*Command.font: *-helvetica-medium-r-*--24-*
+
+! Use this font when messages are popped up and for the Label in the Item.
+*Label.font: *-lucidabright-medium-r-normal--24-*
+!*Label.font: *-times-medium-r-*--24-*
+
+! Use this font for reporting the cursor position.
+*position.font: *-lucidatypewriter-medium-r-normal-sans-24-*
+!*Item.Text*font: *-courier-medium-r-*--24-*
+
+! Use this font for the text they edit.
+*Item.Text*font: *-lucidatypewriter-medium-r-normal-sans-24-*
+!*Item.Text*font: *-courier-medium-r-*--24-*
+! 
+! The values here depend on the font: the idea is to put the character
+! code on the baseline of the prompt.
+*Item.Text*topMargin: 1
+*Item.Text*bottomMargin: 3
+!*Item.Text*topMargin: 7
+!*Item.Text*bottomMargin: 4
+
+! How an item value gets changed.
+*Item.Text*translations: #override\n\
+  Ctrl<Key>M: AcceptValue() \n\
+  <Key>Return: AcceptValue()
+
+! Other random preferences; these values can be changed at will.
+Bitmap*cursor: dot
+*Bitmap.expansion: 12
+*Scrollbar.thickness: 10
+*Command.internalHeight: 2
+*Command.internalWidth: 4
+
+! We only want the expanded Bitmap (named `bitmap') to be editable, not
+! the true-size one.  So the bindings here can be changed, but don't say
+! `Bitmap' instead of `bitmap'.  I didn't define any translations for the
+! transparent AcceptPaste, since I couldn't figure out a good way to
+! specify them.
+*bitmap.translations:							\
+     <Btn1Down>:	StartSelection()				\n\
+     <Btn1Motion>:	AdjustSelection()				\n\
+     <Btn1Up>:		AcceptSelection()				\n\
+     <Btn2Down>:	StartPaste()					\n\
+     <Btn2Motion>:	MovePaste()					\n\
+  Ctrl Alt<Btn2Up>:	AcceptPaste(Opaque, FlipBoth)			\n\
+  Alt<Btn2Up>:		AcceptPaste(Opaque, FlipVertical)		\n\
+  Ctrl<Btn2Up>:		AcceptPaste(Opaque, FlipHorizontal)		\n\
+     <Btn2Up>:		AcceptPaste(Opaque, FlipNeither)		\n\
+  Alt<Btn3Down>:	FillSelection()					\n\
+     <Btn3Down>:   	InvertPixel(Discrete)				\n\
+     <Btn3Motion>: 	InvertPixel(Continuous)				\n\
+
+! Don't leave any space between the child widgets,
+! or between the Form and main window.
+*Form.borderWidth: 0
+*Form.defaultDistance: 0
+*Box.hSpace: 0
+*Box.vSpace: 0
+
+! Kern items inside the box don't need borders.  The others do.
+*Box*Item.borderWidth: 0
+*Item.borderWidth: 1
+
+! This can be changed, but I think a visible border around the true-size
+! bitmap is too distracting. The extra space separates it from its
+! neighbors.
+*Bitmap.borderWidth: 6
+*Bitmap.borderColor: XtDefaultBackground
+
+
+
+!%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+! Changing anything below here should be unnecessary, and may produce
+! incorrect actions or even crash the program.  It is simply more
+! convenient for resources to be specified here, where they can be changed
+! experimentally during development without recompilation.
+
+! Making these nonzero affects the Bitmap that is put inside the
+! Viewport, where we don't want any extra space.
+*Bitmap*internalWidth: 0
+*Bitmap*internalHeight: 0
+
+! The buttons will be in a row on the first line, and won't change size.
+*Command.top: chaintop
+*Command.bottom: chaintop
+*Command.left: chainleft
+*Command.right: chainleft
+*Command.resizable: false
+
+*Box.top: chaintop
+*Box.bottom: chaintop
+*Box.left: chainleft
+*Box.right: chainleft
+*Box.resizable: true
+
+! We don't want the position-reporting widget to change size, either.
+! This starting label is a little ugly, but it is an easy way to make
+! the width of the widget be right.
+*position.label: 000,000
+*position.top: chaintop
+*position.bottom: chaintop
+*position.left: chainleft
+*position.right: chainleft
+
+! We want the true-size bitmap to be completely visible if at all
+! possible.  And it should always be a fixed distance from the top.
+*Bitmap.top: chaintop
+*Bitmap.bottom: chaintop
+*Bitmap.right: chainleft
+
+! The Viewport (i.e., editable bitmap) shouldn't move vertically.
+*Viewport.top: chaintop
+*Viewport.left: chainleft
+
+! These tell the Form we might change the sizes of the bitmap and the
+! viewport (for example, when the user changes characters).
+*Bitmap.resizable: true
+*Viewport.resizable: true
+
+! We certainly want to allow scrollbars.
+*Viewport.allowHoriz: true
+*Viewport.allowVert: true
+
+! The Items aren't going to resize.
+*Item.top: chaintop
+*Item.bottom: chaintop
+*Item.left: chainleft
+*Item.right: chainleft
+
+! The subwidgets of the Item don't need borders.
+*Item.Label.borderWidth: 0
+*Item.Text*borderWidth: 0
+
+! We want the users to be able to edit the items.  Even though we create an
+! `AsciiText' widget, the name of the class is `Text'.
+*Item.Text*editType: edit
+*Item.Text*type: string
+*Item.Text*useStringInPlace: true
+*Item.Text*leftMargin: 0
+*Item.Text*rightMargin: 0
+*Item.Text*dataCompression: false

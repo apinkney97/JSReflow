@@ -1,0 +1,7 @@
+pk_input.o : pk_input.c ../include/config.h ../include/c-auto.h \
+  ../include/c-std.h ../include/c-memstr.h ../include/c-errno.h \
+  ../include/c-minmax.h ../include/c-limits.h ../include/c-seek.h \
+  ../include/c-proto.h ../include/global.h ../include/lib.h \
+  ../include/types.h ../include/file-input.h ../include/list.h \
+  ../include/pk.h ../include/bounding-box.h ../include/font.h \
+  ../include/bitmap.h ../include/tfm.h ../include/fix-num.h pk_opcodes.h 

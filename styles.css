@@ -1,4 +1,4 @@
-@font-face { font-family: myfont; src: url('times.ttf'); }
+@font-face { font-family: myfont; src: url('Futura.ttf'); }
 body { font-family: myfont; }
 img { border: 1px solid black; }
 .bgred { background-color: red; }

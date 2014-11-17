@@ -1,0 +1,259 @@
+% The extended TeX font encoding scheme (Latin), as specified by Cork in
+% TUGboat 11(4), November 1990, page 516.
+Extended TeX Latin
+grave
+acute
+circumflex
+tilde
+dieresis
+hungarumlaut
+ring
+caron
+breve
+macron
+dotaccent
+cedilla
+ogonek
+quotesinglbase
+guilsinglleft
+guilsinglright
+quotedblleft
+quotedblright
+quotedblbase
+guillemotleft
+guillemotright
+endash			lig - =: 026
+emdash
+compoundwordmark	% non-Adobe
+zerolowered		% non-Adobe
+dotlessi
+dotlessj		% non-Adobe
+ff			lig i =: 036 lig l =: 037
+fi
+fl
+ffi
+ffl
+visiblespace		% non-Adobe
+exclam			lig ` =: 0275
+quotedbl
+numbersign
+dollar
+percent
+ampersand
+quoteright		lig ' =: 021
+parenleft
+parenright
+asterisk
+plus
+comma
+asciihyphen		lig - =: 025
+period
+slash
+zero
+one
+two
+three
+four
+five
+six
+seven
+eight
+nine
+colon
+semicolon
+less
+equal
+greater
+question		lig ` =: 0276
+at
+A
+B
+C
+D
+E
+F
+G
+H
+I
+J
+K
+L
+M
+N
+O
+P
+Q
+R
+S
+T
+U
+V
+W
+X
+Y
+Z
+bracketleft
+backslash
+bracketright
+asciicircum
+underscore
+quoteleft		lig ` =: 020  % `` => opening double quote char
+a
+b
+c
+d
+e
+f			lig f =: 033  lig i =: 034  lig l =: 035
+g
+h
+i
+j
+k
+l
+m
+n
+o
+p
+q
+r
+s
+t
+u
+v
+w
+x
+y
+z
+braceleft
+bar
+braceright
+asciitilde
+hyphen			% non-Adobe
+Abreve			% non-Adobe
+Aogonek			% non-Adobe
+Cacute			% non-Adobe
+Ccaron			% non-Adobe
+Dcaron			% non-Adobe
+Ecaron			% non-Adobe
+Eogonek			% non-Adobe
+Gbreve			% non-Adobe
+Lacute			% non-Adobe
+Lcaron			% represented with quoteright; non-Adobe
+Lslash
+Nacute			% non-Adobe
+Ncaron			% non-Adobe
+Eng			% non-Adobe
+Ohungarumlaut		% non-Adobe
+Racute			% non-Adobe
+Rcaron			% non-Adobe
+Sacute			% non-Adobe
+Scaron
+Scedilla		% non-Adobe
+Tcaron			% non-Adobe
+Tcedilla		% non-Adobe
+Uhungarumlaut		% non-Adobe
+Uring			% non-Adobe
+Ydieresis
+Zacute			% non-Adobe
+Zcaron
+Zdot			% non-Adobe
+IJ			% non-Adobe
+Idot			% non-Adobe
+dbar			% non-Adobe
+section
+abreve			% non-Adobe
+aogonek			% non-Adobe
+cacute			% non-Adobe
+ccaron			% non-Adobe
+dcaron			% represented with quoteright; non-Adobe
+ecaron			% non-Adobe
+eogonek			% non-Adobe
+gbreve			% non-Adobe
+lacute			% non-Adobe
+lcaron			% represented with quoteright; non-Adobe
+lslash
+nacute			% non-Adobe
+ncaron			% non-Adobe
+eng			% non-Adobe
+ohungarumlaut		% non-Adobe
+racute			% non-Adobe
+rcaron			% non-Adobe
+sacute			% non-Adobe
+scaron
+scedilla		% non-Adobe
+tcaron			% represented with quoteright; non-Adobe
+tcedilla		% non-Adobe
+uhungarumlaut		% non-Adobe
+uring			% non-Adobe
+ydieresis
+zacute			% non-Adobe
+zcaron
+zdot			% non-Adobe
+ij			% non-Adobe
+exclamdown
+questiondown
+sterling
+Agrave
+Aacute
+Acircumflex
+Atilde
+Adieresis
+Aring
+AE
+Ccedilla
+Egrave
+Eacute
+Ecircumflex
+Edieresis
+Igrave
+Iacute
+Icircumflex
+Idieresis
+Eth			% non-Adobe
+Ntilde
+Ograve
+Oacute
+Ocircumflex
+Otilde
+Odieresis
+OE
+Oslash
+Ugrave
+Uacute
+Ucircumflex
+Udieresis
+Yacute			% non-Adobe
+Thorn
+germandblS		% non-Adobe
+agrave
+aacute
+acircumflex
+atilde
+adieresis
+aring
+ae
+ccedilla
+egrave
+eacute
+ecircumflex
+edieresis
+igrave
+iacute
+icircumflex
+idieresis
+eth			% non-Adobe
+ntilde
+ograve
+oacute
+ocircumflex
+otilde
+odieresis
+oe
+oslash
+ugrave
+uacute
+ucircumflex
+udieresis
+yacute			% non-Adobe
+thorn
+germandbls		% non-Adobe

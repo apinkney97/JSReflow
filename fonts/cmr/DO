@@ -1,0 +1,6 @@
+for i in `ls [a-z]*`
+do
+	f=`basename $i .pfa`
+	F=`echo $f | tr '[a-z]' '[A-Z]'`
+	echo "$f $F < /ep/typeset/fonts/cmr/$i"
+done

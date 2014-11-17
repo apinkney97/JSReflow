@@ -1,0 +1,1103 @@
+Sat Mar 28 07:49:02 1992  Karl Berry  (karl at hayley)
+
+        * Version 0.4.
+
+        * Change copyright years to 1992 only.
+
+Fri Mar 27 17:33:01 1992  Karl Berry  (karl at hayley)
+
+        * c-memstr.h (memcpy) [!(USG or STDC_HEADERS)]: change condition.
+
+
+        * c-minmax.h: make all #definitions conditional
+
+        * c-limits.h: only include <float.h> if we don't have FLT_MAX
+          already.
+
+        * c-memstr.h [!NEED_MEMORY_H]: do not declare memchr.
+
+Thu Mar 26 14:36:08 1992  Karl Berry  (karl at claude.cs.umb.edu)
+
+        * Bitmap.h [!XtCBitmap]: make the definition conditional.
+
+        * c-memstr.h: move #include <memory.h> outside of #if
+          STDC_HEADERS.
+
+Sat Mar 21 11:11:18 1992  Kathy Hargreaves  (kathy at hayley)
+Sat Mar 21 11:11:18 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * tfm.h (tfm_set_design_size): added.
+
+        * tfm.h (tfm_set_header): deleted DEFAULT_DESIGN_SIZE;
+
+        * tfm.h [TFM_CHECK_DESIGNSIZE]: changed name from CHECK_DESIGNSIZE.
+
+Thu Mar 19 17:28:34 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * tfm.h: doc fix.
+
+Thu Mar 19 07:47:58 1992  Karl Berry  (karl at hayley)
+
+        * config.h: don't include paths.h, c-pathmx.h, c-namemx.h,
+          c-pathch.h; just include them in the files where they are
+          needed.
+
+        * c-{path,name}_max.h: rename to c-*mx.h; new versions.
+        * pathsearch.h => pathsrch.h.
+
+Wed Mar 18 12:27:27 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * tfm.h (tfm_set_ligature): added.
+
+        * tfm.h (tfm_set_header): doc fix.
+
+Mon Mar 16 11:42:14 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * tfm.h [TFM_MIN_DESIGNSIZE]: added.
+
+        * tfm.h [TFM_MAX_DESIGNSIZE_PLUS_ONE]: added.
+
+Sun Mar 15 16:59:02 1992  Karl Berry  (karl at hayley)
+
+        * font.h: doc fix.
+
+Sun Mar 15 13:50:40 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * paths.h [DEFAULT_LIB_PATH]: change /u/research/data to /w/data.
+
+Tue Mar 10 15:02:27 1992  Karl Berry  (karl at hayley)
+
+        * cmdline.h (GETOPT_USAGE): new macro.
+
+Mon Mar  9 16:33:34 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * filename.h (make_stem_suffix): added.
+
+Sun Mar  8 17:09:03 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * filename.h (make_output_filename): changed comment.
+
+Sun Mar  8 05:11:50 1992  Karl Berry  (karl at fosse)
+
+        * global.h (dtoa): rename from `ftoa'.
+
+        * c-memstr.h (strstr) [!USG or STDC_HEADERS]: declare it.
+
+        * global.h (ROUND): cast the result to int, and simplify.
+
+Sat Mar  7 16:59:04 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * filename.h (sizeless_font_name): removed.
+
+Sat Mar  7 11:26:59 1992  Karl Berry  (karl at fosse)
+
+        * c-std.h [!STDC_HEADERS]: declare getenv.
+
+        * varstring.h (vs_set_char): change parameter name to avoid
+          warnings.
+
+        * c-minmax.h [!FLT_MIN]: define FLT_MIN and FLT_MAX.
+
+        * c-memstr.h [NEED_MEMORY_H]: include <memory.h> instead of
+          #defining memcpy.  
+          Also declare strtok if including <strings.h>, and memchr if
+          using #define of memcpy.
+
+Sat Mar  7 10:02:24 1992  Karl Berry  (karl at hayley)
+
+        * pbmplus.h, c-proto.h: use #if __STDC__, not #ifdef.
+
+        * config.h: break out into various files.
+
+Tue Mar  3 16:28:26 1992  Karl Berry  (karl at hayley)
+
+        * filename.h (find_suffix): new routine.
+
+Sun Mar  1 14:48:41 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * filename.h (make_output_file): added.
+
+Sun Mar  1 13:00:17 1992  Karl Berry  (karl at hayley)
+
+        * bb-outline.h, pbm.h, pbmplus.h: new files from imagetofont.
+
+Mon Feb 24 08:07:47 1992  Karl Berry  (karl at hayley)
+
+        * lib.h (X{RE,}TALLOC): cast the result to the right pointer type,
+          for the benefit of broken compilers which don't cast void *'s.
+
+        * config.h (P...): new macros to omit prototypes if not __STDC__.
+        * lib.h: new file with some declarations moved from global.h.
+        * {pathsearch,xstat,dirio}.h: use un/prototyping macros.
+
+        * global.h (ARE_EQUAL_POINTS): remove, as no one uses this anymore.
+
+        * global.h ({START,END}_{FATAL,WARNING}): use fputs instead of
+          fprintf for constant strings.
+
+Mon Feb 17 07:26:13 1992  Karl Berry  (karl at hayley)
+
+        * filename.h (sizeless_font_name): new routine.
+
+        * bzr.h (bzr_char_type): declare the character code as
+          `charcode_type'.
+
+        * hexify.h: new file.
+
+        * tfm.h: doc fixes.
+
+        * varstring.h (vs_{set,append}_char): doc fix.
+
+Sun Feb 16 11:47:27 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * tfm.h (TFM_KERN): added.
+
+Sun Feb 16 10:38:56 1992  Karl Berry  (karl at hayley)
+
+        * config.h: figure out NAME_MAX like we figure out PATH_MAX.
+
+Fri Feb 14 08:29:42 1992  Karl Berry  (karl at hayley)
+
+        * varstring.h (variable_string): add `used' field; rename `length'
+          to `allocated'.
+        (VS_USEd): new macro.
+
+        * varstring.h (vs_free): new routine.
+
+        * encoding.h (ENCODING_VECTOR_SIZE): define this.
+        (encoding_info_type): use it to define the array.
+
+Tue Feb 11 10:23:43 1992  Karl Berry  (karl at hayley)
+
+        * config.h [NEED_MEMORY_H]: include <memory.h>.
+
+        * config.h [LIMITS_H_MISSING]: include <sys/param.h>.
+
+        * config.h [STDC_HEADERS]: include <string.h> if this is defined.
+        
+Thu Feb  6 17:25:55 1992  Karl Berry  (karl at claude.cs.umb.edu)
+
+        * global.h (MIN) [!MIN]: define it conditionally.
+
+Sat Feb  1 14:54:51 1992  Karl Berry  (karl at hayley)
+
+        * filename.h (depath): remove.
+
+        * pathsearch.h (initialize_path_list): change decl to remove
+          subdir paths; that's now indicated by // ending a path element.
+        * paths.h-dist (DEFAULT_SUBDIR_PATH): remove.
+        * filename.h: doc fix.
+
+Thu Jan 16 09:27:16 1992  Karl Berry  (karl at hayley)
+
+        * global.h (MAX, MIN): remove unnecessary parens.
+
+Tue Jan 14 16:04:05 1992  Karl Berry  (karl at hayley)
+
+        * config.h: include <sys/types.h> before <unistd.h>.
+        * types.h: don't include <sys/types.h> again.
+
+Sun Jan 12 14:58:11 1992  Karl Berry  (karl at hayley)
+
+        * pathsearch.h (initialize_path_list): doc fix.
+
+Sat Jan 11 15:02:09 1992  Karl Berry  (karl at hayley)
+
+        * pathsearch.h (initialize_path_list): declare additional arg.
+
+Fri Jan 10 07:41:51 1992  Karl Berry  (karl at hayley)
+
+        * config.h (PATH_MAX): define this as the maximum length of a
+          filename.
+
+        * types.h (const_string): new type.
+
+        * config.h (DBL_MIN) [!DBL_MIN]: define it.
+
+        * tfm.h: include fix-num.h.
+
+        * varstring.h: change names to start with `vs'.
+
+        * filename.h (find_dpi): move decl to cmdline.h.
+        (basename): move to global.h.
+
+Thu Jan  9 08:41:59 1992  Karl Berry  (karl at hayley)
+
+        * global.h: don't include kbase.h; declare commonly-used routines here.
+        * kbase.h, convert.h: remove.
+
+        * cmdline.h: include getopt.h.
+        (scan_integer_list): rename to `scan_unsigned_list'.
+
+        * scaled-num.h, fix-num.h: new files.
+
+        * *.h: remove #pragma once.
+
+        * config.h: include global.h.
+
+        * config.h: update for new configuration stuff.
+
+        * types.h: include <sys/types.h>.
+
+Wed Jan  8 15:30:11 1992  Karl Berry  (karl at hayley)
+
+        * config.h: do not include conf-sys.h, as we don't need it
+          any more; change `conf-sysauto.h' to `config-auto.h'.
+
+        * update copyright messages.
+
+        * change `allocate to `xmalloc', `reallocate' to `xrealloc', and
+          `string_copy' to `strdup'.
+
+Tue Jan  7 17:26:38 1992  Karl Berry  (karl at hayley)
+
+        * bitmap.h: doc fix.
+
+Mon Dec 23 16:47:05 1991  Karl Berry  (karl at hayley)
+
+        * encoding.h (encoding_number): new declaration.
+
+Fri Nov 22 16:38:13 1991  Karl Berry  (karl at hayley)
+
+        * tfm.h (TFM_VERSION_PARAMETER): new font parameter.
+
+Wed Nov 20 08:38:28 1991  Karl Berry  (karl at hayley)
+
+        * varstring.h: doc fix.
+
+Tue Oct  1 11:55:29 1991  Karl Berry  (karl at hayley)
+
+        * Bitmap.h: document FillSelection.
+
+Tue Jul 30 13:18:57 1991  Karl Berry  (karl at ra.cs.umb.edu)
+
+        * Version 0.3.
+
+Fri Jul 26 10:37:51 1991  Karl Berry  (karl at hayley)
+
+        * vector.h: doc fix.
+
+Wed Jul 24 06:32:44 1991  Karl Berry  (karl at hayley)
+
+        * bitmap.h (concat_bitmaps): remove.
+
+        * kbase.h (xcalloc): new fn declaration.
+
+Fri Jul 19 09:39:58 1991  Karl Berry  (karl at hayley)
+
+        * paths.h-dist (DEFAULT_LIB_PATH): the envvar is FONTUTIL_LIB, not
+          AUX_FONT_FILES.
+
+        * global.h [STDLIB_H]: reverse conditional, to STDLIB_H_MISSING.
+
+Tue Jul 16 08:25:49 1991  Karl Berry  (karl at hayley)
+
+        * bitmap.h: doc fix.
+
+Mon Jul 15 18:02:28 1991  Karl Berry  (karl at hayley)
+
+        * convert.h (POINTS_TO_PIXELS): round the result after adding .5,
+          not before.
+
+Fri Jul  5 07:54:04 1991  Karl Berry  (karl at hayley)
+
+        * xt-common.h (DEFINE_RESOURCE): take the field name as an arg.
+        (IMMEDIATE_RESOURCE2): new macro.
+        (IMMEDIATE_RESOURCE): call above.
+
+        * xt-common.h (Pointer): define to be a synonym for XtPointer.
+
+        * kbase.h (XRETALLOC): new macro to go with XTALLOC.
+
+Thu Jul  4 16:20:53 1991  Karl Berry  (karl at hayley)
+
+        * convert.h (POINTS_TO_PIXELS): round the result.
+
+Sun Jun 30 09:13:26 1991  Karl Berry  (karl at hayley)
+
+        * xt-common.h (DEFINE_RESOURCE, IMMEDIATE_RESOURCE,
+          STRING_RESOURCE): new macros.
+
+        * Item.h: include types.h.
+
+Thu Jun 27 11:26:58 1991  Karl Berry  (karl at hayley)
+
+        * xt-common.h (XFIND_WIDGET): improve error message.
+
+        * Bitmap.h: include bitmap.h.
+
+        * font.h (get_char, get_raw_char, raw_char_type): use
+          `charcode_type' for the character codes.
+
+Tue Jun 25 08:54:57 1991  Karl Berry  (karl at hayley)
+
+        * Bitmap.h (BITMAP_DEFAULT_EXPANSION): new symbol.
+
+Thu Jun 20 08:06:07 1991  Karl Berry  (karl at hayley)
+
+        * xt-common.h (XFIND_WIDGET): safeguard against a collision with
+          the name `w'.
+
+        * types.h (charcode_type): define to be `one_byte', not `int'.  
+
+        * tfm.h (tfm_global_info_type): use `charcode_type' for the
+          character codes.
+        * font.h (char_info_type): likewise.
+
+Tue Jun 18 07:05:03 1991  Karl Berry  (karl at hayley)
+
+        * xt-common.h (XFIND_WIDGET): new macro.
+
+Mon Jun 17 09:52:44 1991  Karl Berry  (karl at hayley)
+
+        * xt-common.h (XTPARSE_CHAR_CODE): new macro.
+
+        * Item.h (ItemGetLabelString): new fn.
+
+        * global.h (PIXELS_TO_POINTS): move to convert.h.
+        * convert.h (POINTS_TO_PIXELS): new macro.
+
+        * xt-common.h (XTARG, SINGLE_CALLBACK, DECLARE_BUTTON,
+          DEFINE_BUTTON): new macros.
+
+Sat Jun 15 09:23:41 1991  Karl Berry  (karl at hayley)
+
+        * font.h (font_info_type): new member `tfm_filename'.
+        (FONT_TFM_FILENAME): new macro to get it.
+
+        * file-misc.h (xmove_file): new routine.
+
+        * tfm.h (tfm_char_type): new member `code'.
+
+        * tfm.h (tfm_put_char): new routine.
+
+        * font.h (get_bitmap_font): doc fix.
+
+        * {dirio,font-open,font-misc}.h: change `checked_' to `x'.
+
+        * font.h (font_info_type): new member `tfm_font'.
+        (FONT_TFM_FONT): new macro to get it.
+
+Wed Jun 12 10:48:42 1991  Karl Berry  (karl at hayley)
+
+        * font.h (CHAR_BITMAP_{WIDTH,HEIGHT}, CHAR_{MIN,MAX}_{COL,ROW}):
+          remove extra parentheses.
+
+Tue Jun 11 15:06:04 1991  Karl Berry  (karl at hayley)
+
+        * tfm.h (tfm_ligature_type, tfm_kern_type): use `charcode_type'
+          instead of `one_byte'.
+        (tfm_{g,s}et_kern): likewise.
+
+        * kbase.h (XTALLOC): new macro to allocate N items of a particular
+          type.
+
+Sun Jun  9 11:14:40 1991  Karl Berry  (karl at hayley)
+
+        * font.h (CHAR_BITMAP_PIXEL): remove this.
+
+Thu Jun  6 07:29:43 1991  Karl Berry  (karl at hayley)
+
+        * All files: change to version 2 of the GPL.
+
+Fri May 31 14:31:51 1991  Kathy Hargreaves  (kathy at hayley)
+
+        * cmdline.h (GET_PERCENT): Changed test of temp to be > 100, not
+          >= 100.
+
+Wed May 29 15:54:41 1991  Kathy Hargreaves  (kathy at hayley)
+
+        * cmdline.h (ARGUMENT_IS): Remove unnecesary surrounding parens.
+
+Tue May 21 10:49:16 1991  Karl Berry  (karl at hayley)
+
+        * tfm.h (tfm_get_char): new routine.
+
+        * types.h (file_descriptor_type): delete.
+        (charcode_type): new type definition.
+
+Thu May 16 07:36:07 1991  Karl Berry  (karl at hayley)
+
+        * font.h: doc fix.
+
+        * xmessage.h: new file.
+
+Fri Apr 26 15:29:32 1991  Karl Berry  (karl at hayley)
+
+        * global.h (SIGN, MAX_EQUALS, MIN_EQUALS): new macros.
+
+Sun Apr 21 17:34:20 1991  Karl Berry  (karl at hayley)
+
+        * bitmap.h (VALID_LOCATION): rename to `BITMAP_VALID_PIXEL'.
+        (bitmap_to_bb): declare the arg as const.
+
+Mon Apr 15 14:06:32 1991  Karl Berry  (karl at hayley)
+
+        * encoding.h: doc fix.
+
+Sat Apr 13 17:38:43 1991  Karl Berry  (karl at hayley)
+
+        * libfile.h: doc fix.
+
+Fri Apr 12 15:12:12 1991  Karl Berry  (karl at hayley)
+
+        * logreport.h: new file.
+
+Mon Apr  8 08:39:19 1991  Karl Berry  (karl at hayley)
+
+        * font.h (ascender_part): remove declaration.
+
+Sun Apr  7 14:30:30 1991  Karl Berry  (karl at hayley)
+
+        * file-output.c (put_signed_two, put_signed_byte): new routines.
+        (put_signed_four): make a #define.
+
+Tue Apr  2 06:40:10 1991  Karl Berry  (karl at hayley)
+
+        * tfm.h (TFM_AXISHEIGHT_PARAMETER): I omitted the parameter number
+          for this (22).
+
+Mon Apr  1 07:53:15 1991  Karl Berry  (karl at hayley)
+
+        * encoding.h, libfile.h: new files.
+
+Sun Mar 31 14:45:03 1991  Karl Berry  (karl at hayley)
+
+        * font.h (get_char): doc fix.
+
+Sat Mar 23 16:23:31 1991  Karl Berry  (karl at hayley)
+
+        * tfm.h: doc fix.
+
+Mon Mar 11 09:24:01 1991  Karl Berry  (karl at hayley)
+
+        * bzr.h (bzr_preamble_type): remove the member `space'.
+        (BZR_SPACE): remove this macro.
+
+Sun Mar 10 10:19:39 1991  Karl Berry  (karl at hayley)
+
+        * tfm.h (tfm_global_info_type): new member `parameter_count'.
+        (TFM_FONT_PARAMETER_COUNT): new macro to get it.
+
+        * tfm.h (tfm_init_global_info): declare this.
+
+Sat Mar  9 17:00:11 1991  Karl Berry  (karl at hayley)
+
+        * tfm.h (TFM_CHECKSUM, TFM_DESIGN_SIZE, TFM_CODING_SCHEME): new
+          accessor macros for `tfm_global_info_type'.
+        (TFM_MAX_FONT_PARAMETERS): define this.
+        (tfm_global_info_type): define the parameters as an array, instead
+          of as separate members.
+        (TFM_FONT_PARAMETER): new macro to get at the parameters.
+        
+        * kbase.h (string functions): declare args as const.
+
+        * kbase.h (lowercasify): declare this.
+
+Thu Mar  7 07:26:19 1991  Karl Berry  (karl at hayley)
+
+        * Version 0.2.
+
+        * cmdline.h: include filename.h.
+
+Wed Mar  6 10:23:28 1991  Kathy Hargreaves  (kathy at hayley)
+
+        * global.h (LIB_ENVVAR): define to be `FONTUTIL_LIB' instead of
+          `FIT_OUTLINES'.
+
+Tue Mar  5 14:39:35 1991  Karl Berry  (karl at hayley)
+
+        * font.h (CHAR_HEIGHT, CHAR_DEPTH): use CHAR_MAX_ROW and
+          CHAR_MIN_ROW.
+
+        * tfm.h: doc fix.
+
+Mon Feb 25 15:15:56 1991  Karl Berry  (karl at hayley)
+
+        * font.h: doc fix.
+
+        * gf.h (new_gf_postamble): remove declaration.
+
+        * gf.h: change names to start with `gf_'.
+
+        * pk.h: change names to start with `pk_'.
+
+        * tfm.h (tfm_convert_pl): take a new parameter to say whether we
+          should run silently.
+
+        * tfm.h: change names to start with `tfm_'.
+
+        * bzr.h: change names to start with `bzr_'.
+
+Sun Feb 24 12:40:22 1991  Karl Berry  (karl at ra.cs.umb.edu)
+
+        * global.h (scanf) [!POSIX]: declare for SunOS4.1.
+
+        * global.h (abs, atoi, free, malloc, rand) [BSD4 || SUNOS4_0]:
+          declare conditionally.
+
+        * global.h [HAVE_STDLIB_H]: include <stdlib.h> based on this,
+          instead of _POSIX_SOURCE.
+
+Sat Feb 16 16:50:14 1991  Karl Berry  (karl at hayley)
+
+        * global.h [USE_MEMORY_H]: change conditional for including
+          <memory.h>.
+
+        * dirio.h (directory_entry_type) [DIRENT]: change conditional from
+          being on `BSD43'.
+        (checked_lstat) [HAVE_SYMBOLIC_LINKS]: change conditional from
+        being on S_IFLNK and S_ISLNK.
+
+        * global.h (LIB_ENVVAR): new symbol to define the envvar with
+          which we look up our auxiliary files.
+
+Tue Jan 29 10:06:33 1991  Karl Berry  (karl at hayley)
+
+        * vector.h: doc fix.
+
+Mon Jan 28 16:53:21 1991  Karl Berry  (karl at hayley)
+
+        * global.h [!RAND_MAX]: define it.
+
+Wed Jan 23 16:25:00 1991  Karl Berry  (karl at hayley)
+
+        * Bitmap.h: document the new actions.
+
+Tue Jan 22 15:44:20 1991  Karl Berry  (karl at hayley)
+
+        * bitmap.h (extract_subbitmap): new routine from imgtogf.
+
+Mon Jan 21 16:11:23 1991  Karl Berry  (karl at hayley)
+
+        * xt-common.h (action_proc_type): new typedef.
+
+Sat Jan 19 06:34:59 1991  Karl Berry  (karl at hayley)
+
+        * Item.h (ItemGetValueWidget): new routine.
+
+        * Bitmap.h (BitmapExpansion): new routine.
+
+Fri Jan 18 08:03:23 1991  Karl Berry  (karl at hayley)
+
+        * vector.h: declare args to be const.
+
+        * vector.h (Vabs): new routine.
+
+Tue Jan 15 15:26:29 1991  Karl Berry  (karl at hayley)
+
+        * spline.h (NEXT_SPLINE_LIST_ELT, PREV_SPLINE_LIST_ELT): new
+          macros.
+
+        * bzr.h (bzr_char_type): the shape is now a spline list array.
+
+        * spline.h (LAST_SPLINE_LIST_ELT): new macro.
+
+        * spline.h (spline_list_array_type): new type, plus the macros to
+          access the fields.
+        (new_spline_list_array, free_spline_list_array,
+         append_spline_list): declare the new routines.
+
+        * spline.h (append_spline_list): rename to concat_spline_lists.
+
+Sun Jan 13 15:29:36 1991  Karl Berry  (karl at hayley)
+
+        * font.h (raw_char_type): move raw_gf_char_type to here, plus the
+          macros.  Add the `bitmap_format' field, and `bitmap_format_type'
+          from font.c.
+        (get_raw_char, free_raw_char): declare these.
+
+Sat Jan 12 14:54:18 1991  Karl Berry  (karl at hayley)
+
+        * gf.h (raw_gf_char_type): new type, plus macros to access the
+          fields.
+        (get_raw_gf_char, put_raw_gf_char): declare these new routines.
+
+Mon Jan  7 15:54:11 1991  Karl Berry  (karl at hayley)
+
+        * spline.h (spline_type): add a `linearity' member and accessor
+          macro.
+
+Wed Dec 12 15:49:43 1990  Karl Berry  (karl at ra.cs.umb.edu)
+
+        * global.h (random) [not _POSIX_SOURCE]: declare it.
+
+        * global.h (S_ISDIR) [not S_ISDIR]: change condition from
+          POSIX_SOURCE, since some non-POSIX systems define it.
+
+        * global.h: make declarations based on SunOS4_0 instead of SunOS4,
+          because now we have to distinguish SunOS 4.1, also.
+
+Sun Dec  9 11:08:49 1990  Karl Berry  (karl at hayley)
+
+        * bzr.h (bzr_char_type): change the member name to `bb', so the
+          CHAR_... macros will work.
+        (BZR_CHAR_BB): change accordingly.
+
+        * bzr.h (BZR_CHAR_CODE, BZR_SET_WIDTH): remove, the CHAR_...
+          routines will do.
+
+        * dirio.h (checked_chdir, checked_stat, checked_lstat, getwd):
+          declare these new routines.
+        (checked_opendir, is_dir): declare the arguments const.
+
+Sat Nov 17 11:10:13 1990  Karl Berry  (karl at hayley)
+
+        * kbase.h: don't include the file routines.
+
+        * kbase.h (distance): declare this.
+
+Tue Oct  9 08:56:06 1990  Karl Berry  (karl at hayley)
+
+        * cmdline.h (scan_integer_list): declare this.
+
+Mon Oct  8 09:01:36 1990  Karl Berry  (karl at hayley)
+
+        * cmdline.h (FINISH_COMMAND_LINE): only look for the resolution if
+          CMDLINE_NO_DPI is undefined.
+
+        * cmdline.h: new file.
+        * global.h (ARGUMENT_IS, GET_PERCENT, GET_RANGE): move to cmdline.h.
+
+        * filename.h (find_dpi): new routine.
+
+Wed Oct  3 07:20:57 1990  Karl Berry  (karl at hayley)
+
+        * file-misc.h (same_file_p): doc fix.
+
+        * filename.h (find_pk_filename, find_gf_filename,
+          find_tfm_filename): new routines.
+
+Fri Sep 28 10:15:59 1990  Karl Berry  (karl at hayley)
+
+        * global.h (M_PI) [!_POSIX_SOURCE]: define this.
+
+Thu Sep 27 11:59:55 1990  Karl Berry  (karl at hayley)
+
+        * global.h (chdir): declare it.
+
+        * filename.h (find_subdir_path_filename): new routine.
+
+Mon Sep 24 16:39:39 1990  Karl Berry  (karl at claude)
+
+        * global.h [!_POSIX_SOURCE] (S_ISDIR): don't give the `.st_mode'.
+
+        * global.h [SunOS40]: include <memory.h>.
+
+        * global.h: use the symbol SunOS40, not SunOS4.
+
+Sun Sep 23 20:18:56 1990  Karl Berry  (karl at claude)
+
+        * global.h: always include <string.h>; define stdio functions if
+        either BSD43 or SunOS4 are defined.
+
+Fri Sep 21 08:25:22 1990  Karl Berry  (karl at hayley)
+
+        * global.h (S_ISDIR) [!_POSIX_SOURCE]: new macro.
+
+        * global.h [BSD43]: conditionally include <string.h> or else
+        <memory.h> and <strings.h>.
+
+        * global.h [!USG]: declare functions conditionally based on BSD43,
+        not !USG.
+        * dirio.h: likewise.
+
+Thu Sep 13 10:38:43 1990  Karl Berry  (karl at hayley)
+
+        * convert.h (xparse_char_code): new routine.
+        (parse_char_code): return a status indicator.
+        * global.h (GET_RANGE): use it.
+
+        * convert.h (all routines): declare parameters as const.
+
+        * font.h (PARSE_CHAR_CODE): rewrite as a routine, in
+        kbase/convert.c.
+        * convert.h (parse_char_code): declare it.
+
+Sun Sep  9 07:14:02 1990  Karl Berry  (karl at hayley)
+
+        * font.h (PARSE_CHAR_CODE): test if the character code is less
+        than zero, not less than -1.
+
+        * convert.h: new file.
+        * kbase.h: include it.
+
+Sat Sep  8 10:06:44 1990  Karl Berry  (karl at hayley)
+
+        * global.h (GET_RANGE): new macro to read a character range
+        argument.
+
+        * font.h (PARSE_CHAR_CODE): new macro.
+
+Thu Sep  6 09:01:01 1990  Karl Berry  (karl at hayley)
+
+        * bitmap.h (new_bitmap): say that the bitmap is initialized to
+        white.
+
+Mon Sep  3 11:06:25 1990  Karl Berry  (karl at hayley)
+
+        * line.h (read_line): say the string is dynamically allocated.
+
+Sat Sep  1 09:38:31 1990  Karl Berry  (karl at hayley)
+
+        * report.h (REPORT*): print to stderr, instead of stdout.
+
+Fri Aug 31 08:38:31 1990  Karl Berry  (karl at hayley)
+
+        * global.h: declare getpid and unlink.
+
+        * font.h (get_bitmap_font, bitmap_font_type): new routine, and the
+        structure it returns.
+
+Thu Aug 30 16:29:33 1990  Karl Berry  (karl at hayley)
+
+        * systypes.h: define __TYPES__, for the sake of X.
+
+Wed Aug 29 11:05:25 1990  Karl Berry  (karl at hayley)
+
+        * kbase.h: split up declarations of file functions into new files
+        `file-input.h', `file-output.h', `file-open.h', and `file-misc.h'.
+
+Thu Aug 23 07:15:38 1990  Karl Berry  (karl at hayley)
+
+        * filename.h (remove_suffix): new routine.  Also, declare all the
+        others to take `const string's instead of just `string's.
+
+Tue Aug 21 11:30:14 1990  Karl Berry  (karl at hayley)
+
+        * report.h: new file.
+
+        * global.h (STREQ): new macro.
+
+Sat Aug  4 14:00:13 1990  Karl Berry  (karl at hayley)
+
+        * global.h: use `USG' for the conditional, instead of `USGr3'.
+        * dirio.h: likewise.
+
+Wed Jul 25 08:19:28 1990  Karl Berry  (karl at hayley)
+
+        * kbase.h (concat5): new routine.
+
+Tue Jul 24 10:24:35 1990  Karl Berry  (karl at hayley)
+
+        * font.c (font_info_type): new member for the design size in
+        points.
+
+        * filename.h: new file.
+        * kbase.h (make_suffix, find_path_filename): move declarations to
+        it.
+
+        * gf.h (put_gf_postamble): doc fix.
+
+        * font.h (char_info_type): define a new field for the TFM width
+        and a macro to get it.
+
+Sun Jul 22 10:44:31 1990  Karl Berry  (karl at hayley)
+
+        * font.h (get_char): doc fix.
+
+Sat Jul 21 08:57:24 1990  Karl Berry  (karl at hayley)
+
+        * global.h (sleep): declare this standard library function.
+
+Fri Jul 20 15:20:43 1990  Karl Berry  (karl at hayley)
+
+        * global.h (PIXELS_TO_POINTS): define this.
+
+Thu Jul 19 15:10:08 1990  Karl Berry  (karl at aten)
+
+        * global.h [!USGr3]: declare sscanf.
+
+        * global.h: include <memory.h>
+
+Mon Jul 16 07:25:06 1990  Karl Berry  (karl at hayley)
+
+        * bitmap.h (bitmap_to_bb): new routine.
+
+Tue Jul 10 06:09:55 1990  Karl Berry  (karl at hayley)
+
+        * bitmap.h (BITMAP_ROW): new macro.
+
+        * bitmap.h (concat_bitmaps): declare this.
+
+        * spline.h: doc fix.
+
+Mon Jul  9 11:04:20 1990  Karl Berry  (karl at hayley)
+
+        * bitmap.h (get_bitmap_bounding_box): remove declaration.
+
+Sat Jul  7 11:37:21 1990  Karl Berry  (karl at hayley)
+
+        * line.h (read_line): doc fix.
+
+        * global.h (GET_PERCENT): new macro.
+
+Wed Jul  4 12:05:41 1990  Karl Berry  (karl at hayley)
+
+        * bounding-box.h (BB_WIDTH): don't add 1, to make it work with the
+        GF routines.
+
+        * bounding-box.h (update_bounding_box): declare this.
+
+Sun Jul  1 15:11:46 1990  Karl Berry  (karl at hayley)
+
+        * font.h (ascender_part): declare this.
+
+Tue Jun 26 11:27:03 1990  Karl Berry  (karl at hayley)
+
+        * vector.h (Padd, Pmult_scalar): define as macros.
+
+Tue Jun 19 10:18:48 1990  Karl Berry  (karl at hayley)
+
+        * kbase.h (move_to_byte): delete this.
+        (cur_pos): rename to `checked_ftell', and take a string argument.
+
+        * bzr.h (bzr_preamble_type): add the interword space.
+        (bzr_postamble_type): add the number of characters.
+        (get_next_bzr_char): delete this, and add get_bzr_char, to get a
+        specific character.
+
+Mon Jun  4 16:21:56 1990  Karl Berry  (karl at hayley)
+
+        * spline.h (spline_bounding_box): remove this declaration.
+
+Sun Jun  3 11:22:58 1990  Karl Berry  (karl at hayley)
+
+        * kbase.h, vector.h: add const declarations.
+
+        * all files: use `(void)' in the prototypes where appropriate.
+
+Sat Jun  2 07:56:01 1990  Karl Berry  (karl at hayley)
+
+        * bounding-box (update_real_bounding_box): declare this.
+
+        * bounding-box.h (increase_int_bound): remove this.
+
+        * font.h, spline.h: include <stdio.h>, since we use FILE.
+
+        * spline.h (SPLINE_LIST_LENGTH, SPLINE_LIST_DATA,
+        SPLINE_LIST_ELT): new accessor macros.
+
+Wed May 30 16:20:35 1990  Karl Berry  (karl at hayley)
+
+        * tfm.h (tfm_char_type): add a new member, `exists', since a width
+        of zero does not imply the character does not exist.
+
+Sat May 26 08:19:24 1990  Karl Berry  (karl at hayley)
+
+        * varstring.h (variable_string): remove the structure tag, since
+        it was only needed for an old version of gdb.
+
+Sat May 19 12:27:35 1990  Karl Berry  (karl at hayley)
+
+        * global.h: declare the functions if USGr3 is not defined, instead
+        of the hardware types.
+
+Sun May 13 14:33:52 1990  Karl Berry  (karl at hayley)
+
+	* dirio.h (is_dir): declare this.
+
+Sat May 12 08:35:44 1990  Karl Berry  (karl at hayley)
+
+	* list.h (LIST_DATA): new macro to get the entire array.
+
+Thu May  3 08:40:53 1990  Karl Berry  (karl at hayley)
+
+	* tfm.h (TFM_FIX_WIDTH): new accessor macro.
+
+	* gf.h (new_gf_char): remove declaration.
+
+Sun Apr 22 14:51:51 1990  Karl Berry  (karl at aten)
+
+	* font.h (CHAR_HEIGHT): don't return the boolean value.
+        Also, forgot to include the baseline row.
+
+	* font.h (font_info_type): remove the `height' and `depth' members.
+
+Wed Apr 18 15:54:09 1990  Karl Berry  (karl at aten)
+
+	* global.h [!i386]: declare sprintf, scanf.
+
+Sat Apr 14 14:53:23 1990  Karl Berry  (karl at hayley)
+
+	* kbase.h (checked_fclose): declare it.
+
+Thu Apr 12 12:19:19 1990  Karl Berry  (karl at hayley)
+
+	* list.h (LIST_ELT, LIST_SIZE): define these macros to use the
+        list_type structure.
+
+	* types.h (REAL): take this type out; `real' will suffice.
+        (COMPLEX): rename this type to `complex'.
+
+	* kbase.h (find_path_name): new argument for a default path.
+
+	* global.h: declare access(2) and an access_bit_type for its
+	second argument.
+
+Tue Apr 10 07:14:38 1990  Karl Berry  (karl at hayley)
+
+	* global.h (MAX): only define it if it's not already defined.
+
+Sun Apr  8 10:32:18 1990  Karl Berry  (karl at hayley)
+
+	* bitmap.h (BITMAP_DIMENSIONS, ...): upcase names.
+        (BITMAP_BITS): new macro to access the bitmap pointer itself.
+
+	* global.h: (max, min, ...): upcase names.
+
+	* global.h (MAX_BOUND): only define it if it isn't already defined.
+
+	* types.h (dimensions_width, dimensions_height): upcase names.
+
+	* bounding-box.h (get_min_row, ...): change names to MIN_ROW, ...
+
+	* gf.h (GF_CHECKSUM, GF_FONT_BB): new accessor macros.
+
+	* tfm.h (tfm_get_checksum): declare this new routine.
+
+	* types.h (fix_word): describe it as well as define it.
+
+	* gf.h (gf_postamble_type): remove the special parameters; they
+	aren't needed anymore.
+        generic.h (generic_char_type): ditto.
+
+	* generic.h (generic_char_type): change the names of some of the
+	members, for consistency with the pk names.
+
+Fri Apr  6 11:55:26 1990  Karl Berry  (karl at hayley)
+
+	* tfm.h: rename `get_interword_space' to `tfm_get_interword_space'.
+
+Fri Mar 16 19:52:12 1990  Karl Berry  (karl at hayley)
+
+	* global.h (ARGUMENT_IS): update for new version of getopt.
+
+Fri Feb 23 08:16:34 1990  Karl Berry  (karl at hayley)
+
+	* tfm.h (tfm_char_type): add fix_width et al. to the structure.
+
+	* all files: add #pragma once.
+
+Wed Feb  7 17:20:51 1990  Karl Berry  (karl at hayley)
+
+	* tfm.h (tfm_get_design_size): new routine.
+        (tfm_get_coding_scheme): rename `get_coding_scheme'.
+
+Mon Jan 29 12:27:32 1990  Karl Berry  (karl at hayley)
+
+	* dirio.h: use USGr3 instead of i386 for the conditional.
+
+	* kbase.h (atou): declare it.
+
+	* global.h (ARGUMENT_IS): macro for use with getopt.
+
+Wed Jan 24 17:43:36 1990  Karl Berry  (karl at hayley)
+
+	* gf.h (ascender_part): declare it.
+
+Sun Jan 21 09:52:23 1990  Karl Berry  (karl at hayley)
+
+	* bounding_box.h (dimensions_to_bounding_box): rename to
+	dimensions_to_bb.  Also, remove various other conversion routines
+        that are now unused.  And rename the file to bounding-box.h.
+
+Fri Dec 22 17:32:04 1989  Karl Berry  (karl at hayley)
+
+	* tfm.h (tfm_get_x_height): new routine. 
+
+Fri Nov 17 07:46:51 1989  Karl Berry  (karl at hayley)
+
+	* types.h: only #define FALSE and TRUE if they are not already
+	defined.  (The X library defines them.)
+
+Tue Nov 14 22:57:50 1989  Karl Berry  (karl at hayley)
+
+	* global.h: add declaration for putenv.
+
+Mon Nov 13 08:18:21 1989  Karl Berry  (karl at hayley)
+
+	* global.h: add declaration for calloc.
+
+Sun Nov 12 20:19:07 1989  Karl Berry  (karl at hayley)
+
+	* global.h (get_string_argument, get_real_argument,
+	get_integer_argument): give error message if we don't have an
+	argument to get.
+
+Sat Nov 11 17:37:57 1989  Karl Berry  (karl at hayley)
+
+	* global.h (max, min): parenthesize arguments properly.
+
+Sun Nov  5 08:28:25 1989  Karl Berry  (karl at hayley)
+
+	* global.h (start_fatal, start_warning, end_fatal, end_warning):
+	swallow a trailing semicolon.
+        (print?): delete these.
+
+Mon Oct 30 12:36:38 1989  Karl Berry  (karl at hayley)
+
+	* all files: add the copyleft.
+
+	* kbase.h (concat4): declare this.
+
+	* tfm.h (put_tfm_global_info): take a structure, not a pointer.
+        (new_tfm_chars, new_tfm_char): declare these.
+        (TFM_SIZE): use this, instead of 256, even though it will never change.
+           
+Sun Oct 29 08:03:46 1989  Karl Berry  (karl at hayley)
+
+	* global.h [! i386 || sun386]: declaration for strtok.  Also add
+	prototypes for most routines.
+
+	* tfm.h (put_pl_output_file): break this up into two new routines,
+	put_tfm_global_info and put_tfm_chars.
+
+Sat Oct 28 15:36:41 1989  Karl Berry  (karl at hayley)
+
+	* kbase.h (put_three): declaration for this.
+
+	* types.h (THREE_BYTES_BIG): define this (1 << 24).
+
+Fri Oct 27 22:14:37 1989  Karl Berry  (karl at hayley)
+
+	* types.h, bitmap.h, gf.h, generic.h: cosmetic changes
+        (via indent -gnu). 
+
+Wed Oct 18 18:43:38 1989  Karl Berry  (karl at ice9)
+
+	* global.h: the externs previously conditional on __i386__ are now
+	included also if the machine is a Sun 386i, i.e., they are
+	conditional on ! __i386__ || __sun386__.
+
+Sat Oct 14 16:04:31 1989  Kathy Hargreaves  (kathy at hayley)
+
+	* types.h: added dimensions_height and dimensions_width macros.
+
+Fri Oct 13 21:33:15 1989  Kathy Hargreaves  (kathy at hayley)
+
+	* global.h: define POINTS_PER_INCH.
+
+	* global.h: change preprocessor symbol to __i386__ for -ansi's sake.
+
+Wed Oct 11 17:00:02 1989  Karl Berry  (karl at mote)
+
+	* global.h [not i386]: externs for fflush, ungetc, and fscanf.
+
+	* dirio.h: system V calls a directory entry a `struct dirent *',
+	but BSD calls it a `struct direct *'.  Make directory_entry_type
+	typedef to handle this, ifdefed on i386.
+
+Sun Oct  8 18:52:10 1989  Karl Berry  (karl at hayley)
+
+	* kbase.h (epsilon_equal): declare this.
+        (REAL_EPSILON): define this for use by epsilon_equal and clients.
+
+	* bitmap.h (free_bitmap): declare this.
+
+Fri Oct  6 19:15:31 1989  Karl Berry  (karl at hayley)
+
+	* global.h: fflush stdout and stderr after warnings, to prevent
+	timing problems.
+
+	* gf.h (print_gf_char): take a FILE * parameter.

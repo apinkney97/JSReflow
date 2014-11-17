@@ -1,0 +1,4 @@
+
+Other utility programs exist for handling the X11 BDF format
+(specifically, bdf2gf and gfto); if enough people care or if someone
+writes the code, I will merge in support for the BDF format someday.

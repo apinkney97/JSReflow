@@ -1,0 +1,149 @@
+#!/bin/sh
+# 
+# Shell script to invoke Ghostscript on a font, create an image, and
+# then run imagetofont to get a bitmap font.  (Can then run
+# fontconvert to get a tfm.)
+
+version=0.4
+
+# Set defaults.
+resolution=300
+point_size=10
+encoding=dvips
+map_file=/usr/local/lib/tex/dvips/psfonts.map
+
+usage='Usage: gsrenderfont [options] [<filename>].
+  You can abbreviate option names unambiguously.
+  The <filename> should be without extension, e.g., `phvr'"'"'.  Default is
+    to look for the filename corresponding to the given <fontname> in the
+    mapping file.
+  Either the <filename> or -fontname must be supplied.
+Options:
+-dpi <integer>: render at a resolution of <integer> dots per inch;
+  default is 300.
+-encoding <encodingscheme>: use <encodingscheme> for the
+  output font, i.e., look for <encodingscheme>.enc; default is `dvips'"'"'.
+-fontname <fontname>: look for the PostScript font <fontname>.  Default
+  is to look for the <fontname> corresponding to the given <filename> in
+  the mapping file.
+-help: print this message.
+-mapfile <filename>: use <filename> for the mapping file;
+  default is '$map_file'.
+-point-size <integer>: render the font at <integer> printer'"'"'s points;
+  default is 10.
+-verbose: print brief progress reports.
+-version: print the version number of this program and the others it calls.'
+
+# Figure out arguments.
+while test $# -gt 0
+do
+  case $1 in
+  -d*) shift
+       resolution=$1
+       ;;
+  -e*) shift
+       encoding=$1
+       ;;
+  -f*) shift
+       fontname=$1
+       ;;
+  -h*) echo "$usage"
+       exit 0
+       ;;
+  -m*) shift
+       mapfile=$1
+       ;;
+  -p*) shift
+       point_size=$1
+       ;;
+  -verb*) verbose="$verbose -verbose"
+          ;;
+  -vers*) verbose="$verbose -version"
+          printed_version=t
+          echo "gsrenderfont version $version"
+          ;;
+  *)   if test -z "$filename"
+       then filename=$1
+       else
+         echo "Too many filenames.  Use -help for more information."
+         exit 1
+       fi
+       ;;
+  esac
+  shift
+done
+
+# If they just wanted the version number, exit.
+if test -z "$filename" -a -z "$fontname" -a -n "$printed_version"
+then exit 0
+fi
+
+# If they gave us a filename and no fontname or vice versa, try to get
+# the missing name from the map file.  Each line in the map file looks like
+# r<filename> <fontname> <stuff we ignore>
+# 
+# The filename has an `r' in front because it specifies the raw fonts,
+# not the virtual ones.
+if test -r $map_file
+then
+  if test -n "$filename" -a -z "$fontname"
+  then fontname=`awk "/^r$filename[ 	]/ {print "'$2}' $map_file`
+  elif test -z "$filename" -a -n "$fontname"
+  then filename=`awk "/[ 	]$fontname[ 	]/ {print $1}" $map_file`
+  fi
+fi
+
+# We need both a filename and a fontname to do anything.
+if test -z "$filename" -o -z "$fontname"
+then
+  echo 'Either a fontname (e.g., Helvetica) or a filename (e.g., phvr)'
+  echo "are needed.  Use -help for more information."
+  exit 1
+fi
+
+# We need the lib path for encoding files.
+if test -n "$FONTUTIL_LIB"
+then lib_path=$FONTUTIL_LIB
+#else lib_path=REPLACE-WITH-DEFAULT-LIB-PATH
+else lib_path=../data
+fi
+
+# Run Ghostscript.  For example:
+# gsnd -I../data -- writefont.PS dvips 300 10 phvr Helvetica
+gsnd -I$lib_path -- writefont.PS \
+  $encoding $resolution $point_size $filename $fontname || exit 1
+
+# Count the bounding boxes in each character.
+bbcount $verbose $filename || exit 1
+
+# Insert the bounding box counts into the IFI file.
+awk -f fixifibb.awk -vbbsfile=$filename.bbs <$filename.xifi >$filename.ifi \
+  || exit 1
+
+
+# We do not put the point size in the filename, because PostScript fonts
+# are typically linearly scaled.  So we compute the `final_resolution'
+# as the resolution * point_size / 10 -- assuming that the 10pt size is
+# what you get when you ask for just (say) `phvr'.
+# 
+final_resolution=`dc << eof
+$resolution $point_size * 10 / p
+eof
+`
+
+# Make a font out of the image.
+../imagetofont/imagetofont $verbose -input-format=pbm \
+  -dpi=$resolution $filename -o=$filename.${final_resolution}gf || exit 1
+
+# For testing.
+#gftype -i $filename.${final_resolution}gf > /tmp/gft
+
+# PK files are smaller than GF files, and hold the same information.
+if test -n "$verbose"
+then verbose=-v
+fi
+gftopk $verbose $filename.${final_resolution}gf || exit 1
+
+rm -f $filename.${final_resolution}gf
+rm -f $filename.bbs $filename.xifi $filename.pbm
+rm -f $filename.bfi $filename.ifi

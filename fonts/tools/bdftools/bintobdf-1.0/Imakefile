@@ -1,0 +1,10 @@
+#
+# Make file for the binary to BDF font converter
+#
+
+      SRCS  = bintobdf.c
+      OBJS  = bintobdf.o
+   INCLUDES = -I. -I$(SERVERSRC)/include -I$(BDFTOSNFSRC)
+   PROGRAM  = bintobdf
+
+ComplexProgramTarget(bintobdf)

@@ -1,0 +1,20 @@
+%!
+/Times-Roman findfont 6 scalefont setfont
+/y 750 def
+/x 50 def
+/n 0 def
+/len 0 def
+(*) {
+	/n n 1 add def
+	dup x y moveto n 6 string cvs show (: ) show show (: ) show
+	status pop pop pop dup
+	20 string cvs show
+	/len exch len add def
+	pop
+	/y y 7 sub def
+	y 50 le {/y 750 def /x x 160 add def} if
+} 100 string filenameforall
+x y moveto
+(Total length: ) show
+len 20 string cvs show
+showpage

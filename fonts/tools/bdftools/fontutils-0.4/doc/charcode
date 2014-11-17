@@ -1,0 +1,6 @@
+Many of the programs allow you to specify character codes in the fonts
+for various purposes.  All such programs parse character codes in the
+same way.  The following variations are permitted: a single character,
+as in `K' or `0'; an octal number, as in `0113'; a hex number, as in
+`0x4a' or `0x4B' or `0X4B', etc; a decimal number, as in `75'.
+

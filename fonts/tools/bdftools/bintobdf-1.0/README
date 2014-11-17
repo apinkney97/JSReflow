@@ -1,0 +1,38 @@
+--------------------------------------------------------------------
+Copyright (C) 1990 Mark Leisher.
+
+Author: Mark Leisher (mleisher@nmsu.edu)
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 1, or (at your option)
+any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+A copy of the GNU General Public License can be obtained from this
+program's author (send electronic mail to mleisher@nmsu.edu) or from
+the Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA
+02139, USA.
+--------------------------------------------------------------------
+
+This program converts raw bitmap fonts into BDF format fonts.  It
+allows for things like skipping headers on the input font and doing
+bit and byte adjustments dependent on architecture.
+
+I wrote bintobdf because I was tired of hacking out a new utility
+every time I wanted to convert a raw bitmap font into a BDF font.
+
+Bintobdf is designed primarily for fiddling with fonts that have a
+large number of characters (i.e. some of the Oriental fonts), but it
+can easily be used for just about any size raw bitmap font.  The only
+real "gotcha" in the program is the assumption that the font's
+characters are square.  This is hardcoded, so it would have to be
+changed for other types of fonts.
+
+Please send bug reports, enhancements, etc. to:
+Internet: mleisher@nmsu.edu
+Bitnet  : mleisher@nmsu.bitnet

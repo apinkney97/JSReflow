@@ -1,0 +1,73 @@
+This library contains many miscellanous functions that are used by the
+other programs we have written.
+
+The declarations for the functions are in ../include.  config.h must be
+included first in a .c file; that includes global.h, which declares a
+few of the most commonly used functions here.  The rest have their own
+include files, e.g., line.h.
+
+Some functions merely call a C library routine or make a system call,
+check the return status, and abort if the function failed.  (In the
+programs this has been used for, that was all that we ever wanted.)
+
+Here is a brief description of what's here (aside from the files which
+have just one function in them and other ``obvious'' ones):
+
+bb-outline	find the outlines in a bitmap character.
+
+bitmap		operations on bitmaps, with each pixel represented by a
+		byte in memory.
+
+bounding-box	conversions to and from bounding boxes, both integer
+		and real.
+
+cmdline		standard things for reading option lists.
+
+dirio		directory operations.
+
+encoding	read a font encoding specification in a .enc file.
+
+file-input	read BigEndian values.
+
+file-open	wrappers for fopen and fclose.
+
+file-output	write BigEndian values.
+
+filename	operations on filenames.
+
+fix-num		conversions for the `fix_word' fixed-point fraction
+		type, used in TFM files et al.
+
+font		read a bitmap font, or a bitmap font and its metrics.
+
+hexify		convert a sequence of binary data to its hex representation.
+
+libfile		read a `library', i.e., an auxiliary data, file.
+
+line		read an arbitrarily long line from a file, returning a string.
+
+list            generic list operations.  It is a tossup as to whether
+                it is easier to repeat this code for the particular
+                lists you desire, or to use these, often with an extra
+                level of pointers.  Unfortunately, C does not support
+                generic types.
+
+math		distance, slope, etc., between two points; operations on
+		arrays as a collection of numeric data.
+
+now		the current time as in date(1).
+
+pathsearch	look up a filename along a path in an environment variable.
+
+report		online progress reporting.
+
+scaled-num	routines for the `scaled' fixed-point fraction
+		type, used in GF files et al.
+
+spline		operations on Bezier splines.
+
+statistics	find the mean/standard deviation of an array of numbers.
+
+varstring	variable-length strings.
+
+vector		operations on vectors and point/vector combinations.

@@ -1,0 +1,14 @@
+We didn't worry about portability in the usual Unix sense.  Here is an
+excerpt from the GNU coding standards:
+
+        Much of what is called "portability" in the Unix world refers to
+	porting to different Unix versions.  This is not relevant to GNU
+	software, because its purpose is to run on top of one and only
+	one kernel, the GNU kernel, compiled with one and only one C
+	compiler, the GNU C compiler.  
+
+Well, the GNU kernel does not yet exist, but the GNU C compiler does.  The
+software here will not compile with other C compilers---even ANSI ones.
+I use features of GNU C in places where they were useful.  I wrote the
+makefiles for GNU make, and used many of its special features.
+

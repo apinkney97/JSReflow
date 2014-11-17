@@ -1,0 +1,8 @@
+#!/bin/sh
+for i
+do
+  echo $i;
+  zcat $i > /tmp/splunge;
+  awk '$1 ~ "FontName" { print substr($2,2); exit }' /tmp/splunge
+done
+rm /tmp/splunge

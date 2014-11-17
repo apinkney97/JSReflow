@@ -1,0 +1,63 @@
+This program is a bitmap font editor running under X11.  You will
+need the X11R4 libraries to compile it.  As well as installing the
+binary, you must install the resource file `XBfe.ad' somewhere where the
+resource manager will find it; for example,
+/usr/lib/X11/app-defaults/XBfe.  That file has many comments as to what
+you can and cannot change for the program to work properly.  The class
+name for this program is, as you might guess, `XBfe'.
+
+Some useful features are missing: seeing multiple characters at a time,
+adjusting the baselines, handling multiple fonts, and no doubt others.
+The most important reason for not implementing these features is that
+this program was written for a specific purpose: cleaning up scanned
+images, so they could be cleanly converted to an outline format.
+
+I also didn't particularly worry about what would happen if the window
+that the program is given is very small.  The most effective way to edit
+big fonts is to use the entire screen, anyway.  The right thing should
+happen when the window is resized, though.
+
+The side bearing and kern values you enter are all given in pixels.
+
+At one point I implemented a previewing window, so you could see the
+characters from the font in context.  This turned out not be as useful as
+I hoped, however, because the characters in the fonts we're developing
+are so large.  If you want to try something with it yourself, the code
+is in widgets/Fontview*.
+
+By default, xbfe inverts the pixel under the pointer when you click
+the right button.  When you drag with the right button, the pixels under
+the pointer are all changed to the same color as the result of the
+inversion.  That is, supposing you click on a black pixel, the pixel
+turns white, and then, as you continue to hold the button down and move
+the pointer, black pixels turn white and white pixels remain unchanged.
+
+Left button down starts a selection; you can drag the mouse with the
+button down to define the selection.  Releasing the button defines the
+selection.
+
+Middle button down starts a paste of the current selection, in the same
+or a different character.  Dragging the mouse with the button down moves
+the paste point, and releasing the button performs the paste.  By
+default, the paste is opaque -- white pixels in the select clear
+corresponding black pixels in the bitmap.  To get a transparent paste,
+where no black pixels turn white, hold the META (a.k.a. Alt) down when
+releasing.
+
+One of the parts of the window is a place where you can type a character
+code.  (In fact, wherever you type in the window, the keyboard input is
+directed to there.)  I use the Athena Text widget to handle this input.
+See the Athena documentation for the key bindings; they resemble the
+default Emacs bindings.  When you have finished typing the character
+code, you must hit RET to tell xbce you've finished typing!  See
+../README for a list of the valid ways you can specify character codes.
+
+The Exit command assumes you know what you're doing, and doesn't ask you
+if you ``really want to quit'', even if the font is modified.
+
+The Save command attempts to make sure that the input file doesn't get
+overwritten by the output file.  Before making substantive changes, I
+suggest making a trivial change, saving the file, and checking the
+results with the gftype program in the TeX distribution.  If some bug is
+lurking, this will save you from wasting a lot of effort.  And save
+*frequently*.  xbfe no Emacs-like autosaving mechanism.

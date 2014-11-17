@@ -1,0 +1,40 @@
+filter.o : filter.c ../include/config.h ../include/c-auto.h \
+  ../include/c-std.h ../include/c-memstr.h ../include/c-errno.h \
+  ../include/c-minmax.h ../include/c-limits.h ../include/c-seek.h \
+  ../include/c-proto.h ../include/global.h ../include/lib.h \
+  ../include/types.h filter.h ../include/bitmap.h ../include/bounding-box.h 
+main.o : main.c ../include/config.h ../include/c-auto.h ../include/c-std.h \
+  ../include/c-memstr.h ../include/c-errno.h ../include/c-minmax.h \
+  ../include/c-limits.h ../include/c-seek.h ../include/c-proto.h \
+  ../include/global.h ../include/lib.h ../include/types.h \
+  ../include/cmdline.h ../include/filename.h ../include/getopt.h \
+  ../include/font.h ../include/bitmap.h ../include/bounding-box.h \
+  ../include/tfm.h ../include/fix-num.h ../include/list.h ../include/report.h \
+  filter.h output-epsf.h output-gf.h output-tfm.h random.h 
+output-epsf.o : output-epsf.c ../include/config.h ../include/c-auto.h \
+  ../include/c-std.h ../include/c-memstr.h ../include/c-errno.h \
+  ../include/c-minmax.h ../include/c-limits.h ../include/c-seek.h \
+  ../include/c-proto.h ../include/global.h ../include/lib.h \
+  ../include/types.h ../include/filename.h output-epsf.h ../include/font.h \
+  ../include/bitmap.h ../include/bounding-box.h ../include/tfm.h \
+  ../include/fix-num.h ../include/list.h 
+output-gf.o : output-gf.c ../include/config.h ../include/c-auto.h \
+  ../include/c-std.h ../include/c-memstr.h ../include/c-errno.h \
+  ../include/c-minmax.h ../include/c-limits.h ../include/c-seek.h \
+  ../include/c-proto.h ../include/global.h ../include/lib.h \
+  ../include/types.h ../include/filename.h ../include/gf.h \
+  ../include/bitmap.h ../include/bounding-box.h ../include/font.h \
+  ../include/tfm.h ../include/fix-num.h ../include/list.h output-gf.h 
+output-tfm.o : output-tfm.c ../include/config.h ../include/c-auto.h \
+  ../include/c-std.h ../include/c-memstr.h ../include/c-errno.h \
+  ../include/c-minmax.h ../include/c-limits.h ../include/c-seek.h \
+  ../include/c-proto.h ../include/global.h ../include/lib.h \
+  ../include/types.h ../include/filename.h filter.h ../include/bitmap.h \
+  ../include/bounding-box.h main.h ../include/font.h ../include/tfm.h \
+  ../include/fix-num.h ../include/list.h random.h output-tfm.h 
+random.o : random.c ../include/config.h ../include/c-auto.h \
+  ../include/c-std.h ../include/c-memstr.h ../include/c-errno.h \
+  ../include/c-minmax.h ../include/c-limits.h ../include/c-seek.h \
+  ../include/c-proto.h ../include/global.h ../include/lib.h \
+  ../include/types.h random.h ../include/bitmap.h ../include/bounding-box.h 
+version.o : version.c 

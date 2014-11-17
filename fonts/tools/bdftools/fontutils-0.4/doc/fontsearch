@@ -1,0 +1,32 @@
+These programs are based on the TeX project font formats: TFM for font
+metrics, GF and PK for the bitmaps.  You may therefore find TeX and its
+companion programs useful.  You can get TeX by ftp from (among many
+other places) ics.uci.edu; write elisabet@max.acs.washington.edu for
+ordering information on a tape.
+
+These programs use the same environment variables and algorithms for
+finding font files as TeX and its friends do (at least in the latest
+release of Unix TeX, which I happen to also maintain).  You specify the
+default paths in the top-level Makefile.  The environment variables
+TEXFONTS, PKFONTS, TEXPKS, and GFFONTS override the paths there.
+
+Specifically, a TFM file is looked for along the path specified by
+TEXFONTS; a GF file along GFFONTS, then TEXFONTS; a PK file along
+PKFONTS, then TEXPKS, then TEXFONTS.
+
+In either the default value or the environment variable value, if a
+component ends with two slashes, all subdirectories of the given
+directory are searched.
+
+A leading or trailing colon in an environment variable value is replaced
+by the default.
+
+You can specify a particular font at a particular resolution by saying,
+for example (`$ ' being the shell prompt):
+$ program foo.300
+or
+$ program -dpi=300 foo
+(You can also say `program foo.300gf', but the `gf' is ignored.  These
+programs always look for a given font in PK format before looking for it
+in GF format, under the assumption that if both fonts exist, with the
+same stem, they are the same.)

@@ -1,0 +1,148 @@
+%!
+% modification from the original program to generate afm file
+% this program redefines print and = to send output to a file
+% and is thus suitable for use with UltraScript where an MSDOS file results
+% the output file is mary. (well it makes a change from fred !)
+% If used with Adobe or built-in fonts change all occurences
+% of CharDefs to CharStrings. CharDefs is used by Fontographer
+
+% /str 80 string def
+% /fred (mary) (w) file def
+% /print { str cvs fred exch writestring} def
+% /= { str cvs fred exch writestring} def
+% $Header: /u/jjc/dvitops/RCS/printafm.ps,v 1.1 89/02/01 09:19:41 jjc Rel $
+% written by James Clark <jjc@jclark.uucp>
+% print an afm file on the standard output ***SEE ABOVE COMMENTS***
+% usage is `fontname printafm' eg `/Times-Roman printafm'
+
+/buf 256 string def
+/onechar 1 string def
+/box 4 array def
+
+% c toupper - c
+/toupper {
+	dup dup 8#141 ge exch 8#172 le and { 
+		8#40 sub
+	} if
+} bind def
+
+
+% dict printinfo -
+/printinfo {
+	/FontInfo get {
+		exch
+		buf cvs dup dup 0 get 0 exch toupper put print
+		( ) print
+		buf cvs =
+	} forall
+} bind def
+
+% dict printbbox -
+
+/printbbox {
+	(FontBBox) print
+	/FontBBox get {
+		( ) print
+		round cvi buf cvs print
+	} forall
+	(\n) print
+} bind def
+	
+% dict printcharmetrics -
+
+/printcharmetrics {
+	/d exch def
+	(StartCharMetrics ) print
+	d /CharStrings get dup length exch /.notdef known { 1 sub } if =
+	d 1000 scalefont setfont 0 0 moveto
+	/e d /Encoding get def
+	0 1 255 {
+		dup e exch get
+		dup /.notdef ne {
+			exch dup printmetric
+		} {
+			pop pop
+		} ifelse
+	} for
+	% s contains an entry for each name in the original encoding vector
+	/s 256 dict def
+	e {
+		s exch true put
+	} forall
+	% v is the new encoding vector
+	/v 256 array def
+	0 1 255 {
+		v exch /.notdef put
+	} for
+	% fill up v with names in CharStrings
+	/i 0 def
+	d /CharStrings get {
+		pop
+		i 255 le {
+			v i 3 -1 roll put
+			/i i 1 add def
+		} {
+			pop
+		} ifelse
+	} forall
+	% define a new font with v as its encoding vector
+	d maxlength dict /f exch def
+	d {
+		exch dup dup /FID ne exch /Encoding ne and { 
+			exch f 3 1 roll put
+		} { 
+			pop pop 
+		} ifelse
+	} forall
+	f /Encoding v put
+	f /FontName /temp put
+	% make this new font the current font
+	/temp f definefont /d exch def
+	d 1000 scalefont setfont
+	% print a entry for each character not in old vector
+	/e d /Encoding get def
+	0 1 255 {
+		dup e exch get
+		dup dup /.notdef ne exch s exch known not and { 
+			exch -1 printmetric
+		} { 
+			pop pop
+		} ifelse
+	} for
+	(EndCharMetrics\n) =
+} bind def
+
+% name actual_code normal_code printmetric -
+
+/printmetric {
+	/saved save def
+	(C ) print
+	buf cvs print
+	( ; WX ) print
+	onechar 0 3 -1 roll put
+	onechar stringwidth pop round cvi buf cvs print
+	( ; N ) print
+	buf cvs print
+	( ; B ) print
+	onechar false charpath flattenpath pathbbox box astore {
+		round cvi buf cvs print
+		( ) print
+	} forall
+	(;\n) =
+	saved restore
+} bind def
+
+% fontname printafm -
+
+/printafm {
+	findfont /d exch def
+	(StartFontMetrics 2.0) =
+	(FontName ) print d /FontName get =
+	d printinfo
+	d printbbox
+	d printcharmetrics
+	(EndFontMetrics) =
+} bind def
+
+/Shalom printafm
+%fred closefile

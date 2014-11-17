@@ -1,0 +1,45 @@
+This program extracts the characters from a big image to a GF font file.
+Information about the image is given in an ``image font information''
+(IFI) file; that file format is described in
+comments at the `get_image_info' routine in main.c.
+
+Currently the program can read the IMG files output by the Scan7650
+software, which works with a fancy Xerox scanner.  (I think IMG output
+is used by other GEM applications as well.)  These images are used
+by the Interleaf desktop publishing program.  The image format isn't
+proprietary, though -- it doesn't have any novel features.  The message
+below describes the format.
+
+
+Date: Thu, 5 Jul 90 11:22:55 EDT
+From: rgw@hq.ileaf.com (Bob Watkins x5545)
+To: karl@cs.umb.edu
+
+The image file consists of an OPSHEADER followed by an IMGHEADER, followed
+by raster data.  The version field of the OPSHEADER determines which of the
+IMGHEADER structures to use.  Most likely this will be 2, but there is a
+chance that it might be 1 -- it depends on how recently the software for
+that scanner was written.
+
+When reading the headers structures, it is a good idea to read them a field
+at a time rather than all at once, since not all compilers use the same
+structure padding conventions.
+
+The resolution numbers are in pixels/inch.  Their primary purpose is to
+allow TPS to scale the image to the correct physical dimensions when it is
+pasted into the document.  Other than that, they aren't that useful.
+
+The flags field should be zero -- there is a stupid marketing reason why it
+is there at all, but I won't go into that.
+
+The w and h fields are the width and height of the image in pixels; the d
+field is the depth in bits/pixel.  The depth is either 1 or 8, depending on
+whether the image is a lineart image or a contone image.
+
+The format field specifies the encoding of the raster data.  A format of 0
+means that the data is uncompressed.  The data itself is stored in scanline-
+major order.  In the case of lineart image, 8 pixels are packed into each
+byte, with most-to-least significant order within the byte representing left-
+to-right order in the image.  A 0 bit corresponds to a black pixel, and a 1
+bit corresponds to a white pixel.  If necessary, the scanlines are padded out
+to the next 16-bit boundary.

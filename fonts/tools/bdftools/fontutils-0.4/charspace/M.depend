@@ -1,0 +1,48 @@
+char.o : char.c ../include/config.h ../include/c-auto.h ../include/c-std.h \
+  ../include/c-memstr.h ../include/c-errno.h ../include/c-minmax.h \
+  ../include/c-limits.h ../include/c-seek.h ../include/c-proto.h \
+  ../include/global.h ../include/lib.h ../include/types.h ../include/report.h \
+  ../include/list.h char.h ../include/font.h ../include/bitmap.h \
+  ../include/bounding-box.h ../include/tfm.h ../include/fix-num.h main.h \
+  ../include/encoding.h symtab.h 
+main.o : main.c ../include/config.h ../include/c-auto.h ../include/c-std.h \
+  ../include/c-memstr.h ../include/c-errno.h ../include/c-minmax.h \
+  ../include/c-limits.h ../include/c-seek.h ../include/c-proto.h \
+  ../include/global.h ../include/lib.h ../include/types.h char.h \
+  ../include/font.h ../include/bitmap.h ../include/bounding-box.h \
+  ../include/tfm.h ../include/fix-num.h ../include/list.h \
+  ../include/cmdline.h ../include/filename.h ../include/getopt.h \
+  ../include/encoding.h ../include/logreport.h ../include/report.h perctab.h \
+  symtab.h main.h sbi.h output.h 
+output.o : output.c ../include/config.h ../include/c-auto.h \
+  ../include/c-std.h ../include/c-memstr.h ../include/c-errno.h \
+  ../include/c-minmax.h ../include/c-limits.h ../include/c-seek.h \
+  ../include/c-proto.h ../include/global.h ../include/lib.h \
+  ../include/types.h ../include/encoding.h ../include/font.h \
+  ../include/bitmap.h ../include/bounding-box.h ../include/tfm.h \
+  ../include/fix-num.h ../include/list.h ../include/filename.h \
+  ../include/gf.h ../include/libfile.h ../include/logreport.h \
+  ../include/report.h char.h main.h output.h 
+sbi.o : sbi.c ../include/config.h ../include/c-auto.h ../include/c-std.h \
+  ../include/c-memstr.h ../include/c-errno.h ../include/c-minmax.h \
+  ../include/c-limits.h ../include/c-seek.h ../include/c-proto.h \
+  ../include/global.h ../include/lib.h ../include/types.h char.h \
+  ../include/font.h ../include/bitmap.h ../include/bounding-box.h \
+  ../include/tfm.h ../include/fix-num.h ../include/list.h \
+  ../include/encoding.h ../include/filename.h ../include/libfile.h \
+  ../include/logreport.h ../include/report.h perctab.h symtab.h main.h sbi.h 
+perctab.o : perctab.c ../include/config.h ../include/c-auto.h \
+  ../include/c-std.h ../include/c-memstr.h ../include/c-errno.h \
+  ../include/c-minmax.h ../include/c-limits.h ../include/c-seek.h \
+  ../include/c-proto.h ../include/global.h ../include/lib.h \
+  ../include/types.h main.h ../include/encoding.h ../include/font.h \
+  ../include/bitmap.h ../include/bounding-box.h ../include/tfm.h \
+  ../include/fix-num.h ../include/list.h perctab.h symtab.h 
+symtab.o : symtab.c ../include/config.h ../include/c-auto.h \
+  ../include/c-std.h ../include/c-memstr.h ../include/c-errno.h \
+  ../include/c-minmax.h ../include/c-limits.h ../include/c-seek.h \
+  ../include/c-proto.h ../include/global.h ../include/lib.h \
+  ../include/types.h main.h ../include/encoding.h ../include/font.h \
+  ../include/bitmap.h ../include/bounding-box.h ../include/tfm.h \
+  ../include/fix-num.h ../include/list.h symtab.h 
+version.o : version.c 

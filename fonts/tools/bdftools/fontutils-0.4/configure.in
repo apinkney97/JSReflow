@@ -1,0 +1,32 @@
+dnl Process this file with autoconf to produce a configure script.
+M_INIT(limn/fit.c)
+
+dnl Write output here, instead of putting -D's on the command line.
+M_HEADER_FILE([[[include/c-auto.h]]])
+
+# We must have gcc.
+M_PROG_GCC
+[if echo $CC | grep -s '^gcc'
+then :
+else
+  echo "Warning: these programs are written in GNU C,"
+  echo "so you need to have gcc."
+fi]
+M_PROG_INSTALL
+M_PROG_RANLIB
+
+M_ISC
+M_ISC_WLIBS
+
+M_DIR_HEADER
+M_HEADER_MISSING(limits.h, M_DEFINE(LIMITS_H_MISSING))
+M_MEMORY_H
+M_STDC_HEADERS
+M_UNISTD_H
+M_USG
+M_X11_LOCATION
+
+M_PREFIX(gcc)
+
+# This will generate `Makefile'(s), `config.status', and our header file.
+M_OUTPUT(.)

@@ -1,0 +1,53 @@
+#!/bin/sh
+if [ $# -ne 1 ]
+then
+  echo "Usage: $0 <MF root>."
+  exit 1
+fi
+
+cd $research/bzrto
+
+echo -n bzrto...
+bzrto -metafont -pstype3 ../limn/$1
+
+# Have to do true-size before smoke, since we put the true-size
+# character on the smoke proof.
+echo -n true-size...
+mf "\mode:=cx; input $1"
+gftopk $1.300gf 
+
+proof_res=1219
+proofing=2
+
+echo -n proof...
+mf "\mode:=proof; nodisplays; proofing:=$proofing; input $1" >/dev/null
+gftodvi $1.${proof_res}gf >/dev/null
+gftopk $1.${proof_res}gf
+mv $1.dvi proof.dvi
+mv $1.${proof_res}pk proof.pk
+mv $1.${proof_res}gf proof.gf
+
+echo -n smoke...
+mf "\mode:=smoke; nodisplays; input $1" >/dev/null
+gftodvi $1.${proof_res}gf >/dev/null
+gftopk $1.${proof_res}gf
+mv $1.dvi smoke.dvi
+mv $1.${proof_res}pk smoke.pk
+mv $1.${proof_res}gf smoke.gf
+
+echo "dviconcat."
+dviconcat -o print.dvi proof.dvi smoke.dvi >/dev/null 2>&1
+
+#echo -n "Display? "
+#read x
+x=y
+if [ $x = y ]
+then xdvi -p 300 -s 3 print &
+fi
+
+echo -n "Print? "
+read x
+if [ "$x" = y ]
+then dvips print
+fi
+

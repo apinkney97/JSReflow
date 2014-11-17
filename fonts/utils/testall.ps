@@ -1,0 +1,90 @@
+%!
+/ystart 700 def
+/ymin 60 def
+/y ystart def
+/x 40 def
+/xtab 200 def
+/ps 12 def
+/vs 14 def
+
+/Helv /Helvetica findfont 10 scalefont def
+/test {
+    Helv setfont
+    dup dup 50 string cvs show
+    findfont ps scalefont setfont
+    currentpoint exch dup xtab lt {pop xtab} if
+    /tab exch def tab exch moveto
+    (The quick brown fox jumps over the lazy dog) show
+    undefinefont
+} def
+
+/SortDict 10 dict def
+SortDict begin
+  /nametype {} def
+end
+/sort {  % Selection sort - see Baase p. 50
+  SortDict begin
+  /n exch def
+
+  dup /names? exch type currentdict exch known def
+
+  [ n 1 add 1 roll ] /L exch def
+
+  names? {
+    0 1 n 1 sub {
+      L exch dup L exch get
+      50 string cvs put
+    } for
+  } if
+
+  1 1 n 1 sub {
+    /ind exch def
+    /x L ind get def
+    /j ind 1 sub def
+    {
+      j 0 lt {exit} if
+      L j get x le {exit} if
+      L j 1 add L j get put
+      /j j 1 sub def
+    } loop
+    L j 1 add x put
+  } for
+
+  n 1 sub -1 0 {
+    L exch get
+    names? {cvn} if
+  } for
+
+  end
+} def
+
+
+FontDirectory dup length /n exch def
+{pop} forall
+n sort
+1 1 n {
+  pop
+  x y moveto
+  test
+  currentpoint exch pop
+  /y exch vs sub def
+  y ymin lt { /y ystart def showpage } if
+} for
+showpage
+/y ystart def
+
+[
+(fonts/*) {50 string copy} 50 string filenameforall
+counttomark /n exch def
+
+n sort
+1 1 n {
+  pop dup length 6 sub 6 exch getinterval
+  x y moveto
+  cvn test
+  currentpoint exch pop
+  /y exch vs sub def
+  y ymin lt { /y ystart def showpage } if
+} for
+pop  % pop the mark
+showpage

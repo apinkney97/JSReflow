@@ -1,0 +1,17 @@
+If you encounter any problems, please send the following to
+bug-gnu-utils@prep.ai.mit.edu.  Thanks.
+
+* the fontutils version (from `ChangeLog' or `Makefile.in').
+* your hardware and operating system.
+* a description of the bug.
+
+If the bug was in using some program (as opposed to installation),
+also include:
+* any command-line arguments.
+* the relevant input files.  Since fonts and images are typically binary
+  files, be sure to uuencode or btoa them first.
+
+If you wish to suggest changes in the sources, or even to discuss
+something in the sources, do it by context, not line number.
+
+                                                            

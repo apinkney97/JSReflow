@@ -1,0 +1,18 @@
+img-input.o : img-input.c ../include/config.h ../include/c-auto.h \
+  ../include/c-std.h ../include/c-memstr.h ../include/c-errno.h \
+  ../include/c-minmax.h ../include/c-limits.h ../include/c-seek.h \
+  ../include/c-proto.h ../include/global.h ../include/lib.h \
+  ../include/types.h ../include/file-input.h ../include/xstat.h img-input.h \
+  img.h 
+img-output.o : img-output.c ../include/config.h ../include/c-auto.h \
+  ../include/c-std.h ../include/c-memstr.h ../include/c-errno.h \
+  ../include/c-minmax.h ../include/c-limits.h ../include/c-seek.h \
+  ../include/c-proto.h ../include/global.h ../include/lib.h \
+  ../include/types.h ../include/file-output.h img-output.h img.h 
+main.o : main.c ../include/config.h ../include/c-auto.h ../include/c-std.h \
+  ../include/c-memstr.h ../include/c-errno.h ../include/c-minmax.h \
+  ../include/c-limits.h ../include/c-seek.h ../include/c-proto.h \
+  ../include/global.h ../include/lib.h ../include/types.h \
+  ../include/cmdline.h ../include/filename.h ../include/getopt.h img-input.h \
+  img.h img-output.h 
+version.o : version.c 

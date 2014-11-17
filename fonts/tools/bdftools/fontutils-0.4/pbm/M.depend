@@ -1,0 +1,3 @@
+libpbm1.o : libpbm1.c ../include/pbm.h ../include/pbmplus.h libpbm.h 
+libpbm2.o : libpbm2.c ../include/pbmplus.h ../include/pbm.h libpbm.h 
+libpbm4.o : libpbm4.c ../include/pbm.h ../include/pbmplus.h libpbm.h 

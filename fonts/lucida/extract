@@ -1,0 +1,8 @@
+#!/bin/sh
+CNT=1
+while :
+do
+	echo Lucida file $CNT
+	dd if=/dev/nrmt0 of=$CNT files=1
+	CNT=`expr $CNT + 1`
+done

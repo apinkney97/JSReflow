@@ -1,0 +1,63 @@
+.TH BDFTOPS 1 "Release 4" "X Version 11"
+.SH NAME
+bdftops - BDF font to Postscript font generator
+.SH SYNOPSIS
+.B "bdftops"
+[bdf-file(s)]
+.SH DESCRIPTION
+.PP
+.B bdftops
+reads a Bitmap Distribution Format (BDF) file (or from standard input
+if no file is specified on the command line) and produces a
+Postscript font on standard output.
+.sp
+.B bdftops
+will use the font filename minus the \fI.bdf\fP extension as
+the name of the font, the full font filename if the \fI.bdf\fP extension is
+not there, or a font name of "\fBBDF-FONT-\fIn\fP", where \fIn\fP is a
+number, when a font file is read from standard input.
+.SH "TUNING FONTS"
+.B bdftops
+depends on the SWIDTH (scalable width) x value heavily.  If this value
+is not correct, then the horizontal offsets will be a little too
+small, especially with variable width fonts.  Details of the SWIDTH
+entry are described in the "Bitmap Distribution Format 2.1" document.
+.sp
+Variable width fonts will probably need a small amount of hand tuning
+to get correct kerning.
+.sp
+An example of a Postscript character definition from the Adobe
+Times-Roman 24(timR24.bdf) font:
+.nf
+\f(CW/char116 [0.230769 0 0 1 1 7 15 -0.5 14.5
+<103070FE303030303030303030321C>] def\fP
+.fi
+.sp
+The first number is the horziontal offset of the character that
+follows this one, the next four numbers are the character's bounding
+box for the font cacheing mechanism, the next two numbers are the
+bitmap's width and height, and the last two numbers are horizontal and
+vertical translations of the bitmap with .5 subtracted to handle
+Postscript rounding errors.
+.sp
+This example in particular is a lower case ``t''.  The horizontal
+offset of the next character is not quite right.  So the 0.230769
+needs to be increased a little so that the character following the
+``t'' is kerned correctly.
+.SH "SEE ALSO"
+X(1), Xserver(1), bdftosnf(1)
+.br
+"Bitmap Distribution Format 2.1"
+.SH AUTHOR
+Internet: mleisher@nmsu.edu     Bitnet: mleisher@nmsu.bitnet
+.br
+Mark Leisher
+.br
+Computing Research Lab
+.br
+New Mexico State University
+.br
+Las Cruces, NM 88003
+.br
+(505) 646-5711
+

@@ -1,0 +1,16 @@
+bzr_input.o : bzr_input.c ../include/config.h ../include/c-auto.h \
+  ../include/c-std.h ../include/c-memstr.h ../include/c-errno.h \
+  ../include/c-minmax.h ../include/c-limits.h ../include/c-seek.h \
+  ../include/c-proto.h ../include/global.h ../include/lib.h \
+  ../include/types.h ../include/bzr.h ../include/bounding-box.h \
+  ../include/font.h ../include/bitmap.h ../include/tfm.h ../include/fix-num.h \
+  ../include/list.h ../include/spline.h ../include/file-input.h \
+  ../include/scaled-num.h bzr_opcodes.h bzr_types.h 
+bzr_output.o : bzr_output.c ../include/config.h ../include/c-auto.h \
+  ../include/c-std.h ../include/c-memstr.h ../include/c-errno.h \
+  ../include/c-minmax.h ../include/c-limits.h ../include/c-seek.h \
+  ../include/c-proto.h ../include/global.h ../include/lib.h \
+  ../include/types.h ../include/bzr.h ../include/bounding-box.h \
+  ../include/font.h ../include/bitmap.h ../include/tfm.h ../include/fix-num.h \
+  ../include/list.h ../include/spline.h ../include/file-output.h \
+  ../include/scaled-num.h bzr_opcodes.h bzr_types.h 

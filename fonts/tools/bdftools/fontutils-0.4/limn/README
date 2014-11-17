@@ -1,0 +1,23 @@
+This program converts bitmap fonts to a homegrown outline format, bezier
+(BZR).  The program `bzrto' converts that format to something usable for
+typesetting.
+
+We used two main sources in writing the program:
+
+(1) Phoenix: an interactive curve design system based on the automatic
+fitting of hand-sketched curves, by Philip J. Schneider, Master's
+thesis, University of Washington, 1988.
+
+(2) Curve-fitting with piecewise parametric cubics, by Michael Plass and
+Maureen Stone, Computer Graphics, SIGGRAPH proceedings, volume 17,
+number 3, July 1983.
+
+We had access to the code for Phoenix, thanks to Philip, but none of our
+code is based on his (mostly because his task was allow interactive
+sketching, and ours to fit bitmap characters, and the two require
+different data structures).  The general outline of the fitting
+algorithm does come from Phoenix.
+
+
+Karl Berry           karl@cs.umb.edu       ...!harvard!umb!karl
+Kathryn Hargreaves   letters@cs.umb.edu    ...!harvard!umb!letters

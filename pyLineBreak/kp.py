@@ -58,6 +58,8 @@ class FontMetric(object):
         return c
 
     def get_width(self, char, size):
+        # sys.stderr.write(char)
+        # sys.stderr.write('\n')
         c = self._map_to_adobe(char)
         return size * (self.metric.get_width_char(c, isord=True) / 1000.0)
 
@@ -125,6 +127,7 @@ class Paragraph(object):
         start = 0
         end = 1
         lines = []
+        stretch_factor = 1
         while end < len(legal_bps) - 1:
             while end < len(legal_bps) and self.get_line_metrics(legal_bps[start], legal_bps[end])['length'] < width:
                 end += 1
@@ -135,17 +138,48 @@ class Paragraph(object):
             start_item = legal_bps[start] + 1
             end_item = legal_bps[end] + 1
             line = self.items[start_item:end_item]
+            # Strip out hyphen penalties and merge the boxes
+            if len(line) >= 3:
+                newline = line[0:2]
+                for item in line[2:]:
+                    try:
+                        if all((
+                            isinstance(newline[-2], Box),
+                            isinstance(newline[-1], Penalty),
+                            newline[-1].content == '-',
+                            isinstance(item, Box),
+                        )):
+                            newline[-2].content += item.content
+                            newline[-2].w += item.w
+                            newline = newline[:-1]
+                        else:
+                            newline.append(item)
+                    except:
+                        newline.append(item)
+                        
+
+                
             line_width = self.get_line_metrics(start_item, end_item)['length']
             if justify:
                 extra_space = width - line_width
                 glue_items = [item for item in line if isinstance(item, Glue)]
                 glue_width = sum([item.w for item in glue_items])
-                stretch_factor = 1 + (extra_space / glue_width)
+                stretch_factor = 1
+                if glue_width != 0:
+                    stretch_factor += extra_space / glue_width
                 for glue_item in glue_items:
                     glue_item.w *= stretch_factor
             lines.append((line_width, line))
             start = end
             end += 1
+
+        # Hack last line
+        if len(lines):
+            last_line = lines[-1][1]
+            glue_items = [item for item in last_line if isinstance(item, Glue)]
+            for glue_item in glue_items:
+                glue_item.w /= stretch_factor
+
 
         return lines
 
@@ -262,7 +296,7 @@ if __name__ == '__main__':
             text = f.readlines()
 
     text = ''.join(text)
-    items = tokenise(text, font_size, font_file)
+    items = tokenise(text, font_size, font_file, explicit_kerning=False)
     par = Paragraph(items)
     lines = par.first_fit(col_wid, justify=True)
 

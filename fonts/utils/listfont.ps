@@ -1,0 +1,29 @@
+%!
+/list {
+/fontsize 17 def
+/x 50 def
+/xstep 105 def
+/columnwidth 58 def
+/ystart 760 def
+/yend 40 def
+/y ystart def
+/vs 19 def
+/T /Times-Roman findfont fontsize scalefont def
+/Z exch findfont fontsize scalefont def
+
+0 1 255 {
+    /n exch def
+    Z setfont currentfont /Encoding get n get
+    /.notdef eq not {
+	x y moveto
+	T setfont
+	n 5 string cvs show ( \() show ( ) dup 0 n put show (\) ) show
+	x columnwidth add y moveto
+	Z setfont
+	( ) dup 0 n put show
+	/y y vs sub def
+	y yend lt { /x x xstep add def /y ystart def} if
+    } if % not undefined
+} for
+} def
+

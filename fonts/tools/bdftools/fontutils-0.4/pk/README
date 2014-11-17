@@ -1,0 +1,13 @@
+This library provides for reading of packed font (PK) bitmap files.  An
+arbitrary number of fonts may be read simultaneously.  Routines to write
+a PK file have not been written; instead, use the TeX utility routine
+gftopk.
+
+None of the code that processes the PK commands actually explains what
+the precise definition of those commands are.  For that, you should look
+at the definition of the PK format in the TeX utility programs that
+convert to and from PK format.
+
+The header file is ../include/pk.h.  It explains the basics of how to
+use the routines.  The source files in this directory do not repeat that
+explanation.

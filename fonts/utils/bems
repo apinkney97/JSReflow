@@ -1,0 +1,9 @@
+#!/bin/sh
+/ep/misc/fonts/utils/download -P$1 MBembo-Bold MBembo-Bold.ps
+/ep/misc/fonts/utils/download -P$1 MBembo-BoldItalic MBembo-BoldItalic.ps
+/ep/misc/fonts/utils/download -P$1 MBembo-ExtraBold MBembo-ExtraBold.ps
+/ep/misc/fonts/utils/download -P$1 MBembo-ExtraBoldItalic MBembo-ExtraBoldItalic.ps
+/ep/misc/fonts/utils/download -P$1 MBembo-Italic MBembo-Italic.ps
+/ep/misc/fonts/utils/download -P$1 MBembo-SemiBold MBembo-SemiBold.ps
+/ep/misc/fonts/utils/download -P$1 MBembo-SemiBoldItalic MBembo-SemiBoldItalic.ps
+/ep/misc/fonts/utils/download -P$1 MBembo MBembo.ps

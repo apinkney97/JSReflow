@@ -1,0 +1,28 @@
+% The encoding filename is extended with `.enc'.
+% See bzrto/pstype?.c for details.
+% 
+% 
+% bitmap name	PostScript name			File with encoding
+% 
+bdk24		Bodoni-Book			standard
+beg18		Benguiat-Roman			ascii
+bsq		Baskerville-Roman		ascii
+bsq18		Baskerville-Roman		ascii
+cen18		yNewCenturySchlbk-Roman		ascii
+cha24		ZapfChancery			ascii
+chab30		ZapfChancery-Bold		ascii
+cmr10		ComputerModern-Roman		textext
+cmss20		ComputerModern-Sans		textext
+% gar30		Garamond-Roman			ascii
+gas42		Gaspipe				ascii
+ggmr		Garamond-Roman			standard+
+ggmr30h		Garamond-Roman-h		standard+
+gil18		GillSans-Bold			ascii
+oli18		AntiqueOlive			ascii
+oen14		OldEnglish			ascii
+oen18		OldEnglish			ascii
+oen36		OldEnglish			ascii
+orn18		University-Roman		ascii
+tmi72		Times-Italic			ascii
+ggmr26D		Garamond-Roman-26D		gnulatin
+ggmr26d		Garamond-Roman-26d		gnulatin

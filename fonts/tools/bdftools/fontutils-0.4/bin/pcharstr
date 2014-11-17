@@ -1,0 +1,8 @@
+#!/bin/sh
+
+gsnd - << eof
+($1.gsf)run
+(pcharstr.ps)run
+/$2 findfont setfont
+()= printfont
+eof

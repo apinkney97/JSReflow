@@ -1,0 +1,158 @@
+Sat Mar 28 07:45:36 1992  Karl Berry  (karl at hayley)
+
+        * Version 0.4.
+
+        * Change copyright years to 1992 only.
+
+Sat Mar  7 11:12:06 1992  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (files, headers, sources): replace with `c_and_h', etc.
+
+Thu Jan  9 08:30:33 1992  Karl Berry  (karl at hayley)
+
+        * *.c: do not include global.h.
+
+        * *.h: remove #pragma once.
+
+Wed Jan  8 15:29:53 1992  Karl Berry  (karl at hayley)
+
+        * update copyright messages.
+
+        * change `allocate to `xmalloc', `reallocate' to `xrealloc', and
+          `string_copy' to `strdup'.
+
+Tue Nov 19 16:58:10 1991  Karl Berry  (karl at hayley)
+
+        * bzr_input.c (bzr_get_char): change warning message.
+
+Tue Jul 30 13:16:58 1991  Karl Berry  (karl at ra.cs.umb.edu)
+
+        * Version 0.3.
+
+Sat Jun 15 09:47:49 1991  Karl Berry  (karl at hayley)
+
+        * all files: change `checked_' to `x'.
+
+Thu Jun  6 07:19:28 1991  Karl Berry  (karl at hayley)
+
+        * All files: change to version 2 of the GPL.
+
+Mon Mar 11 09:22:54 1991  Karl Berry  (karl at hayley)
+
+        * README: BZR files don't have the interword space any more.
+        * bzr_output.c (bzr_put_preamble): don't output it.
+        * bzr_input.c (bzr_get_preamble): don't read it.
+
+Thu Mar  7 07:31:22 1991  Karl Berry  (karl at hayley)
+
+        * Version 0.2.
+
+Tue Feb 26 06:48:25 1991  Karl Berry  (karl at hayley)
+
+        * bzr_input.c (bzr_close_input_file): do not free `char_loc',
+          since it isn't dynamically allocated any more.
+
+Mon Feb 25 15:21:47 1991  Karl Berry  (karl at hayley)
+
+        * bzr_input.c (char_loc): make a static, as in `bzr_output.c',
+          instead of using `malloc'.
+
+        * GNUmakefile (sources): remove `bzr_util.c'.
+        * bzr_input.c (bzr_open_input_file): initialize the locators
+          inline.
+        * bzr_output.c (bzr_open_output_file): likewise.
+        * bzr_util.h: rename to `bzr_types.h'.
+        
+        * bzr_{input,output}.c: rename external routines to start with
+          `bzr'; change error messages, etc.
+
+Sat Feb 16 17:07:28 1991  Karl Berry  (karl at hayley)
+
+        * *.c: #include "config.h".
+
+Wed Jan 16 16:23:45 1991  Karl Berry  (karl at hayley)
+
+        * bzr_input.c (get_bzr_char): only append the spline list to the
+          character shape if it's nonempty.
+
+Tue Jan 15 15:43:47 1991  Karl Berry  (karl at hayley)
+
+        * bzr_input.c (get_bzr_char): the shape is now a list of splines.
+        * bzr_output.c (put_bzr_char): likewise.
+
+Wed Jan  9 07:04:53 1991  Karl Berry  (karl at hayley)
+
+        * README: state that outside curves must go counterclockwise.
+
+Wed Dec 26 15:15:15 1990  Karl Berry  (karl at hayley)
+
+        * bzr_output.c (font_bb): use MAXFLOAT and MINFLOAT, instead of
+          MAXDOUBLE and MINDOUBLE, since Sun's atof can't deal with
+          the latter.
+
+Sun Dec  9 15:24:12 1990  Karl Berry  (karl at hayley)
+
+        * bzr_input.c, bzr_output.c: replace BZR_CHAR_CODE and
+          BZR_SET_WIDTH with CHAR_CODE and CHAR_SET_WIDTH.
+
+Sat Nov 17 12:50:38 1990  Karl Berry  (karl at hayley)
+
+        * bzr_input.c, bzr_output.c: include appropriate file-...h files.
+
+Wed Aug 29 13:49:15 1990  Karl Berry  (karl at hayley)
+
+        * bzr_input.c (get_bzr_byte, ...): add the filename to calls to
+        get_byte, and rewrite as macros.
+        * bzr_output.c (put_bzr_byte, ...): likewise.
+
+Fri Jun 22 15:25:12 1990  Karl Berry  (karl at hayley)
+
+        * bzr_input.c (get_bzr_postamble): always read the character
+        locators.
+
+        * bzr_input.c (get_bzr_postamble): read the POST byte.
+
+        * bzr_input.c (open_bzr_input_file): allocate the space for the
+        character locators before initializing them.
+
+Tue Jun 19 11:15:11 1990  Karl Berry  (karl at hayley)
+
+        * bzr_output.c (bzr_cur_pos): `cur_pos' is now `checked_ftell';
+        rename to bzr_ftell.
+
+        * bzr_input.c (bzr_ftell, bzr_fseek): new routines.
+        
+        * bzr_input.c (get_next_bzr_char): rename back to get_bzr_char,
+        and take an argument that specifies the character code.
+
+        * bzr_input.c (bzr_get_postamble): read the character count; read
+        the postamble starting at the end of the file, instead of the
+        beginning. 
+        * bzr_output.c (bzr_put_postamble): write the character count.
+
+        * bzr_input.c (bzr_get_preamble): read the interword space.
+        * bzr_output.c (bzr_put_preamble): write the interword space.
+
+Sat Jun 16 09:11:24 1990  Karl Berry  (karl at hayley)
+
+        * bzr_input.c (get_bzr_char): rename to get_next_bzr_char.
+
+Mon Jun  4 11:17:47 1990  Karl Berry  (karl at hayley)
+
+        * bzr_input.c (get_bzr_postamble): read the font bounding box in
+        the right order.
+
+        * bzr_output.c (font_bb): define to be a real bounding box, not an
+        integer one.
+
+        * bzr_input.c (get_bzr_postamble): don't count EOF as a non-NO_OP.
+
+        * bzr_input.c (get_bzr_postamble): don't continue reading pas the
+        end of the file.
+
+        * bzr_input.c (get_bzr_postamble): don't skip over the POST_POST.
+
+        * bzr_input.c (bzr_get_scaled): sign extend the upper byte.
+        
+        * bzr_input.c (get_bzr_char): read the bounding box info in the
+        right order.

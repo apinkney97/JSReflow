@@ -1,0 +1,18 @@
+This program converts a bitmap font file to ``something else''.  For
+example, a representation as plain text; a TFM file; or a GF file.
+
+Plain text is useful if you want to see exactly which pixels are on and
+off in the bitmaps.
+
+Having a TFM file is necessary to use the font with TeX.  No side
+bearings, kerning, or ligature information is added to the TFM file, so
+it is only useful for proofing, but that's better than nothing.
+
+You can also select a range of characters, omit individual characters,
+and change the character codes.  With these options, you want to output
+another bitmap file; hence, the last option.
+
+You can also filter the bitmaps through a simple averaging filter.  This
+is useful as a preliminary cleanup of scanned images.  The filtering
+removes a fair amount of the noise, but it also fills in and/or rounds
+off sharp corners.

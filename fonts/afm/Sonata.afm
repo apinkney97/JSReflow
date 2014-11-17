@@ -1,0 +1,192 @@
+StartFontMetrics 2.0
+Comment Copyright (c) 1984 Adobe Systems Incorporated. 	All Rights Reserved.
+Comment Creation Date:Mon Sep 15 20:27:25 PDT 1986
+FontName Sonata
+EncodingScheme FontSpecific
+FullName Sonata
+FamilyName Music
+Weight Medium
+ItalicAngle 0.0
+IsFixedPitch false
+UnderlinePosition -98
+UnderlineThickness 54
+Version 001.000
+Notice Sonata is a trademark of Adobe Systems Incorporated
+FontBBox -11 -1402 1197 1387
+StartCharMetrics 174
+C 32 ; WX 150 ; N space ; B 0 0 0 0 ;
+C 33 ; WX 210 ; N largethree ; B 0 0 210 376 ;
+C 34 ; WX 511 ; N grandpause ; B 0 0 511 509 ;
+C 35 ; WX 224 ; N sharp ; B 0 -379 224 375 ;
+C 36 ; WX 505 ; N serpent ; B 0 -175 505 1158 ;
+C 37 ; WX 515 ; N segno ; B 0 -343 515 336 ;
+C 38 ; WX 611 ; N trebleclef ; B 0 -402 611 1334 ;
+C 39 ; WX 130 ; N arrowup ; B 0 0 130 162 ;
+C 40 ; WX 165 ; N parenleft ; B 0 -50 165 500 ;
+C 41 ; WX 165 ; N parenright ; B 0 -50 165 500 ;
+C 42 ; WX 361 ; N pedaloff ; B 0 0 361 350 ;
+C 43 ; WX 300 ; N cross ; B 0 -150 300 150 ;
+C 44 ; WX 182 ; N pause ; B 0 -231 182 68 ;
+C 45 ; WX 300 ; N tenuto ; B 0 -19 300 19 ;
+C 46 ; WX 94 ; N dot ; B 0 -46 94 48 ;
+C 47 ; WX 174 ; N percclef1 ; B 0 0 174 500 ;
+C 48 ; WX 360 ; N zero ; B 0 -217 360 218 ;
+C 49 ; WX 250 ; N one ; B 0 -209 250 209 ;
+C 50 ; WX 340 ; N two ; B 0 -217 340 218 ;
+C 51 ; WX 324 ; N three ; B 0 -217 324 218 ;
+C 52 ; WX 329 ; N four ; B 0 -209 329 209 ;
+C 53 ; WX 300 ; N five ; B 0 -209 300 209 ;
+C 54 ; WX 334 ; N six ; B 0 -217 334 218 ;
+C 55 ; WX 341 ; N seven ; B 0 -215 341 216 ;
+C 56 ; WX 328 ; N eight ; B 0 -217 328 218 ;
+C 57 ; WX 334 ; N nine ; B 0 -217 334 218 ;
+C 58 ; WX 151 ; N eighthdownsmall ; B 0 -438 151 62 ;
+C 59 ; WX 274 ; N eighthupsmall ; B 0 -63 274 437 ;
+C 61 ; WX 1000 ; N staff ; B -11 -9 1011 1009 ;
+C 62 ; WX 417 ; N accent ; B 0 4 417 257 ;
+C 63 ; WX 694 ; N bassclef ; B 0 192 691 991 ;
+C 64 ; WX 197 ; N largefive ; B 0 2 197 369 ;
+C 65 ; WX 300 ; N quarternotedownB ; B 0 -759 300 126 ;
+C 66 ; WX 674 ; N cclef ; B 0 -9 674 1009 ;
+C 67 ; WX 421 ; N cuttime ; B 0 -424 421 425 ;
+C 68 ; WX 811 ; N dc ; B 0 -16 811 351 ;
+C 69 ; WX 300 ; N eighthnotedown ; B 0 -874 300 125 ;
+C 70 ; WX 834 ; N mezzoforte ; B 0 -172 834 413 ;
+C 71 ; WX 150 ; N slashforgrace ; B 0 0 150 86 ;
+C 72 ; WX 300 ; N halfnotedown ; B 0 -874 300 134 ;
+C 73 ; WX 112 ; N smallsharp ; B 0 -193 112 188 ;
+C 74 ; WX 0 ; N eighthflagdown ; B 0 -874 271 -124 ;
+C 75 ; WX 0 ; N sxflagdown ; B 0 -874 283 -92 ;
+C 76 ; WX 408 ; N bottombracket ; B 0 -296 408 155 ;
+C 77 ; WX 586 ; N mordentslash ; B 0 -90 586 310 ;
+C 79 ; WX 300 ; N harmonic ; B 0 -131 300 132 ;
+C 80 ; WX 800 ; N mezzopiano ; B 0 -172 800 266 ;
+C 81 ; WX 300 ; N quarternotedown ; B 0 -874 300 125 ;
+C 82 ; WX 300 ; N thrtynotedown ; B 0 -1034 300 125 ;
+C 83 ; WX 599 ; N sforzando ; B 0 -172 599 413 ;
+C 84 ; WX 618 ; N turn ; B 0 -133 618 133 ;
+C 85 ; WX 658 ; N fermata ; B 0 0 658 352 ;
+C 86 ; WX 721 ; N octbassa ; B 0 0 721 360 ;
+C 87 ; WX 614 ; N dblwholenote ; B 0 -166 614 166 ;
+C 88 ; WX 300 ; N sxnotedown ; B 0 -874 300 125 ;
+C 89 ; WX 558 ; N sxnotedownB ; B 0 -774 558 126 ;
+C 90 ; WX 651 ; N forzando ; B 0 -172 651 413 ;
+C 91 ; WX 150 ; N heavybarline ; B 0 -9 150 1009 ;
+C 92 ; WX 0 ; N upstem ; B 275 37 300 874 ;
+C 93 ; WX 455 ; N repeat ; B 0 -9 455 1009 ;
+C 94 ; WX 263 ; N heavyaccent ; B 0 0 263 417 ;
+C 95 ; WX 500 ; N ledgerline ; B 0 -15 500 15 ;
+C 96 ; WX 497 ; N trillo ; B 0 -16 497 364 ;
+C 97 ; WX 300 ; N quarternoteupB ; B 0 -126 300 759 ;
+C 98 ; WX 198 ; N flat ; B 0 -178 198 491 ;
+C 99 ; WX 421 ; N commontime ; B 0 -254 421 255 ;
+C 100 ; WX 746 ; N ds ; B 0 -12 746 350 ;
+C 101 ; WX 546 ; N eighthnoteup ; B 0 -125 546 874 ;
+C 102 ; WX 515 ; N forte ; B 0 -172 515 413 ;
+C 103 ; WX 138 ; N arpeggio ; B 0 0 138 534 ;
+C 104 ; WX 300 ; N halfnoteup ; B 0 -134 300 874 ;
+C 105 ; WX 95 ; N smallflat ; B 0 -89 95 246 ;
+C 106 ; WX 0 ; N eighthflagup ; B 275 124 546 874 ;
+C 107 ; WX 0 ; N sxflagup ; B 275 58 558 874 ;
+C 108 ; WX 37 ; N barline ; B 0 -9 37 1009 ;
+C 109 ; WX 606 ; N mordent ; B 0 -1 606 240 ;
+C 110 ; WX 176 ; N natural ; B 0 -350 176 350 ;
+C 111 ; WX 120 ; N naturalharmonic ; B 0 -61 120 60 ;
+C 112 ; WX 445 ; N piano ; B 0 -172 445 266 ;
+C 113 ; WX 300 ; N quarternoteup ; B 0 -125 300 874 ;
+C 114 ; WX 558 ; N thrtynoteup ; B 0 -125 558 1019 ;
+C 115 ; WX 226 ; N s ; B 0 -16 226 266 ;
+C 116 ; WX 519 ; N tablature ; B 0 0 557 999 ;
+C 117 ; WX 658 ; N fermataup ; B 0 -352 658 0 ;
+C 118 ; WX 263 ; N wedgedown ; B 0 0 263 417 ;
+C 119 ; WX 412 ; N wholenote ; B 0 -126 412 126 ;
+C 120 ; WX 558 ; N sxnoteup ; B 0 -125 558 874 ;
+C 121 ; WX 300 ; N sxnoteupB ; B 0 -126 300 988 ;
+C 122 ; WX 291 ; N z ; B 0 -16 291 250 ;
+C 123 ; WX 126 ; N repeatdots ; B 0 307 126 696 ;
+C 124 ; WX 0 ; N downstem ; B 0 -874 25 -35 ;
+C 125 ; WX 455 ; N repeatright ; B 0 -9 455 1009 ;
+C 126 ; WX 337 ; N trillsection ; B 0 0 413 165 ;
+C 129 ; WX 546 ; N eighthnotedownB ; B 0 -774 546 126 ;
+C 130 ; WX 300 ; N one28notedown ; B 0 -1402 300 125 ;
+C 140 ; WX 300 ; N eighthnoteupB ; B 0 -126 300 924 ;
+C 141 ; WX 558 ; N one28noteup ; B 0 -125 558 1387 ;
+C 160 ; WX 173 ; N extablature ; B 0 0 211 999 ;
+C 161 ; WX 792 ; N pedal ; B 0 -2 792 458 ;
+C 162 ; WX 248 ; N italicfour ; B 0 0 248 297 ;
+C 163 ; WX 244 ; N italicthree ; B 0 -15 244 297 ;
+C 164 ; WX 205 ; N italicsix ; B 0 -15 205 297 ;
+C 165 ; WX 262 ; N italiceight ; B 0 -15 262 297 ;
+C 166 ; WX 233 ; N italicseven ; B 0 0 233 297 ;
+C 167 ; WX 300 ; N braceup ; B 0 -1001 300 1009 ;
+C 168 ; WX 207 ; N thrtyscndrest ; B 0 -384 400 578 ;
+C 169 ; WX 150 ; N graceup ; B 0 -62 150 438 ;
+C 170 ; WX 249 ; N italictwo ; B 0 -15 249 297 ;
+C 172 ; WX 278 ; N dotaccentup ; B 0 0 278 416 ;
+C 173 ; WX 300 ; N square ; B 0 -150 300 150 ;
+C 174 ; WX 130 ; N arrowdown ; B 0 0 130 162 ;
+C 175 ; WX 300 ; N halfnotedownB ; B 0 -759 300 134 ;
+C 176 ; WX 230 ; N italicfive ; B 0 -15 230 297 ;
+C 177 ; WX 300 ; N major ; B 0 -116 300 155 ;
+C 178 ; WX 229 ; N upbow ; B 0 0 229 417 ;
+C 179 ; WX 340 ; N downbow ; B 0 0 340 351 ;
+C 180 ; WX 300 ; N thrtynoteupB ; B 0 -126 300 1123 ;
+C 181 ; WX 852 ; N mordentthree ; B 0 -1 852 238 ;
+C 183 ; WX 313 ; N wholerest ; B 0 125 313 250 ;
+C 184 ; WX 1197 ; N ppp ; B 0 -172 1197 266 ;
+C 185 ; WX 821 ; N pp ; B 0 -172 821 266 ;
+C 186 ; WX 367 ; N dblflat ; B 0 -178 367 491 ;
+C 187 ; WX 215 ; N italicnine ; B 0 -15 215 297 ;
+C 188 ; WX 233 ; N italiczero ; B 0 -15 233 297 ;
+C 189 ; WX 479 ; N m ; B 0 -16 479 266 ;
+C 190 ; WX 300 ; N tremeloshort ; B 0 0 300 479 ;
+C 191 ; WX 300 ; N halfnoteupB ; B 0 -134 300 759 ;
+C 192 ; WX 300 ; N rhythmX ; B 0 -149 300 150 ;
+C 193 ; WX 198 ; N italicone ; B 0 0 198 297 ;
+C 194 ; WX 408 ; N topbracket ; B 0 -155 408 296 ;
+C 195 ; WX 573 ; N octalta ; B 0 0 573 360 ;
+C 196 ; WX 781 ; N ff ; B 0 -172 781 413 ;
+C 197 ; WX 138 ; N sixteenthrest ; B 0 -384 331 322 ;
+C 198 ; WX 558 ; N sxtyfournoteup ; B 0 -125 558 1242 ;
+C 199 ; WX 0 ; N extendstemup ; B 275 0 300 250 ;
+C 200 ; WX 0 ; N extendstemdown ; B 0 -250 25 0 ;
+C 201 ; WX 284 ; N eighthupslash ; B 0 -63 284 437 ;
+C 202 ; WX 275 ; N stemspace ; B 0 0 0 0 ;
+C 206 ; WX 257 ; N quarterrest ; B 0 -355 257 400 ;
+C 207 ; WX 300 ; N quarternotehead ; B 0 -125 300 125 ;
+C 208 ; WX 300 ; N squarefill ; B 0 -150 300 150 ;
+C 209 ; WX 300 ; N trianglefill ; B 0 -116 300 155 ;
+C 210 ; WX 258 ; N repeatbarleft ; B 0 -9 258 1009 ;
+C 211 ; WX 455 ; N repeatbarright ; B 197 -9 455 1009 ;
+C 212 ; WX 610 ; N repsign ; B 0 0 610 509 ;
+C 214 ; WX 280 ; N percclef2 ; B 0 70 280 930 ;
+C 215 ; WX 561 ; N octbassa1 ; B 0 0 561 364 ;
+C 217 ; WX 468 ; N trillofinno ; B 0 -13 468 369 ;
+C 218 ; WX 558 ; N monsternote ; B 0 -125 558 874 ;
+C 220 ; WX 266 ; N dblsharp ; B 0 -131 266 131 ;
+C 221 ; WX 500 ; N measurerest ; B 0 0 500 500 ;
+C 222 ; WX 443 ; N coda ; B 0 -254 443 255 ;
+C 224 ; WX 228 ; N wedgefill ; B 0 0 228 199 ;
+C 225 ; WX 300 ; N diamond ; B 0 -150 300 150 ;
+C 226 ; WX 300 ; N diamondfill ; B 0 -150 300 150 ;
+C 227 ; WX 150 ; N dblwholerest ; B 0 0 150 250 ;
+C 228 ; WX 69 ; N eighthrest ; B 0 -384 262 78 ;
+C 229 ; WX 345 ; N one28rest ; B 0 -384 538 1078 ;
+C 231 ; WX 558 ; N thrtynotedownB ; B 0 -1042 558 126 ;
+C 232 ; WX 278 ; N dotaccentdown ; B 0 0 278 416 ;
+C 233 ; WX 88 ; N smallnatural ; B 0 -192 88 186 ;
+C 234 ; WX 300 ; N bracedown ; B 0 -1001 300 1009 ;
+C 236 ; WX 1047 ; N fff ; B 0 -172 1047 413 ;
+C 237 ; WX 150 ; N gracedown ; B 0 -438 150 62 ;
+C 238 ; WX 313 ; N halfrest ; B 0 0 313 125 ;
+C 239 ; WX 300 ; N sxtyfournotedown ; B 0 -1218 300 125 ;
+C 240 ; WX 0 ; N extendflagdown ; B 0 -159 272 375 ;
+C 241 ; WX 37 ; N dottedbarline ; B 0 -9 37 1009 ;
+C 242 ; WX 365 ; N metronome ; B 0 -62 365 438 ;
+C 243 ; WX 280 ; N r ; B 0 0 280 266 ;
+C 244 ; WX 276 ; N sxtyfourrest ; B 0 -384 469 828 ;
+C 246 ; WX 300 ; N noteheadextra ; B 0 -125 300 125 ;
+C 250 ; WX 300 ; N halfnotehead ; B 0 -134 300 134 ;
+C 251 ; WX 0 ; N extendflagup ; B 275 -360 546 184 ;
+EndCharMetrics
+EndFontMetrics

@@ -1,0 +1,24 @@
+Subject: REPOST: v10i076: BDF to Postscript program, Part01/01
+Newsgroups: comp.sources.x
+Approved: argv@sun.com
+
+Submitted-by: mleisher@NMSU.Edu
+Posting-number: Volume 10, Issue 76
+Archive-name: bdf2ps/part01
+
+This program makes a Postscript font out from a BDF font.  It will not
+work with large, two byte BDF fonts such as Chinese or Japanese BDF
+fonts.  It also ignores any entries that have an ENCODING value less
+than zero.
+
+You might want to tune some of the Postscript parameters by hand to
+get the output closer to what you want.  There is a short description
+of this in the man page.
+
+This program depends heavily on the SWIDTH entry for each character.
+Please see the "Bitmaps Distribution Format 2.1" document for details
+on SWIDTH.  You can also send me email for a copy of this document.
+
+Please send bug reports, enhancements, etc. to:
+Internet: mleisher@nmsu.edu
+Bitnet  : mleisher@nmsu.bitnet

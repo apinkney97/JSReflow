@@ -1,0 +1,106 @@
+.TH BINTOBDF 1 "Release 4" "X Version 11"
+.SH NAME
+bintobdf - Binary to BDF font converter for X11
+.SH SYNOPSIS
+.B "bintobdf"
+[-c #] [-d #] [-e #] [-f name] [-g #] [-lmLM] [-o name] [-r] [-size #]
+[-skip #] [-u #] [-x #] [-y #] bitmap-font-file
+.SH DESCRIPTION
+.PP
+.B bintobdf
+reads a raw bitmap font from the
+specified file and writes an X11 Bitmap Distribution Format (BDF) to
+standard output.
+.SH OPTIONS
+.TP 8
+.B \-c #
+The number following \fI-c\fP is the number of characters that will
+appear in a row.  For instance, in the GB 2312-1980 and JIS X0208
+encoding, there are 94 characters per row.  In the Big5 encoding,
+there are 190 characters per row. (Default: 94)
+.TP 8
+.B \-d #
+The number following \fI-d\fP will be the default character on the BDF
+font.  (Default: \fIthe value for -e\fP)
+.TP 8
+.B \-e #
+The number following \fI-e\fP will be the encoding value of the first
+character in the BDF font.  For instance, the encoding starts at 41377
+(0xa1a1) for GB 2312-1980, and the encoding starts at 8481 (0x2121) for
+the JIS X0208 encoding.  The Big5 encoding starts at 41280 (0xa140).
+.TP 8
+.B \-f name
+The string following \fI-f\fP will be the name used for the ``FONT''
+entry of the BDF font. (Default: basename of the font concated with size)
+.TP 8
+.B \-g #
+The number following \fI-g\fP indicates how many of the bitmap
+characters to generate.  This is here for generating a limited number
+of characters for testing purposes. (Default: calculated from raw
+bitmap font file size and character size)
+.TP 8
+.B \-l
+Force the bit order to least significant bit first.
+.TP 8
+.B \-m
+Force the bit order to most significant bit first.
+.TP 8
+.B \-L
+Force the byte order to least significant bit first.
+.TP 8
+.B \-M
+Force the byte order to most significant bit first.
+.TP 8
+.B \-o name
+Send the output to \fIname\fP instead of stdout.
+.TP 8
+.B \-r
+Write each characters bytes in reverse order after they have been
+adjusted for bit and byte order.
+.TP 8
+.B \-size #
+The number following \fI-size\fP will be the width and height in bits
+of each character. A lot of fonts that use two bytes per character are
+either 16x16 or 24x24. (Default: 16)
+.TP 8
+.B \-skip #
+The number that follows \fI-skip\fP will be the number of bytes
+skipped at the beginning of the raw bitmap font file.  Occasionally, a
+raw bitmap font file will have some sort of header information.
+(Default: 0)
+.TP 8
+.B \-u #
+The number that follows \fI-u\fP will be the scan unit for each
+character's bitmap.  This value determines number of bytes that will
+be swapped in setting bit and byte order of each character.  This
+value shouldn't change for most Big<->Little Endian conversions.
+If you are unsure if the target architecture needs this value changed,
+check the \fBservermd.h\fP file in the X11 server source distribution.
+(Default: 1)
+.TP 8
+.B \-x #
+Set the X offset of the character in the BDF font.  For fonts that use
+two bytes per character, a value of 0 usually looks alright. (Default: 0)
+.TP 8
+.B \-y #
+Set the Y offset of the character in the BDF font.  In fonts that use
+two bytes per character, a value of -2 usually looks alright. (Default: -2)
+.SH "SEE ALSO"
+X(1), Xserver(1), bdftosnf(1), snftobdf(1), bdftops(1)
+.br
+"Bitmap Distribution Format 2.1"
+.br
+"X Logical Font Description Conventions"
+.SH AUTHOR
+Internet: mleisher@nmsu.edu   Bitnet: mleisher@nmsu.bitnet
+.br
+Mark Leisher
+.br
+Computing Research Lab
+.br
+New Mexico State University
+.br
+Las Cruces, NM 88003
+.br
+(505) 646-5711
+

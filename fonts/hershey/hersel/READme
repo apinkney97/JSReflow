@@ -1,0 +1,66 @@
+This program takes a "selection file" and a file of Hershey glyphs
+and creates 3 output files:
+
+	a .pro file -- PostScript code that when included in a PostScript
+		program makes a font that may then be accessed via 'findfont'
+	a .afm file -- provides the Adobe Font Metrics information needed
+		by the TranScript shell file 'afmdit' to construct a
+		troff .out file
+	a .map file -- used by TranScript software to map the 2-character
+		troff font name to the internal font name
+
+To make the whole shebang, just say "make".
+
+If you have Adobe's TranScript package, you dispose of the output
+files as follows:
+
+	.pro -- goes in /usr/add-on/ps/lib [Your Directories May Vary]
+
+	.afm -- goes in /usr/add-on/ps/lib and /usr/lsrc/transcript/lib
+
+	.map -- goes in /usr/lsrc/transcript/lib/ditroff.font
+
+Then sort the `font.map+' lines into your font.map, merge the `moreout' line
+into your /usr/lsrc/transcript/lib/ditroff.font/Makefile, and run make in
+this directory.  Scatter the .out and .aux files to their proper places
+[probably /usr/lib/font/devpsc].
+
+Now if you have the version of TranScript I do, you are done.  (I've locally
+modified mine to automatically merge the .pro file with the rest of the
+psdit output whenever a "non-standard font" is used in a document.  I can't
+send you these modifications but you might try expressing your wishes
+to adobe!shore in hope of altering the future.)  Otherwise you need to
+arrange some other method of merging the proper .pro files before printing
+the output.
+
+Usage:	(if you wish to build fonts other than the ones I did)
+ 	hersel font.sel hersh.oc
+
+Notes:
+	1.  I didn't bother with ligatures (none of the fonts I encoded
+	had any).
+
+	2.  I only encoded characters in Adobe's Standard Encoding.  You'll
+	have to do some twiddling to get the Christmas tree into a font.
+
+	3.  To keep the regular fonts dainty, I have used a rather narrow
+	pen width.  This looks fine at small character sizes, but at
+	larger sizes the characters show gaps in the strokes.  I'd just
+	use the "bold" variety of the font when this happens but you might
+	feel like adjusting the penwidth for the basic font.
+
+	4.  I didn't like the spacing on most of the fonts so put a provision
+	in the select file to adjust the left and right "boundaries" (not
+	really side-bearings as the character origin isn't given and had
+	to be divined) of a character.  These are the third and fourth fields
+	on the character selection line when present.  You may feel like
+	adjusting them again.  The Gothic fonts probably could use some
+	tuning, too, but I haven't done them.
+
+Author:
+	Guy Riddle
+	AT&T Bell Laboratories
+	184 Liberty Corner Road
+	Liberty Corner, NJ  07938
+
+	<allegra!nomad!ggr> or <ggr@btl.csnet>

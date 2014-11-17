@@ -1,0 +1,1524 @@
+Sat Mar 28 07:49:16 1992  Karl Berry  (karl at hayley)
+
+        * Version 0.4.
+
+        * Change copyright years to 1992 only.
+
+Tue Mar 10 15:01:49 1992  Karl Berry  (karl at hayley)
+
+        * main.c (USAGE): separate out GETOPT_USAGE.
+
+Tue Mar 10 14:02:28 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * main.c (main): set output_name to font_basename if the former is
+          NULL.  Call bzr_start_output with output_name instead of
+          font_basename. 
+
+Sat Mar  7 13:26:07 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * output_bzr.c (bzr_start_output): changed FONT_NAME to OUTPUT_NAME;
+          call make_output_filename on concatenation of it and ".bzr".
+
+        * main.c [USAGE]: added output-file.
+          (read_command_line): added output-file option.
+
+        * output-bzr.[ch]: added output_name.
+
+Sat Mar  7 09:13:24 1992  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (libraries): define again.
+        (files, headers, sources): replace with `c_and_h', etc.
+
+        * display.c (digitize_spline): use puts instead of printf.
+
+Wed Mar  4 08:02:13 1992  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (libraries): remove.
+
+        * display.[ch] (server_identity, get_client_identity): these do not
+          need to be public.
+        (get_server_info): take the identity as an arg; change callers.
+
+        * xserver.c (start_server) [STANDALONE_SERVER]: set geometry_args
+          to window_size after reading command line.
+
+        * xserver.c (CLASS_NAME): change to `Limn'.
+
+        * display.c [!STANDALONE_SERVER]: compile the server fork
+          conditionally.
+
+Tue Mar  3 11:47:49 1992  Karl Berry  (karl at hayley)
+
+        * display.[ch], xserver.[ch]: changes from Erik Wallin for a
+          better way of finding the server.
+        * GNUmakefile (display.o): remove special target; make the default
+          to fork.
+        (xserver): new target for debugging.
+
+Sat Feb  8 07:09:47 1992  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (need_X_libraries): define this.
+
+Fri Jan 31 16:49:29 1992  Karl Berry  (karl at hayley)
+
+        * main.c (read_command_line): declare `option_index' (for new
+          getopt).
+
+        * display.c (init.c) [FORK_SERVER]: do not declare fork.
+
+Thu Jan  9 08:29:29 1992  Karl Berry  (karl at hayley)
+
+        * *.c: do not include global.h.
+
+        * *.h: remove #pragma once.
+
+Wed Jan  8 15:26:35 1992  Karl Berry  (karl at hayley)
+
+        * update copyright messages.
+
+        * change `allocate to `xmalloc', `reallocate' to `xrealloc', and
+          `string_copy' to `strdup'.
+
+Wed Oct  2 07:10:56 1991  Karl Berry  (karl at hayley)
+
+        * output-bzr.c (bzr_start_output): omit needless `string_copy'.
+
+Mon Aug  5 06:18:46 1991  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (program): change name to `limn'.
+
+Tue Jul 30 13:19:12 1991  Karl Berry  (karl at ra.cs.umb.edu)
+
+        * Version 0.3.
+
+Fri Jul 26 10:22:48 1991  Karl Berry  (karl at hayley)
+
+        * most files: rename `fit-outlines' to `limn'.
+
+        * FitOutlines.ad: remove prefix.
+
+Fri Jul 19 09:15:35 1991  Karl Berry  (karl at hayley)
+
+        * pxl-outline.c (TRY_PIXEL): VALID_LOCATION has been renamed to
+          BITMAP_VALID_PIXEL.
+
+        * GNUmakefile (install): rename fileinstall to INSTALLDATA; source
+          file is FitOutlines.ad.
+
+Mon Jun 17 15:21:18 1991  Karl Berry  (karl at hayley)
+
+        * output-bzr.c (most routines): change calls to PIXELS_TO_POINTS.
+
+Sat Jun 15 09:49:25 1991  Karl Berry  (karl at hayley)
+
+        * main.c: change `checked_fopen' to `xfopen'.
+
+Sun Jun  9 11:03:37 1991  Karl Berry  (karl at hayley)
+
+        * display.c: doc fix.
+
+Thu Jun  6 07:25:54 1991  Karl Berry  (karl at hayley)
+
+        * All files: change to version 2 of the GPL.
+
+Sat Apr 13 09:42:15 1991  Karl Berry  (karl at hayley)
+
+        * curve.c, fit.c, main.c, pxl-outline.c: doc fix.
+
+Fri Apr 12 15:13:24 1991  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (files): remove `logreport'.
+
+Wed Mar 13 17:15:56 1991  Karl Berry  (karl at hayley)
+
+        * main.c (main): report `|' instead of of `(' when we finish
+          finding the outline, since we don't have matching `)' any more.
+
+        * output-bzr.c (bzr_start_output): don't remove the design size
+          from the output name.
+
+Tue Mar 12 06:41:21 1991  Karl Berry  (karl at hayley)
+
+        * fit.c (filter): don't filter unless we have five points.
+
+        * curve.c (print_curve): fix parentheses.
+
+Mon Mar 11 09:27:20 1991  Karl Berry  (karl at hayley)
+
+        * fit.c (fit_curve_list): only append the first point as the last
+          point if the curve is cyclic and the length is not three; if it
+          isn't, then it's already been done.
+
+        * curve.c (print_curve): if the curve is short enough, print every
+          point.
+
+        * fit.c (remove_adjacent_corners): new routine.
+        (find_corners): call it, and remove ad hoc checks for adjacent
+          corners. 
+
+        * main.c (main): open a bitmap font only, instead of looking for
+          the TFM file, also.  Change calls as below.
+        * output-bzr.c (bzr_start_output): take a `bitmap_font_type', and don't
+          worry about the interword space.
+        * output-bzr.c (bzr_start_output): change the declaration.
+        * display.c (init_display): take a `bitmap_font_type'.
+        * display.h (bitmap_font_type): change the declaration.
+
+Thu Mar  7 07:32:04 1991  Karl Berry  (karl at hayley)
+
+        * Version 0.2.
+
+Mon Feb 25 15:31:03 1991  Karl Berry  (karl at hayley)
+
+        * output-bzr.c: change calls to `bzr_...' from `..._bzr_...'.
+
+Sun Feb 24 19:59:18 1991  Karl Berry  (karl at ra.cs.umb.edu)
+
+        * fit.c (fit_curve_list): only log the splines if `logging' is
+          nonzero.
+
+Sun Feb 17 09:28:13 1991  Karl Berry  (karl at hayley)
+
+        * fit.c (find_corners): don't let a point adjacent to an
+          already-chosen corner be a corner, even if its angle is less
+          than `corner_always_threshold'.
+
+        * *.c: include config.h.
+
+Sun Feb 10 09:03:40 1991  Karl Berry  (karl at hayley)
+
+        * fit.c (find_corners): don't let points adjacent to
+          already-chosen corners be corners themselves.
+
+        * pxl-outline.c (find_outline_pixels): set it according to whether
+          the starting edge was a top or bottom.
+        * pxl-outline.h (pixel_outline_type): new member `clockwise'.
+        (O_CLOCKWISE): new macro.
+        * curve.h (curve_list_type): likewise.
+        (CURVE_LIST_CLOCKWISE): and again.
+        * fit.c (remove_knee_points): pass clockwise as a parameter;
+          change caller. 
+
+Sat Feb  9 10:33:16 1991  Karl Berry  (karl at hayley)
+
+        * fit.c (clockwise_p, FIND_CHANGE_POINT): new definitions.
+        (remove_knees); handle clockwise and counterclockwise cases
+        differently. 
+
+        * pxl-outline.c: doc fix.
+
+Sun Feb  3 11:31:48 1991  Karl Berry  (karl at hayley)
+
+        * pxl-outline.c (find_outline_pixels): log the information in the
+          right order.
+
+        * fit.c (set_initial_parameter_values): log the entire curve.
+        * curve.c (log_entire_curve): new routine.
+        * curve.h (log_entire_curve): declare it.
+
+Fri Feb  1 14:48:05 1991  Karl Berry  (karl at hayley)
+
+        * fit.c (fit_curve_list): call `change_bad_lines' on each
+          individual curve, i.e., on the fitted splines between corners,
+          instead of once on the list for the entire outline.
+
+        * fit.c (spline_linear_enough): log the final linearity.
+
+Thu Jan 31 14:30:35 1991  Karl Berry  (karl at hayley)
+
+        * fit.c (change_bad_lines): log more information.
+
+        * fit.c (fit_curve_list): call `change_bad_lines' here, instead of
+          in `fit_with_least_squares'.
+
+Wed Jan 30 16:56:45 1991  Karl Berry  (karl at hayley)
+
+        * fit.c (align): log the information about splines changing.
+        (TRY_AXIS): Use an epsilon test for zero.
+
+Tue Jan 29 10:09:32 1991  Karl Berry  (karl at hayley)
+
+        * display.c (get_server_info): remove dead code.
+
+        * fit.c (filter): don't use the alternate values if the vector sum is
+          zero in either direction.
+
+Fri Jan 18 08:00:30 1991  Karl Berry  (karl at hayley)
+
+        * fit.c (test_subdivision_point): don't subdivide at points which
+          are close to the endpoints.
+
+        * logreport.h (LOG5): new macro.
+
+        * fit.c (test_subdivision_point): new routine to test a single
+          point and update the `best' vector.
+        (UPDATE_BEST): new macro.
+        (JOIN_POINT): assume the parameters have already been fabs'd.
+        (find_subdivision): call test_subdivision_point (twice).
+
+Thu Jan 17 08:15:46 1991  Karl Berry  (karl at hayley)
+
+        * fit.c (find_curve_vectors): return only one count, since they
+          are the same now.
+
+        * fit.c (filter): put the filtered points into a separate curve,
+          instead of back into the original; append the first and last
+          points separately.
+
+        * fit.c (find_curve_vectors): correct off-by-one error in making
+          sure that we don't use more points after the point than before.
+
+        * main.c (main): remove the report of the spline count.
+        * fit.c (fitted_splines, fit_curve): report the totals here.
+
+        * fit.h (align_threshold): declare it.
+
+        * fit.c (TRY_AXIS): new macro.
+        (align): test both the x and y axes.
+
+Tue Jan 15 11:31:56 1991  Karl Berry  (karl at hayley)
+
+        * pxl-outline.h (O_PREV): define so as not to need casts to int.
+
+        * fit.h (fitted_splines): declare to return a spline_list_array.
+        * main.c (main): change call of fitted_splines; call
+          free_spline_list_array instead of free_spline_list.  Calls to
+          x_output_char and bzr_output_char also change.
+        * output-bzr.[ch] (bzr_output_char): change definition and declaration.
+        * display.[ch] (x_output_char): likewise.
+
+        * fit.c (fit_curve_list): append the first point as the last
+          point here.
+
+        * curve.h (CURVE_LIST_LENGTH, CURVE_LIST_ELT,
+          LAST_CURVE_LIST_ELT): new macros.
+
+        * curve.h (curve_list_array_type): new type.
+        (CURVE_LIST_ARRAY_LENGTH, CURVE_LIST_ARRAY_ELT,
+         LAST_CURVE_LIST_ARRAY_ELT): new macros.
+        (new_curve_list_array, free_curve_list_array, append_curve_list):
+         declare new routines, and define them in curve.c.
+
+        * fit.c (fit_curve_list): new routine to do most of what
+          `fitted_splines' did.  
+        (fit_splines): rename to `fit_curve'.
+        (fitted_splines): now control a list of curve_lists, instead of
+         just a curve_list; similarly, return a list of spline_lists.
+        (split_at_corners): return a list of curve_lists.
+        
+Sun Jan 13 16:47:05 1991  Karl Berry  (karl at hayley)
+
+        * main.c (read_command_line): set `explicit_dpi'.
+
+Tue Jan  8 09:55:32 1991  Karl Berry  (karl at hayley)
+
+        * fit.c (split_at_corners): append the first point as the last
+          point also, if the curve is cyclic.  No, rescind that, and
+          append the point after filtering, in `fit_splines'.
+        * curve.c (append_point): new routine.
+        * curve.h (append_point): declare it.
+
+        * fit.c, fit.h, main.c: remove filter-secondary-surround.
+
+        * fit.c (spline_linear_enough): use the curve length squared,
+          instead of the curve length, so that shorter curves are more
+          likely to be reverted.
+        * main.c (USAGE): fix documentation.
+
+        * fit.c (subdivide_search): Since we don't want to search equally
+          far on all curves, make this a percentage instead of an absolute
+          number.
+        (find_subdivision): use the new parameter to compute the old.
+        * fit.h (subdivide_search): declare as a real, instead of int.
+        * main.c (read_command_line, USAGE): likewise.
+
+Mon Jan  7 09:16:16 1991  Karl Berry  (karl at hayley)
+
+        * fit.c (change_bad_lines): don't change the cubic back to a line
+          if its linearity is < line_reversion_threshold.
+        (spline_linear_enough): save the distance from the line.
+        (fit_with_line): initialize the linearity to zero.
+        * fit.h: declare line_reversion_threshold.
+        * main.c (read_command_line, USAGE): new option.
+
+        * fit.c (filter): don't use filter-secondary-surround at all.
+
+        * fit.c (find_curve_vectors): make sure we use the same number of
+          points on either side of the candidate.
+
+        * fit.c (FILTER_ASSIGN): new macro, to change the filter
+        information.
+
+        * fit.c (filter): if the angle using filter_alternative_surround
+          points is more than filter_epsilon different from the normal
+          one, use it instead.  Also, take neighbor_percent as a
+          (global) parameter, instead of computing it based on
+          filter_power.  Also, only use the secondary information if its
+          angle is nonzero.
+        * main.c (read_command_line): new options:
+          filter-alternative-surround, filter-percent, filter-epsilon.
+          Remove filter-power.
+        * fit.h: declare them.
+
+Wed Jan  2 05:42:11 1991  Karl Berry  (karl at hayley)
+
+        * main.c: doc fix.
+
+Tue Jan  1 14:07:57 1991  Karl Berry  (karl at hayley)
+
+        * pxl-outline.c (append_coordinate): append the corner of the
+          pixel in a counterclockwise orientation, instead of clockwise.
+
+Sun Dec 30 09:56:59 1990  Karl Berry  (karl at hayley)
+
+        * fit.c (filter_power): new global parameter.
+        * fit.h (filter_power): declare it.
+        * main.c (read_command_line): new option, `filter-power'.
+        (USAGE): describe it.
+
+Sat Dec 29 11:02:37 1990  Karl Berry  (karl at hayley)
+
+        * pxl-outline.c (next_outline_edge): reimplement to go
+          counterclockwise on outside edges.
+          (TRY_PIXEL, COMPUTE_DELTA, COMPUTE_ROW_DELTA, COMPUTE_COL_DELTA,
+          FIND_TEST_EDGE): new macros to help.
+          (direction_type): new type, for the ways in which we can move.
+
+Thu Dec 27 10:12:12 1990  Karl Berry  (karl at hayley)
+
+        * pxl-outline.c (NUM_EDGES): define to be `no_edge', instead of
+          using sizeof.
+
+Wed Dec 26 15:15:55 1990  Karl Berry  (karl at hayley)
+
+        * pxl-outline.c (edge_type): change values so that we will return
+          them in a counterclockwise direction.
+
+        * pxl-outline.c (edge_names): move declaration to top of file, and
+          rename to `edge_name'; remove the routine `edge_name'.
+        (mark_edge): use edge_name as an array instead of a routine.
+
+        * fit.c (fit_with_least_squares): use MAXFLOAT and MINFLOAT,
+          instead of MAXDOUBLE and MINDOUBLE, since Sun's atof can't deal
+          with the latter.
+
+Wed Dec 19 07:14:24 1990  Karl Berry  (karl at hayley)
+
+        * output-bzr.c (bzr_start_output): don't output the day of the
+          week in the comment.
+
+Tue Dec 18 16:24:27 1990  Karl Berry  (karl at hayley)
+
+        * output-bzr.c (bzr_start_output): convert the interword space to
+          points, scaled by the design size.
+
+Sun Dec  9 15:15:19 1990  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (files): remove metafont.
+        * main.c (main): don't call the mf_... routines.
+        (USAGE, read_command_line): remove the `-metafont' option.
+
+Sat Dec  8 10:30:03 1990  Karl Berry  (karl at hayley)
+
+        * fit.c (find_tangent): new parameter, `cross_curve', which says
+          whether we use points on the adjacent curve or not.
+        (fit_splines): send cross_curve as false.
+        (fit_with_least_squares): send cross_curve as true, and rearrange
+        how left_curve and right_curve are set up.  For one thing, set the
+        NEXT_CURVE and PREVIOUS_CURVE links.
+
+        * metafont.c (mf_output_char): output a newline after each spline.
+
+        * fit.c: doc fixes.
+
+Sat Dec  1 17:12:55 1990  Karl Berry  (karl at hayley)
+
+        * main.c (main): call init_display before opening any output files.
+
+Mon Nov 19 07:57:04 1990  Karl Berry  (karl at hayley)
+
+        * display.c (display_grid_size): doc fix.
+        * main.c (USAGE): ditto.
+
+Sat Nov 17 10:41:22 1990  Karl Berry  (karl at hayley)
+
+        * display.c [STANDALONE_SERVER]: use `FORK_SERVER' instead, to
+          avoid two `main's being defined.
+
+        * GNUmakefile (files): remove `postscript'; we have another
+          program (bzrto) to do this.
+        * main.c: do not include postscript.h.
+        (main): don't call ps_start_output et al.
+
+        * main.c, metafont.c: include file-open.h.
+
+        * display.c (digitize_spline): use the length of the bounding
+          rectangle to compute the step size instead of the distance from
+          the starting point to the ending point.
+
+        * fit.c (set_initial_parameter_values, reparameterize,
+          find_error): use distance instead of hypot.
+
+        * display.c (digitize_spline): avoid dividing by zero in the case
+          of one-pixel splines.
+
+Fri Nov 16 06:51:21 1990  Karl Berry  (karl at hayley)
+
+        * fit.c (the globals): say (-<argument>), not (+<argument>), since
+          getopt has changed.
+
+        * display.c (GRID_INTERVAL, PIXEL_EXPANSION, RECTANGLE_SIZE): make
+          these variables (as signed integers, since we do arithmetic that
+          might wind up as negative numbers on them), instead of macros.
+        * display.h: declare them.
+        * main.c (read_command_line): new options to set them.
+
+Thu Nov 15 14:42:53 1990  Karl Berry  (karl at hayley)
+
+        * xserver.c (foserver_exit): exit (0) after closing display.
+
+        * xserver.h (start_server): declare it.
+
+        * GNUmakefile (files): add `xserver'.
+
+Tue Nov 13 09:06:21 1990  Karl Berry  (karl at hayley)
+
+        * display.c (get_server_info): don't receive any events after we
+          find our server. 
+
+        * display.c (send_event): new routine to send an event to our
+          server.  Call it in close_display and x_output_char.
+
+        * display.c (get_server_info): use the grandchild of the window we
+          receive the event on, i.e., the label widget, instead of the
+          child, which is the viewport.
+
+        * display.c (get_server_info): use our own connection to the
+          server.
+          (close_display): close our connection.
+
+        * xserver.h (CLASS_NAME): define this here, so that the server can
+          use it; whoops, may as well put it in xserver.c.
+
+        * xserver.h: new file, for the message atoms.
+
+        * GNUmakefile (CFLAGS): add -DSTANDALONE_SERVER (for testing).
+
+Mon Nov 12 12:05:42 1990  Karl Berry  (karl at hayley)
+
+        * display.c: send messages to a server instead of doing the
+          drawing directly.  This means sending a ClientMessage event
+          before waiting for RET, and an event to exit.
+
+Wed Oct 24 14:58:52 1990  Karl Berry  (karl at aten)
+
+        * Version 0.0.
+
+Tue Oct 23 08:55:00 1990  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (install): install the app-defaults file.
+
+        * display.c (display_negative, display_descender): these options
+          are obsolete now.
+        * display.h: remove declarations.
+        * main.c (read_command_line): remove assignments and documentation.
+
+        * display.c (x_start_char): make the width and height 1 more than
+          the bitmap's width and height, not two.  Also increase the
+          offset_bb's MAX_ROW and MIN_COL by 1.  [No, we have to go back
+          to increasing by 2.]
+
+        * display.c (init_display): make the internal width and height of
+          the label be PIXEL_EXPANSION.  [No, let's assign it in the
+          defaults file instead of in the code.]
+
+Mon Oct 22 07:18:38 1990  Karl Berry  (karl at hayley)
+
+        * display.c (x_start_char): add two (* PIXEL_EXPANSION) to the
+          width and height of the pixmap.
+
+        * display.c (x_output_char): process more pending events after
+          flushing the output buffer.
+
+Sun Oct 21 15:55:49 1990  Karl Berry  (karl at hayley)
+
+        * display.c (x_start_char): make the gc's foreground be 0 to start
+          with, since we want to blank the pixmap before doing anything
+          else.
+
+        * display.c (x_output_char): process pending events before
+          prompting the user to continue.
+
+        * display.c (init_display): remove no_args and zero, since we can
+          pass NULL and 0, no, I'm wrong, have to have zero.
+
+        * GNUmakefile (libraries): add gnuw.
+
+        * display.c (init_display): transposed arguments to
+          XtCreateWidget.
+
+Sat Oct 20 08:43:30 1990  Karl Berry  (karl at hayley)
+
+        * display.c: change to use the Label widget's pixmap for drawing;
+          this affects almost every procedure.
+        (init_display): set up the widget hierarchy.
+        (x_start_char): take the character as an argument.
+        * display.h (x_start_char): change the prototype.
+        * main.c (main): change the call.
+
+        * display.c: remove R3 stuff.
+
+Sun Oct 14 17:10:02 1990  Karl Berry  (karl at hayley)
+
+        * main.c (read_command_line): use FINISH_COMMAND_LINE.
+
+Fri Sep 28 09:33:13 1990  Karl Berry  (karl at hayley)
+
+        * main.c: include "getopt.h", not <getopt.h>.
+
+        * output-bzr.c (bzr_start_output): doc fix.
+
+        * pxl-outline.c (append_outline_pixel): subtract one from O_LENGTH
+        when assigning the new element.
+
+Thu Sep 27 17:51:04 1990  Karl Berry  (karl at hayley)
+
+        * main.c (read_command_line): return NULL at the end to avoid a
+        gcc warning.
+        * pxl-outline.c (is_outline_edge): similarly.
+
+        * output-bzr.c (bzr_start_output): remove unused variable
+        `dpi_real'.
+
+Sat Sep  8 10:33:34 1990  Karl Berry  (karl at hayley)
+
+        * report.[hc]: rename to logreport.[hc], and include report.h.
+        * (almost all files): upcase `report*' and `log*'.
+
+        * main.c (main): use the basename of the font for opening the
+        output files.
+
+        * main.c (read_command_line): remove any suffix on the font name
+        before returning it.
+
+        * main.c (read_command_line): use GET_RANGE.
+
+Wed Sep  5 06:19:15 1990  Karl Berry  (karl at hayley)
+
+        * main.c (USAGE): doc fix in explanation of -range.
+
+Mon Sep  3 17:02:10 1990  Karl Berry  (karl at hayley)
+
+        * pxl-outline.c (append_outline_pixel): use O_LENGTH.
+
+Tue Aug 28 18:18:19 1990  Kathy Hargreaves  (letters at claude)
+
+        * display.c: include main.h.
+
+Tue Aug 21 17:41:43 1990  Karl Berry  (karl at hayley)
+
+        * report.c (verbose): doc fix -- +v isn't an option anymore.
+
+        * main.c (USAGE): explain option syntax better.
+
+Tue Jul 24 13:06:07 1990  Karl Berry  (karl at hayley)
+
+        * output-bzr.c (bzr_start_output): don't convert the design size
+        from pixels to points.
+        * display.c (init_display): convert the design size from points to
+        pixels.
+        * postscript.c (ps_start_output): ditto.
+
+Sun Jul 22 09:39:04 1990  Karl Berry  (karl at hayley)
+
+        * display.c: don't include <X11/Xlib.h>, it's done for us.
+
+Sat Jul 21 07:39:24 1990  Karl Berry  (karl at hayley)
+
+        * output-bzr.c (bzr_start_output): convert `dpi' to a double
+        before using PIXELS_TO_POINTS.
+
+        * display.c: remove the `my_' prefix from variables.
+
+Mon Jul 16 06:28:16 1990  Karl Berry  (karl at hayley)
+
+        * main.c (read_command_line): remove the `v' option.
+
+Fri Jul 13 16:59:22 1990  Karl Berry  (karl at hayley)
+
+        * postscript.c (ps_init_encoding): use the filename we got back
+        from find_path_filename.
+
+Sat Jul  7 08:09:04 1990  Karl Berry  (karl at hayley)
+
+        * main.c (GET_PERCENT): move to global.h.
+
+        * pxl-outline.c (next_outline_edge): improve the error message.
+
+Fri Jul  6 11:23:46 1990  Karl Berry  (karl at hayley)
+
+        * pxl-outline.c (find_outline_pixels): free the `marked' bitmap.
+
+Thu Jul  5 06:41:49 1990  Karl Berry  (karl at hayley)
+
+        * pxl-outline.c (find_outline_pixels): don't call any subroutines
+        unless the pixel is black.
+
+        * main.c (read_command_line): explain the -range option better.
+
+Wed Jul  4 12:03:34 1990  Karl Berry  (karl at hayley)
+
+        * pxl-outline.c (append_pixel_outline): use the O_LIST_LENGTH macro.
+
+Sun Jul  1 06:57:20 1990  Karl Berry  (karl at hayley)
+
+        * postscript.c (start_postscript_output): remove the code that
+        changes the name based on `oblique_angle'.
+
+Tue Jun 26 13:43:25 1990  Karl Berry  (karl at hayley)
+
+        * main.c (main): remove call to oblique_splines.
+        (read_command_line): remove `oblique-angle' option.
+        GNUmakefile (files): remove oblique from the list.
+
+Sat Jun 23 11:50:28 1990  Karl Berry  (karl at hayley)
+
+        * main.c (main): increase the character bounding box after finding
+        the outline.
+
+        * pxl-outline.c (find_one_outline): add the left side bearing
+        (somehow this got removed since June 4), and correct the
+        conversion of the y-coordinates to Cartesian.
+
+Fri Jun 22 14:31:07 1990  Karl Berry  (karl at hayley)
+
+        * report.c (verbose): both -v and -verbose set this variable.
+
+Wed Jun 20 08:00:01 1990  Karl Berry  (karl at hayley)
+
+        * main.c (read_command_line): the `help' option was out of order.
+
+        * pxl-outline.c (append_coordinate): improve the error message.
+
+        * main.h (font_name): remove declaration.
+        * main.c (font_name): change from a global to a local (of main).
+        (read_command_line): return the font name.
+        * postscript.c (find_ps_info): use the argument `sized_name'
+        instead of `font_name'.
+
+Mon Jun  4 15:22:05 1990  Karl Berry  (karl at hayley)
+
+        * fit.c (fit_with_least_squares): use MAXDOUBLE, instead of MAXFLOAT.
+
+        * pxl-outline.c (find_one_outline): add the left side bearing to
+        all coordinates before we append them to the list.
+
+        * output-bzr.c (output_bzr_char): convert all the numbers in the
+        spline list from pixels to points.
+
+Sun Jun  3 06:30:22 1990  Karl Berry  (karl at hayley)
+
+        * all .h files: use `(void)' in the prototypes where appropriate.
+
+        * display.c (x_start_char): reinitialize before doing the horizontal
+        lines of the grid.
+
+        * bzr-output.c (bzr_start_output): initialize bzr_name properly.
+
+Sat Jun  2 07:42:46 1990  Karl Berry  (karl at hayley)
+
+        * fit.c (fit_with_line, fit_with_least_squares): replace calls to
+        `log_spline' with calls to `print_spline'.
+
+        * GNUmakefile (files): remove spline and vector; put those files
+        in kbase.
+
+Thu May 31 19:43:16 1990  Karl Berry  (karl at aten)
+
+        * curve.c (log_curve): don't try to log the tangents if they
+        haven't been set.
+
+Wed May 30 16:47:18 1990  Karl Berry  (karl at hayley)
+
+        * curve.c (free_curve_list): don't try to free the list if it was
+        empty.
+        * pxl-outline.c (free_pixel_outline_list): likewise.
+        * spline.c (free_spline_list): likewise.
+
+        * display.c (x_start_char): don't go past the end of the array of
+        lines, even if the characters are huge.
+
+Sat May 26 13:30:08 1990  Karl Berry  (karl at hayley)
+
+        * fit.c (remove_knee_points): do not allow the previous point to
+        be a knee point, that just got removed.
+
+        * pxl-outline.c (append_coordinate): log the coordinate.
+
+        * fit.c (split_at_corners): log the total number of corners found
+        for each pixel outline (even if the number is zero).
+
+        * curve.c (free_curve): don't free the curve unless the length is
+        > 0.
+
+Fri May 25 19:34:31 1990  Karl Berry  (karl at claude)
+
+        * report.c: include "global.h".
+
+Tue May 22 17:20:33 1990  Karl Berry  (karl at hayley)
+
+        * main.c (read_command_line): add `-verbose', a synonym for `-v'.
+
+Sun May 20 08:44:17 1990  Karl Berry  (karl at hayley)
+
+        * fit.c (find_subdivision): new routine to look for the best place
+        to subdivide.
+        (subdivide_search, subdivide_surround, subdivide_threshold): new
+        variables to control it.
+        * fit.h (same): declare them.
+        * main.c (read_command_line): new options to set them.
+
+        * curve.c (log_curve): do not print the next and previous curves
+        in the list, since usually they're zero.
+
+Sat May 19 15:42:44 1990  Karl Berry  (karl at hayley)
+
+        * postscript.c (encoding): eliminate this routine; just use the
+        array directly.
+
+        * postscript.c (find_ps_info, ps_init_encoding): look up the files
+        using a path, instead of assuming the current directory.
+
+Tue May 15 06:55:03 1990  Karl Berry  (karl at hayley)
+
+        * fit.c (fit_with_least_squares): reparameterize until it doesn't
+        help, and go back to the best fitting spline when we finally exit.
+
+        * metafont.c (mf_start_output): initialize the designsize and u#
+        for 72pt type.
+
+        * postscript.c (ps_start_output): don't use font_name_subptr
+        before it's been set.
+
+	* display.c (real_cartesian_to_offset_x): new routine.
+        (x_output_char, digitize_spline): call it.
+
+	* display.c (digitize_spline): make delta depend on the length of
+	spline.
+
+	* fit.c (find_error): return the worst error, instead of the total
+	error.
+
+	* fit.c (fit_with_line): report an `l'.
+
+	* fit.c (fit_with_least_squares): don't return null if
+	reparameterization makes the fit worse, and put the information in
+	the log file, instead of on the terminal.
+
+Sat May 12 08:42:44 1990  Karl Berry  (karl at hayley)
+
+	* postscript.h (ps_flush_output): declare a new routine.
+        * postscript.c (ps_flush_output): define it.
+        * metafont.[ch] (mf_flush_output): ditto.
+        * report.[ch] (flush_log_output): ditto.
+        * main.c (main): flush the output files before doing
+        x_output_char.
+
+	* postscript.c (font_bb): make it static.
+
+	* fit.c (find_error): don't take the square and square root of the
+        error, since we already computed the error as the Euclidean
+        distance.
+
+	* fit.c (find_error): log the total error.
+
+	* curve.c (log_curve): print tangents correctly.
+
+	* vector.h (Vadd_int_point, IPsubtractP, IPadd, IPmult_scalar,
+	IPmult_real, IPequal): a bunch of new routines.
+        * vector.c (...): define them.
+        * display.c (digitize_spline): show the splines online.
+        (x_output_char): call it.
+
+Tue May  8 12:09:18 1990  Karl Berry  (karl at hayley)
+
+	* display.c (x_output_char): don't print a newline before the
+	prompt if not verbose.
+
+	* fit.c (filter_secondary_surround): new global for number of
+	points to look at when we find a straight line.
+        (filter): use it.
+        (find_curve_vectors): take an argument for the number of points to
+        look at.
+        * fit.h (filter_secondary_surround): declare it.
+        * main.c (read_command_line): add the option.
+        
+	* vector.c: doc fix.
+
+Mon May  7 07:52:19 1990  Karl Berry  (karl at hayley)
+
+	* fit.c: remove all the `join' stuff; we're better off just
+        sticking with angles.
+        * main.c (read_command_line): likewise.
+
+	* fit.c (find_corners): only append to the `equally_good' list if
+        we haven't wrapped around.
+
+	* fit.c (find_curve_vectors): look at `filter_surround' points,
+        not `corner_surround'.
+        (filter_surround): new global.
+        * main.c (read_command_line): new option to set it.
+
+	* curve.h (curve): make the `length' member be int, not unsigned,
+        since sometimes we subtract one from it.
+
+	* fit.c (remove_knee_points): use NEXT_CURVE and LAST_CURVE, and
+        look at the first and last points if the curve is cyclic.
+
+	* fit.c (filter): forget all the distance stuff; that had too big
+        an effect.  Use the vectors, instead.
+
+	* fit.c (filter): filter the first and last points, too, if the
+        curve is cyclic.
+
+	* fit.c (filter): put the filtered point into the curve.
+
+	* fit.c (find_curve_vectors): return the number of points used to
+        compute the vectors, as well as the vectors.  And change callers.
+
+	* fit.c (filter): make the percentage inversely proportional to
+        the distance, not directly proportional.
+
+	* curve.c (log_curve): print out all the information, not just the
+        points.
+
+	* curve.c (append_pixel): use `LAST_CURVE_POINT'.
+
+	* curve.c (init_curve): call `new_curve'.
+
+	* fit.c (remove_knee_points): call `copy_most_of_curve', so that
+        we don't lose the next/previous/cyclic elements.
+        * curve.c (copy_most_of_curve): define it.
+        * curve.h (copy_most_of_curve): declare it.
+
+	* fit.c (find_curve_vectors): don't do the next/previous on the
+        original point as we update the loop.
+        (filter): likewise.
+
+Sun May  6 11:53:20 1990  Karl Berry  (karl at hayley)
+
+	* curve.h (curve): new member, `cyclic'.
+        (CURVE_LENGTH): new accessor macro.
+        (CURVE_NEXT, CURVE_PREV): use it to figure out what the adjacent
+        points are.
+        * curve.c (new_curve): initialize it to false.
+        * fit.c (split_at_corners): set it to true if we didn't find any
+        corners.
+        (filter): loop using CURVE_NEXT and CURVE_PREV.
+
+	* fit.c (filter): look at `corner_surround' neighbors, not just
+        one; use distances to compute contributions.
+        (SMOOTH): #if 0 it.
+
+	* vector.c (Vadd_point): switch the point arg and the vector arg,
+        for consistency.  (And change callers everywhere.)
+        * vector.h (Vadd_point): change declaration.
+
+	* fit.c (find_curve_vectors, find_vectors): rearrange the
+        conditions.
+
+	* postscript.c (ps_start_output): put the copyleft in the output
+        file.
+
+	* postscript.c (PS_OUT_...): forget the PS_ prefix.
+        * metafont.c (MF...): likewise.
+
+Thu May  3 08:07:54 1990  Karl Berry  (karl at hayley)
+
+	* main.h (version_string): move this declaration to main.c.
+
+	* main.c (found_first_char): remove this (unused) variable.
+
+Tue May  1 09:13:53 1990  Karl Berry  (karl at hayley)
+
+	* fit.c (find_curve_angle): use Vangle.
+
+	* main.c (USAGE): doc fix.
+
+	* fit.c (free_index_list): new routine.
+
+	* fit.c (find_corners): keep track of all corners that are equally
+        good, instead of just the first.
+
+Mon Apr 30 07:24:48 1990  Karl Berry  (karl at hayley)
+
+	* metafont.c (MF_OUT_POINT): multiply the coordinates by u#.
+        [whoops, make that u.]
+
+	* display.c (x_output_char): display the control points of the
+        splines.
+        (display_subdivision): use XDrawArc instead of XFillArc.
+        [rescind this; the display is too cluttered.]
+
+	* fit.c (is_join_point): use `join_surround' instead of
+        `corner_surround' for checking the length of the lines.
+        * main.c (read_command_line): `join-surround' is a new option.
+        * fit.h: declare it.
+
+	* main.c (read_command_line): print the long usage message at
+        -help (a new option) only.
+
+Sun Apr 29 07:52:40 1990  Karl Berry  (karl at hayley)
+
+	* fit.c (remove_knee_points): log the fact that no points were
+        removed.
+
+	* fit.c (is_join_point): rewrite; we can't just use precomputed
+        vectors, we have to look at every point.
+
+	* pxl-outline.h (O_NEXT, O_PREV): macros to find the next and
+        previous indices in a pixel_outline.
+        fit.c (find_vectors): use them.
+
+Sat Apr 28 14:00:55 1990  Karl Berry  (karl at hayley)
+
+	* fit.c (find_corners): also make join points corners.
+        (find_angle): turned into `find_vectors', essentially, plus Vangle
+        below.
+        (is_join_point): new boolean function to test for a join point.
+
+	* vector.c (Vangle): new routine to return the angle between two
+	vectors.
+        vector.h (Vangle): declare it.
+
+	* vector.c (magnitude): use hypot(3M).
+
+Fri Apr 27 06:46:11 1990  Karl Berry  (karl at hayley)
+
+	* main.c (read_command_line): don't allow an empty font name.
+
+	* main.c (main): only print the font comment if verbose.
+
+Thu Apr 26 09:49:52 1990  Karl Berry  (karl at hayley)
+
+	* fit.c (reparameterize): pass the right arguments to hypot.
+
+	* fit.c (find_corners): tested `q' instead of `best_corner_index'
+        when we got out of the loop, so points towards the end of the list
+        didn't become corners.
+
+	* pxl-outline.h (outline_pixel_type): delete this, since it just
+        contains a coordinate.
+        (O_PIXEL_X, O_PIXEL_Y): delete these, too.
+        (O_LENGTH, O_LIST_OUTLINE, O_LIST_LENGTH): new accessor macros.
+        Change references in fit.c and pxl-outline.c to use them.
+
+	* display.c (x_output_char): start the lines in the middle of the
+        rectangle.
+
+	* fit.c (filter): make the amount of filtering dependent on the
+	angle at the current point.
+        (find_curve_angle): new routine to find the angle at a point on a
+        curve.
+
+Tue Apr 24 15:09:04 1990  Karl Berry  (karl at hayley)
+
+	* pxl-outline.c (remove_knee_points): move to fit.c, and redo to
+        take a curve, instead of a pixel_outline -- we have to find the
+        corners before removing the knees.
+
+	* curve.c (free_curve): don't make it static.
+        curve.h: declare it.
+
+	* display.c (real_cartesian_to_x): call real_to_int_coord, instead
+        of doing it inline.
+
+	* pxl-outline.c (find_one_outline): don't remove knees if
+	`keep_knees' is true.
+        pxl-outline.h: declare the variable.
+        main.c (read_command_line): new option to set it.
+
+Sun Apr 22 06:45:03 1990  Karl Berry  (karl at hayley)
+
+	* pxl-outline.c (find_one_outline): free the old outline after
+        removing knees.
+
+	* display.c (display_subdivision): don't synchronize the connection.
+
+	* pxl-outline.c (remove_knee_points): log the points that get removed.
+
+Sat Apr 21 09:30:17 1990  Karl Berry  (karl at hayley)
+
+	* pxl-outline.c (remove_knee_points): new routine that cleans up
+        the pixel list we return.
+        (find_one_outline): call it.
+        (append_outline_pixel): new routine that just appends a given
+        coordinate to the list.
+        (append_coordinate): call it.
+
+	* pxl-outline.c (find_one_outline): eliminate `previous_row' and
+        `previous_col' variables.
+
+	* pxl-outline.c (find_outline_pixels): print . on stdout after
+        finding each outline.
+
+	* display.c (display_corner): don't synchronize the connection.
+
+Fri Apr 20 16:24:11 1990  Karl Berry  (karl at hayley)
+
+	* main.c (read_command_line): +display-stop doesn't take an argument.
+
+	* display.c (real_cartesian_to_x): do not round until after the
+        multiplications.
+
+	* display.c (display_pixel): take a real point, instead of an
+        integer one.
+        display.h (display_pixel): declare it that way.
+
+	* curve.c (display_curve): new routine for online output.
+        curve.h: declare it.
+        fit.c (filter): call it, after filtering.
+
+	* pxl-outline.c (find_one_outline): eliminate the variable
+	`starting_edge'.
+
+Thu Apr 19 16:07:35 1990  Karl Berry  (karl at hayley)
+
+	* main.c (read_command_line): call getopt_long_only instead of getopt.
+
+	* postscript.c (ps_start_output): doc fix (in generated font).
+
+Tue Apr 17 07:50:33 1990  Karl Berry  (karl at hayley)
+
+	* pxl-outline.c (free_pixel_outline_list): new routine.
+        pxl-outline.h: declare it.
+        main.c (main): call it.
+
+	* display.c (x_output_char): only wait for a return if
+        display_stop is set.
+        main.c (read_command_line): new argument `+display-stop', for the
+        above switch.
+
+	* main.c (main): display the comment in the font, if it's non-null.
+
+	* fit.c (split_at_corners): do not just ignore pixel outlines with
+        fewer pixels than corner_surround * 2 + 2.
+
+Mon Apr 16 07:57:32 1990  Karl Berry  (karl at hayley)
+
+	* display.c: make the allocations for the descenders and the
+        negative x-coordinate pixels be variables.
+        main.c (read_command_line): define new options to set those
+        variables, and a macro GET_PERCENT to read the values.
+
+	* postscript.c (ps_start_output, start_chars): fix indentation
+        problems in the generated PostScript.
+
+	* main.c (read_command_line): set _getopt_long_only to 1.
+
+	* display.c (x_start_char): set the LineWidth to 1 at the end.
+        (x_output_char): don't set the LineWidth.
+        [Whoops, forgot that that affects the rectangles. Change it back.]
+
+	* main.c (main): call init_display with all of f, not the font
+        bounding box.
+        display.h (init_display): change declaration.
+        display.c (x_init_display): base the size of the window on the
+        design size, instead of the font bounding box.
+
+	* postscript.c: new static variable, `font_bb', to accumulate the
+	font's bounding box.
+        (ps_start_output): initialize font_bb, but don't output anything.
+        (ps_output_char): update font_bb.
+        (ps_finish_output): output it.
+        main.c (main): don't do anything with the font bounding box.
+
+Fri Apr 13 20:02:28 1990  Karl Berry  (karl at hayley)
+
+	* main.c (main): if the character isn't in the font, don't try to
+	fit it!
+
+Thu Apr 12 20:43:40 1990  Karl Berry  (karl at hayley)
+
+	* fit.c (set_initial_parameter_values, find_error): pass the right
+	kind of arguments to hypot(3M).
+
+	* fit.c (fit_splines): do not try to fit curves with one point.
+
+Tue Apr 10 07:36:06 1990  Karl Berry  (karl at hayley)
+
+	* main.c, postscript.c, postscript.h: rename the postscript_...
+	routines to ps_...
+
+Mon Apr  9 10:01:59 1990  Karl Berry  (karl at hayley)
+
+	* main.c (main): use char_info_type instead of gf_char_type
+	directly.  (And this same change throughout the output routines.)
+
+	* fit.c (set_initial_parameter_values, reparameterize,
+	find_error): replace calls to `distance' with calls to `hypot'.
+
+Thu Apr  5 14:46:24 1990  Karl Berry  (karl at hayley)
+
+	* main.c (main, read_command_line): open the log file in the
+	former instead of the latter.
+
+Wed Apr  4 17:01:54 1990  Karl Berry  (karl at aten)
+
+	* display.c: R4 wants <X11/Xaw/Simple.h>, and R3 wants just
+	<X11/Simple.h>, so conditionalize.
+
+Sat Mar 31 08:45:56 1990  Karl Berry  (karl at hayley)
+
+	* display.c (x_start_char): wait for the user to hit return before
+	clearing the window (if this isn't the first call).
+
+Fri Mar 30 14:46:05 1990  Karl Berry  (karl at hayley)
+
+	* postscript.c (find_postscript_info): ended up with
+	standard.enc.enc for the encoding name if the info wasn't found.
+
+Wed Mar 21 08:31:34 1990  Karl Berry  (karl at hayley)
+
+	* fit.c (find_corners): don't append a corner if we've wrapped
+        around in the search; rearrange the loop so that the first
+        candidate is appended if its angle is less than
+        corner_always_threshold.
+
+	* fit.c (filter): if the curve has fewer than three points, don't
+        bother filtering it.
+
+	* main.c (read_command_line): add new argument,
+        `corner-always-threshold'.
+        fit.c: define `corner_always_threshold' variable (and declare it
+        in fit.h).
+        (find_corners): if the angle is less than corner_always_threshold,
+        append it to the corner_list.
+
+	* main.c (read_command_line): delete the
+	corner-secondary-threshold argument.
+        pxl-outline.h (outline_pixel_type): delete the is_corner_pixel
+        member.
+        pxl-outline.c (find_one_outline): remove code dealing with corner
+        pixels.
+        (next_outline_edge): don't return a corner pixel.
+        fit.c: delete the `corner_secondary_threshold' variable.
+        (find_corners): remove tests for corner pixels.
+        (find_angle): remove code dealing with corner pixels.
+
+	* display.c (start_display_char): offset the horizontal grid lines
+	by one, to counteract the X origin being at the upper left.
+
+Tue Mar 20 11:34:44 1990  Karl Berry  (karl at hayley)
+
+	* display.c (real_cartesian_to_x): rounds its argument, then does
+        cartesian_to_x. 
+
+	* display.c (x_output_char): new routine to show the fitted result.
+        display.h (x_output_char): define it.
+        main.c (main): call it.
+
+	* display.c (display_subdivision): draw a circle at the
+        subdivision points.
+        fit.c (fit_with_least_squares): call display_subdivision when we
+        subdivide.
+
+	* display.c (start_display_char): draw a grid to show the
+	coordinates of the character.
+        (GRID_INTERVAL): distance between lines.
+        (segment_to_x): convert an XSegment from Cartesian to X
+        coordinates.
+        
+
+Mon Mar 19 12:28:35 1990  Karl Berry  (karl at hayley)
+
+	* display.c (cartesian_to_x): take the x- and y-offsets into
+        account when computing the X coordinate.
+
+	* display.c (init_display): simplify things: override the width
+	and height based on the font bounding box; use the default GC
+	instead of trying to figure out what the foreground and background
+	are; pass in a fake argc and argv (again).
+        main.c (main): don't pass argc and argv to init_display.
+
+Sun Mar 18 12:30:53 1990  Kathy Hargreaves  (kathy at hayley)
+
+	* postscript.c (postscript_start_output): implement usual
+	convention for adding `Oblique' to font names.
+
+Sat Mar 17 07:09:42 1990  Karl Berry  (karl at hayley)
+
+	* postscript.c (postscript_start_output): append `_o' to the
+	output file name if it's oblique, and `-Oblique' to the PostScript
+	font name.
+
+	* postscript.c (find_postscript_info): reversed sense of stopping
+	condition for reading the file.
+
+Fri Mar 16 15:37:02 1990  Karl Berry  (karl at hayley)
+
+	* postscript.c (postscript_start_output, find_postscript_info,
+        postscript_init_encoding): allow the PostScript font name to be
+        specified in a file, and put the encoding name there, also.
+
+	* postscript.c (postscript_start_output): the KKBuildChar is now
+        in KKBuildChar.PS.
+
+	* main.c (read_command_line): convert the oblique_angle to radians.
+
+	* postscript.c (postscript_output_splines): forgot an argument to
+        fatal.
+
+	* spline.h: declare append_spline, which appends a single spline
+        to an existing list.
+        spline.c: define it.
+
+	* oblique.[ch]: new files to support slanting the characters.
+        main.c (main): call oblique_splines.
+        main.c (read_command_line): new argument, oblique-angle <degrees>.
+
+	* display.c (display_corner): XSync after displaying the corner,
+        so we aren't forced to look at a partially done character.
+
+	* display.c (everything): check if wants_display is true before
+	doing anything.
+        
+
+Mon Mar 12 15:28:49 1990  Karl Berry  (karl at hayley)
+
+	* display.c (init_display), main.c (main): no, rescind that
+        change, without the real argc and argv the XtGetValues function
+        bombs out.
+
+	* main.c (main): call start_display_char on every character.  
+        Don't send argv and argc to init_display.
+	display.c (start_display_char): new routine to clear window and
+        synchronize connection.
+        (init_display): don't expect argc and argv.
+
+	* pxl-outline.c (append_coordinate): don't ever subtract from the
+        coordinate we're given.
+
+Sun Mar 11 11:45:55 1990  Karl Berry  (karl at hayley)
+
+	* display.c, display.h: new files to output the pixel outline and
+        corners to an X window.
+        main.c (main): call init_display and close_display.
+        pxl-outline.c (display_outline_list): call display_pixel on each
+        coordinate we have in the outline.
+        (find_outline_pixels): call display_outline_list.
+        fit.c (find_corners): call display_corner.
+
+	* fit.c (fit_with_line): log the line.  Also, set the control
+        points, in case it gets changed to a cubic.
+
+	* postscript.c (postscript_output_splines): make sure the spline
+        degree is a valid one.
+
+	* pxl-outline.c (append_coordinate): take the edge as a parameter,
+	and append a Cartesian coordinate instead of a pixel coordinate.
+        (find_one_outline): call it with the current edge.
+
+Sat Mar 10 10:52:28 1990  Karl Berry  (karl at hayley)
+
+	* main.c (read_command_line): exit if we get an unrecognized
+        option, instead of continuing.
+
+	* postscript.c (postscript_output_chars_encoding): don't share the
+        value of StandardEncoding (which should be a readonly object).
+
+	* postscript.c (postscript_start_output): use the standard
+        encoding if we don't find the font in the encoding map file.
+
+	* main.c (main): only free the GF bitmap if it isn't null.
+
+	* pxl-outline.c (SET_CORNER_PIXEL): new macro that checks if the
+        pixel is black before setting *corner_pixel.
+        (next_outline_edge): call the macro instead of just assigning.
+
+	* fit.c (fit_with_line): new routine to fit a small curve with a
+        line.
+        (fit_splines): call fit_with_line if the curve is small enough.
+
+	* *.h: add #pragma once.
+
+Fri Mar  9 11:04:37 1990  Karl Berry  (karl at hayley)
+
+	* build-char.PS: name the BuildChar routine KKCharBuilder instead
+	of just CharBuilder, since dvips has usurped the latter.
+        postscript.c (postscript_finish_output): use the new name.
+
+	* pxl-outline.c (find_one_outline): only exit the loop if we are
+	not at the original edge.  Otherwise, a solitary pixel on top of a
+	row causes a premature exit.
+
+Thu Feb  8 11:34:52 1990  Karl Berry  (karl at hayley)
+
+	* metafont.[ch]: new files for Metafont output.
+        (main.c): call the new routines.
+
+Wed Feb  7 17:08:05 1990  Karl Berry  (karl at hayley)
+
+	* postscript.c (strip_trailing_numbers): delete this; we can use
+        strtok(3).
+
+	* postscript.c (postscript_start_output): we don't need to pass
+        the design size, we can get it from the TFM file.
+        postscript.h (postscript_start_output): change the declaration.
+        main.c (main): change the call.
+
+	* postscript.c (postscript_init_encoding): change
+	`mapping_filename' to `ENCODING_MAP_FILENAME'.
+        (postscript_start_output): fix up the initial comment a bit.
+
+Tue Jan 30 10:31:18 1990  Karl Berry  (karl at hayley)
+
+	* fit.c (spline_linear_enough): forgot a minus sign in the
+        vertical line case.
+
+	* postscript.c (postscript_output_splines): add the lsb to each
+        x-coordinate, so we stay in the bounding box.
+        (postscript_output_char_proc): pass the lsb in.
+
+	* fit.c (find_error): don't dereference worst_point if the fit was
+        perfect, since it won't have been set.
+
+	* report.h (log[1234], report[1234]): swallow a trailing semicolon.
+
+	* postscript.c (postscript_finish_output): output a `pop' after
+	the definefont.
+	(ps_output_real): only output three places after
+	the decimal point.
+        (postscript_start_output): write a header identifying the font and
+        its origin to the PS file.
+        
+Mon Jan 29 15:54:07 1990  Karl Berry  (karl at hayley)
+
+	* pxl_outline.[ch]: rename to pxl-outline.[ch].
+
+	* Makefile: rename to GNUmakefile, and remove commandline.[ch].
+
+	* main.c (read_command_line): convert for use with getopt.
+
+Sun Nov 12 08:24:42 1989  Karl Berry  (karl at hayley)
+
+	* fit.c (fit_with_least_squares): change_bad_lines on the
+        concatenation of the left and right spline lists, not separately.
+
+	* fit.c (find_error): log the worst error and worst point.
+
+	* curve.h (curve): new members, `start_tangent and `end_tangent'.
+        (CURVE_START_TANGENT, CURVE_END_TANGENT): macros to access them.
+        curve.c (new_curve): make the tangents NULL to begin with.
+        fit.c (find_tangent): check if the tangent is already computed,
+        and if not, put the result in the appropriate member of the curve,
+        instead of returning it.
+        (fit_with_least_squares): remove tangents from parameter list.
+        When subdividing, copy the tangents from the outer curve to the
+        subdivided portions.
+        (fit_one_spline): remove tangents from parameter list.
+        
+Sat Nov 11 15:57:16 1989  Karl Berry  (karl at hayley)
+
+	* fit.c (change_bad_lines): new function to change lines back to
+	cubics if they are a piece of a curve that has a cubic in it.
+        (fit_with_least_squares): call change_bad_lines after subdividing.
+
+	* fit.c (spline_linear_enough): divide by the length of the line.
+
+	* postscript.c (postscript_output_splines): remove logging info.
+
+Fri Nov 10 21:28:07 1989  Karl Berry  (karl at hayley)
+
+	* spline.h (spline_type): include the degree as a member.
+        (polynomial_degree): new enumerated type.
+        spline.c (evaluate_spline): doesn't need the degree as a separate
+        argument any more.
+        postscript.c (spline_almost_linear): delete.
+        (line_threshold): move to fit.c.
+        fit.c (fit_with_least_squares): check if the spline can become a line.
+        (spline_linear_enough): routine that does that.
+        (fit_one_spline, reparameterize): assign to the degree of 
+        splines when they are constructed.
+
+Tue Nov  7 10:51:06 1989  Karl Berry  (karl at hayley)
+
+	* pxl_outline.h (coordinate_list_type): change name to
+        pixel_outline_type, and make it a list of outline_pixel_types.
+        (outline_pixel_type, O_PIXEL_X, O_PIXEL_Y, O_PIXEL_CORNER): new
+        type and macros to access it.
+        pxl_outline.c (append_coordinate): takes another arg, says whether
+        the pixel is a `potential corner' one.
+        (find_one_outline): change to the new names; call
+        append_coordinate with the new arg.
+        (new_coordinate_list): change name to new_pixel_outline.
+        fit.c (split_at_corners): only append pixels to the curve if they
+        are not potential corners.
+        (find_corners): change names.
+        (find_angle): ignore pixels that are potential corners.
+
+	* fit.c (fit_with_least_squares): log the improvement in the error.
+
+	* fit.c (find_corners): was using corner_surround+1 pixels for
+        computing in_vector.
+
+	* fit.c, fit.h: delete reparameterize_iteration_max.
+        (fit_with_least_squares): take out test on above.
+        commandline.c (read_command_line): take out option for above.
+
+	* fit.c (fit_with_least_squares): stop reparameterizing if
+        improvement is less than reparameterize_improvement.
+        (reparameterize_improvement): new global.
+        (reparameterize_iteration_max): default now 10.
+        fit.h: declare reparameterize_improvement.
+	commandline.c (read_command_line): new option,
+        -reparameterize-improve.
+        
+	* fit.c: don't log values of alpha1 and alpha2.
+
+	* fit.c: change default value of error_threshold to 2.0.
+
+	* postscript.c: change default value of line_threshold to 3.0.
+
+Sun Nov  5 08:00:38 1989  Karl Berry  (karl at hayley)
+
+	* curve.c (log_curve): test if logging is true.
+        spline.c (log_spline): ditto.
+        Also change calls to match in many files.
+
+	* postscript.c (ps_output_command_6, ps_output_command_2,
+        ps_output_line): swallow a trailing semicolon.
+
+	* postscript.c (postscript_start_output): calculate the number of
+	pixels in the design size (at the resolution of the input font),
+	and use that for the FontMatrix.
+
+Sat Nov  4 13:12:07 1989  Karl Berry  (karl at hayley)
+
+	* fit.c (fit_with_least_squares): subdivide at the point of
+        maximum error, instead of halfway.
+        (find_error): return the point of maximum error, as well as the
+        total error over the whole curve.
+
+	* commandline.c (read_command_line): don't abort if -version was
+        printed and no font name was given.
+
+	* build_char.ps (CharBuilder): only define it if it's not defined
+	already.  Also, rename the file to build_char.PS.
+
+	* postscript.c (postscript_output_splines): add some logging
+	information. 
+        (postscript_start_output): output a call to `build_char.PS'
+        instead of `.ps'.
+
+	* fit.c (corner_surround): change default value to five.
+
+Fri Nov  3 20:24:53 1989  Karl Berry  (karl at hayley)
+
+	* postscript.c (postscript_start_output): output the font bounding
+	box in Cartesian coordinates, not bitmap coordinates.
+        On the other hand, output the font matrix based on the maximum
+        width and height of the font bounding box, rather than the design
+        size.
+
+	* commandline.c (read_command_line): add -version option.

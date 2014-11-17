@@ -1,0 +1,11 @@
+MANIFEST
+
+These are the files that are part of snftobdf.
+----------------------------------------------
+Makefile
+input.c
+output.c
+patchlevel.h
+snftobdf.c
+snftobdf.h
+snftobdf.man

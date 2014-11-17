@@ -1,0 +1,191 @@
+#!/bin/sh
+# Script to create a Unix PostScript Resource file for on-line fonts
+# to be used with Acrobat Distiller
+# Font tree passed in must have directories containing the AFM files and the
+# PostScript fonts
+
+PROG=`basename $0`
+USAGE="usage: $PROG [-afm dir] [-ps dir ] fontdir"
+AFMDIR=afm
+PSDIR=postscript
+
+while [ $# -gt 0 ]
+do
+    case "$1" in
+    -afm)
+	if [ $# -gt 1 ]
+	then shift
+	     AFMDIR=$1
+	else echo "$USAGE" 1>&2
+	     exit 1
+	fi;;
+    -ps)
+	if [ $# -gt 1 ]
+	then shift
+	     PSDIR=$1
+	else echo "$USAGE" 1>&2
+	     exit 1
+	fi;;
+    *)	break;;
+    esac
+    shift
+done
+
+if [ $# -ne 1 ]
+then	echo "$USAGE" 1>&2
+	exit 1
+fi
+
+FONTDIR=$1
+
+cd $FONTDIR
+if [ ! -d $AFMDIR -a ! -d $PSDIR ]
+then	echo "$PROG: no $AFMDIR or $PSDIR directories!" 1>&2
+	exit 1
+fi
+
+
+# define some functions to return information on the fonts
+
+getpsstr() {
+    s=$1
+    grep /$s $2 | head -1 | sed -e 's/.*(//' -e 's/).*//'
+}
+
+getpsname() {
+    s=FontName
+    f=`head -1 $1 | grep '%%BeginFont:' | sed 's/.* //'`
+    if [ -z "$f" ]
+    then f=`grep /$s $1 | head -1 | sed -e 's#.*/##' -e 's/ .*//'`
+    fi
+
+    echo $f
+}
+
+getfamily() {
+    getpsstr FamilyName $1
+}
+
+getfullname() {
+    getpsstr FullName $1
+}
+
+getfamilyex() {
+    getpsstr FamilyName $1 | awk '
+	{
+	    if ($0 ~ /^LaTeX$/) {
+		print $0
+	    } else {
+		nm = $0
+		n = length(nm)
+		s = substr(nm, 1, 1)
+		lastc = s
+		for (i = 2; i <= n; i++) {
+		    c = substr(nm, i, 1)
+		    if ((c ~ /[A-Z]/) && (lastc !~ / /) && (lastc !~ /[A-Z]/))
+			s = s " "
+		    s = s c
+		    lastc = c
+		}
+		print s
+	    }
+	}'
+}
+
+getweight() {
+    w=`getfullname $1`
+    case "$w" in
+    *" "*)
+	case "$w" in
+	*\**)
+	    echo "$PROG: cannot find correct weight for $1" 1>&2
+	    w="";;
+	*)
+	    w=`echo "$w" | sed -e "s/[a-zA-Z0-9]* $2 //" \
+		-e "s/[a-zA-Z0-9]* $2//" -e "s/$2[ -]//" -e "s/$2//"`;;
+	esac
+	;;
+    *)
+	w="";;
+    esac
+    if [ -z "$w" ]
+    then w=`getpsstr Weight $1`
+    fi
+    echo $w
+}
+
+
+
+# start processing the fonts
+
+echo PS-Resources-1.0
+
+if [ -d $AFMDIR ]
+then echo FontAFM
+fi
+if [ -d $PSDIR ]
+then echo FontFamily
+     echo FontOutline
+
+fi
+echo .
+
+if [ -d $AFMDIR ]
+then
+    echo FontAFM
+
+    cd $AFMDIR
+    for i in *.afm
+    do
+	f=`basename $i .afm`
+	echo $f=$AFMDIR/$i
+    done
+    cd ..
+
+    echo .
+fi
+
+if [ -d $PSDIR ]
+then
+    cd $PSDIR
+
+    echo FontFamily
+    for i in *
+    do
+	f=`getfamilyex $i`
+	n=`getpsname $i`
+	w=`getweight $i "$f"`
+	if [ -z "$f" -o -z "$n" -o -z "$w" ]
+	then echo "$PROG: cannot find enough font family information for $i" 1>&2
+	else echo "$f,$w,$n"
+	fi
+    done | sort -t, | awk -F, '
+	BEGIN { start=0; last="" }
+	{
+	    if ((length(last) == length($1)) && (last ~ $1)) {
+		printf ",%s,%s", $2, $3
+	    } else {
+		if (NR > 1) printf "\n"
+		printf "%s=%s,%s", $1, $2, $3
+		start=1
+	    }
+	    last=$1
+	}
+	END { if (start == 1) { printf "\n" } }
+    '
+
+    echo .
+
+    echo FontOutline
+    for i in *
+    do
+	n=`getpsname $i`
+	if [ -z "$n" ]
+	then echo "$PROG: cannot find font name for $i" 1>&2
+	else echo $n=$PSDIR/$i
+	fi
+    done
+    echo .
+
+    cd ..
+fi

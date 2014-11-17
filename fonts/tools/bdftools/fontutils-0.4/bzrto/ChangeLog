@@ -1,0 +1,482 @@
+Sat Mar 28 07:46:14 1992  Karl Berry  (karl at hayley)
+
+        * Version 0.4.
+
+        * Change copyright years to 1992 only.
+
+Wed Mar 25 15:37:07 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * metafont.c (metafont_start_output): move outputting `input
+          bzrsetup' to above outputting fontdimens.  Tack `* u#' onto each
+          fontdimen assignment.
+
+Sun Mar  8 05:12:56 1992  Karl Berry  (karl at fosse)
+
+        * psutil.c (ps_start_font): remove unused printf argument.
+
+Sat Mar  7 14:26:52 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * pstype3.c: analogous to pstype1.c changes directly below.
+
+        * pstype1.c (pstype1_start_output): add OUTPUT_NAME; set
+          ps_filename with make_output_file.
+
+        * main.c (main): if it's NULL, set output_name to sizeless
+          font_basename.
+
+        * main.c (read_command_line): added `output-file' option.
+
+Sat Mar  7 09:10:15 1992  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (files): replace with `c_and_h', etc.
+
+        * GNUmakefile (libraries): put this back.
+
+        * text.c (text_output_char): use puts instead of printf where possible.
+
+Wed Mar  4 11:18:32 1992  Karl Berry  (karl at hayley)
+
+        * GNUmakefile (libraries): remove.
+
+Sun Mar  1 15:44:00 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * main.c (main): correct test to start pstype3 output.
+
+Sat Feb 22 14:04:10 1992  Karl Berry  (karl at hayley)
+
+        * metafont.c (output_ligtable): new routine; outputs all the
+          kerning/ligature information, and omits it if any char involved
+          doesn't exist.
+        (metafont_finish_output): call it.
+        (mf_char_output_p): new static.
+        (metafont_output_char): don't output ligtable info here.
+        * metafont.h (metafont_output_char): omit TFM info here.
+        (metafont_finish_output): use it here.
+        * main.c (main): change calls.
+
+        * bzrsetup.mf (turningcheck): set to 1.
+
+        * pstype1.c (out_curveto): new routine.
+        (pstype1_output_char): call it.
+        (T1_{HV,VH}CURVETO): new opcodes.
+
+        * pstype1.c (out_relative_cmd): generalize out_lineto.
+        (out_lineto): use out_relative_cmd.
+        (out_moveto): new routine a la out_lineto.
+        (pstype1_output_char): call it.
+        (T1_[HV]MOVETO): new opcodes.
+        (type1_opcode): new type.
+
+        * pstype1.c (out_lineto): new routine, to optimize the lineto
+          command used.
+        (pstype1_output_char): call it, instead of always outputting an
+          rlineto.
+        (T1_[HV]LINETO): new opcodes.
+
+Thu Feb 20 07:08:47 1992  Karl Berry  (karl at hayley)
+
+        * pstype1.c (cs_number): encode negative middle numbers correctly.
+
+        * psutil.c (ps_start_font): don't output the literal font name
+          here; copy it from the stack instead.
+
+        * pstype1.c (out_point): new routine.
+        (pstype1_output_char): call it to output relative points instead
+          of absolute.
+
+Wed Feb 19 09:12:52 1992  Karl Berry  (karl at hayley)
+
+        * pstype1.c (cs_number): correct algorithm for middle numbers.
+
+        * pstype1.c (em_factor): new static.
+        (points_to_adobes): round using it.
+        (pstype1_start_output): set it.
+
+        * pstype1.c (cs_encrypt): reinitialize the key every time we do
+          an encryption, instead of making it static.
+
+        * pstype1.c (output_private_dictionary): split into the
+          character-independent part and the char-dependent part, call
+          them output_private_dict_1 and ..._2.
+        (pstype3_start_output): output the first part here.
+
+        * pstype[13].c (pstype?_finish_output): put currentdict on the
+          operand stack before `end'ing it.
+
+        * psutil.c (ps_output_encoding): output code to define the
+          encoding in the font dictionary.
+
+        * psutil.h (ps_start_font): new routine.
+        * pstype[13].c (pstype?_start_output): call it, instead of
+          repeating the starting boilerplate.
+
+        * pstype1.c (output_private_dictionary): output definitions for -|
+          and |-, to read and define the characters; remove the definition
+          of _B.
+        (output_charstring_buffer): output calls to these procedures for
+          each character.
+
+        * psutil.[ch] (ps_encoding_name): declare the arg as
+          `charcode_type', not `int'.
+        (ps_encoding_number): don't give a warning if the name is not defined.
+        * pstype1.c (pstype1_finish_output): output the space character
+          here if it hasn't been output already; don't automatically
+          encode it.
+        (pstype1_start_output): don't output the space here, but remember
+          the TFM space width.
+        (tfm_space): new static.
+        * pstype3.c: likewise.
+
+        * pstype3.c (OUT_COMMAND?): indent properly.
+
+        * psutil.c (ps_init): erroneously left the dash in the family name.
+
+        * pstype[13].c (pstype?_start_output): pass the right font name to
+          `sizeless_font_name'.
+
+Mon Feb 17 07:28:15 1992  Karl Berry  (karl at hayley)
+
+        * metafont.c (metafont_start_output): use `sizeless_font_name' to
+          find the output font name.
+        * pstype1.c (pstype1_start_output): likewise.
+        * pstype3.c (pstype3_start_output): likewise.
+
+        * psutil.h (ps_output_encoding): take a FILE *.
+        * pstype?.c: change calls.
+
+        * pstype1.c (pstype1_output_char): write this, at long last.
+
+        * pstype3.c: use the new routines in psutil.c.
+
+        * pstype1.c (cs_encrypt): new routine to construct the encrypted
+          charstring and return it.
+
+Fri Feb 14 08:30:17 1992  Karl Berry  (karl at hayley)
+
+        * pstype1.c (ds_points_to_adobes): redo as `points_to_adobes', as
+          the bzr routines never return designsize-scaled points (which is
+          a good thing).
+
+        * psutil.c (ps_encoding_name): new routine.
+        * psutil.h (ps_encoding_name): declare it.
+
+        * psutil.h (ps_encoding_number): declare to return int.
+        * psutil.c (ps_encoding_number): define it; include encoding.h.
+        (ps_init_encoding): remove this; just call read_encoding_file in
+          ps_init. 
+        (ENCODING_VECTOR_SIZE, base_encoding): remove these.
+
+Fri Jan 31 17:06:05 1992  Karl Berry  (karl at hayley)
+
+        * main.c (read_command_line): declare `option_index' (for new
+          getopt).
+
+Thu Jan  9 08:30:22 1992  Karl Berry  (karl at hayley)
+
+        * *.c: do not include global.h.
+
+        * *.h: remove #pragma once.
+
+Wed Jan  8 15:29:40 1992  Karl Berry  (karl at hayley)
+
+        * update copyright messages.
+
+        * change `allocate to `xmalloc', `reallocate' to `xrealloc', and
+          `string_copy' to `strdup'.
+
+Sun Nov 17 06:50:41 1991  Karl Berry  (karl at hayley)
+
+        * main.c (read_command_line): new option for Type 1 output.
+        (translation_targets): add `pstype1'.
+        (USAGE): document it.
+        (main): call the same routines as the others.
+        * pstype1.[ch]: new files.
+
+        * pstype3.c (pstype3_start_output): change extension to `pf3'.
+        * main.c (USAGE): document this.
+
+Tue Jul 30 13:17:12 1991  Karl Berry  (karl at ra.cs.umb.edu)
+
+        * Version 0.3.
+
+Sat Jun 15 09:48:50 1991  Karl Berry  (karl at hayley)
+
+        * all files: change `checked_' to `x'.
+
+Thu Jun  6 07:21:18 1991  Karl Berry  (karl at hayley)
+
+        * All files: change to version 2 of the GPL.
+
+Sat Mar 23 16:15:41 1991  Karl Berry  (karl at hayley)
+
+        * main.c (main): call `find_tfm_filename' with `font_name' instead
+          of `font_basename'.
+
+Wed Mar 13 17:17:18 1991  Karl Berry  (karl at hayley)
+
+        * pstype3.c (pstype3_start_output); don't call strcmp if one of
+          the args might be null.
+
+        * metafont.c (metafont_start_output): remove any design size from
+          the output filename.
+        * pstype3.c (pstype3_start_output): likewise.
+
+Mon Mar 11 09:39:22 1991  Karl Berry  (karl at hayley)
+
+        * pstype3.c (pstype3_start_output): start the file with a `%!'.
+
+        * ascii.c (ascii_start_output): don't print the interword space.
+
+Sun Mar 10 15:48:08 1991  Karl Berry  (karl at hayley)
+
+        * metafont.c (metafont_output_char): output ligature and kerning
+          information.
+        * metafont.h (metafont_output_char): change the declaration.
+        * main.c (main): change the call.
+
+        * main.c (main): report the character codes we do as we go.
+
+        * metafont.c (metafont_start_output): don't output the GPL in the
+          generated font.
+        * pstype3.c (pstype3_start_output): likewise.
+
+        * metafont.c (metafont_start_output): take the global TFM info as
+          a parameter, and output the font parameters.
+        * metafont.h (metafont_start_output): change the declaration.
+        * pstype3.c (pstype3_start_output): take the global TFM info as a
+          parameter, and output the interword space.
+        * pstype3.h (pstype3_start_output): change the declaration.
+        * main.c (main): change calls.
+
+        * main.c (main): read a TFM file along with the BZR file.
+
+Thu Mar  7 07:31:34 1991  Karl Berry  (karl at hayley)
+
+        * Version 0.2.
+
+Wed Mar  6 15:39:18 1991  Karl Berry  (karl at hayley)
+
+        * bzrsetup.mf (mag, designsize): change things around so we
+          generate the same TFM file for all point sizes.
+
+        * bzrsetup.mf (font_quad): don't assign to this; it should come
+          from the input.
+
+Fri Mar  1 10:16:57 1991  Karl Berry  (karl at hayley)
+
+        * metafont.c (metafont_start_output): scale the interword space by
+          the design size.
+
+Tue Feb 26 06:50:15 1991  Karl Berry  (karl at hayley)
+
+        * metafont.c (metafont_finish_output): use `bye' to finish off the
+          MF file, instead of `end'.
+
+Mon Feb 25 14:47:51 1991  Karl Berry  (karl at hayley)
+
+        * main.c (main): call `bzr_...' instead of `..._bzr_...'.
+
+        * metafont.c (OUT_PT_ASSIGNMENT): new macro.
+
+        * bzrsetup.mf: use `font_size' instead of `designsize'.
+        * metafont.c (metafont_start_output): output the font's interword
+          space.
+
+Sun Feb 17 11:46:48 1991  Karl Berry  (karl at hayley)
+
+        * pstype3.c (ps_init_encoding, find_ps_info): use `LIB_ENVVAR',
+          not `LIB_NAME'.
+
+Sat Feb 16 16:49:34 1991  Karl Berry  (karl at hayley)
+
+        * *.c: include "config.h".
+
+        * pstype3.c (LIB_NAME): move to ../include/global.h.
+        (DEFAULT_LIB_PATH): move to ../include/paths.h-dist.
+
+Sun Feb 10 11:46:31 1991  Karl Berry  (karl at hayley)
+
+        * metafont.c (metafont_output_char): make sure all the labels
+        appear.
+
+Fri Feb  1 14:44:49 1991  Karl Berry  (karl at hayley)
+
+        * bzrsetup.mf: save and restore `proofing' around `mode_setup' if
+          the former is >2.
+
+Wed Jan 30 16:00:29 1991  Karl Berry  (karl at hayley)
+
+        * metafont.c (metafont_start_output): print the copyleft.
+
+        * metafont.c (metafont_output_char): output the first point of
+          each spline list with the suffix `s', and the last point with no
+          suffix.
+        * barsetup.mf (proof_labels): change the suffix we look for
+          correspondingly.
+
+Tue Jan 29 10:35:05 1991  Karl Berry  (karl at hayley)
+
+        * metafont.c (metafont_output_char): output `proof_labels' by
+          itself.
+
+Thu Jan 17 16:30:18 1991  Karl Berry  (karl at hayley)
+
+        * bzrsetup.mf: save and restore `proofing' around the
+          `mode_setup'; no, don't do that, it makes smoke mode fail.
+
+Wed Jan 16 08:07:45 1991  Karl Berry  (karl at hayley)
+
+        * metafont.c (metafont_output_char): only output the point list
+          once.
+        * bzrsetup.mf (proof_labels, general_label): new macros to do all
+          the work of producing the proofsheet labels.
+
+        * ascii.c (ascii_output_char), metafont.c (metafont_output_char),
+          pstype3.c (out_splines), oblique.[ch] (oblique_splines): changes
+          to accomodate the new representation of the character shape as a
+          list of lists.
+
+Sat Jan 12 10:39:49 1991  Karl Berry  (karl at hayley)
+
+        * bzrsetup.mf (fill_or_unfill): use := to set `temp_path' instead
+          of =.
+
+Fri Jan 11 14:47:08 1991  Karl Berry  (karl at hayley)
+
+        * bzrsetup.mf (fill_or_unfill): improve, so that the Metafont
+          output doesn't need temporary path variables.
+
+        * metafont.c (counterclockwise): this was a foolish idea; remove
+          this routine, and output MF code to use `turningnumber' instead.
+        (FINISH_PATH): new macro to help.
+
+        * metafont.c (metafont_start_output): do `input bzrsetup' in the
+          .mf file, instead of writing out all that stuff.
+        * bzrsetup.mf: new file.
+
+Thu Jan 10 11:35:28 1991  Karl Berry  (karl at hayley)
+
+        * metafont.c (counterclockwise): make work for the length=2 case.
+
+        * metafont.c (counterclockwise): use the starting point and ending
+          point of the first spline, instead of the ending point and the
+          first and starting of the next.
+
+Wed Jan  9 07:12:50 1991  Karl Berry  (karl at hayley)
+
+        * metafont.c (counterclockwise): new routine.
+        (metafont_output_char): call it, to determine whether we should
+        fill or unfill the curve.
+
+Tue Jan  1 16:30:35 1991  Karl Berry  (karl at hayley)
+
+        * metafont.c (metafont_output_char): reinitialize
+          `previous_end_point' before outputting the path commands, so we
+          don't get a spurious equality.
+
+Sat Dec 29 14:54:14 1990  Karl Berry  (karl at hayley)
+
+        * metafont.c (metafont_output_char): output the labels for the
+          control points separately from the start/end points.
+
+        * metafont.c (metafont_output_char): don't output an ending point
+          if it is also the first point of the spline.
+
+Wed Dec 26 09:02:24 1990  Karl Berry  (karl at hayley)
+
+        * metafont.c (OUT_LINE): new macro.
+        (metafont_finish_output): use it to output the `end'.
+        
+        * metafont.c (metafont_start_output): get the true-size character
+          onto the proofsheet if we're not labeling.
+
+        * metafont.c (metafont_start_output): can't use `unknown
+          designsize', since `designsize' is always known.  Instead, test
+          if it =0.
+
+Tue Dec 18 14:59:42 1990  Karl Berry  (karl at hayley)
+
+        * metafont.c (metafont_start_output): set turningcheck to 1 in the
+          MF output, instead of doing scrollmode, to avoid strange path
+          errors and yet stop on other errors.
+
+        * metafont.c (metafont_start_output): take the BZR preamble as an
+          arg, so we can use it in the Metafont output.  Allow the user to
+          specify an arbitrary point size by setting `designsize'.
+        * main.c (main): send in the preamble.
+
+        * ascii.c (ascii_finish_output): doc fix.
+
+        * metafont.c (metafont_output_char): output label commands.
+
+        * metafont.c (metafont_start_output): use OUT_ASSIGNMENT for all
+          the assignments.
+
+        * metafont.c (OUT_ZASSIGNMENT): use =, not :=.
+
+        * pstype.c (pstype3_start_output): change KKCharBuilder to
+          KKBuildChar, for consistency.
+        * KKBuildChar.PS: likewise.
+
+Wed Dec 12 18:53:51 1990  Karl Berry  (karl at aten)
+
+        * metafont.c (metafont_output_char): output the points as Metafont
+          variables, instead of just using the points.
+
+Sun Dec  9 14:25:26 1990  Karl Berry  (karl at hayley)
+
+        * metafont.c (OUT1, OUT_ASSIGNMENT, OUT_ZASSIGNMENT): new macros
+          to abbreviate output to mf_file.
+
+        * ascii.c, pstype3.c: doc fix.
+
+        * main.c (read_command_line): use FINISH_COMMAND_LINE.
+
+        * GNUmakefile (files): include metafont.
+        * main.c (read_command_line, USAGE): new option, `-metafont'.
+
+Sat Dec  1 16:44:34 1990  Karl Berry  (karl at hayley)
+
+        * main.c: include cmdline.h.
+
+        * pstype3.c: include file-open.h.
+
+Wed Oct 24 14:59:16 1990  Karl Berry  (karl at aten)
+
+        * Version 0.0.
+
+Fri Sep 28 09:54:30 1990  Karl Berry  (karl at hayley)
+
+        * main.c (main): call basename on the font name before opening the
+        output files.
+        (read_command_line): call remove_suffix on the font name before
+        returning it.
+        Include filename.h.
+
+        * main.c (read_command_line): return NULL at the end.
+
+        * main.c: include "getopt.h", not <getopt.h>.
+        * pstype3.c: include filename.h.
+
+Tue Jul 24 13:10:07 1990  Karl Berry  (karl at hayley)
+
+        * pstype3.c (pstype3_start_output): don't include time.h.
+
+Fri Jun 22 17:33:09 1990  Karl Berry  (karl at hayley)
+
+        * pstype3.c (pstype3_start_output): double %'s in calls to OUT1.
+
+        * pstype3.c (ps_init_encoding): use the name find_path_filename
+        found to look for the encoding file.
+
+Wed Jun 20 16:10:00 1990  Karl Berry  (karl at hayley)
+
+        * main.c (read_command_line): new routine.
+
+        * GNUmakefile (files): remove read, add oblique, ascii and pstype3.
+
+Sat Jun 16 09:04:58 1990  Karl Berry  (karl at hayley)
+
+        * read.c (do_characters): remove spurious newline after printing
+        lines; also, change call to get_bzr_char to the new name,
+        get_next_bzr_char.

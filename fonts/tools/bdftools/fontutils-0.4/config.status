@@ -1,0 +1,17 @@
+DEFS="#define DIRENT 
+#define NEED_MEMORY_H 
+#define STDC_HEADERS 
+#define HAVE_UNISTD_H 
+"
+LIBS=""
+CC="gcc -O"
+INSTALL="/usr/bin/install -c"
+INSTALL_PROGRAM="/usr/bin/install -c"
+INSTALL_DATA="/usr/bin/install -c -m 644"
+RANLIB="ranlib "
+wlibs=""
+LDFLAGS=""
+xincludedir=""
+xlibdir="-L/usr/local/lib"
+prefix="/usr/local"
+

@@ -1,0 +1,291 @@
+% The GNU latin text font encoding scheme, as developed by Karl Berry
+% and Kathy Hargreaves on 12-31-91.
+GNU Latin Text
+.notdef
+.notdef
+.notdef
+.notdef
+.notdef
+.notdef
+.notdef
+.notdef
+%
+bullet			% Standard 267
+dagger			% Standard 262
+daggerdbl		% Standard 263
+ff			lig i =: 016  lig l =: 017 	% TeX Text
+fi			% TeX Text
+fl			% TeX Text
+ffi			% TeX Text
+ffl			% TeX Text
+%
+quotedblleft		% Extended TeX Latin
+quotedblright		% Extended TeX Latin
+guilsinglleft		% Standard 0254
+guilsinglright		% Standard 0255
+quotesinglbase		% Standard 0270
+endash			lig - =: 026	% Extended TeX Latin
+emdash			% Extended TeX Latin
+compoundwordmark	% Extended TeX Latin (non-Adobe name)
+%
+zerolowered		% Extended TeX Latin (non-Adobe name)
+threequartersemdash	% Expert 075
+quotesingle		% Standard 0251 (foot mark)
+oe			% TeX Text
+quotedblbase		% Standard 0271
+perthousand		% Standard 0275
+OE			% TeX Text
+florin			% Standard 0246
+%
+space
+exclam
+quotedbl
+numbersign
+dollar
+percent
+ampersand
+quoteright		lig ' =: 021
+%
+parenleft
+parenright
+asterisk
+plus
+comma
+asciihyphen		lig - =: 025
+period
+slash
+%
+zero
+one
+two
+three
+four
+five
+six
+seven
+%
+eight
+nine
+colon
+semicolon
+less
+equal
+greater
+question
+%
+at
+A
+B
+C
+D
+E
+F
+G
+%
+H
+I
+J
+K
+L
+M
+N
+O
+%
+P
+Q
+R
+S
+T
+U
+V
+W
+%
+X
+Y
+Z
+bracketleft
+backslash
+bracketright
+asciicircum
+underscore
+%
+quoteleft		lig ` =: 020  	% `` => opening double quote char
+a
+b
+c
+d
+e
+f			lig f =: 013  lig i =: 014  lig l =: 015
+g
+%
+h
+i
+j
+k
+l
+m
+n
+o
+%
+p
+q
+r
+s
+t
+u
+v
+w
+%
+x
+y
+z
+braceleft
+bar
+braceright
+asciitilde
+fraction		% Standard 244
+%
+zerooldstyle		% Expert 060
+oneoldstyle		% Expert 061
+twooldstyle		% Expert 062
+threeoldstyle		% Expert 063
+fouroldstyle		% Expert 064
+fiveoldstyle		% Expert 065
+sixoldstyle		% Expert 066
+sevenoldstyle		% Expert 067
+%
+eightoldstyle		% Expert 070
+nineoldstyle		% Expert 071
+Lslash			% TeX Text
+lslash			% non-Adobe name
+ij			% Extended TeX Latin 0274 (non-Adobe name)
+Eng			% Extended TeX Latin (non-Adobe name)
+eng			% Extended TeX Latin 0255 (non-Adobe name)
+SS			% Extended TeX Latin 0337 (non-Adobe name)
+%
+dotlessi
+grave
+colonmonetary 		% Expert 173
+circumflex
+tilde
+ellipses		% Standard 0274 (Adobe replicated ISO macron 257)
+breve
+dotaccent
+%
+dotlessj		% TeX Text 021 (non-Adobe name) 
+			%   (Adobe replicated ISO dieresis 230)
+dbar			% Extended TeX Latin 0236 (non-Adobe name)
+ring
+cedilla			% Standard 0313
+IJ			% Extended TeX Latin 0234 (non-Adobe name)
+hungarumlaut
+ogonek
+caron
+%
+nobreakspace		% (non-Adobe name)
+exclamdown
+cent
+sterling
+currency
+yen
+brokenbar
+section
+%
+dieresis
+copyright
+ordfeminine
+guillemotleft
+logicalnot
+hyphen
+registered
+macron
+%
+degree
+plusminus
+twosuperior
+threesuperior
+acute
+mu
+paragraph
+periodcentered
+%
+cedilla
+onesuperior
+ordmasculine
+guillemotright
+onequarter
+onehalf
+threequarters
+questiondown
+%
+Agrave
+Aacute
+Acircumflex
+Atilde
+Adieresis
+Aring
+AE
+Ccedilla
+%
+Egrave
+Eacute
+Ecircumflex
+Edieresis
+Igrave
+Iacute
+Icircumflex
+Idieresis
+%
+Eth
+Ntilde
+Ograve
+Oacute
+Ocircumflex
+Otilde
+Odieresis
+multiply
+%
+Oslash
+Ugrave
+Uacute
+Ucircumflex
+Udieresis
+Yacute
+Thorn
+germandbls
+%
+agrave
+aacute
+acircumflex
+atilde
+adieresis
+aring
+ae
+ccedilla
+%
+egrave
+eacute
+ecircumflex
+edieresis
+igrave
+iacute
+icircumflex
+idieresis
+%
+eth
+ntilde
+ograve
+oacute
+ocircumflex
+otilde
+odieresis
+divide
+%
+oslash
+ugrave
+uacute
+ucircumflex
+udieresis
+yacute
+thorn
+ydieresis

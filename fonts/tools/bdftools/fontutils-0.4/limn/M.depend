@@ -1,0 +1,53 @@
+curve.o : curve.c ../include/config.h ../include/c-auto.h \
+  ../include/c-std.h ../include/c-memstr.h ../include/c-errno.h \
+  ../include/c-minmax.h ../include/c-limits.h ../include/c-seek.h \
+  ../include/c-proto.h ../include/global.h ../include/lib.h \
+  ../include/types.h ../include/logreport.h ../include/report.h curve.h \
+  ../include/vector.h display.h ../include/bounding-box.h ../include/font.h \
+  ../include/bitmap.h ../include/tfm.h ../include/fix-num.h ../include/list.h \
+  ../include/spline.h 
+display.o : display.c ../include/config.h ../include/c-auto.h \
+  ../include/c-std.h ../include/c-memstr.h ../include/c-errno.h \
+  ../include/c-minmax.h ../include/c-limits.h ../include/c-seek.h \
+  ../include/c-proto.h ../include/global.h ../include/lib.h \
+  ../include/types.h ../include/spline.h ../include/bounding-box.h \
+  ../include/vector.h display.h ../include/font.h ../include/bitmap.h \
+  ../include/tfm.h ../include/fix-num.h ../include/list.h main.h xserver.h 
+fit.o : fit.c ../include/config.h ../include/c-auto.h ../include/c-std.h \
+  ../include/c-memstr.h ../include/c-errno.h ../include/c-minmax.h \
+  ../include/c-limits.h ../include/c-seek.h ../include/c-proto.h \
+  ../include/global.h ../include/lib.h ../include/types.h \
+  ../include/logreport.h ../include/report.h ../include/spline.h \
+  ../include/bounding-box.h ../include/vector.h curve.h display.h \
+  ../include/font.h ../include/bitmap.h ../include/tfm.h ../include/fix-num.h \
+  ../include/list.h fit.h pxl-outline.h 
+main.o : main.c ../include/config.h ../include/c-auto.h ../include/c-std.h \
+  ../include/c-memstr.h ../include/c-errno.h ../include/c-minmax.h \
+  ../include/c-limits.h ../include/c-seek.h ../include/c-proto.h \
+  ../include/global.h ../include/lib.h ../include/types.h ../include/bzr.h \
+  ../include/bounding-box.h ../include/font.h ../include/bitmap.h \
+  ../include/tfm.h ../include/fix-num.h ../include/list.h ../include/spline.h \
+  ../include/cmdline.h ../include/filename.h ../include/getopt.h display.h \
+  fit.h pxl-outline.h ../include/logreport.h ../include/report.h main.h \
+  output-bzr.h 
+output-bzr.o : output-bzr.c ../include/config.h ../include/c-auto.h \
+  ../include/c-std.h ../include/c-memstr.h ../include/c-errno.h \
+  ../include/c-minmax.h ../include/c-limits.h ../include/c-seek.h \
+  ../include/c-proto.h ../include/global.h ../include/lib.h \
+  ../include/types.h ../include/bzr.h ../include/bounding-box.h \
+  ../include/font.h ../include/bitmap.h ../include/tfm.h ../include/fix-num.h \
+  ../include/list.h ../include/spline.h ../include/filename.h main.h \
+  output-bzr.h 
+pxl-outline.o : pxl-outline.c ../include/config.h ../include/c-auto.h \
+  ../include/c-std.h ../include/c-memstr.h ../include/c-errno.h \
+  ../include/c-minmax.h ../include/c-limits.h ../include/c-seek.h \
+  ../include/c-proto.h ../include/global.h ../include/lib.h \
+  ../include/types.h ../include/bitmap.h ../include/bounding-box.h \
+  ../include/font.h ../include/tfm.h ../include/fix-num.h ../include/list.h \
+  ../include/logreport.h ../include/report.h pxl-outline.h 
+xserver.o : xserver.c ../include/config.h ../include/c-auto.h \
+  ../include/c-std.h ../include/c-memstr.h ../include/c-errno.h \
+  ../include/c-minmax.h ../include/c-limits.h ../include/c-seek.h \
+  ../include/c-proto.h ../include/global.h ../include/lib.h \
+  ../include/types.h xserver.h 
+version.o : version.c 

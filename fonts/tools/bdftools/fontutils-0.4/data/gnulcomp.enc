@@ -1,0 +1,294 @@
+% The GNU latin text complement font encoding scheme, as developed by
+% Karl Berry and Kathy Hargreaves on 1-7-92.
+GNU Latin Text Complement
+.notdef
+.notdef
+.notdef
+.notdef
+.notdef
+.notdef
+.notdef
+.notdef
+%
+zerofitted		% non-Adobe name
+onefitted
+twofitted		% non-Adobe name
+threefitted		% non-Adobe name
+fourfitted		% non-Adobe name
+fivefitted		% non-Adobe name
+sixfitted		% non-Adobe name
+sevenfitted		% non-Adobe name
+%
+eightfitted		% non-Adobe name
+ninefitted		% non-Adobe name
+Abreve			% Extended TeX Latin 0200 (non-Adobe name)
+Aogonek			% Extended TeX Latin 0201 (non-Adobe name)
+CAcute			% Extended TeX Latin 0202 (non-Adobe name)
+Ccaron			% Extended TeX Latin 0203 (non-Adobe name)
+Ecaron			% Extended TeX Latin 0205 (non-Adobe name)
+Eogonek			% Extended TeX Latin 0206 (non-Adobe name)
+%
+Lacute			% Extended TeX Latin 0210 (non-Adobe name)
+Lapostrophe		% Extended TeX Latin 0211 (non-Adobe name)
+Nacute			% Extended TeX Latin 0213 (non-Adobe name)
+Ncaron			% Extended TeX Latin 0214 (non-Adobe name)
+Racute			% Extended TeX Latin 0217 (non-Adobe name)
+Rcaron			% Extended TeX Latin 0220 (non-Adobe name)
+Tcaron			% Extended TeX Latin 0224 (non-Adobe name)
+Togonek			% Extended TeX Latin 0225 (non-Adobe name)
+%
+Dcaron			% Extended TeX Latin 0204 (non-Adobe name)
+exclamsmall		% Expert
+Hungarumlautsmall	% Expert
+Gbreve			% Extended TeX Latin 0207 (non-Adobe name)
+dollaroldstyle		% Expert
+dollarsuperior		% Expert
+ampersandsmall		% Expert
+Acutesmall		% Expert
+%
+parenleftsuperior	% Expert
+parenrightsuperior	% Expert
+twodotenleader		% Expert
+onedotenleader		% Expert
+Idot			% Extended TeX Latin 0235 (non-Adobe name)
+Sacute			% Extended TeX Latin 0221 (non-Adobe name)
+Scaron			% Extended TeX Latin 0222 (non-Adobe name)
+Sogonek			% Extended TeX Latin 0223 (non-Adobe name)
+%
+zerooldstylefitted	% non-Adobe name
+oneoldstylefitted	% non-Adobe name
+twooldstylefitted	% non-Adobe name
+threeoldstylefitted	% non-Adobe name
+fouroldstylefitted	% non-Adobe name
+fiveoldstylefitted	% non-Adobe name
+sixoldstylefitted	% non-Adobe name
+sevenoldstylefitted	% non-Adobe name
+%
+eightoldstylefitted	% non-Adobe name
+nineoldstylefitted	% non-Adobe name
+Uhungarumlaut		% Extended TeX Latin 0226 (non-Adobe name)
+Uring			% Extended TeX Latin 0227 (non-Adobe name)
+commasuperior		% Expert
+Ohungarumlaut		% Extended TeX Latin 0216 (non-Adobe name)
+periodsuperior		% Expert
+questionsmall		% Expert
+%
+tt			% non-Adobe name			
+asuperior		% Expert
+bsuperior		% Expert
+centsuperior		% Expert
+dsuperior		% Expert
+esuperior		% Expert
+gg			% non-Adobe name			
+ll			% non-Adobe name			
+%
+Zacute			% Extended TeX Latin 0231 (non-Adobe name)
+isuperior		% Expert
+Yhungarumlaut		% Extended TeX Latin 0230 (non-Adobe name)
+centoldstyle		% Expert 0242
+lsuperior		% Expert
+msuperior		% Expert
+nsuperior		% Expert
+osuperior		% Expert
+%
+Zcaron			% Extended TeX Latin 0232 (non-Adobe name)
+Zdot			% Extended TeX Latin 0233 (non-Adobe name)
+rsuperior		% Expert
+ssuperior		% Expert
+tsuperior		% Expert
+fb			
+fh
+fk
+%
+Ethsmall		% Expert 0360
+Oslashsmall		% Expert 0370
+Thornsmall		% Expert 0376
+parenrightinferior	% Expert
+Lslashsmall		% Expert 0243
+parenleftinferior	% Expert
+Circumflexsmall		% Expert
+hyphensuperior		% Expert
+%
+Gravesmall		% Expert
+Asmall			% Expert
+Bsmall			% Expert
+Csmall			% Expert
+Dsmall			% Expert
+Esmall			% Expert
+Fsmall			% Expert
+Gsmall			% Expert
+%
+Hsmall			% Expert
+Ismall			% Expert
+Jsmall			% Expert
+Ksmall			% Expert
+Lsmall			% Expert
+Msmall			% Expert
+Nsmall			% Expert
+Osmall			% Expert
+%
+Psmall			% Expert
+Qsmall			% Expert
+Rsmall			% Expert
+Ssmall			% Expert
+Tsmall			% Expert
+Usmall			% Expert
+Vsmall			% Expert
+Wsmall			% Expert
+%
+Xsmall			% Expert
+Ysmall			% Expert
+Zsmall			% Expert
+AEsmall			% Expert 0346
+OEsmall			% Expert 0367
+rupiah			% Expert
+Tildesmall		% Expert
+soldstyle		% non-Adobe name
+%
+Aswash			% non-Adobe name
+Bswash			% non-Adobe name
+Cswash			% non-Adobe name
+Dswash			% non-Adobe name
+Eswash			% non-Adobe name
+Fswash			% non-Adobe name
+Gswash			% non-Adobe name
+Hswash			% non-Adobe name
+%
+Iswash			% non-Adobe name
+Jswash			% non-Adobe name
+Kswash			% non-Adobe name
+Lswash			% non-Adobe name
+Mswash			% non-Adobe name
+Nswash			% non-Adobe name
+Oswash			% non-Adobe name
+Pswash			% non-Adobe name
+%
+Qswash			% non-Adobe name
+Rswash			% non-Adobe name
+Sswash			% non-Adobe name
+Tswash			% non-Adobe name
+Uswash			% non-Adobe name
+Vswash			% non-Adobe name
+Wswash			% non-Adobe name
+Xswash			% non-Adobe name
+%
+Yswash			% non-Adobe name
+Zswash			% non-Adobe name
+abreve		        % Extended TeX Latin 0240 (non-Adobe name)
+aogonek			% Extended TeX Latin 0241 (non-Adobe name)
+cacute			% Extended TeX Latin 0242 (non-Adobe name)
+ccaron			% Extended TeX Latin 0243 (non-Adobe name)
+ecaron			% Extended TeX Latin 0245 (non-Adobe name)
+egonek			% Extended TeX Latin 0246 (non-Adobe name)
+%
+dapostrophe		% Extended TeX Latin 0244 (non-Adobe name)
+exclamdownsmall		% Expert
+gabreve			% Extended TeX Latin 0247 (non-Adobe name)
+lacute			% Extended TeX Latin 0250 (non-Adobe name)
+lapostrophe		% Extended TeX Latin 0251 (non-Adobe name)
+sacute			% Extended TeX Latin 0261 (non-Adobe name)
+scaron			% Extended TeX Latin 0262 (non-Adobe name)
+sogonek			% Extended TeX Latin 0263 (non-Adobe name)
+%
+Dieresissmall		% Expert
+Brevesmall		% Expert
+Caronsmall		% Expert
+ohungarumlaut		% Extended TeX Latin 0256 (non-Adobe name)
+Dotaccentsmall		% Expert
+nacute			% Extended TeX Latin 0253 (non-Adobe name)
+ncaron			% Extended TeX Latin 0254 (non-Adobe name)
+Macronsmall		% Expert
+%
+racute			% Extended TeX Latin 0257 (non-Adobe name)
+rcaron			% Extended TeX Latin 0260 (non-Adobe name)
+figuredash		% Expert
+hypheninferior		% Expert
+tapostrophe		% Extended TeX Latin 0264 (non-Adobe name)
+togonek			% Extended TeX Latin 0265 (non-Adobe name)
+Ogoneksmall		% Expert
+Ringsmall		% Expert
+%
+Cedillasmall		% Expert
+zacute			% Extended TeX Latin 0271 (non-Adobe name)
+zcaron			% Extended TeX Latin 0272 (non-Adobe name)
+zdot			% Extended TeX Latin 0273 (non-Adobe name)
+onequarter		% Expert
+onehalf			% Expert
+threequarters		% Expert
+questiondownsmall	% Expert
+%
+oneeigthth		% Expert
+threeeighths		% Expert
+fiveeighths		% Expert
+seveneighths		% Expert
+onethird		% Expert
+twothirds		% Expert
+uhungarumlaut		% Extended TeX Latin 0266 (non-Adobe name)
+uring			% Extended TeX Latin 0267 (non-Adobe name)
+%
+zerosuperior		% Expert
+onesuperior		% Expert
+twosuperior		% Expert
+threesuperior		% Expert
+foursuperior		% Expert
+fivesuperior		% Expert
+sixsuperior		% Expert
+sevensuperior		% Expert
+%
+eightsuperior		% Expert
+ninesuperior		% Expert
+zeroinferior		% Expert
+oneinferior		% Expert
+twoinferior		% Expert
+threeinferior		% Expert
+fourinferior		% Expert
+fiveinferior		% Expert
+%
+sixinferior		% Expert
+seveninferior		% Expert
+eightinferior		% Expert
+nineinferior		% Expert
+centinferior		% Expert
+dollarinferior		% Expert
+periodinferior		% Expert
+commainferior		% Expert
+%
+aswash			% non-Adobe name
+bswash			% non-Adobe name
+cswash			% non-Adobe name
+dswash			% non-Adobe name
+eswash			% non-Adobe name
+fswash			% non-Adobe name
+gswash			% non-Adobe name
+hswash			% non-Adobe name
+%
+iswash			% non-Adobe name
+jswash			% non-Adobe name
+kswash			% non-Adobe name
+lswash			% non-Adobe name
+mswash			% non-Adobe name
+nswash			% non-Adobe name
+oswash			% non-Adobe name
+pswash			% non-Adobe name
+%
+qswash			% non-Adobe name
+rswash			% non-Adobe name
+sswash			% non-Adobe name
+tswash			% non-Adobe name
+uswash			% non-Adobe name
+vswash			% non-Adobe name
+wswash			% non-Adobe name
+xswash			% non-Adobe name
+%
+yswash			% non-Adobe name
+zswash			% non-Adobe name
+ct			% non-Adobe name
+st			% non-Adobe name
+ft			% non-Adobe name
+sp			% non-Adobe name
+fr			% non-Adobe name
+es			% non-Adobe name
+
+
+
+

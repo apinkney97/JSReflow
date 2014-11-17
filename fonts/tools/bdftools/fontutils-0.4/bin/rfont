@@ -1,0 +1,14 @@
+#!/bin/sh
+
+unset PKFONTS
+unset TEXPKS
+TEXFONTS=/usr/local/lib/tex/fonts//
+export TEXFONTS
+
+for r in 0 1 2 3 4 5 6 7
+do
+  fontconvert -random=$r -random-threshold=.5 -gf -tfm cmr10 \
+    -output-file=cmr-$r
+  gftopk cmr-$r.300gf
+  echo $r done
+done

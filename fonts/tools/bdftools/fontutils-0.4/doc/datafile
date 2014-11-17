@@ -1,0 +1,4 @@
+The programs also use various data files to specify the encodings of
+the fonts, among other things.  These files are distributed in `./lib'.
+If the environment variable FONTUTIL_LIB exists, the files are looked up
+along those paths; then along the DEFAULT_LIB_PATH defined in `./GNUmakefile'.

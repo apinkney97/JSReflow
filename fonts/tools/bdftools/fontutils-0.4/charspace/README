@@ -1,0 +1,8 @@
+This program adds sidebearings to a bitmap font, and outputs a revised
+bitmap font and a TFM file.  It reads several auxiliary ``side bearing
+information'' (SBI) files to determine the side bearings.  Comments in
+the sources describe the file format (somewhat).
+
+The ideas behind the SBI files are based on Harry Smith's (Linotype)
+principles, as explicated by Walter Tracy in his book _Letters of
+Credit_.

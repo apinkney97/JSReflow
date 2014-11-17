@@ -1,0 +1,287 @@
+Sat Mar 28 07:49:38 1992  Karl Berry  (karl at hayley)
+
+        * Version 0.4.
+
+        * Change copyright years to 1992 only.
+
+Sat Mar 21 10:59:51 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * tfm_util.c (tfm_set_design_size): set design size unconditionally.
+
+        * tfm_util.c (tfm_set_design_size): added.
+
+        * tfm_util.c (tfm_set_header): deleted DEFAULT_DESIGN_SIZE.
+
+        * tfm_util.c (tfm_set_fontsize): made extern.
+
+        * tfm_util.c [TFM_CHECK_DESIGNSIZE]: changed name from
+          CHECK_DESIGNSIZE.
+
+        * tfm_util.c (tfm_set_font_parameter, tfm_set_fontsize): added.
+          (tfm_set_fontdimens): use tfm_set_font_parameter.
+
+Thu Mar 19 13:24:14 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * tfm_util.c (tfm_set_header): use CHECK_DESIGN_SIZE.
+          Don't range of check default design size; expect it to be valid.
+
+        * tfm_util.h [CHECK_DESIGN_SIZE]: added.
+
+        * tfm_util.c (tfm_set_header): took `design_size' out of
+          `designsize' else clause.  Added DEFAULT_DESIGN_SIZE.  If either
+          variable is set, then arrange to set fontsize.  
+          Set tfm_info's design size to DEFAULT_DESIGN_SIZE if it's not
+          set by the tfm-header design-size option.
+          
+        * tfm_util.c (set_fontsize): changed name from set_fontsize_if_unset.
+          (tfm_set_header): if -design-size tfm-header option is used, set
+          the font parameter count so will change the fontsize.
+
+Wed Mar 18 12:27:44 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * tfm_util.c (tfm_set_ligature): added.
+
+        * tfm_util.c (tfm_set_header): dox fix.
+
+Mon Mar 16 12:22:42 1992  Kathy Hargreaves  (kathy at hayley)
+
+        * tfm_util.c (tfm_set_header): set design size correctly.
+
+        * tfm_util.c (set_fontsize_if_unset): added.
+          (tfm_set_header, tfm_set_fontdimens): call set_fontsize_if_unset.
+
+        * tfm_util.c (tfm_set_header): added.
+
+Thu Jan  9 11:22:04 1992  Karl Berry  (karl at hayley)
+
+        * *.c: do not include global.h.
+
+Wed Jan  8 15:25:17 1992  Karl Berry  (karl at hayley)
+
+        * update copyright messages.
+
+        * change `allocate to `xmalloc', `reallocate' to `xrealloc', and
+          `string_copy' to `strdup'.
+
+Tue Sep 17 16:54:26 1991  Karl Berry  (karl at hayley)
+
+        * tfm_input.c (tfm_get_bcpl_string): append a null to the data.
+
+Tue Jul 30 13:20:02 1991  Karl Berry  (karl at ra.cs.umb.edu)
+
+        * Version 0.3.
+
+Tue Jul 16 17:21:19 1991  Karl Berry  (karl at hayley)
+
+        * tfm_util.c (tfm_get_kern): move from tfm_input.c, and take a tfm
+          char as an arg, instead of using the tfm_char_table from the font.
+
+Sun Jun 16 07:47:49 1991  Karl Berry  (karl at hayley)
+
+        * tfm_output.c (put_lig_kern_info): output a `stop' after each
+          character, since it isn't implied by a `label'.
+
+        * tfm_output.c (tfm_put_global_info): don't output a checksum
+          property if the checksum is zero.
+
+Sat Jun 15 09:54:19 1991  Karl Berry  (karl at hayley)
+
+        * tfm_input.c (tfm_get_chars, tfm_get_char): set the `code' member
+          of the TFM character structure.
+
+        * tfm_output.c (put_pl_lig_kern_table): rename to
+          `put_lig_kern_info' and rewrite to take a single character.
+        (tfm_put_char): new routine to output only one character.
+        (tfm_put_chars): call `tfm_put_char'.
+
+        * all files: change `checked_' to `x'.
+
+Tue Jun 11 15:17:51 1991  Karl Berry  (karl at hayley)
+
+        * tfm_util.c (tfm_new_chars): use XTALLOC.
+
+        * tfm_input.c (tfm_get_char): new routine.
+
+        * tfm_input.c (tfm_get_kern): check if the character exists before
+          looking at its kern list.  Also, use LIST_... macros instead of
+          doing direct selection.  Also, use `charcode_type' instead of
+          `one_byte'.
+        * tfm_util.c (tfm_set_kern): likewise.
+
+        * tfm_input.c (tfm_get_global_info, tfm_get_chars): don't save and
+          restore the file position.
+
+        * tfm_input.c (get_tfm_char): rename to `get_char'.
+
+Thu Jun  6 07:31:49 1991  Karl Berry  (karl at hayley)
+
+        * All files: change to version 2 of the GPL.
+
+Thu Apr  4 05:48:15 1991  Karl Berry  (karl at hayley)
+
+        * tfm_util.c (tfm_new_chars): call `tfm_new_char'.
+
+        * tfm_output.c (put_pl_lig_kern_table): test different characters
+          as we go through the loop!  How did this one get past?  Ohh, now
+          I see -- I was incrementing the pointer.
+
+        * tfm_output.c (put_pl_lig_kern_table): test >0 instead of !=0 on
+          the (unsigned) count variables.
+
+Wed Apr  3 11:43:28 1991  Karl Berry  (karl at hayley)
+
+        * tfm_output.c (tfm_init_global_info): initialize the number of
+          parameters to zero.
+
+        * tfm_output.c (put_pl_lig_kern_table): don't output a lig/kern
+          program for a character that doesn't exist -- either the left or
+          the right.
+
+Tue Apr  2 06:48:27 1991  Karl Berry  (karl at hayley)
+
+        * tfm_util.c (tfm_set_fontdimens): assign zero to all the
+          intervening fontdimens when we set the fontsize; reset the
+          parameter count.
+
+        * tfm_output.c (tfm_put_global_info): output the number of
+          parameters we have, instead of trying to find the last nonzero
+          one.
+
+        * tfm_output.c (put_string_prop): don't output a space if there is
+          no value to the string property.
+
+Sun Mar 10 13:12:51 1991  Karl Berry  (karl at hayley)
+
+        * tfm_input.c (get_tfm_params): save the number of parameters we
+          read.
+
+        * tfm_output.c (tfm_put_global_info): output as many parameters as
+          we have, instead of just the first six.
+        * tfm_input.c (get_tfm_params): likewise, for reading.
+
+        * tfm_output.c (tfm_init_global_info): new routine.
+
+Sat Mar  9 17:23:42 1991  Karl Berry  (karl at hayley)
+
+        * tfm_util.c (tfm_set_fontdimens): new routine.
+
+Thu Mar  7 07:33:33 1991  Karl Berry  (karl at hayley)
+
+        * Version 0.2.
+
+Tue Mar  5 15:34:26 1991  Karl Berry  (karl at hayley)
+
+        * tfm_output.c (tfm_convert_pl): use output redirection instead of
+          -v to make tftopl be quiet.
+
+Mon Feb 25 15:42:09 1991  Karl Berry  (karl at hayley)
+
+        * tfm_output.c (tfm_convert_pl): take a new parameter which says
+          whether to operate silently.
+
+        * tfm_output.c (INDENT_INCR): define as 2.
+
+        * tfm_input.c (tfm_open_filename): give an error if the caller
+          tries to open more than one file.
+
+        * tfm_{input,output,util}.c: rename external routines to start with
+          `tfm'; change error messages, etc.
+
+Sun Feb 17 09:51:50 1991  Karl Berry  (karl at hayley)
+
+        * *.c: include config.h.
+
+Sun Dec  9 15:08:57 1990  Karl Berry  (karl at hayley)
+
+        * tfm_input.c, tfm_output.c: doc fix.
+
+Sat Nov 17 12:54:02 1990  Karl Berry  (karl at hayley)
+
+        * tfm_input.c, tfm_output.c: include appropriate file-...h files.
+
+Thu Aug 30 16:29:51 1990  Karl Berry  (karl at hayley)
+
+        * tfm_input.c (tfm_get_byte, ...): pass the input filename, and
+        rewrite as macros.
+
+Tue Jul 24 11:09:46 1990  Karl Berry  (karl at hayley)
+
+        * tfm_output.c: include filename.h.
+
+Fri Jul 13 16:48:56 1990  Karl Berry  (karl at hayley)
+
+        * tfm_input.c (get_tfm_chars): declare `this_char' as unsigned,
+        not one_byte, since it might have to become 256.
+
+Wed Jul  4 08:39:28 1990  Karl Berry  (karl at hayley)
+
+        * tfm_output.c (put_tfm_chars): look at the `exists' member of the
+        character structure, instead of checking for the width being zero.
+
+Wed Jun 20 07:32:49 1990  Karl Berry  (karl at hayley)
+
+        * tfm_input.c (tfm_cur_pos): rename to tfm_ftell, and use
+        checked_ftell.
+        (tfm_set_pos): rename to tfm_fseek.
+
+Fri Jun  1 15:36:38 1990  Karl Berry  (karl at hayley)
+
+        * tfm_input.c (close_tfm_input_file): use checked_fclose.
+        * tfm_output.c (close_pl_output_file): likewise.
+
+Wed May 30 16:21:43 1990  Karl Berry  (karl at hayley)
+
+        * tfm_input.c (get_tfm_char): set the `exists' member of the
+        character structure.
+        * tfm_util.c (new_tfm_char): initialize the `exists' member.
+
+Thu Apr 12 14:58:24 1990  Karl Berry  (karl at hayley)
+
+	* tfm_input.c (get_interword_space): rename to
+	`tfm_get_interword_space'. 
+
+Mon Apr  9 12:10:26 1990  Karl Berry  (karl at hayley)
+
+	* (all files): upcase macro names.
+
+Sun Apr  8 11:42:53 1990  Karl Berry  (karl at hayley)
+
+	* tfm_input.c (get_tfm_global_info): if we've already read the
+	global info, just return the structure, instead of reading it
+	again.
+
+Fri Feb 23 08:43:02 1990  Karl Berry  (karl at hayley)
+
+	* tfm_input.c (get_tfm_char): remember the dimensions in their
+	original fix_word units, as well as in points.
+
+Wed Feb  7 17:22:27 1990  Karl Berry  (karl at hayley)
+
+	* tfm_input.c (tfm_get_design_size): new routine.
+        (tfm_get_coding_scheme): rename `get_coding_scheme'.
+
+Sun Jan 28 14:48:35 1990  Karl Berry  (karl at hayley)
+
+	* tfm_util.c (set_kern): move this routine from tfm_input.c.
+
+	* tfm_output.c (change_pl_to_tfm): check that pl_output_filename
+	is non-NULL.
+
+Fri Dec 22 17:33:30 1989  Karl Berry  (karl at hayley)
+
+	* tfm_input.c (tfm_get_x_height): new routine.
+
+Mon Oct 30 12:37:02 1989  Karl Berry  (karl at hayley)
+
+	* all files: add the copyleft.
+
+	* tfm_util.c: define new_tfm_chars.
+
+	* tfm_output.c (put_tfm_global_info): take a structure as input,
+	not a pointer.
+	(new_tfm_char): move to tfm_util.c.
+
+Sun Oct 29 08:13:05 1989  Karl Berry  (karl at hayley)
+
+	* tfm_output.c (put_pl_file): remove this, and add put_tfm_chars
+	and put_tfm_global_info in its place.

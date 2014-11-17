@@ -1,0 +1,187 @@
+# MBembo-SemiBold
+name MR
+
+# Comment Copyright (c) 1989 Monotype Corporation plc.  All rights reserved.
+# PostScript MBembo-SemiBold from /usr/local/lib/ps/MBembo-SemiBold.afm
+# PostScript is a trademark of Adobe Systems Incorporated
+# Notice Monotype Bembo is a trademark of the Monotype Corporation plc
+ligatures fi fl 0
+spacewidth 67
+charset
+\|	33 0 000	1/6 em space
+\^	17 0 000	1/12 em space
+\&	00 0 000	no space
+!	58 0 041	exclam
+"	111 0 042	quotedbl
+#	134 0 043	numbersign
+$	97 0 044	dollar
+%	155 0 045	percent
+&	148 0 046	ampersand
+'	58 0 047	quoteright
+(	70 0 050	parenleft
+)	70 0 051	parenright
+*	103 0 052	asterisk
++	133 0 053	plus
+,	58 0 054	comma
+-	78 0 055	hyphen
+hy	"
+.	58 0 056	period
+/	95 0 057	slash
+sl	"
+0	103 0 060	zero
+1	103 0 061	one
+2	103 0 062	two
+3	103 0 063	three
+4	103 0 064	four
+5	103 0 065	five
+6	103 0 066	six
+7	103 0 067	seven
+8	103 0 070	eight
+9	103 0 071	nine
+:	58 0 072	colon
+;	58 0 073	semicolon
+<	133 0 074	less
+=	133 0 075	equal
+>	133 0 076	greater
+?	72 0 077	question
+@	186 0 0100	at
+A	142 0 0101	A
+B	130 0 0102	B
+C	148 0 0103	C
+D	157 0 0104	D
+E	115 0 0105	E
+F	110 0 0106	F
+G	148 0 0107	G
+H	162 0 0110	H
+I	69 0 0111	I
+J	70 0 0112	J
+K	144 0 0113	K
+L	115 0 0114	L
+M	186 0 0115	M
+N	164 0 0116	N
+O	168 0 0117	O
+P	112 0 0120	P
+Q	168 0 0121	Q
+R	159 0 0122	R
+S	105 0 0123	S
+T	137 0 0124	T
+U	160 0 0125	U
+V	146 0 0126	V
+W	224 0 0127	W
+X	159 0 0130	X
+Y	148 0 0131	Y
+Z	135 0 0132	Z
+[	67 0 0133	bracketleft
+\	95 0 0134	backslash
+]	67 0 0135	bracketright
+ac	116 0 0136	asciicircum
+_	100 0 0137	underscore
+\_	"
+`	58 0 0140	quoteleft
+a	88 0 0141	a
+b	106 0 0142	b
+c	90 0 0143	c
+d	106 0 0144	d
+e	94 0 0145	e
+f	61 0 0146	f
+g	103 0 0147	g
+h	108 0 0150	h
+i	52 0 0151	i
+j	52 0 0152	j
+k	106 0 0153	k
+l	54 0 0154	l
+m	164 0 0155	m
+n	108 0 0156	n
+o	108 0 0157	o
+p	105 0 0160	p
+q	106 0 0161	q
+r	72 0 0162	r
+s	70 0 0163	s
+t	63 0 0164	t
+u	108 0 0165	u
+v	105 0 0166	v
+w	155 0 0167	w
+x	108 0 0170	x
+y	97 0 0171	y
+z	94 0 0172	z
+{	79 0 0173	braceleft
+|	105 0 0174	bar
+or	"
+}	79 0 0175	braceright
+at	133 0 0176	asciitilde
+!!	58 0 0241	exclamdown
+I!	"
+ct	90 0 0242	cent
+ps	160 0 0243	sterling
+po	"
+pn	"
+fr	34 0 0244	fraction
+yi	144 0 0245	yen
+yn	"
+$J	"
+$D	98 0 0246	florin
+sc	92 0 0247	section
+cn	133 0 0250	currency
+n'	56 0 0251	quotesingle
+lq	105 0 0252	quotedblleft
+oq	"
+d<	70 0 0253	guillemotleft
+f<	52 0 0254	guilsinglleft
+f>	52 0 0255	guilsinglright
+fi	119 0 0256	fi
+fl	108 0 0257	fl
+en	86 0 0261	endash
+\-	"
+dg	95 0 0262	dagger
+dd	95 0 0263	daggerdbl
+pc	58 0 0264	periodcentered
+pp	108 0 0266	paragraph
+bl	70 0 0267	bullet
+qs	58 0 0270	quotesinglbase
+qd	105 0 0271	quotedblbase
+rq	105 0 0272	quotedblright
+cq	"
+d>	70 0 0273	guillemotright
+el	173 0 0274	ellipsis
+pm	200 0 0275	perthousand
+??	72 0 0277	questiondown
+I?	"
+ga	67 0 0301	grave
+\`	"
+aa	67 0 0302	acute
+\'	"
+^	67 0 0303	circumflex
+~	67 0 0304	tilde
+mc	67 0 0305	macron
+ma	"
+be	67 0 0306	breve
+dt	67 0 0307	dotaccent
+um	67 0 0310	dieresis
+..	"
+ri	67 0 0312	ring
+cd	67 0 0313	cedilla
+h:	67 0 0315	hungarumlaut
+og	67 0 0316	ogonek
+hc	67 0 0317	caron
+em	173 0 0320	emdash
+AE	177 0 0341	AE
+of	56 0 0343	ordfeminine
+PL	115 0 0350	Lslash
+O/	168 0 0351	Oslash
+OE	202 0 0352	OE
+om	69 0 0353	ordmasculine
+ae	135 0 0361	ae
+ui	52 0 0365	dotlessi
+Pl	54 0 0370	lslash
+o/	108 0 0371	oslash
+oe	155 0 0372	oe
+ss	106 0 0373	germandbls
+23	167 0 0211	fudgedproc!
+78	167 0 0207	fudgedproc!
+12	167 0 0202	fudgedproc!
+13	167 0 0210	fudgedproc!
+14	167 0 0201	fudgedproc!
+18	167 0 0204	fudgedproc!
+34	167 0 0203	fudgedproc!
+38	167 0 0205	fudgedproc!
+58	167 0 0206	fudgedproc!

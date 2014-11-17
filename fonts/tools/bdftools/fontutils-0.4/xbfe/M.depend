@@ -1,0 +1,32 @@
+char.o : char.c ../include/config.h ../include/c-auto.h ../include/c-std.h \
+  ../include/c-memstr.h ../include/c-errno.h ../include/c-minmax.h \
+  ../include/c-limits.h ../include/c-seek.h ../include/c-proto.h \
+  ../include/global.h ../include/lib.h ../include/types.h \
+  ../include/xt-common.h ../include/Bitmap.h ../include/bitmap.h \
+  ../include/bounding-box.h ../include/font.h ../include/tfm.h \
+  ../include/fix-num.h ../include/list.h ../include/Item.h char.h main.h \
+  kern.h 
+commands.o : commands.c ../include/config.h ../include/c-auto.h \
+  ../include/c-std.h ../include/c-memstr.h ../include/c-errno.h \
+  ../include/c-minmax.h ../include/c-limits.h ../include/c-seek.h \
+  ../include/c-proto.h ../include/global.h ../include/lib.h \
+  ../include/types.h ../include/xt-common.h ../include/Bitmap.h \
+  ../include/bitmap.h ../include/bounding-box.h ../include/filename.h \
+  ../include/font.h ../include/tfm.h ../include/fix-num.h ../include/list.h \
+  ../include/gf.h ../include/xmessage.h char.h main.h commands.h 
+kern.o : kern.c ../include/config.h ../include/c-auto.h ../include/c-std.h \
+  ../include/c-memstr.h ../include/c-errno.h ../include/c-minmax.h \
+  ../include/c-limits.h ../include/c-seek.h ../include/c-proto.h \
+  ../include/global.h ../include/lib.h ../include/types.h \
+  ../include/xt-common.h ../include/Item.h ../include/xmessage.h char.h \
+  ../include/font.h ../include/bitmap.h ../include/bounding-box.h \
+  ../include/tfm.h ../include/fix-num.h ../include/list.h main.h kern.h 
+main.o : main.c ../include/config.h ../include/c-auto.h ../include/c-std.h \
+  ../include/c-memstr.h ../include/c-errno.h ../include/c-minmax.h \
+  ../include/c-limits.h ../include/c-seek.h ../include/c-proto.h \
+  ../include/global.h ../include/lib.h ../include/types.h \
+  ../include/xt-common.h ../include/Bitmap.h ../include/bitmap.h \
+  ../include/bounding-box.h ../include/cmdline.h ../include/filename.h \
+  ../include/getopt.h ../include/font.h ../include/tfm.h ../include/fix-num.h \
+  ../include/list.h ../include/Item.h char.h main.h commands.h kern.h 
+version.o : version.c 

@@ -1,0 +1,46 @@
+The programs here can all be improved.  If you want to work on them,
+send mail to me (karl@cs.umb.edu), so I can help avoid duplicated
+effort.
+
+bzrto:
+* output more font formats, e.g., TrueType.
+* output hints for Metafont and Type 1 fonts.
+* handle accented characters somehow; should it be here, or in limn, or ...?
+
+fontconvert:
+* output in virtual font format.
+* allow specifying input encodings and output encodings as files (the
+  same .enc files that the other programs read).
+
+gf:
+* support multiple simultaneous open fonts, like pk does now.
+
+gsrenderfont:
+* allow for characters larger than 1" square.
+
+imagetofont:
+* understand more image formats, e.g., tiff.
+* implement a good rotation algorithm.
+
+imgrotate:
+* combine with imagetofont.
+
+lib:
+* extend the encoding files to math attributes.  Probably rewrite as a
+  bison grammar.  (I have it started.)
+* write a variant of string_to_bitmap (in font.c) which understand kerns
+  and ligatures.
+* add support for BDF fonts.
+
+limn:
+* handle the standard X toolkit options.
+
+pk:
+* implement PK output.
+
+tfm:
+* support multiple simultaneous open fonts, like pk does now.
+* support ligatures in their full generality.
+
+xbfe:
+* see xbfe/README.

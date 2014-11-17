@@ -1,0 +1,108 @@
+longname	Hershey-Triplex-Bold-Italic
+shortname	HerTriBI
+troffname	HT
+penwidth	2.0
+italicangle	-20
+#
+space		3198
+.notdef		735
+a		3151	+1 -1
+b		3152	+1 -1
+c		3153	+1 -1
+d		3154	+1 -0
+e		3155	+1 -1
+f		3156	+0 -1
+g		3157	+1 -1
+h		3158	+1 -1
+i		3159
+j		3160	+2 -1
+k		3161
+l		3162	+1 -0
+m		3163	+0 -1
+n		3164	+0 -1
+o		3165	+2 -1
+p		3166	+0 -1
+q		3167	+1 -0
+r		3168
+s		3169
+t		3170	+1 -0
+u		3171	+1 -0
+v		3172	+0 -1
+w		3173
+x		3174
+y		3175
+z		3176
+A		3051	+0 -1
+B		3052
+C		3053
+D		3054
+E		3055	+0 -1
+F		3056
+G		3057
+H		3058
+I		3059
+J		3060
+K		3061
+L		3062
+M		3063
+N		3064
+O		3065	+1 -1
+P		3066	+0 -1
+Q		3067
+R		3068
+S		3069	+1 -1
+T		3070
+U		3071
+V		3072
+W		3073
+X		3074
+Y		3075
+Z		3076
+zero		3250
+one		3251
+two		3252
+three		3253
+four		3254
+five		3255
+six		3256
+seven		3257
+eight		3258
+nine		3259
+period		3260
+comma		3261
+colon		3262
+semicolon	3263
+exclam		3264
+question	3265
+quotesingle	3277
+dollar		3269
+slash		802
+backslash	804
+parenleft	3271	+0 -1
+parenright	3272	+1 -0
+bar		723
+hyphen		224
+plus		3275
+equal		3276
+asterisk	3273
+periodcentered	729
+quoteleft	3266
+quoteright	3267
+numbersign	733
+ampersand	3268
+bullet		751
+bracketleft	1405
+bracketright	1406
+braceleft	1407
+braceright	1408
+asciitilde	2246
+asciicircum	2247
+less		2241
+greater		2242
+at		2273
+percent		2271
+section		2276
+quotedbl	3278
+tilde		1246
+dagger		2277
+daggerdbl	2278

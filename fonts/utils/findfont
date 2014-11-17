@@ -1,0 +1,41 @@
+#!/bin/sh
+# findfont by pns (6th December 1995)
+# Searches files in the given directories for lines containing
+# /.*Name.* followed by the given string
+# For example, findfont Euler returns all postscript fonts with
+# Euler in their family or font names.
+
+if [ $# -eq 0 ]
+then
+  echo "usage: `basename $0` name [directory ...]" 1>&2
+  exit 1
+fi
+
+SEARCH_STRING=$1
+shift
+if [ $# -gt 0 ]
+then
+  SEARCH_DIRS=$*
+else
+  SEARCH_DIRS="."
+fi
+
+
+for dir in $SEARCH_DIRS
+do
+  echo "`basename $0`: looking for \"$SEARCH_STRING\" fonts in $dir" 1>&2
+  for file in $dir/*
+  do
+    FOUND=`awk '$0 ~ "currentfile" {exit}
+{print $0}' $file | egrep "/.*Name.*$SEARCH_STRING"`
+    if [ -n "$FOUND" ]
+    then
+      if [ "$SEARCH_DIRS" = "." ]
+      then
+        echo "`basename $file`"
+      else
+        echo "$file"
+      fi
+    fi
+  done
+done

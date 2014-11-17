@@ -1,0 +1,56 @@
+On many machines (Sun 3/4 running SunOS 4.1, Sun386i running 4.0.2, 386
+  running ISC 2.2), gcc 1.40 gets a fatal error compiling
+  imagetofont/main.c with -O.  Just use -g for that file.
+
+
+Under SunOS 4.x, the programs which use X (xbfe and limn) cannot be
+  statically linked.  I get 
+  mbstowcs.o: Undefined symbol _dlsym referenced from text segment
+  wcstombs.o: Undefined symbol _dlsym referenced from text segment
+  mblib.o: Undefined symbol _dlclose referenced from text segment
+  mblib.o: Undefined symbol _dlopen referenced from text segment
+
+  I don't understand why (1) these multibyte functions are being pulled
+  in (via __Xsi...) at all; I'm not using any multibyte features; and
+  (2) why the multibyte functions need to specifically call the dynamic
+  linking functions.  I would be grateful for explanations and/or suggestions.
+  
+  The only permutation that I have seen work is to use libXaw.a, so that
+  the form, label, and viewport widgets aren't defined twice (if anyone
+  can explain why the entire .sa file needs to be pulled in, I'd like to
+  hear it), and doing a dynamic link (i.e., with /bin/ld).
+
+
+On a 386 running Interactive UNIX 2.2, you should be aware that <math.h>
+  has the wrong prototype for fmod(3): the routine takes two doubles, not
+  one.  I corrected my system include file.
+
+
+Also on a 386 running ISC 2.2, shared libraries cause still more
+  problems.  I have run a number of tests, listed below.  The bottom
+  line is that I changed gcc's tm file to define the following.  I use
+  Michael Bloom's stabs-in-coff stuff (i.e., gas but no robotussin), but
+  I don't think that matters here.
+  
+/* Don't use -lc_s, since then 1) gdb tries to step into library routines;
+   and 2) programs like textutils' csplit, which use POSIX signals,
+   cannot link, because signal, sighold, etc. are multiply defined.
+   (But we still need -shlib to specify crtp1 instead of crtp0.)  */
+#define LIB_SPEC "%{posix:-lcposix} -lc"
+
+Here are the results of linking with various startup files and libraries
+in various orders:
+  crtp0 -lc_s -lcposix		=> sysisc undefined
+  crtp0 -lc_s -lcposix -lc	=> xbfe -display otherhost:0 gets
+                                     default_new_handler: out of memory
+  crtp1 -lc_s -lcposix -lc	=> xbfe works, but csplit (in textutils)
+                                     gets signal, sighold, ... multiply defined
+  crtp0 -lcposix -lc_s		=> _cleanup, fclose, ... multiply defined
+  crtp1 -lcposix -lc_s		=> 		"
+  crtp0 -lcposix -lc_s -lc	=> 		"
+  crtp1 -lcposix -lc_s -lc	=>		"
+  crtp0 -lcposix -lc		=> links, but xbfe -display otherhost:0 
+                                     crashes in CallTliServer (in nsl_s)
+  crtp1 -lcposix -lc		=> xbfe works, csplit links
+
+  Conclusion: -lc_s and POSIX signals conflict.  Don't use -lc_s, ever.

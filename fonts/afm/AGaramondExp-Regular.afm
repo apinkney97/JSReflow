@@ -1,0 +1,332 @@
+StartFontMetrics 2.0
+Comment  Copyright (c) 1989 Adobe Systems Incorporated. All Rights Reserved.
+Comment Creation Date:Mon Jul 10 15:38:54 PDT 1989
+FontName AGaramondExp-Regular
+EncodingScheme FontSpecific
+FullName Adobe Garamond Expert Regular
+FamilyName AdobeGaramond
+Weight Regular
+ItalicAngle 0.0
+IsFixedPitch false
+UnderlinePosition -100
+UnderlineThickness 50
+Version 001.000
+Notice Copyright (c) 1989 Adobe Systems Incorporated.  All Rights Reserved.Adobe Garamond is a trademark of Adobe Systems Incorporated.
+FontBBox -183 -246 955 715
+StartCharMetrics 165
+C 32 ; WX 250 ; N space ; B 0 0 0 0 ;
+C 33 ; WX 200 ; N exclamsmall ; B 48 -14 152 434 ;
+C 34 ; WX 360 ; N Hungarumlautsmall ; B 22 454 339 659 ;
+C 36 ; WX 410 ; N dollaroldstyle ; B 36 -84 373 480 ;
+C 37 ; WX 360 ; N dollarsuperior ; B 35 172 325 697 ;
+C 38 ; WX 604 ; N ampersandsmall ; B 50 -14 604 448 ;
+C 39 ; WX 360 ; N Acutesmall ; B 123 461 285 666 ;
+C 40 ; WX 220 ; N parenleftsuperior ; B 41 168 212 688 ;
+C 41 ; WX 220 ; N parenrightsuperior ; B 8 168 179 688 ;
+C 42 ; WX 500 ; N twodotenleader ; B 69 -14 431 100 ;
+C 43 ; WX 500 ; N onedotenleader ; B 194 -14 306 100 ;
+C 44 ; WX 250 ; N comma ; B 53 -121 192 122 ;
+C 45 ; WX 320 ; N hyphen ; B 32 168 288 247 ;
+C 46 ; WX 250 ; N period ; B 69 -14 181 100 ;
+C 47 ; WX 100 ; N fraction ; B -183 -40 284 654 ;
+C 48 ; WX 511 ; N zerooldstyle ; B 40 -14 480 436 ;
+C 49 ; WX 328 ; N oneoldstyle ; B 35 -3 294 425 ;
+C 50 ; WX 440 ; N twooldstyle ; B 44 -3 427 436 ;
+C 51 ; WX 380 ; N threeoldstyle ; B 36 -188 325 436 ;
+C 52 ; WX 470 ; N fouroldstyle ; B 17 -186 466 437 ;
+C 53 ; WX 370 ; N fiveoldstyle ; B 66 -198 336 438 ;
+C 54 ; WX 489 ; N sixoldstyle ; B 55 -14 482 636 ;
+C 55 ; WX 472 ; N sevenoldstyle ; B 31 -198 455 425 ;
+C 56 ; WX 430 ; N eightoldstyle ; B 49 -14 379 621 ;
+C 57 ; WX 472 ; N nineoldstyle ; B 33 -198 420 436 ;
+C 58 ; WX 250 ; N colon ; B 69 -14 181 393 ;
+C 59 ; WX 250 ; N semicolon ; B 53 -122 192 393 ;
+C 60 ; WX 180 ; N commasuperior ; B 28 171 153 371 ;
+C 61 ; WX 750 ; N threequartersemdash ; B 0 181 750 230 ;
+C 62 ; WX 180 ; N periodsuperior ; B 36 240 144 350 ;
+C 63 ; WX 276 ; N questionsmall ; B 46 -14 231 448 ;
+C 65 ; WX 332 ; N asuperior ; B 33 240 330 540 ;
+C 66 ; WX 406 ; N bsuperior ; B 40 240 374 715 ;
+C 67 ; WX 360 ; N centsuperior ; B 18 184 343 675 ;
+C 68 ; WX 406 ; N dsuperior ; B 32 233 391 715 ;
+C 69 ; WX 328 ; N esuperior ; B 35 240 300 540 ;
+C 73 ; WX 219 ; N isuperior ; B 22 245 202 715 ;
+C 76 ; WX 214 ; N lsuperior ; B 13 245 201 714 ;
+C 77 ; WX 629 ; N msuperior ; B 22 245 612 546 ;
+C 78 ; WX 424 ; N nsuperior ; B 22 245 407 546 ;
+C 79 ; WX 387 ; N osuperior ; B 32 240 355 540 ;
+C 82 ; WX 272 ; N rsuperior ; B 22 245 265 546 ;
+C 83 ; WX 268 ; N ssuperior ; B 30 240 238 540 ;
+C 84 ; WX 270 ; N tsuperior ; B 35 240 254 579 ;
+C 86 ; WX 558 ; N ff ; B 30 -3 670 715 ;
+C 87 ; WX 522 ; N fi ; B 30 -3 500 715 ;
+C 88 ; WX 522 ; N fl ; B 30 -3 503 715 ;
+C 89 ; WX 790 ; N ffi ; B 30 -3 768 715 ;
+C 90 ; WX 789 ; N ffl ; B 30 -3 770 715 ;
+C 91 ; WX 220 ; N parenleftinferior ; B 41 -69 212 451 ;
+C 93 ; WX 220 ; N parenrightinferior ; B 8 -69 179 451 ;
+C 94 ; WX 360 ; N Circumflexsmall ; B 60 459 301 665 ;
+C 95 ; WX 243 ; N hyphensuperior ; B 25 423 218 471 ;
+C 96 ; WX 360 ; N Gravesmall ; B 75 461 237 666 ;
+C 97 ; WX 457 ; N Asmall ; B -15 -3 467 446 ;
+C 98 ; WX 481 ; N Bsmall ; B 34 -3 437 437 ;
+C 99 ; WX 501 ; N Csmall ; B 38 -14 477 448 ;
+C 100 ; WX 573 ; N Dsmall ; B 34 -5 535 437 ;
+C 101 ; WX 448 ; N Esmall ; B 26 -3 432 437 ;
+C 102 ; WX 410 ; N Fsmall ; B 34 -3 383 437 ;
+C 103 ; WX 529 ; N Gsmall ; B 38 -14 512 448 ;
+C 104 ; WX 610 ; N Hsmall ; B 30 -3 580 437 ;
+C 105 ; WX 286 ; N Ismall ; B 34 -3 252 437 ;
+C 106 ; WX 304 ; N Jsmall ; B -4 -144 266 437 ;
+C 107 ; WX 509 ; N Ksmall ; B 38 -3 525 437 ;
+C 108 ; WX 422 ; N Lsmall ; B 34 -3 422 437 ;
+C 109 ; WX 675 ; N Msmall ; B 24 -8 647 437 ;
+C 110 ; WX 579 ; N Nsmall ; B 27 -13 554 437 ;
+C 111 ; WX 566 ; N Osmall ; B 38 -14 528 448 ;
+C 112 ; WX 446 ; N Psmall ; B 38 -3 413 437 ;
+C 113 ; WX 566 ; N Qsmall ; B 38 -158 617 448 ;
+C 114 ; WX 486 ; N Rsmall ; B 37 -7 507 437 ;
+C 115 ; WX 374 ; N Ssmall ; B 37 -14 336 448 ;
+C 116 ; WX 468 ; N Tsmall ; B 10 -3 458 456 ;
+C 117 ; WX 550 ; N Usmall ; B 30 -14 536 437 ;
+C 118 ; WX 484 ; N Vsmall ; B -11 -14 502 437 ;
+C 119 ; WX 708 ; N Wsmall ; B -6 -14 729 437 ;
+C 120 ; WX 480 ; N Xsmall ; B -10 -3 495 437 ;
+C 121 ; WX 438 ; N Ysmall ; B -6 -3 454 437 ;
+C 122 ; WX 471 ; N Zsmall ; B 29 -3 461 458 ;
+C 123 ; WX 628 ; N colonmonetary ; B 45 -76 611 707 ;
+C 124 ; WX 350 ; N onefitted ; B 38 -3 304 640 ;
+C 125 ; WX 996 ; N rupiah ; B 30 -246 955 627 ;
+C 126 ; WX 360 ; N Tildesmall ; B 30 466 330 622 ;
+C 161 ; WX 200 ; N exclamdownsmall ; B 48 -14 152 434 ;
+C 162 ; WX 408 ; N centoldstyle ; B 40 -72 392 473 ;
+C 163 ; WX 428 ; N Lslashsmall ; B 22 -3 422 437 ;
+C 166 ; WX 374 ; N Scaronsmall ; B 37 -14 336 676 ;
+C 167 ; WX 471 ; N Zcaronsmall ; B 29 -3 461 676 ;
+C 168 ; WX 360 ; N Dieresissmall ; B 40 495 320 589 ;
+C 169 ; WX 360 ; N Brevesmall ; B 48 517 312 655 ;
+C 170 ; WX 360 ; N Caronsmall ; B 59 470 300 676 ;
+C 172 ; WX 360 ; N Dotaccentsmall ; B 133 495 226 589 ;
+C 175 ; WX 360 ; N Macronsmall ; B 53 524 308 575 ;
+C 178 ; WX 500 ; N figuredash ; B 32 291 468 340 ;
+C 179 ; WX 245 ; N hypheninferior ; B 25 174 218 222 ;
+C 182 ; WX 360 ; N Ogoneksmall ; B 97 -207 264 0 ;
+C 183 ; WX 360 ; N Ringsmall ; B 80 473 280 663 ;
+C 184 ; WX 360 ; N Cedillasmall ; B 102 -207 250 0 ;
+C 188 ; WX 780 ; N onequarter ; B 43 -40 706 654 ;
+C 189 ; WX 780 ; N onehalf ; B 50 -40 748 654 ;
+C 190 ; WX 780 ; N threequarters ; B 37 -40 726 654 ;
+C 191 ; WX 276 ; N questiondownsmall ; B 46 -14 231 448 ;
+C 192 ; WX 780 ; N oneeighth ; B 43 -40 729 654 ;
+C 193 ; WX 780 ; N threeeighths ; B 17 -40 754 654 ;
+C 194 ; WX 780 ; N fiveeighths ; B 44 -40 756 654 ;
+C 195 ; WX 780 ; N seveneighths ; B 48 -40 753 654 ;
+C 196 ; WX 780 ; N onethird ; B 33 -40 748 654 ;
+C 197 ; WX 780 ; N twothirds ; B 6 -40 764 654 ;
+C 200 ; WX 360 ; N zerosuperior ; B 32 240 329 640 ;
+C 201 ; WX 360 ; N onesuperior ; B 86 245 280 640 ;
+C 202 ; WX 360 ; N twosuperior ; B 29 245 333 640 ;
+C 203 ; WX 360 ; N threesuperior ; B 42 208 326 640 ;
+C 204 ; WX 360 ; N foursuperior ; B 27 245 334 680 ;
+C 205 ; WX 360 ; N fivesuperior ; B 53 210 307 643 ;
+C 206 ; WX 360 ; N sixsuperior ; B 31 240 329 663 ;
+C 207 ; WX 360 ; N sevensuperior ; B 26 216 335 635 ;
+C 208 ; WX 360 ; N eightsuperior ; B 43 240 318 640 ;
+C 209 ; WX 360 ; N ninesuperior ; B 34 220 327 640 ;
+C 210 ; WX 360 ; N zeroinferior ; B 32 -7 329 393 ;
+C 211 ; WX 360 ; N oneinferior ; B 86 -2 280 393 ;
+C 212 ; WX 360 ; N twoinferior ; B 29 -2 333 393 ;
+C 213 ; WX 360 ; N threeinferior ; B 42 -39 326 393 ;
+C 214 ; WX 360 ; N fourinferior ; B 27 -2 334 432 ;
+C 215 ; WX 360 ; N fiveinferior ; B 53 -37 307 396 ;
+C 216 ; WX 360 ; N sixinferior ; B 31 -7 329 416 ;
+C 217 ; WX 360 ; N seveninferior ; B 26 -31 335 388 ;
+C 218 ; WX 360 ; N eightinferior ; B 43 -7 318 393 ;
+C 219 ; WX 360 ; N nineinferior ; B 34 -27 327 393 ;
+C 220 ; WX 360 ; N centinferior ; B 18 -63 343 428 ;
+C 221 ; WX 360 ; N dollarinferior ; B 35 -74 325 450 ;
+C 222 ; WX 180 ; N periodinferior ; B 36 -7 144 103 ;
+C 223 ; WX 180 ; N commainferior ; B 28 -83 153 117 ;
+C 224 ; WX 457 ; N Agravesmall ; B -15 -3 467 666 ;
+C 225 ; WX 457 ; N Aacutesmall ; B -15 -3 467 666 ;
+C 226 ; WX 457 ; N Acircumflexsmall ; B -15 -3 467 665 ;
+C 227 ; WX 457 ; N Atildesmall ; B -15 -3 467 622 ;
+C 228 ; WX 457 ; N Adieresissmall ; B -15 -3 467 589 ;
+C 229 ; WX 457 ; N Aringsmall ; B -15 -3 467 663 ;
+C 230 ; WX 622 ; N AEsmall ; B -34 -3 606 437 ;
+C 231 ; WX 501 ; N Ccedillasmall ; B 38 -207 477 448 ;
+C 232 ; WX 448 ; N Egravesmall ; B 26 -3 432 666 ;
+C 233 ; WX 448 ; N Eacutesmall ; B 26 -3 432 666 ;
+C 234 ; WX 448 ; N Ecircumflexsmall ; B 26 -3 432 665 ;
+C 235 ; WX 448 ; N Edieresissmall ; B 26 -3 432 589 ;
+C 236 ; WX 286 ; N Igravesmall ; B 34 -3 252 666 ;
+C 237 ; WX 286 ; N Iacutesmall ; B 34 -3 252 666 ;
+C 238 ; WX 286 ; N Icircumflexsmall ; B 23 -3 264 665 ;
+C 239 ; WX 286 ; N Idieresissmall ; B 3 -3 283 589 ;
+C 240 ; WX 579 ; N Ethsmall ; B 35 -5 541 437 ;
+C 241 ; WX 579 ; N Ntildesmall ; B 27 -13 554 622 ;
+C 242 ; WX 566 ; N Ogravesmall ; B 38 -14 528 666 ;
+C 243 ; WX 566 ; N Oacutesmall ; B 38 -14 528 666 ;
+C 244 ; WX 566 ; N Ocircumflexsmall ; B 38 -14 528 665 ;
+C 245 ; WX 566 ; N Otildesmall ; B 38 -14 528 622 ;
+C 246 ; WX 566 ; N Odieresissmall ; B 38 -14 528 589 ;
+C 247 ; WX 731 ; N OEsmall ; B 38 -6 715 440 ;
+C 248 ; WX 566 ; N Oslashsmall ; B 38 -38 528 470 ;
+C 249 ; WX 550 ; N Ugravesmall ; B 30 -14 536 666 ;
+C 250 ; WX 550 ; N Uacutesmall ; B 30 -14 536 666 ;
+C 251 ; WX 550 ; N Ucircumflexsmall ; B 30 -14 536 665 ;
+C 252 ; WX 550 ; N Udieresissmall ; B 30 -14 536 589 ;
+C 253 ; WX 438 ; N Yacutesmall ; B -6 -3 454 666 ;
+C 254 ; WX 452 ; N Thornsmall ; B 34 -3 415 437 ;
+C 255 ; WX 438 ; N Ydieresissmall ; B -6 -3 454 589 ;
+EndCharMetrics
+StartKernData
+StartKernPairs 126
+
+KPX Asmall Ysmall -50
+KPX Asmall Wsmall -72
+KPX Asmall Vsmall -60
+KPX Asmall Usmall -18
+KPX Asmall Tsmall -54
+KPX Asmall Qsmall -18
+KPX Asmall Osmall -18
+KPX Asmall Gsmall -18
+KPX Asmall Csmall -18
+
+KPX Bsmall Wsmall -12
+KPX Bsmall Vsmall -12
+KPX Bsmall Usmall -18
+KPX Bsmall Tsmall -12
+
+KPX Csmall Qsmall -6
+KPX Csmall Osmall -6
+KPX Csmall Gsmall -6
+KPX Csmall Csmall -6
+
+KPX Dsmall Wsmall -12
+KPX Dsmall Vsmall -12
+
+KPX Esmall Ysmall -12
+KPX Esmall Wsmall -18
+KPX Esmall Vsmall -12
+
+KPX Fsmall semicolon -12
+KPX Fsmall period -48
+KPX Fsmall colon -12
+KPX Fsmall Asmall -26
+
+KPX Ksmall Qsmall -32
+KPX Ksmall Osmall -32
+KPX Ksmall Gsmall -32
+KPX Ksmall Csmall -32
+
+KPX Lsmall Ysmall -50
+KPX Lsmall Wsmall -80
+KPX Lsmall Vsmall -60
+KPX Lsmall Usmall -30
+KPX Lsmall Tsmall -68
+KPX Lsmall Qsmall -6
+KPX Lsmall Osmall -6
+KPX Lsmall Gsmall -6
+KPX Lsmall Csmall -6
+KPX Lsmall Asmall 12
+
+KPX Osmall Ysmall -18
+KPX Osmall Xsmall -30
+KPX Osmall Wsmall -34
+KPX Osmall Vsmall -18
+KPX Osmall Tsmall -18
+KPX Osmall Asmall -12
+
+KPX Psmall semicolon -12
+KPX Psmall period -48
+KPX Psmall colon -12
+KPX Psmall Ismall -12
+KPX Psmall Hsmall -12
+KPX Psmall Esmall -18
+KPX Psmall Asmall -38
+
+KPX Qsmall Ysmall -18
+KPX Qsmall Xsmall -12
+KPX Qsmall Wsmall -24
+KPX Qsmall Vsmall -18
+KPX Qsmall Usmall -12
+KPX Qsmall Tsmall -12
+KPX Qsmall Asmall -12
+
+KPX Rsmall Ysmall -28
+KPX Rsmall Wsmall -36
+KPX Rsmall Vsmall -30
+KPX Rsmall Usmall -6
+KPX Rsmall Tsmall -30
+KPX Rsmall Qsmall -12
+KPX Rsmall Osmall -12
+KPX Rsmall Gsmall -12
+KPX Rsmall Csmall -12
+
+KPX Tsmall semicolon -12
+KPX Tsmall period -24
+KPX Tsmall comma -24
+KPX Tsmall colon -12
+KPX Tsmall Ysmall 12
+KPX Tsmall Xsmall 18
+KPX Tsmall Wsmall 6
+KPX Tsmall Tsmall 12
+KPX Tsmall Ssmall -12
+KPX Tsmall Qsmall -18
+KPX Tsmall Osmall -18
+KPX Tsmall Gsmall -18
+KPX Tsmall Csmall -18
+KPX Tsmall Asmall -48
+
+KPX Usmall Asmall -12
+
+KPX Vsmall semicolon -12
+KPX Vsmall period -24
+KPX Vsmall comma -24
+KPX Vsmall colon -12
+KPX Vsmall Qsmall -25
+KPX Vsmall Osmall -25
+KPX Vsmall Gsmall -25
+KPX Vsmall Csmall -25
+KPX Vsmall Asmall -60
+
+KPX Wsmall semicolon -12
+KPX Wsmall period -24
+KPX Wsmall comma -24
+KPX Wsmall colon -12
+KPX Wsmall Tsmall 12
+KPX Wsmall Qsmall -18
+KPX Wsmall Osmall -18
+KPX Wsmall Gsmall -18
+KPX Wsmall Csmall -18
+KPX Wsmall Asmall -66
+
+KPX Xsmall Qsmall -24
+KPX Xsmall Osmall -24
+KPX Xsmall Gsmall -24
+KPX Xsmall Csmall -24
+
+KPX Ysmall semicolon -12
+KPX Ysmall period -24
+KPX Ysmall comma -24
+KPX Ysmall colon -12
+KPX Ysmall Ysmall 12
+KPX Ysmall Xsmall 12
+KPX Ysmall Wsmall 12
+KPX Ysmall Vsmall 12
+KPX Ysmall Tsmall 12
+KPX Ysmall Qsmall -18
+KPX Ysmall Osmall -24
+KPX Ysmall Gsmall -24
+KPX Ysmall Csmall -24
+KPX Ysmall Asmall -36
+
+KPX Zsmall Qsmall -18
+KPX Zsmall Osmall -18
+KPX Zsmall Gsmall -18
+KPX Zsmall Csmall -18
+KPX Zsmall Asmall 12
+EndKernPairs
+EndKernData
+EndFontMetrics
