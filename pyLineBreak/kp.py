@@ -156,9 +156,8 @@ class Paragraph(object):
                             newline.append(item)
                     except:
                         newline.append(item)
-                        
+            line = newline
 
-                
             line_width = self.get_line_metrics(start_item, end_item)['length']
             if justify:
                 extra_space = width - line_width
@@ -282,6 +281,7 @@ if __name__ == '__main__':
 
     if len(sys.argv) < 5:
         sys.stderr.write("Not enough args you dumbass\n")
+        sys.stderr.write("Should be 'python %s in-file afm-file font-size col-wid\n" % __file__)
         sys.exit(1)
 
     in_file = sys.argv[1]
