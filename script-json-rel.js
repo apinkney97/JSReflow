@@ -1,11 +1,11 @@
 var JSReflow = JSReflow || {};
 
-JSReflow.ps = 12;
-JSReflow.vs = 14;
+JSReflow.ps = 11;
+JSReflow.vs = 15;
 JSReflow.pt_per_px = 0.75; // 12pt = 16px
 JSReflow.top_margin = 2 * JSReflow.vs;
-JSReflow.bot_margin = JSReflow.top_margin;
-JSReflow.min_gutter = 12;
+JSReflow.bot_margin = JSReflow.top_margin / 2;
+JSReflow.min_gutter = 15;
 JSReflow.scale = 1;
 JSReflow.multi_column = true;
 JSReflow.current_paragraph = 0;

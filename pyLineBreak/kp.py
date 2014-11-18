@@ -158,10 +158,15 @@ class Paragraph(object):
                         newline.append(item)
             line = newline
 
-            line_width = self.get_line_metrics(start_item, end_item)['length']
+            line_width = sum([item.w for item in line])
+            glue_at_end = isinstance(line[-1], Glue)
+            if glue_at_end:
+                line_width -= line[-1].w
             if justify:
                 extra_space = width - line_width
                 glue_items = [item for item in line if isinstance(item, Glue)]
+                if glue_at_end:
+                    glue_items = glue_items[:-1]
                 glue_width = sum([item.w for item in glue_items])
                 stretch_factor = 1
                 if glue_width != 0:
