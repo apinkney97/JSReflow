@@ -431,8 +431,8 @@ $("body").touchwipe({
         JSReflow.scale /= 1.1;
         JSReflow.pageInit();
     },
-    min_move_x: 20,
-    min_move_y: 20,
+    min_move_x: 10,
+    min_move_y: 10,
     preventDefaultEvents: true
 });
 

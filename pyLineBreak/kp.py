@@ -1,6 +1,7 @@
 # coding=utf-8
 import json
 import sys
+import codecs
 from hyphenate import hyphenate_word
 from afm import AFM
 
@@ -228,6 +229,8 @@ def tokenise(text, size, metric_file, indent=1, explicit_kerning=True, collapse_
                 # Add penalty for explicit hyphens
                 if c in (u'-', u'–', u'—'):
                     items.append(Penalty(p=HYPHEN_PENALTY, f=True))
+                if ord(c) > 127:
+                    sys.stderr.write("char was \\x%s \n" % (ord(c),))
                 last_c = c
         items.append(Glue(**default_space_glue_params))
 
@@ -295,12 +298,14 @@ if __name__ == '__main__':
     col_wid = float(sys.argv[4]) * 72
 
     if in_file == '-':
+        sys.stdin = codecs.getreader('utf-8')(sys.stdin)
         text = sys.stdin.readlines()
     else:
-        with open(in_file) as f:
+        with codecs.open(in_file, 'r', 'utf-8') as f:
             text = f.readlines()
+    # sys.stderr.write("%s" % text)
 
-    text = ''.join(text)
+    text = u''.join(text)
     items = tokenise(text, font_size, font_file, explicit_kerning=False)
     par = Paragraph(items)
     lines = par.first_fit(col_wid, justify=True)

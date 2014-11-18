@@ -51,14 +51,19 @@ class Hyphenator:
             hyphenation points.
         """
         # Strip off trailing punctuation
-        addendum = ''
-        if word[-1] in ('.', ','):
-            addendum = word[-1]
+        prefix = ''
+        suffix = ''
+        strip_chars = ('.', ',', ')', '(', '"')
+        while len(word) and word[-1] in strip_chars:
+            suffix = word[-1] + suffix
             word = word[:-1]
+        while len(word) and word[0] in strip_chars:
+            prefix += word[0]
+            word = word[1:]
 
         # Short words aren't hyphenated.
         if len(word) <= 4:
-            return [word + addendum]
+            return [prefix + word + suffix]
         # If the word is an exception, get the stored points.
         if word.lower() in self.exceptions:
             points = self.exceptions[word.lower()]
@@ -85,7 +90,8 @@ class Hyphenator:
             pieces[-1] += c
             if p % 2:
                 pieces.append('')
-        pieces[-1] += addendum
+        pieces[0] = "%s%s" % (prefix, pieces[0])
+        pieces[-1] = "%s%s" % (pieces[-1], suffix)
         return pieces
 
 patterns = (
