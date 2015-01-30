@@ -12,6 +12,9 @@ JSReflow.current_paragraph = 0;
 JSReflow.current_line = 0;
 JSReflow.min_badness_index = 0;
 JSReflow.cols_per_page = 1;
+JSReflow.pageWidth = 0;
+JSReflow.pageHeight = 0;
+
 
 JSReflow.float_types = Object.freeze({
     NONE: 0,
@@ -36,12 +39,12 @@ JSReflow.getLine = function (words) {
     length = words.length;
     offset = null;
     word = null;
-	pos = 0;
+    pos = 0;
     for (i = 0; i < length; i++) {
         offset = JSReflow.deltasdict[words[i][0]];
         word = words[i][1];
         text += "<div class=\"inner\" style=\"left: " + (pos + offset) * JSReflow.scale + "pt;\">" + JSReflow.dictionary[word][0] + " </div>";
-		pos = pos + JSReflow.dictionary[word][1] + offset;
+        pos = pos + JSReflow.dictionary[word][1] + offset;
     }
     text += "</div>";
     return JSReflow.getDiv("line", 0, 0, text);
@@ -86,7 +89,6 @@ JSReflow.checkSpace = function (nlines, span) {
 
     cols_left_on_page = JSReflow.cols_per_page - (JSReflow.curr_col % JSReflow.cols_per_page);
     if (cols_left_on_page < span) { // don't span page boundaries
-        console.log(JSReflow.curr_col, JSReflow.cols_per_page, span, cols_left_on_page);
         return false;
     }
 
@@ -246,8 +248,8 @@ JSReflow.computePagination = function () {
             h *= scale;
 
             // Is it too big to fit? If so scale down the height
-            if (h > JSReflow.bodyheight) {
-                scale = JSReflow.bodyheight / h;
+            if (h > JSReflow.pageHeight) {
+                scale = JSReflow.pageHeight / h;
                 w *= scale;
                 h *= scale;
             }
@@ -303,9 +305,9 @@ JSReflow.computePagination = function () {
 
 };
 
-JSReflow.pageInit = function() {
-
-    var i, nc, ex_ws, rq_ws, dropdown, pageWidth, badness, name;
+JSReflow.pageInit = function () {
+    "use strict";
+    var i, nc, ex_ws, rq_ws, dropdown, badness, name;
 
     JSReflow.current_paragraph = 0;
     JSReflow.current_line = 0;
@@ -316,15 +318,15 @@ JSReflow.pageInit = function() {
 
     $('body').css('font-size', (JSReflow.ps * JSReflow.scale) + 'pt');
 
-    pageWidth = window.innerWidth * JSReflow.pt_per_px;
+    JSReflow.pageWidth = window.innerWidth * JSReflow.pt_per_px;
     badness = [];
     JSReflow.min_badness_index = 0;
 
-    JSReflow.bodyheight = window.innerHeight * JSReflow.pt_per_px - (JSReflow.bot_margin + JSReflow.top_margin) * JSReflow.scale;
+    JSReflow.pageHeight = window.innerHeight * JSReflow.pt_per_px - (JSReflow.bot_margin + JSReflow.top_margin) * JSReflow.scale;
 
     for (i = 0; i < JSReflow.galley_widths.length; i++) {
-        nc = Math.floor(pageWidth / ((JSReflow.galley_widths[i] + JSReflow.min_gutter) * JSReflow.scale));
-        ex_ws = pageWidth % ((JSReflow.galley_widths[i] + JSReflow.min_gutter) * JSReflow.scale);
+        nc = Math.floor(JSReflow.pageWidth / ((JSReflow.galley_widths[i] + JSReflow.min_gutter) * JSReflow.scale));
+        ex_ws = JSReflow.pageWidth % ((JSReflow.galley_widths[i] + JSReflow.min_gutter) * JSReflow.scale);
         rq_ws = nc * JSReflow.min_gutter * JSReflow.scale;
 
         badness.push((ex_ws /*+ rq_ws*/ + 100) * Math.sqrt(nc));
@@ -340,7 +342,7 @@ JSReflow.pageInit = function() {
 
     JSReflow.galley_width = JSReflow.galley_widths[JSReflow.min_badness_index];
 
-    JSReflow.col_sep = Math.floor(pageWidth / JSReflow.cols_per_page);
+    JSReflow.col_sep = Math.floor(JSReflow.pageWidth / JSReflow.cols_per_page);
 
     /*
      Previously, we (and I quote) "just shove[d] lines onto screen" -- Now we need to populate the JSReflow.columns array and then output the contents of that to the screen.
@@ -384,7 +386,7 @@ JSReflow.pageInit = function() {
     JSReflow.computePagination();
     JSReflow.paginate(0);
 
-}
+};
 
 JSReflow.updateFloatType = function (dd) {
     "use strict";
@@ -399,6 +401,19 @@ JSReflow.toggleMulti = function () {
     JSReflow.pageInit();
 };
 
+JSReflow.scaleUp = function (factor) {
+    "use strict";
+    if (JSReflow.galley_widths[0] + JSReflow.min_gutter < JSReflow.page_width) {
+        JSReflow.scale *= factor;
+    }
+};
+
+JSReflow.scaleDown = function (factor) {
+    "use strict";
+    JSReflow.scale /= factor;
+};
+
+
 $(window).resize(function () {
     "use strict";
     clearTimeout(JSReflow.resizetimer);
@@ -409,7 +424,7 @@ $(window).resize(function () {
 $(document).ready(function () {
     "use strict";
     JSReflow.pageInit();
-	$('#top').hide();
+    $('#top').hide();
 });
 
 $("body").touchwipe({

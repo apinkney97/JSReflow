@@ -1,0 +1,7 @@
+var JSReflow = JSReflow || {};
+JSReflow.galley_widths = [216.0];
+JSReflow.paragraph_tree = [[[[[1,2],[0,3],[0,4],[0,1],[0,0]]]]];
+
+JSReflow.dictionary = [["sentence.",44.068],["short",24.456],["This",21.404],["is",7.856],["a",6.072]];
+JSReflow.deltasdict = [2.4,0];
+

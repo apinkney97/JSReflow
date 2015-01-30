@@ -124,7 +124,7 @@ public class ParSplitter {
 
 						for (int g = 0; g < widths.length; g++) {
 							// start of galley rendering");
-							Process proc = rt.exec("python pyLineBreak/kp.py - Futura.afm 12 " + widths[g]);
+							Process proc = rt.exec("./LineBreak/LineBreak - Futura.afm 12 " + widths[g]);
 							OutputStream out = proc.getOutputStream();
 							out.write(currText.getBytes());
 							out.close();

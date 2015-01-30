@@ -214,7 +214,7 @@ def tokenise(text, size, metric_file, indent=1, explicit_kerning=True, collapse_
 
     for word in text.split():
         last_c = None
-        for i, word_part in enumerate(hyphenate_word(word)):
+        for i, word_part in enumerate([word]):
             if i > 0:  # Append a flagged penalty for the hyphen
                 items.append(Penalty(p=HYPHEN_PENALTY, w=font_metric.get_width('-', size), f=True, content='-'))
             for c in word_part:

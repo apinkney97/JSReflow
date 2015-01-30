@@ -1,0 +1,32 @@
+%!
+
+4.5 dup scale
+0.5 setlinewidth
+
+/pointsize 12 def
+
+/box {
+	/wid exch def
+	0 -3 rmoveto
+	wid 0 rlineto stroke %0 pointsize rlineto wid neg 0 rlineto closepath stroke
+	gsave
+	wid 2 div -8 moveto
+	/Helvetica 3 selectfont
+	/numstr wid (       ) cvs def
+	numstr stringwidth pop 2 div neg 0 rmoveto
+       	numstr show
+	grestore
+} def
+
+/Times-Roman pointsize selectfont
+
+10 50 translate
+0 0 moveto (This)      show 0 0 moveto 21.404 dup box 2.4 add 0 translate
+0 0 moveto (is)        show 0 0 moveto 7.856  dup box 2.4 add 0 translate
+0 0 moveto (a)         show 0 0 moveto 6.072  dup box 2.4 add 0 translate
+0 0 moveto (short)     show 0 0 moveto 24.456 dup box 2.4 add 0 translate
+0 0 moveto (sentence.) show 0 0 moveto 44.068 dup box 2.4 add 0 translate
+
+
+showpage
+
